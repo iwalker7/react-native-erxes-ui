@@ -1,0 +1,22 @@
+{
+  "name": "rn-erxes-ui-example",
+  "displayName": "RnErxesUi Example",
+  "expo": {
+    "name": "rn-erxes-ui-example",
+    "slug": "rn-erxes-ui-example",
+    "description": "Example app for rn-erxes-ui",
+    "privacy": "public",
+    "version": "1.0.0",
+    "platforms": [
+      "ios",
+      "android",
+      "web"
+    ],
+    "ios": {
+      "supportsTablet": true
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
