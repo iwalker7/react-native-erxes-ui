@@ -1,22 +1,16 @@
 {
-  "name": "rn-erxes-ui-example",
+  "name": "react-native-erxes-ui-example",
   "displayName": "RnErxesUi Example",
   "expo": {
-    "name": "rn-erxes-ui-example",
-    "slug": "rn-erxes-ui-example",
-    "description": "Example app for rn-erxes-ui",
+    "name": "react-native-erxes-ui-example",
+    "slug": "react-native-erxes-ui-example",
+    "description": "Example app for react-native-erxes-ui",
     "privacy": "public",
     "version": "1.0.0",
-    "platforms": [
-      "ios",
-      "android",
-      "web"
-    ],
+    "platforms": ["ios", "android", "web"],
     "ios": {
       "supportsTablet": true
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ]
+    "assetBundlePatterns": ["**/*"]
   }
 }

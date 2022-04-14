@@ -1,6 +1,6 @@
 {
-  "name": "rn-erxes-ui-example",
-  "description": "Example app for rn-erxes-ui",
+  "name": "react-native-erxes-ui-example",
+  "description": "Example app for react-native-erxes-ui",
   "version": "0.0.1",
   "private": true,
   "main": "index",

@@ -1,4 +1,4 @@
-# rn-erxes-ui
+# react-native-erxes-ui
 
 React native erxes ui library
 
@@ -9,8 +9,6 @@ npm install react-native-erxes-ui
 ```
 
 ## Usage
-
-
 
 ## Contributing
 

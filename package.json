@@ -16,7 +16,7 @@
     "android",
     "ios",
     "cpp",
-    "rn-erxes-ui.podspec",
+    "react-native-erxes-ui.podspec",
     "!lib/typescript/example",
     "!android/build",
     "!ios/build"
@@ -40,7 +40,7 @@
     "mobile",
     "erxes-ui-mobile"
   ],
-  "repository": "https://github.com/iwalker7/rn-erxes-ui",
+  "repository": "https://github.com/iwalker7/react-native-erxes-ui",
   "author": {
     "name": "Itgel G",
     "username": "itgel",
@@ -48,9 +48,9 @@
   },
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/iwalker7/rn-erxes-ui/issues"
+    "url": "https://github.com/iwalker7/react-native-erxes-ui/issues"
   },
-  "homepage": "https://github.com/iwalker7/rn-erxes-ui#readme",
+  "homepage": "https://github.com/iwalker7/react-native-erxes-ui#readme",
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
   },

@@ -9,7 +9,7 @@ export default function App() {
       <TextView color="#673FBD">
         erxes Inc ui lib by{' '}
         <TextView bold large color="mediumvioletred">
-          Itgel G
+          Itgel.G
         </TextView>
       </TextView>
     </View>
