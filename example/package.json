@@ -18,11 +18,14 @@
     "react-dom": "16.13.1",
     "react-native": "0.63.4",
     "react-native-unimodules": "~0.12.0",
-    "react-native-web": "~0.14.9"
+    "react-native-web": "~0.14.9",
+    "rn-erxes-ui": "link:../"
   },
   "devDependencies": {
     "@babel/core": "~7.12.10",
     "@babel/runtime": "^7.9.6",
+    "@types/react": "~16.9.35",
+    "@types/react-native": "^0.67.4",
     "babel-plugin-module-resolver": "^4.0.0",
     "babel-preset-expo": "8.3.0",
     "expo-cli": "^4.0.13"

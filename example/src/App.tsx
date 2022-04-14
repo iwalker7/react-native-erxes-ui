@@ -1,18 +1,12 @@
 import * as React from 'react';
 
-import { StyleSheet, View, Text } from 'react-native';
-import RnErxesUi from 'rn-erxes-ui';
+import { StyleSheet, View } from 'react-native';
+import { TextView } from 'rn-erxes-ui';
 
 export default function App() {
-  const [result, setResult] = React.useState<number | undefined>();
-
-  React.useEffect(() => {
-    RnErxesUi.multiply(3, 7).then(setResult);
-  }, []);
-
   return (
     <View style={styles.container}>
-      <Text>Result: {result}</Text>
+      <TextView>Result: 400</TextView>
     </View>
   );
 }
