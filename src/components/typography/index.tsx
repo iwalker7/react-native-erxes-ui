@@ -43,7 +43,6 @@ const TextView: React.FC<TextViewProps> = ({
   bold,
   boldless,
   italic,
-  children,
   style,
   capitalize,
   uppercase,
@@ -83,7 +82,7 @@ const TextView: React.FC<TextViewProps> = ({
       onLongPress={onLongPress}
       {...rest}
     >
-      {children}
+      {rest.children}
     </Text>
   );
 };

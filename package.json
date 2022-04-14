@@ -1,6 +1,6 @@
 {
-  "name": "rn-erxes-ui",
-  "version": "0.1.0",
+  "name": "react-native-erxes-ui",
+  "version": "0.1.1",
   "description": "erxes react native ui library",
   "main": "lib/commonjs/index.js",
   "module": "lib/module/index.js",
@@ -34,10 +34,18 @@
   "keywords": [
     "react-native",
     "ios",
-    "android"
+    "android",
+    "erxes",
+    "erxes-ui",
+    "mobile",
+    "erxes-ui-mobile"
   ],
   "repository": "https://github.com/iwalker7/rn-erxes-ui",
-  "author": "Itgel G <itgel.g@nmtec.co> (https://github.com/iwalker7)",
+  "author": {
+    "name": "Itgel G",
+    "username": "itgel",
+    "email": "itgel.g@nmtec.co"
+  },
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/iwalker7/rn-erxes-ui/issues"

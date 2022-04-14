@@ -19,7 +19,7 @@
     "react-native": "0.63.4",
     "react-native-unimodules": "~0.12.0",
     "react-native-web": "~0.14.9",
-    "rn-erxes-ui": "link:../"
+    "react-native-erxes-ui": "link:../"
   },
   "devDependencies": {
     "@babel/core": "~7.12.10",

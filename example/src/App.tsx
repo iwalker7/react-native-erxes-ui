@@ -1,12 +1,17 @@
 import * as React from 'react';
 
 import { StyleSheet, View } from 'react-native';
-import { TextView } from 'rn-erxes-ui';
+import { TextView } from 'react-native-erxes-ui';
 
 export default function App() {
   return (
     <View style={styles.container}>
-      <TextView>Result: 400</TextView>
+      <TextView color="#673FBD">
+        erxes Inc ui lib by{' '}
+        <TextView bold large color="mediumvioletred">
+          Itgel G
+        </TextView>
+      </TextView>
     </View>
   );
 }

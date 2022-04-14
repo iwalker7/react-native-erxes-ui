@@ -1,22 +1,16 @@
 # rn-erxes-ui
 
-erxes react native ui library
+React native erxes ui library
 
 ## Installation
 
 ```sh
-npm install rn-erxes-ui
+npm install react-native-erxes-ui
 ```
 
 ## Usage
 
-```js
-import RnErxesUi from "rn-erxes-ui";
 
-// ...
-
-const result = await RnErxesUi.multiply(3, 7);
-```
 
 ## Contributing
 
