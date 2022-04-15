@@ -14,10 +14,10 @@ import {
   ViewStyle,
 } from 'react-native';
 import FastImage, { FastImageProps } from 'react-native-fast-image';
-import Loader from '../Loader';
+import Loader from '../loader';
 import images from '../../assets/images';
 import { deviceWidth, getAttachmentUrl } from '../../utils';
-import Touchable, { TouchableProps } from '../Touchable';
+import Touchable, { TouchableProps } from '../touchable';
 
 export type ImageViewProps = FastImageProps & {
   containerStyle?: StyleProp<ViewStyle>;

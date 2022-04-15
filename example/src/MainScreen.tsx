@@ -55,7 +55,8 @@ const renderSectionHeader = ({ section }: any) => {
 const colorMain = '#673FBD';
 const colorHighlight = 'mediumvioletred';
 
-const MainScreen = () => {
+function MainScreen() {
+  console.log('hello');
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
@@ -72,10 +73,11 @@ const MainScreen = () => {
       />
     </SafeAreaView>
   );
-};
+}
 
 const styles = StyleSheet.create({
   container: {
+    backgroundColor: '#673FBD',
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',

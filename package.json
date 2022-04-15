@@ -152,6 +152,7 @@
     "@types/moment": "^2.13.0",
     "color": "^4.2.3",
     "moment": "^2.29.2",
+    "react-i18next": "^11.16.6",
     "react-native-document-picker": "^8.1.0",
     "react-native-fast-image": "^8.5.11",
     "react-native-gesture-handler": "^2.4.0",

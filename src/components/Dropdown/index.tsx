@@ -7,9 +7,7 @@
 //   View,
 //   ViewStyle,
 // } from 'react-native';
-// import { XPopover, XTouchable, IconCore, TextView } from '.';
-// import { useTheme } from '../../theme';
-// import { transparent } from '../../theme/colors';
+// import { Popover, Touchable, TextView } from '../../index';
 
 // type Props = {
 //   selectedIndex?: number;
@@ -30,11 +28,11 @@
 //   const dropRef = useRef<any>(null);
 //   const [isOpen, onOpen] = useState(false);
 
-//   const { colors } = useTheme();
+//   //const { colors } = useTheme();
 
 //   return (
 //     <View style={[styles.container, containerStyle]}>
-//       <XTouchable onPress={() => onOpen(!isOpen)} touchRef={dropRef}>
+//       <Touchable onPress={() => onOpen(!isOpen)} touchRef={dropRef}>
 //         <View
 //           style={[
 //             styles.title,
@@ -42,47 +40,51 @@
 //               borderColor: colors.surfaceGrayDarker,
 //               borderBottomWidth: underline ? 1 : 0,
 //             },
-//           ]}>
+//           ]}
+//         >
 //           <TextView style={{ fontSize: 13, flex: 1 }}>
 //             {data[selectedIndex]}
 //           </TextView>
-//           <IconCore
+//           {/* <IconCore
 //             name={isOpen ? 'uparrow-2' : 'downarrow'}
 //             // color={grey100}
 //             style={{ marginStart: 5 }}
 //             // size={14}
-//           />
+//           /> */}
 //         </View>
-//       </XTouchable>
-//       <XPopover
+//       </Touchable>
+//       <Popover
 //         from={dropRef}
 //         isVisible={isOpen}
 //         onVisible={onOpen}
-//         popBackgroundColor={transparent}
+//         popBackgroundColor={'rgba(255, 255, 255, 0)'}
 //         arrowStyle={{ height: 0 }}
 //         hasArrow={false}
-//         popStyle={popStyle}>
+//         popStyle={popStyle}
+//       >
 //         <ScrollView
 //           style={{ maxHeight: 200 }}
-//           showsVerticalScrollIndicator={false}>
+//           showsVerticalScrollIndicator={false}
+//         >
 //           <View style={popStyle}>
 //             {data.map((item, index) => {
 //               return (
-//                 <XTouchable
+//                 <Touchable
 //                   key={index.toString()}
 //                   onPress={() => {
 //                     onSelect(index);
 //                     onOpen(false);
-//                   }}>
+//                   }}
+//                 >
 //                   <View style={styles.itemText}>
 //                     <TextView small>{item}</TextView>
 //                   </View>
-//                 </XTouchable>
+//                 </Touchable>
 //               );
 //             })}
 //           </View>
 //         </ScrollView>
-//       </XPopover>
+//       </Popover>
 //     </View>
 //   );
 // };

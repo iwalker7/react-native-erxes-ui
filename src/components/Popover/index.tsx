@@ -4,6 +4,9 @@
 // import Popover from 'react-native-popover-view/dist/Popover';
 // import { PopoverPlacement } from 'react-native-popover-view';
 // import { useSafeAreaInsets } from 'react-native-safe-area-context';
+// import type { Mode, Size, Rect } from 'react-native-popover-view/dist/Types';
+// import { Platform } from 'react-native';
+// import { StatusBar } from 'react-native';
 
 // export type PopoverProp = {
 //   isVisible: boolean;
@@ -17,11 +20,19 @@
 //   hasArrow?: boolean;
 //   isFixed70?: boolean;
 //   isFixed50?: boolean;
+//   displayArea?: Pick<Rect, 'x' | 'y' | 'width' | 'height'>;
+//   arrowSize?: Pick<Size, 'width' | 'height'>;
+//   mode?: Mode;
 //   verticalOffset?: number;
 //   popoverStyle?: StyleProp<ViewStyle>;
 //   arrowStyle?: StyleProp<ViewStyle>;
 //   backgroundStyle?: StyleProp<ViewStyle>;
 //   arrowShift?: number;
+//   offset?: number;
+//   popoverShift?: {
+//     x?: number;
+//     y?: number;
+//   };
 //   onOpenStart?: () => void;
 //   onOpenComplete?: () => void;
 //   onRequestClose?: () => void;
@@ -29,8 +40,7 @@
 //   onCloseComplete?: () => void;
 //   onPositionChange?: () => void;
 //   debug?: boolean;
-//   children?: any;
-// };
+// } & { children?: any };
 
 // const XPopover: React.FC<PopoverProp> = ({
 //   isVisible,
@@ -43,7 +53,7 @@
 //   isFixed70 = false,
 //   isFixed50 = false,
 //   onRequestClose,
-//   children,
+//   ...rest
 // }) => {
 //   const insets = useSafeAreaInsets();
 
@@ -53,7 +63,9 @@
 //       placement={PopoverPlacement.BOTTOM}
 //       from={from}
 //       isVisible={isVisible && isVisible}
-//       // verticalOffset={Platform.OS === 'android' ? -StatusBar.currentHeight : 0}
+//       verticalOffset={
+//         Platform.OS === 'android' ? -StatusBar && StatusBar.currentHeight : 0
+//       }
 //       arrowStyle={hasArrow ? arrowStyle && arrowStyle : { height: 0 }}
 //       popoverStyle={[
 //         styles.popoverShadow,
@@ -81,7 +93,7 @@
 //         onVisible && onVisible(false);
 //       }}
 //     >
-//       {children}
+//       {rest.children}
 //     </Popover>
 //   );
 // };
