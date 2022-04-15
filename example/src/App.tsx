@@ -1,30 +1,41 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import * as React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import MainScreen from './MainScreen';
 
-import { StyleSheet, View } from 'react-native';
-import { TextView } from 'react-native-erxes-ui';
+// type StackParamList = {
+//   Main: undefined;
+
+//   Card: undefined;
+//   Chip: undefined;
+//   Divider: undefined;
+//   Dropdown: undefined;
+//   ImageView: undefined;
+//   Loader: undefined;
+//   Modal: undefined;
+//   Popover: undefined;
+//   TextInput: undefined;
+//   Touchable: undefined;
+// };
+
+const Stack = createStackNavigator();
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <TextView color="#673FBD">
-        erxes Inc ui lib by{' '}
-        <TextView bold large color="mediumvioletred">
-          Itgel.G
-        </TextView>
-      </TextView>
-    </View>
+    <NavigationContainer>
+      {/* <Stack.Navigator initialRouteName="Main"> */}
+      <Stack.Screen name="Main" component={MainScreen} />
+      {/* {map(screens, (screen, key) => {
+          return (
+            <Stack.Screen
+              key={key}
+              name={key.replace('Screen', '')}
+              component={screen}
+            />
+          );
+        })} */}
+      {/* </Stack.Navigator> */}
+    </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  box: {
-    width: 60,
-    height: 60,
-    marginVertical: 20,
-  },
-});
