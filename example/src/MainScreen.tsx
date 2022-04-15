@@ -26,6 +26,7 @@ const sections = [
 
 const onItemPress = ({ item }: any) => {
   //navigation hiih
+  console.log(item);
 };
 
 const renderItem = ({ item }: any) => {
@@ -41,7 +42,7 @@ const renderItem = ({ item }: any) => {
   );
 };
 
-const renderSectionHeader = ({ section }) => {
+const renderSectionHeader = ({ section }: any) => {
   return (
     <View style={styles.sectionHeader}>
       <TextView uppercase bold color="white">
@@ -54,7 +55,7 @@ const renderSectionHeader = ({ section }) => {
 const colorMain = '#673FBD';
 const colorHighlight = 'mediumvioletred';
 
-const MainScreen = ({ navigation }) => {
+const MainScreen = () => {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
