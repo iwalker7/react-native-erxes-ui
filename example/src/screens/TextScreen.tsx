@@ -2,10 +2,12 @@ import React from 'react';
 import { View } from 'react-native';
 import { TextView } from 'react-native-erxes-ui';
 
-export default function HomeScreen() {
+const TextScreen = () => {
   return (
     <View>
-      <TextView>asd</TextView>
+      <TextView> This is text screen </TextView>
     </View>
   );
-}
+};
+
+export default TextScreen;

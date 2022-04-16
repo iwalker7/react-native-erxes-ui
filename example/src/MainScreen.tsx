@@ -2,6 +2,7 @@
 import React, { useCallback, useState } from 'react';
 import { SectionList, StyleSheet, View } from 'react-native';
 import { TextView, TouchableOpacity, TextInput } from 'react-native-erxes-ui';
+
 import _ from 'lodash';
 import { screens } from './MenuStructure';
 
@@ -16,7 +17,7 @@ export default function MainScreen({ navigation }: any) {
   const [searchText, setSearchText] = useState('');
 
   const includedInSearch = (text = '') => {
-    return searchText.toLowerCase().includes(text.toLowerCase());
+    return text.toLowerCase().includes(searchText.toLowerCase());
   };
 
   const onItemPress = useCallback(({ screenId }) => {
@@ -30,8 +31,10 @@ export default function MainScreen({ navigation }: any) {
       }
 
       return (
-        <View>
-          <TextView uppercase>{section.key}</TextView>
+        <View style={{ padding: 20, backgroundColor: 'orange' }}>
+          <TextView uppercase bold>
+            {section.key}
+          </TextView>
         </View>
       );
     },
@@ -63,7 +66,9 @@ export default function MainScreen({ navigation }: any) {
             onItemPress({ screenId });
           }}
         >
-          <TextView>{item.title}</TextView>
+          <TextView style={{ padding: 10, backgroundColor: 'grey' }}>
+            {item.title}
+          </TextView>
         </TouchableOpacity>
       );
     },

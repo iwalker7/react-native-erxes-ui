@@ -12,11 +12,11 @@ export const screens = {
   Components: {
     title: 'Components',
     screens: [
-      { title: 'Text', tags: 'text', screen: 'unicorn.components.TextScreen' },
+      { title: 'Text', tags: 'text', screen: 'TextScreen' },
       {
         title: 'View',
         tags: 'view modifiers',
-        screen: 'unicorn.components.ViewScreen',
+        screen: 'ViewScreen',
       },
       {
         title: 'Image',
@@ -28,32 +28,18 @@ export const screens = {
         tags: 'button cta',
         screen: 'unicorn.components.ButtonsScreen',
       },
-      { title: '' },
-      {
-        title: 'Action Bar',
-        tags: 'action bar floating bottom',
-        screen: 'unicorn.components.ActionBarScreen',
-      },
       {
         title: 'Avatars',
         tags: 'avatar contact',
         screen: 'unicorn.components.AvatarsScreen',
       },
-      {
-        title: 'Badges',
-        tags: 'badge',
-        screen: 'unicorn.components.BadgesScreen',
-      },
+
       {
         title: 'Cards',
         tags: 'cards feed',
         screen: 'unicorn.components.CardsScreen',
       },
-      {
-        title: 'Connection Status Bar',
-        tags: 'connection status bar',
-        screen: 'unicorn.components.ConnectionStatusBar',
-      },
+
       { title: 'Chip', tags: 'chip', screen: 'unicorn.components.ChipScreen' },
       {
         title: 'ExpandableSection',
@@ -66,34 +52,9 @@ export const screens = {
         screen: 'unicorn.components.IconScreen',
       },
       {
-        title: 'Page Control',
-        tags: 'page',
-        screen: 'unicorn.components.PageControlScreen',
-      },
-      {
         title: 'ProgressBar',
         tags: 'progress bar animated',
         screen: 'unicorn.animations.ProgressBarScreen',
-      },
-      {
-        title: 'ScrollBar',
-        tags: 'scroll bar gradient',
-        screen: 'unicorn.components.ScrollBarScreen',
-      },
-      {
-        title: 'Shared Transition',
-        tags: 'shared transition element',
-        screen: 'unicorn.components.SharedTransitionScreen',
-      },
-      {
-        title: 'Stack Aggregator',
-        tags: 'stack aggregator',
-        screen: 'unicorn.components.StackAggregatorScreen',
-      },
-      {
-        title: 'Wheel Picker Dialog',
-        tags: 'wheel picker dialog',
-        screen: 'unicorn.components.WheelPickerDialogScreen',
       },
     ],
   },
@@ -207,31 +168,6 @@ export const screens = {
       },
     ],
   },
-  Lists: {
-    title: 'Lists',
-    screens: [
-      {
-        title: 'Basic List',
-        tags: 'basic list',
-        screen: 'unicorn.lists.BasicListScreen',
-      },
-      {
-        title: 'Contacts List',
-        tags: 'list contacts',
-        screen: 'unicorn.lists.ContactsListScreen',
-      },
-      {
-        title: 'Conversation List',
-        tags: 'list conversation',
-        screen: 'unicorn.lists.ConversationListScreen',
-      },
-      {
-        title: 'Drawer',
-        tags: 'drawer',
-        screen: 'unicorn.components.DrawerScreen',
-      },
-    ],
-  },
   LayoutsAndTemplates: {
     title: 'Layouts & Templates',
     screens: [
@@ -307,41 +243,6 @@ export const screens = {
       },
     ],
   },
-  Native: {
-    title: 'Native',
-    screens: [
-      {
-        title: 'KeyboardAwareScrollView',
-        tags: 'KeyboardAwareScrollView',
-        screen: 'unicorn.components.KeyboardAwareScrollViewScreen',
-      },
-      {
-        title: 'Highlight Overlay',
-        tags: 'native overlay',
-        screen: 'unicorn.nativeComponents.HighlightOverlayViewScreen',
-      },
-      {
-        title: 'Wheel Picker',
-        tags: 'wheel picker',
-        screen: 'unicorn.nativeComponents.WheelPickerViewScreen',
-      },
-      {
-        title: 'SafeArea Spacer',
-        tags: 'native safe area',
-        screen: 'unicorn.nativeComponents.SafeAreaSpacerViewScreen',
-      },
-      {
-        title: 'KeyboardTracking (iOS)',
-        tags: 'KeyboardTracking',
-        screen: 'unicorn.nativeComponents.KeyboardTrackingViewScreen',
-      },
-      {
-        title: 'KeyboardAccessoryView',
-        tags: 'KeyboardInput',
-        screen: 'unicorn.nativeComponents.KeyboardAccessoryViewScreen',
-      },
-    ],
-  },
   AnimationsAndGestures: {
     title: 'Animations & Gestures',
     screens: [
@@ -379,86 +280,6 @@ export const screens = {
         title: 'Pan Responder',
         tags: 'pan swipe drag responder',
         screen: 'unicorn.components.PanResponderScreen',
-      },
-    ],
-  },
-  Incubator: {
-    title: 'Incubator (Experimental)',
-    screens: [
-      {
-        title: 'ChipsInput (New)',
-        tags: 'chips input',
-        screen: 'unicorn.components.IncubatorChipsInputScreen',
-      },
-      {
-        title: 'Native TouchableOpacity',
-        tags: 'touchable native',
-        screen: 'unicorn.incubator.TouchableOpacityScreen',
-      },
-      {
-        title: 'Dialog (New)',
-        tags: 'dialog modal popup alert',
-        screen: 'unicorn.incubator.IncubatorDialogScreen',
-      },
-      {
-        title: 'TextField (New)',
-        tags: 'text field input',
-        screen: 'unicorn.components.IncubatorTextFieldScreen',
-      },
-      {
-        title: 'Toast (New)',
-        tags: 'toast',
-        screen: 'unicorn.components.IncubatorToastScreen',
-      },
-      {
-        title: 'ExpandableOverlay',
-        tags: 'text field expandable input picker',
-        screen: 'unicorn.components.IncubatorExpandableOverlayScreen',
-      },
-      {
-        title: 'WheelPicker (Incubator)',
-        tags: 'wheel picker spinner experimental',
-        screen: 'unicorn.incubator.WheelPickerScreen',
-      },
-      {
-        title: 'Pan View',
-        tags: 'pan swipe drag',
-        screen: 'unicorn.incubator.PanViewScreen',
-      },
-      {
-        title: 'Transition View',
-        tags: 'transition animation enter exit',
-        screen: 'unicorn.incubator.TransitionViewScreen',
-      },
-    ],
-  },
-  Inspirations: {
-    title: 'Inspirations',
-    screens: [
-      {
-        title: 'Apple Music',
-        tags: 'apple music demo screen',
-        screen: 'unicorn.examples.AppleMusic',
-      },
-      {
-        title: 'Pinterest',
-        tags: 'pinterest demo screen',
-        screen: 'unicorn.examples.Pinterest',
-      },
-      {
-        title: 'List Actions',
-        tags: 'list actions demo screen',
-        screen: 'unicorn.examples.ListActionsScreen',
-      },
-      {
-        title: 'Product Page',
-        tags: 'product page demo screen',
-        screen: 'unicorn.examples.ProductPage',
-      },
-      {
-        title: 'Twitter',
-        tags: 'twitter demo screen',
-        screen: 'unicorn.examples.Twitter',
       },
     ],
   },
