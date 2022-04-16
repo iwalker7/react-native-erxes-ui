@@ -10,10 +10,12 @@ import {
 } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import { TextView, Empty, Indicator, ImageView } from 'react-native-erxes-ui';
+import { TextView, Empty, Indicator, TextInput } from 'react-native-erxes-ui';
 import images from '../assets/images';
 
 export default function App() {
+  const colorMain = '#673FBD';
+  const [value, setValue] = React.useState('');
   return (
     // <NavigationContainer>
     //   <Stack.Navigator>
@@ -25,7 +27,13 @@ export default function App() {
         Itgel.G
       </TextView>
 
-      <Empty />
+      <View style={{ height: 100, width: '100%' }}>
+        <TextInput
+          placeholder="hi"
+          value={value}
+          onChangeText={(text) => setValue(text)}
+        />
+      </View>
     </SafeAreaView>
   );
 }

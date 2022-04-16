@@ -3,7 +3,6 @@ export { default as Card } from './components/card';
 export { default as Chip } from './components/chip';
 export { default as Divider } from './components/divider';
 export { default as Empty } from './components/empty';
-export { default as ImageView } from './components/imageView';
 export { default as Indicator } from './components/indicator';
 export { default as Loader } from './components/loader';
 export { default as TextView } from './components/typography';
