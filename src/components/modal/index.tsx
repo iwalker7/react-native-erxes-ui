@@ -11,7 +11,7 @@ import {
   ViewProps as RNViewProps,
   ViewStyle,
 } from 'react-native';
-import { ios } from '../../utils';
+import { ios } from '../../commons/utils';
 
 export type ModalProps = RNModalProps &
   RNViewProps & {

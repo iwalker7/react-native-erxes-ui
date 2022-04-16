@@ -1,3 +1,13 @@
+import { Platform } from 'react-native';
+
+export enum orientations {
+  PORTRAIT = 'portrait',
+  LANDSCAPE = 'landscape',
+}
+
+const isAndroid: boolean = Platform.OS === 'android';
+const isIOS: boolean = Platform.OS === 'ios';
+
 const initialBravo = {
   title: '',
   description: '',
@@ -403,4 +413,6 @@ export {
   CURRENCIES,
   INTEGRATION_KINDS,
   DEFAULT_COMPANY_INDUSTRY_TYPES,
+  isAndroid,
+  isIOS,
 };

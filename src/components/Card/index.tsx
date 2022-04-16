@@ -7,7 +7,7 @@ import {
   ViewStyle,
 } from 'react-native';
 
-export type CardProp = {
+export type CardProps = {
   containerStyle?: StyleProp<ViewStyle>;
   activeOpacity?: number | undefined;
   onPress?: () => void;
@@ -16,7 +16,7 @@ export type CardProp = {
   shadow?: boolean;
 };
 
-const Card: React.FC<CardProp> = ({
+const Card: React.FC<CardProps> = ({
   containerStyle,
   activeOpacity,
   onPress,

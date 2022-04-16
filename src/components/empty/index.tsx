@@ -24,7 +24,7 @@ const Empty: React.FC<EmptyProps> = ({ textStyle, text, containerStyle }) => {
   return (
     <View style={[styles.container, containerStyle]}>
       <Image
-        source={images.nostage}
+        source={images.no_stage}
         resizeMode="contain"
         style={styles.image}
       />

@@ -8,7 +8,7 @@ export type $RemoveChildren<T extends React.ComponentType<any>> = $Omit<
   'children'
 >;
 
-export type DividerProp = $RemoveChildren<typeof View> & {
+export type DividerProps = $RemoveChildren<typeof View> & {
   /**
    *  Whether divider has a left inset.
    */
@@ -19,7 +19,7 @@ export type DividerProp = $RemoveChildren<typeof View> & {
    */
 };
 
-const Divider: React.FC<DividerProp> = ({ inset, style, ...rest }) => {
+const Divider: React.FC<DividerProps> = ({ inset, style, ...rest }) => {
   return (
     <View {...rest} style={[styles.light && inset && styles.inset, style]} />
   );

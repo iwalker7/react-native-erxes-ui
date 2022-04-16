@@ -1,105 +1,96 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-import * as React from 'react';
-import {
-  SafeAreaView,
-  SectionList,
-  StyleSheet,
-  TouchableOpacity,
-  View,
-} from 'react-native';
-import { TextView } from 'react-native-erxes-ui';
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useCallback, useState } from 'react';
+import { SectionList, StyleSheet, View } from 'react-native';
+import { TextView, TouchableOpacity, TextInput } from 'react-native-erxes-ui';
+import _ from 'lodash';
+import { screens } from './MenuStructure';
 
-const sections = [
-  {
-    title: 'Basic',
-    data: ['Button', 'Card', 'Chip', 'ImageView', 'Text', 'Touchable'],
-  },
-  {
-    title: 'Overlays',
-    data: ['Alert'],
-  },
-  {
-    title: 'Incubator',
-    data: ['ChipInput', 'TextField'],
-  },
-];
+const sections = _.map(screens, (section, key) => {
+  return {
+    key,
+    data: section.screens,
+  };
+});
 
-const onItemPress = ({ item }: any) => {
-  //navigation hiih
-  console.log(item);
-};
+export default function MainScreen({ navigation }: any) {
+  const [searchText, setSearchText] = useState('');
 
-const renderItem = ({ item }: any) => {
-  return (
-    <TouchableOpacity
-      activeOpacity={1}
-      key={item.title}
-      style={styles.sectionItem}
-      onPress={() => onItemPress(item)}
-    >
-      <TextView>{item}</TextView>
-    </TouchableOpacity>
+  const includedInSearch = (text = '') => {
+    return searchText.toLowerCase().includes(text.toLowerCase());
+  };
+
+  const onItemPress = useCallback(({ screenId }) => {
+    navigation.navigate(screenId);
+  }, []);
+
+  const renderSectionHeader = useCallback(
+    ({ section }) => {
+      if (!_.find(section.data, (screen) => includedInSearch(screen.title))) {
+        return null;
+      }
+
+      return (
+        <View>
+          <TextView uppercase>{section.key}</TextView>
+        </View>
+      );
+    },
+    [searchText]
   );
-};
 
-const renderSectionHeader = ({ section }: any) => {
-  return (
-    <View style={styles.sectionHeader}>
-      <TextView uppercase bold color="white">
-        {section.title}
-      </TextView>
-    </View>
+  const renderItem = useCallback(
+    ({ item }) => {
+      if (!includedInSearch(item.title)) {
+        return null;
+      }
+
+      if (!item.title) {
+        return <View />;
+      }
+
+      const screenId = _.flow(
+        (str: string) => _.split(str, '.'),
+        _.last,
+        (str: string) => _.replace(str, 'Screen', '')
+      )(item.screen);
+
+      return (
+        <TouchableOpacity
+          activeOpacity={1}
+          key={item.title}
+          style={styles.sectionItem}
+          onPress={() => {
+            onItemPress({ screenId });
+          }}
+        >
+          <TextView>{item.title}</TextView>
+        </TouchableOpacity>
+      );
+    },
+    [searchText]
   );
-};
 
-const colorMain = '#673FBD';
-const colorHighlight = 'mediumvioletred';
-
-function MainScreen() {
-  console.log('hello');
   return (
-    <SafeAreaView style={styles.container}>
-      <View style={styles.header}>
-        <TextView color={colorMain}>erxes Inc ui lib by</TextView>
-        <TextView bold large color={colorHighlight}>
-          Itgel.G
-        </TextView>
-      </View>
+    <View>
       <SectionList
+        ListHeaderComponent={
+          <TextInput
+            placeholder="Search component name"
+            onChangeText={(text) => setSearchText(text)}
+            value={searchText}
+          />
+        }
         sections={sections}
         renderSectionHeader={renderSectionHeader}
         renderItem={renderItem}
-        style={{ width: '100%' }}
       />
-    </SafeAreaView>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    backgroundColor: '#673FBD',
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    flexDirection: 'column',
-    width: '100%',
-  },
-  header: {
-    padding: 20,
-    flexDirection: 'column',
-    alignItems: 'center',
-  },
+  fieldStyle: {},
   sectionItem: {
-    width: '100%',
-    borderBottomWidth: 0.3,
-    borderBottomColor: '#673FBD',
-    paddingHorizontal: 50,
-    paddingVertical: 10,
-  },
-  sectionHeader: {
-    backgroundColor: '#673FBD',
-    padding: 10,
+    borderBottomWidth: 1,
   },
 });
-
-export default MainScreen;

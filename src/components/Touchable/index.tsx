@@ -4,27 +4,22 @@ import {
   StyleProp,
   TouchableOpacity,
   ViewStyle,
-  TouchableOpacityProps,
+  TouchableOpacityProps as RNTouchableOpacityProps,
 } from 'react-native';
 
-export type TouchableProps = TouchableOpacityProps & {
-  activeOpacity?: number;
+export type TouchableOpacityProps = RNTouchableOpacityProps & {
   style?: StyleProp<ViewStyle>;
   onPress?: (
     e: React.MouseEvent<HTMLAnchorElement, MouseEvent> | GestureResponderEvent
   ) => void;
   onLongPress?: () => void;
-  touchRef?: LegacyRef<TouchableOpacity | any>;
+  ref?: LegacyRef<TouchableOpacity | any>;
 };
 
-const Touchable: React.ForwardRefRenderFunction<unknown, TouchableProps> = ({
-  activeOpacity = 0.5,
-  style,
-  onPress,
-  onLongPress,
-  touchRef,
-  ...rest
-}) => {
+const Touchable: React.ForwardRefRenderFunction<
+  unknown,
+  TouchableOpacityProps
+> = ({ activeOpacity = 0.5, style, onPress, onLongPress, ref, ...rest }) => {
   let isCalled: boolean = false,
     timer: any;
 
@@ -41,7 +36,7 @@ const Touchable: React.ForwardRefRenderFunction<unknown, TouchableProps> = ({
 
   return (
     <TouchableOpacity
-      ref={touchRef}
+      ref={ref}
       style={style}
       onLongPress={() => onLongPress && onLongPress()}
       onPress={HandlerOnceTap}

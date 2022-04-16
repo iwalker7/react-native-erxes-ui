@@ -9,8 +9,17 @@
     "version": "1.0.0",
     "platforms": ["ios", "android", "web"],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.erxes.ui",
+      "buildNumber": "1.0.0"
     },
-    "assetBundlePatterns": ["**/*"]
+    "android": {
+      "package": "com.erxes.ui",
+      "versionCode": 1
+    },
+    "assetBundlePatterns": ["**/*"],
+    "updates": {
+      "fallbackToCacheTimeout": 0
+    }
   }
 }
