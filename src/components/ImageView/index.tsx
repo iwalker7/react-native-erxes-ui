@@ -21,7 +21,7 @@ import Touchable, { TouchableProps } from '../touchable';
 
 export type ImageViewProps = FastImageProps & {
   containerStyle?: StyleProp<ViewStyle>;
-  style: ImageStyle;
+  style?: ImageStyle;
   resizeMode?: FastImageProps['resizeMode'] | undefined;
   OnErrorComponent?: any;
   uri?: string;
@@ -45,6 +45,8 @@ const ImageView: React.FC<ImageViewProps> = ({
   onLoadEvent,
   placeHolder,
   touchRef,
+  width = 100,
+  height = 80,
 }) => {
   const [isError, setError] = useState(false);
 
@@ -68,8 +70,6 @@ const ImageView: React.FC<ImageViewProps> = ({
       uri: getAttachmentUrl(uri),
     };
   };
-
-  const { width, height, borderRadius } = style;
 
   const imageWidth = (width ? width : deviceWidth) as any;
 
@@ -112,11 +112,7 @@ const ImageView: React.FC<ImageViewProps> = ({
 
   return (
     <View style={[styles.container, containerStyle]}>
-      <Touchable
-        touchRef={touchRef}
-        style={{ borderRadius: borderRadius }}
-        onPress={!isLoading ? onPress : undefined}
-      >
+      <Touchable touchRef={touchRef} onPress={!isLoading ? onPress : undefined}>
         <View>
           {renderImage()}
           <View style={styles.childrenStyle}>

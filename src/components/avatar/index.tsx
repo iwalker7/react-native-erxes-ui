@@ -3,7 +3,7 @@ import React from 'react';
 import { StyleSheet } from 'react-native';
 import { StyleProp, View, ViewStyle } from 'react-native';
 import images from '../../assets/images';
-import { getNameUser } from 'src/utils';
+// import { getNameUser } from 'src/utils';
 import { ImageView, TextView } from '../../index';
 
 export type AvatarProps = {
@@ -77,7 +77,7 @@ const Avatars: React.FC<AvatarProps> = ({
       )}
       {withLabel && (
         <TextView small style={{ marginStart: 5 }}>
-          {getNameUser(users[0])}
+          {/* {getNameUser(users[0])} */}
           {users.length > 1
             ? ' and ' +
               getLeftLength() +

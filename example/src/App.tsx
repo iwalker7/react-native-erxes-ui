@@ -10,7 +10,8 @@ import {
 } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import { TextView, Empty } from 'react-native-erxes-ui';
+import { TextView, Empty, Indicator, ImageView } from 'react-native-erxes-ui';
+import images from '../assets/images';
 
 export default function App() {
   return (
@@ -23,6 +24,7 @@ export default function App() {
       <TextView bold large color="red">
         Itgel.G
       </TextView>
+
       <Empty />
     </SafeAreaView>
   );

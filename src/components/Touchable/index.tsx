@@ -17,7 +17,7 @@ export type TouchableProps = TouchableOpacityProps & {
   touchRef?: LegacyRef<TouchableOpacity | any>;
 };
 
-const XTouchable: React.ForwardRefRenderFunction<unknown, TouchableProps> = ({
+const Touchable: React.ForwardRefRenderFunction<unknown, TouchableProps> = ({
   activeOpacity = 0.5,
   style,
   onPress,
@@ -53,4 +53,4 @@ const XTouchable: React.ForwardRefRenderFunction<unknown, TouchableProps> = ({
   );
 };
 
-export default XTouchable;
+export default Touchable;
