@@ -1,6 +1,4 @@
-export { default as Avatar } from './components/avatar';
 export { default as Card } from './components/card';
-export { default as Chip } from './components/chip';
 export { default as Divider } from './components/divider';
 export { default as Empty } from './components/empty';
 export { default as Indicator } from './components/indicator';
