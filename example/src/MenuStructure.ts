@@ -87,12 +87,12 @@ export const screens = {
       {
         title: 'Empty',
         tags: 'empty state screen',
-        screen: 'EmptyStateScreen',
+        screen: 'EmptyScreen',
       },
       {
-        title: 'LoadingScreen',
-        tags: 'loading screen',
-        screen: 'LoadingScreen',
+        title: 'Loader',
+        tags: 'loader screen',
+        screen: 'LoaderScreen',
       },
       {
         title: 'Skeleton (Shimmer)',

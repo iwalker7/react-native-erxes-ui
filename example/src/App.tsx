@@ -13,23 +13,42 @@ import {
   TextScreen,
 } from './screens';
 import TouchableScreen from './screens/TouchableScreen';
+import LoaderScreen from './screens/LoaderScreen';
 
 const Stack = createStackNavigator();
 
 export default function App() {
+  const option = {
+    headerTitleStyle: {
+      //   color: '#472D9A',
+    },
+  };
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen name="Main" component={MainScreen} />
+        <Stack.Screen
+          name="Main"
+          component={MainScreen}
+          options={{ headerShown: false }}
+        />
 
-        <Stack.Screen name="Alert" component={AlertScreen} />
-        <Stack.Screen name="Avatar" component={AvatarScreen} />
-        <Stack.Screen name="Button" component={ButtonScreen} />
-        <Stack.Screen name="Card" component={CardScreen} />
-        <Stack.Screen name="Empty" component={EmptyScreen} />
-        <Stack.Screen name="Text" component={TextScreen} />
-        <Stack.Screen name="TextInput" component={TextInputScreen} />
-        <Stack.Screen name="Touchable" component={TouchableScreen} />
+        <Stack.Screen name="Alert" component={AlertScreen} options={option} />
+        <Stack.Screen name="Avatar" component={AvatarScreen} options={option} />
+        <Stack.Screen name="Button" component={ButtonScreen} options={option} />
+        <Stack.Screen name="Card" component={CardScreen} options={option} />
+        <Stack.Screen name="Empty" component={EmptyScreen} options={option} />
+        <Stack.Screen name="Loader" component={LoaderScreen} options={option} />
+        <Stack.Screen name="Text" component={TextScreen} options={option} />
+        <Stack.Screen
+          name="TextInput"
+          component={TextInputScreen}
+          options={option}
+        />
+        <Stack.Screen
+          name="Touchable"
+          component={TouchableScreen}
+          options={option}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );

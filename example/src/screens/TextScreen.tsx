@@ -1,3 +1,4 @@
+/* eslint-disable react-native/no-inline-styles */
 import React from 'react';
 import { View } from 'react-native';
 import { TextView, Colors } from 'react-native-erxes-ui';
@@ -15,13 +16,23 @@ import styles from '../styles';
 const TextScreen: React.FC<any> = () => {
   return (
     <View style={styles.container}>
-      <View>
-        <View style={{ width: '30%' }}>
+      <View
+        style={{
+          width: '100%',
+          flexDirection: 'row',
+          paddingVertical: 10,
+          justifyContent: 'space-between',
+          borderColor: 'transparent',
+          borderBottomColor: Colors.surface,
+          borderWidth: 1,
+        }}
+      >
+        <View>
           <TextView bold large color={Colors.primaryDark1}>
             Size
           </TextView>
         </View>
-        <View style={{ width: '70%' }}>
+        <View>
           <TextView xxsmall>xxsmall</TextView>
           <TextView xsmall>xsmall</TextView>
           <TextView small>small</TextView>
@@ -31,20 +42,27 @@ const TextScreen: React.FC<any> = () => {
           <TextView xxxlarge>xxxlarge</TextView>
         </View>
       </View>
-      <View>
-        <View style={{ width: '30%' }}>
+      <View
+        style={{
+          width: '100%',
+          flexDirection: 'row',
+          paddingVertical: 10,
+          justifyContent: 'space-between',
+          borderColor: 'transparent',
+          borderBottomColor: Colors.surface,
+          borderWidth: 1,
+        }}
+      >
+        <View>
           <TextView bold large color={Colors.primaryDark1}>
             Style
           </TextView>
         </View>
-        <View style={{ width: '70%' }}>
+        <View>
           <TextView bold>bold</TextView>
           <TextView boldless>boldless</TextView>
           <TextView italic>italic</TextView>
-          <TextView uppercase>large</TextView>
-          <TextView xlarge>xlarge</TextView>
-          <TextView xxlarge>xxlarge</TextView>
-          <TextView xxxlarge>xxxlarge</TextView>
+          <TextView uppercase>uppercase</TextView>
         </View>
       </View>
     </View>

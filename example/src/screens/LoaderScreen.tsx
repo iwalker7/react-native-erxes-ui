@@ -1,9 +1,10 @@
+/* eslint-disable react-native/no-inline-styles */
 import React from 'react';
 import { View } from 'react-native';
-import { TextView, Colors, Empty } from 'react-native-erxes-ui';
+import { TextView, Colors, Loader } from 'react-native-erxes-ui';
 import styles from '../styles';
 
-const EmptyScreen: React.FC<any> = () => {
+const LoaderScreen: React.FC<any> = () => {
   return (
     <View style={styles.container}>
       <View style={styles.segment}>
@@ -19,16 +20,18 @@ const EmptyScreen: React.FC<any> = () => {
               borderRadius: 5,
             }}
           >
-            <TextView small> default | task </TextView>
+            <TextView small> default | full </TextView>
           </View>
         </View>
 
-        <View style={{ height: 200 }}>
-          <Empty />
+        <View style={{ height: 50, flexDirection: 'row' }}>
+          <Loader />
+          <Loader color="red" />
+          <Loader />
         </View>
       </View>
     </View>
   );
 };
 
-export default EmptyScreen;
+export default LoaderScreen;

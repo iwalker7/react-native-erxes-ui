@@ -8,9 +8,7 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     alignItems: 'center',
     paddingHorizontal: 20,
-    paddingTop: 10,
   },
-
   item: {
     width: '100%',
     flexDirection: 'row',
@@ -19,6 +17,19 @@ const styles = StyleSheet.create({
     padding: 3,
     borderBottomWidth: 1,
     borderColor: Colors.surface,
+  },
+  segment: {
+    width: '100%',
+    flexDirection: 'column',
+    paddingVertical: 15,
+    borderColor: 'transparent',
+    borderBottomColor: Colors.surface,
+    borderWidth: 1,
+  },
+  props: {
+    flexDirection: 'row',
+    marginBottom: 15,
+    justifyContent: 'space-between',
   },
 });
 

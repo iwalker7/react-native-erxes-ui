@@ -5,6 +5,7 @@ import { TextView, Touchable, TextInput, Colors } from 'react-native-erxes-ui';
 
 import _ from 'lodash';
 import { screens } from './MenuStructure';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 const sections = _.map(screens, (section, key) => {
   return {
@@ -31,8 +32,13 @@ export default function MainScreen({ navigation }: any) {
       }
 
       return (
-        <View style={{ padding: 20, backgroundColor: Colors.secondary }}>
-          <TextView uppercase bold>
+        <View
+          style={{
+            padding: 20,
+            backgroundColor: '#DED9E8',
+          }}
+        >
+          <TextView uppercase bold color={Colors.primaryDark3}>
             {section.key}
           </TextView>
         </View>
@@ -66,7 +72,14 @@ export default function MainScreen({ navigation }: any) {
             onItemPress({ screenId });
           }}
         >
-          <TextView style={{ padding: 10, backgroundColor: 'white' }}>
+          <TextView
+            bold
+            style={{
+              padding: 15,
+              backgroundColor: 'white',
+              color: Colors.primaryDark3,
+            }}
+          >
             {item.title}
           </TextView>
         </Touchable>
@@ -76,7 +89,7 @@ export default function MainScreen({ navigation }: any) {
   );
 
   return (
-    <View>
+    <SafeAreaView style={{ flex: 1, backgroundColor: '#fff' }}>
       <SectionList
         ListHeaderComponent={
           <View style={styles.search}>
@@ -91,12 +104,12 @@ export default function MainScreen({ navigation }: any) {
         renderSectionHeader={renderSectionHeader}
         renderItem={renderItem}
       />
-    </View>
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
-  search: { backgroundColor: '#fff' },
+  search: { backgroundColor: '#fff', width: '100%' },
   sectionItem: {
     borderBottomWidth: 1,
     borderColor: Colors.surface,

@@ -19,17 +19,15 @@ export type TextInputProps = RNProps & {
   onSubmitEditing?: (
     value: NativeSyntheticEvent<TextInputSubmitEditingEventData>
   ) => void;
+  type?: 'default' | 'outline' | 'filled';
   placeholder?: string;
-  default?: boolean;
   floating?: boolean;
-  filled?: boolean;
-  error?: string;
   inputRef?: LegacyRef<RNTextInput>;
 };
 const TextInput: React.ForwardRefRenderFunction<unknown, TextInputProps> = ({
   style,
   value,
-  filled = false,
+  type = 'default',
   floating = false,
   onChangeText,
   onSubmitEditing,
@@ -46,8 +44,18 @@ const TextInput: React.ForwardRefRenderFunction<unknown, TextInputProps> = ({
         style,
         {
           justifyContent: 'center',
-          backgroundColor: filled ? 'rgba(79, 51, 175, 0.12)' : '#F5F5F5',
-          borderColor: filled ? 'rgba(241, 167, 62, 0.5)' : 'transparent',
+          backgroundColor:
+            type === 'filled'
+              ? 'rgba(79, 51, 175, 0.12)'
+              : type === 'outline'
+              ? '#fff'
+              : '#F5F5F5',
+          borderColor:
+            type === 'filled'
+              ? '#5629B6'
+              : type === 'outline'
+              ? '#5629B6'
+              : 'transparent',
           borderWidth: 1,
         },
       ]}
