@@ -9,7 +9,8 @@
     "ios": "expo start --ios",
     "web": "expo start --web",
     "start": "expo start",
-    "test": "jest"
+    "test": "jest",
+    "tunnel": "expo-cli start --tunnel"
   },
   "dependencies": {
     "@react-navigation/native": "^6.0.10",
@@ -22,6 +23,7 @@
     "react-native": "0.64.3",
     "react-native-erxes-ui": "link:../",
     "react-native-fast-image": "^8.5.11",
+    "react-native-gesture-handler": "~2.1.0",
     "react-native-safe-area-context": "3.3.2",
     "react-native-screens": "~3.10.1",
     "react-native-unimodules": "~0.15.0",

@@ -1,4 +1,6 @@
-import { isIOS } from '../commons/constants';
+import constants from '../commons/constants';
+
+const isIOS = constants.isIOS;
 
 const BorderRadius = {
   br0: isIOS ? 0 : 0,

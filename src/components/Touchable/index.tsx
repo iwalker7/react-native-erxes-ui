@@ -7,7 +7,7 @@ import {
   TouchableOpacityProps as RNTouchableOpacityProps,
 } from 'react-native';
 
-export type TouchableOpacityProps = RNTouchableOpacityProps & {
+export type TouchableProps = RNTouchableOpacityProps & {
   style?: StyleProp<ViewStyle>;
   onPress?: (
     e: React.MouseEvent<HTMLAnchorElement, MouseEvent> | GestureResponderEvent
@@ -16,10 +16,14 @@ export type TouchableOpacityProps = RNTouchableOpacityProps & {
   ref?: LegacyRef<TouchableOpacity | any>;
 };
 
-const Touchable: React.ForwardRefRenderFunction<
-  unknown,
-  TouchableOpacityProps
-> = ({ activeOpacity = 0.5, style, onPress, onLongPress, ref, ...rest }) => {
+const Touchable: React.ForwardRefRenderFunction<unknown, TouchableProps> = ({
+  activeOpacity = 0.5,
+  style,
+  onPress,
+  onLongPress,
+  ref,
+  ...rest
+}) => {
   let isCalled: boolean = false,
     timer: any;
 

@@ -1,61 +1,29 @@
 export const screens = {
-  Foundation: {
-    title: 'Foundation',
+  Basic: {
+    title: 'Basic',
     screens: [
       {
-        title: 'Border Radius',
-        tags: 'corener border radius circle',
-        screen: 'unicorn.style.BorderRadiusesScreen',
-      },
-    ],
-  },
-  Components: {
-    title: 'Components',
-    screens: [
-      { title: 'Text', tags: 'text', screen: 'TextScreen' },
-      {
-        title: 'View',
-        tags: 'view modifiers',
-        screen: 'ViewScreen',
-      },
-      {
-        title: 'Image',
+        title: 'Alert',
         tags: 'image cover overlay',
-        screen: 'unicorn.components.ImageScreen',
+        screen: 'AlertScreen',
+      },
+      {
+        title: 'Avatar',
+        tags: 'avatar',
+        screen: 'AvatarScreen',
       },
       {
         title: 'Button',
-        tags: 'button cta',
-        screen: 'unicorn.components.ButtonsScreen',
+        tags: 'button',
+        screen: 'ButtonScreen',
       },
       {
-        title: 'Avatars',
-        tags: 'avatar contact',
-        screen: 'unicorn.components.AvatarsScreen',
-      },
-
-      {
-        title: 'Cards',
+        title: 'Card',
         tags: 'cards feed',
-        screen: 'unicorn.components.CardsScreen',
+        screen: 'CardScreen',
       },
-
-      { title: 'Chip', tags: 'chip', screen: 'unicorn.components.ChipScreen' },
-      {
-        title: 'ExpandableSection',
-        tags: 'expandable section',
-        screen: 'unicorn.components.ExpandableSectionScreen',
-      },
-      {
-        title: 'Icon',
-        tags: 'image icon assets',
-        screen: 'unicorn.components.IconScreen',
-      },
-      {
-        title: 'ProgressBar',
-        tags: 'progress bar animated',
-        screen: 'unicorn.animations.ProgressBarScreen',
-      },
+      { title: 'Text', tags: 'text', screen: 'TextScreen' },
+      { title: 'Touchable', tags: 'touchable', screen: 'TouchableScreen' },
     ],
   },
   Form: {
@@ -64,107 +32,47 @@ export const screens = {
       {
         title: 'Checkbox',
         tags: 'checkbox toggle controls',
-        screen: 'unicorn.components.CheckboxScreen',
+        screen: 'CheckboxScreen',
       },
       {
-        title: 'Color Picker',
-        tags: 'color picker control',
-        screen: 'unicorn.components.ColorPickerScreen',
-      },
-      {
-        title: 'Color Swatch',
-        tags: 'color swatch and palette',
-        screen: 'unicorn.components.ColorSwatchScreen',
-      },
-      {
-        title: 'TextField',
-        tags: 'text input field form',
-        screen: 'unicorn.components.TextFieldScreen',
+        title: 'TextInput',
+        tags: 'textInput',
+        screen: 'TextInputScreen',
       },
       {
         title: 'Picker',
         tags: 'picker form',
-        screen: 'unicorn.components.PickerScreen',
+        screen: 'PickerScreen',
       },
       {
         title: 'DateTimePicker',
         tags: 'date time picker form',
-        screen: 'unicorn.components.DateTimePickerScreen',
+        screen: 'DateTimePickerScreen',
       },
       {
         title: 'RadioButton',
         tags: 'radio button group controls',
-        screen: 'unicorn.components.RadioButtonScreen',
-      },
-      {
-        title: 'SectionsWheelPicker',
-        tags: 'sections wheel picker form',
-        screen: 'unicorn.components.SectionsWheelPickerScreen',
-      },
-      {
-        title: 'SegmentedControl',
-        tags: 'segmented control switch toggle',
-        screen: 'unicorn.components.SegmentedControlScreen',
+        screen: 'RadioButtonScreen',
       },
       {
         title: 'Stepper',
         tags: 'stepper form',
-        screen: 'unicorn.components.StepperScreen',
+        screen: 'StepperScreen',
       },
       {
         title: 'Slider',
         tags: 'slider',
-        screen: 'unicorn.components.SliderScreen',
+        screen: 'SliderScreen',
       },
       {
         title: 'Switch',
         tags: 'switch toggle',
-        screen: 'unicorn.components.SwitchScreen',
+        screen: 'SwitchScreen',
       },
       {
         title: 'ChipsInput',
         tags: 'chips tags input form',
-        screen: 'unicorn.components.ChipsInputScreen',
-      },
-      {
-        title: 'Masked Inputs',
-        tags: 'text input form mask',
-        screen: 'unicorn.components.MaskedInputScreen',
-      },
-    ],
-  },
-  Overlays: {
-    title: 'Overlays',
-    screens: [
-      {
-        title: 'Action Sheet',
-        tags: 'action sheet cross-platform',
-        screen: 'unicorn.components.ActionSheetScreen',
-      },
-      {
-        title: 'Dialog',
-        tags: 'dialog modal popup alert',
-        screen: 'unicorn.components.DialogScreen',
-      },
-      {
-        title: 'Feature Highlight',
-        tags: 'feature overlay',
-        screen: 'unicorn.components.FeatureHighlightScreen',
-      },
-      {
-        title: 'Floating Button',
-        tags: 'floating button',
-        screen: 'unicorn.components.FloatingButtonScreen',
-      },
-      {
-        title: 'Hint',
-        tags: 'hints tooltip',
-        screen: 'unicorn.components.HintsScreen',
-      },
-      {
-        title: 'Toast',
-        tags: 'toast top bottom snackbar',
-        screen: 'unicorn.components.ToastsScreen',
+        screen: 'ChipsInputScreen',
       },
     ],
   },
@@ -174,72 +82,49 @@ export const screens = {
       {
         title: 'Carousel',
         tags: 'carousel',
-        screen: 'unicorn.components.CarouselScreen',
+        screen: 'CarouselScreen',
       },
       {
-        title: 'Carousel (Vertical)',
-        tags: 'carousel',
-        screen: 'unicorn.components.CarouselVerticalScreen',
-      },
-      {
-        title: 'Skeleton (Shimmer)',
-        tags: 'skeleton loading',
-        screen: 'unicorn.components.SkeletonViewScreen',
+        title: 'Empty',
+        tags: 'empty state screen',
+        screen: 'EmptyStateScreen',
       },
       {
         title: 'LoadingScreen',
         tags: 'loading screen',
-        screen: 'unicorn.screens.LoadingScreen',
+        screen: 'LoadingScreen',
       },
+      {
+        title: 'Skeleton (Shimmer)',
+        tags: 'skeleton loading',
+        screen: 'SkeletonViewScreen',
+      },
+
       {
         title: 'Modal',
         tags: 'modal topbar screen',
-        screen: 'unicorn.screens.ModalScreen',
+        screen: 'ModalScreen',
       },
-      {
-        title: 'StateScreen',
-        tags: 'empty state screen',
-        screen: 'unicorn.screens.EmptyStateScreen',
-      },
+
       {
         title: 'TabController',
         tags: 'tabbar controller native',
-        screen: 'unicorn.components.TabControllerScreen',
-      },
-      {
-        title: 'withScrollEnabler',
-        tags: 'scroll enabled withScrollEnabler',
-        screen: 'unicorn.components.WithScrollEnablerScreen',
-      },
-      {
-        title: 'withScrollReached',
-        tags: 'scroll reach start end',
-        screen: 'unicorn.components.WithScrollReachedScreen',
+        screen: 'TabControllerScreen',
       },
       {
         title: 'Fader',
         tags: 'scroll fader',
-        screen: 'unicorn.components.FaderScreen',
-      },
-      {
-        title: 'Wizard',
-        tags: 'wizard',
-        screen: 'unicorn.components.WizardScreen',
+        screen: 'FaderScreen',
       },
       {
         title: 'GridList',
         tags: 'grid list',
-        screen: 'unicorn.components.GridListScreen',
+        screen: 'GridListScreen',
       },
       {
         title: 'SortableGridList',
         tags: 'sort grid list drag',
-        screen: 'unicorn.components.SortableGridListScreen',
-      },
-      {
-        title: 'GridView',
-        tags: 'grid view',
-        screen: 'unicorn.components.GridViewScreen',
+        screen: 'SortableGridListScreen',
       },
     ],
   },
@@ -249,17 +134,17 @@ export const screens = {
       {
         title: 'Animated Image',
         tags: 'animated image',
-        screen: 'unicorn.components.AnimatedImageScreen',
+        screen: 'AnimatedImageScreen',
       },
       {
         title: 'Haptic feedback',
         tags: 'haptic feedback',
-        screen: 'unicorn.components.HapticScreen',
+        screen: 'HapticScreen',
       },
       {
         title: 'ProgressiveImage',
         tags: 'progressive image cover overlay',
-        screen: 'unicorn.components.ProgressiveImageScreen',
+        screen: 'ProgressiveImageScreen',
       },
       {
         title: 'Card Scanner',
@@ -269,17 +154,17 @@ export const screens = {
       {
         title: 'Pan Dismissible',
         tags: 'pan swipe drag dismiss',
-        screen: 'unicorn.components.PanDismissibleScreen',
+        screen: 'PanDismissibleScreen',
       },
       {
         title: 'Pan Listener',
         tags: 'pan swipe drag listener',
-        screen: 'unicorn.components.PanListenerScreen',
+        screen: 'PanListenerScreen',
       },
       {
         title: 'Pan Responder',
         tags: 'pan swipe drag responder',
-        screen: 'unicorn.components.PanResponderScreen',
+        screen: 'PanResponderScreen',
       },
     ],
   },

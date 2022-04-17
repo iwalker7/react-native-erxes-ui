@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useCallback, useState } from 'react';
 import { SectionList, StyleSheet, View } from 'react-native';
-import { TextView, TouchableOpacity, TextInput } from 'react-native-erxes-ui';
+import { TextView, Touchable, TextInput, Colors } from 'react-native-erxes-ui';
 
 import _ from 'lodash';
 import { screens } from './MenuStructure';
@@ -31,7 +31,7 @@ export default function MainScreen({ navigation }: any) {
       }
 
       return (
-        <View style={{ padding: 20, backgroundColor: 'orange' }}>
+        <View style={{ padding: 20, backgroundColor: Colors.secondary }}>
           <TextView uppercase bold>
             {section.key}
           </TextView>
@@ -58,7 +58,7 @@ export default function MainScreen({ navigation }: any) {
       )(item.screen);
 
       return (
-        <TouchableOpacity
+        <Touchable
           activeOpacity={1}
           key={item.title}
           style={styles.sectionItem}
@@ -66,10 +66,10 @@ export default function MainScreen({ navigation }: any) {
             onItemPress({ screenId });
           }}
         >
-          <TextView style={{ padding: 10, backgroundColor: 'grey' }}>
+          <TextView style={{ padding: 10, backgroundColor: 'white' }}>
             {item.title}
           </TextView>
-        </TouchableOpacity>
+        </Touchable>
       );
     },
     [searchText]
@@ -79,11 +79,13 @@ export default function MainScreen({ navigation }: any) {
     <View>
       <SectionList
         ListHeaderComponent={
-          <TextInput
-            placeholder="Search component name"
-            onChangeText={(text) => setSearchText(text)}
-            value={searchText}
-          />
+          <View style={styles.search}>
+            <TextInput
+              placeholder="Search component name"
+              onChangeText={(text: string) => setSearchText(text)}
+              value={searchText}
+            />
+          </View>
         }
         sections={sections}
         renderSectionHeader={renderSectionHeader}
@@ -94,8 +96,9 @@ export default function MainScreen({ navigation }: any) {
 }
 
 const styles = StyleSheet.create({
-  fieldStyle: {},
+  search: { backgroundColor: '#fff' },
   sectionItem: {
     borderBottomWidth: 1,
+    borderColor: Colors.surface,
   },
 });
