@@ -12,7 +12,7 @@ import {
 export type LoaderProps = ViewProps & {
   backgroundColor?: string;
   isWhite?: boolean;
-  color: string;
+  color?: string;
   style?: StyleProp<ViewStyle>;
 };
 
