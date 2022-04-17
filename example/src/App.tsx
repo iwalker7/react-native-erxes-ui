@@ -9,8 +9,10 @@ import {
   ButtonScreen,
   CardScreen,
   EmptyScreen,
+  ModalScreen,
   TextInputScreen,
   TextScreen,
+  UplaoderScreen,
 } from './screens';
 import TouchableScreen from './screens/TouchableScreen';
 import LoaderScreen from './screens/LoaderScreen';
@@ -38,6 +40,7 @@ export default function App() {
         <Stack.Screen name="Card" component={CardScreen} options={option} />
         <Stack.Screen name="Empty" component={EmptyScreen} options={option} />
         <Stack.Screen name="Loader" component={LoaderScreen} options={option} />
+        <Stack.Screen name="Modal" component={ModalScreen} options={option} />
         <Stack.Screen name="Text" component={TextScreen} options={option} />
         <Stack.Screen
           name="TextInput"
@@ -47,6 +50,11 @@ export default function App() {
         <Stack.Screen
           name="Touchable"
           component={TouchableScreen}
+          options={option}
+        />
+        <Stack.Screen
+          name="Uploader"
+          component={UplaoderScreen}
           options={option}
         />
       </Stack.Navigator>

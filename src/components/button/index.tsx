@@ -14,10 +14,11 @@ export type ButtonProps = ViewProps & {
   borderColor?: string;
   style?: StyleProp<ViewStyle>;
   onPress: () => void;
-  onLongPress: () => void;
+  onLongPress?: () => void;
   hasIcon?: boolean;
   iconSrc?: string;
   iconName?: string;
+  width?: number;
 };
 
 const Button: React.FC<ButtonProps> = ({
@@ -31,10 +32,11 @@ const Button: React.FC<ButtonProps> = ({
   textColor,
   borderColor,
   children,
+  width,
 }) => {
   const defaultStyle = {
     minHeight: 40,
-    width: block ? '100%' : 100,
+    width: width ? width : block ? '100%' : 100,
     borderWidth: 1,
     borderColor:
       borderColor || (type === 'outline' && mode === 'active')

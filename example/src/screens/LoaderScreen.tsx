@@ -26,8 +26,38 @@ const LoaderScreen: React.FC<any> = () => {
 
         <View style={{ height: 50, flexDirection: 'row' }}>
           <Loader />
-          <Loader color="red" />
-          <Loader />
+          <Loader color={Colors.secondary} />
+          <Loader color={Colors.grey600} />
+        </View>
+      </View>
+
+      <View style={styles.segment}>
+        <TextView bold>
+          color
+          <TextView color={Colors.grey600}>{`: string`}</TextView>
+        </TextView>
+        <View style={{ marginVertical: 10 }}>
+          <TextView small> default loader-ын өнгө</TextView>
+        </View>
+      </View>
+
+      <View style={styles.segment}>
+        <TextView bold>
+          backgroundColor
+          <TextView color={Colors.grey600}>{`: string`}</TextView>
+        </TextView>
+        <View style={{ marginVertical: 10 }}>
+          <TextView small> full loader-ын арын өнгө</TextView>
+        </View>
+      </View>
+
+      <View style={styles.segment}>
+        <TextView bold>
+          style
+          <TextView color={Colors.grey600}>{`: StyleProp<ViewStyle>`}</TextView>
+        </TextView>
+        <View style={{ marginVertical: 10 }}>
+          <TextView small>Агуулагчийн style</TextView>
         </View>
       </View>
     </View>

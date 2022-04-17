@@ -11,17 +11,11 @@ import {
 
 export type LoaderProps = ViewProps & {
   backgroundColor?: string;
-  isWhite?: boolean;
   color?: string;
   style?: StyleProp<ViewStyle>;
 };
 
-const Loader: React.FC<LoaderProps> = ({
-  backgroundColor,
-  isWhite = false,
-  style,
-  color,
-}) => {
+const Loader: React.FC<LoaderProps> = ({ backgroundColor, style, color }) => {
   return (
     <View style={{ flex: 1 }}>
       <View
@@ -33,10 +27,7 @@ const Loader: React.FC<LoaderProps> = ({
           style,
         ]}
       >
-        <ActivityIndicator
-          size="small"
-          color={color || isWhite ? '#fff' : '#5629B6'}
-        />
+        <ActivityIndicator size="small" color={color || '#5629B6'} />
       </View>
     </View>
   );

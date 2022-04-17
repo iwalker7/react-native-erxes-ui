@@ -109,6 +109,18 @@ const TextInputScreen: React.FC<any> = () => {
 
         <View style={styles.segment}>
           <TextView bold>
+            floating
+            <TextView color={Colors.grey600}>{`: boolean`}</TextView>
+          </TextView>
+          <View style={{ marginVertical: 10 }}>
+            <TextView small>
+              True үед placeholder баруун дээд булан руу хөдөлгөөнтөөр шилжинэ
+            </TextView>
+          </View>
+        </View>
+
+        <View style={styles.segment}>
+          <TextView bold>
             placeholder
             <TextView color={Colors.grey600}>{`: string`}</TextView>
           </TextView>

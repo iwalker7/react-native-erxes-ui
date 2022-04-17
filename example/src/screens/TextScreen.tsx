@@ -22,24 +22,43 @@ const TextScreen: React.FC<any> = () => {
           flexDirection: 'row',
           paddingVertical: 10,
           justifyContent: 'space-between',
+          alignContent: 'center',
           borderColor: 'transparent',
           borderBottomColor: Colors.surface,
           borderWidth: 1,
         }}
       >
-        <View>
-          <TextView bold large color={Colors.primaryDark1}>
+        <View style={{ width: '25%', alignContent: 'flex-start' }}>
+          <TextView bold large>
             Size
           </TextView>
         </View>
-        <View>
-          <TextView xxsmall>xxsmall</TextView>
-          <TextView xsmall>xsmall</TextView>
-          <TextView small>small</TextView>
-          <TextView large>large</TextView>
-          <TextView xlarge>xlarge</TextView>
-          <TextView xxlarge>xxlarge</TextView>
-          <TextView xxxlarge>xxxlarge</TextView>
+        <View style={{ flexDirection: 'column' }}>
+          <View
+            style={{
+              width: '70%',
+              flexDirection: 'row',
+              justifyContent: 'space-around',
+              flexWrap: 'wrap',
+            }}
+          >
+            <TextView xxsmall>xxsmall</TextView>
+            <TextView xsmall>xsmall</TextView>
+            <TextView small>small</TextView>
+            <TextView large>large</TextView>
+          </View>
+          <View
+            style={{
+              width: '75%',
+              flexDirection: 'row',
+              justifyContent: 'space-between',
+              flexWrap: 'wrap',
+            }}
+          >
+            <TextView xlarge>xlarge</TextView>
+            <TextView xxlarge>xxlarge</TextView>
+            <TextView xxxlarge>xxxlarge</TextView>
+          </View>
         </View>
       </View>
       <View
@@ -54,11 +73,18 @@ const TextScreen: React.FC<any> = () => {
         }}
       >
         <View>
-          <TextView bold large color={Colors.primaryDark1}>
+          <TextView bold large>
             Style
           </TextView>
         </View>
-        <View>
+        <View
+          style={{
+            width: '75%',
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+            flexWrap: 'wrap',
+          }}
+        >
           <TextView bold>bold</TextView>
           <TextView boldless>boldless</TextView>
           <TextView italic>italic</TextView>

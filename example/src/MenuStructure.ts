@@ -2,11 +2,11 @@ export const screens = {
   Basic: {
     title: 'Basic',
     screens: [
-      {
-        title: 'Alert',
-        tags: 'image cover overlay',
-        screen: 'AlertScreen',
-      },
+      //   {
+      //     title: 'Alert',
+      //     tags: 'image cover overlay',
+      //     screen: 'AlertScreen',
+      //   },
       {
         title: 'Avatar',
         tags: 'avatar',
@@ -22,6 +22,11 @@ export const screens = {
         tags: 'cards feed',
         screen: 'CardScreen',
       },
+      {
+        title: 'Modal',
+        tags: 'modal topbar screen',
+        screen: 'ModalScreen',
+      },
       { title: 'Text', tags: 'text', screen: 'TextScreen' },
       { title: 'Touchable', tags: 'touchable', screen: 'TouchableScreen' },
     ],
@@ -29,10 +34,30 @@ export const screens = {
   Form: {
     title: 'Form',
     screens: [
+      //   {
+      //     title: 'Checkbox',
+      //     tags: 'checkbox toggle controls',
+      //     screen: 'CheckboxScreen',
+      //   },
       {
-        title: 'Checkbox',
-        tags: 'checkbox toggle controls',
-        screen: 'CheckboxScreen',
+        title: 'ChipsInput',
+        tags: 'picker form',
+        screen: 'ChipsInputScreen',
+      },
+      {
+        title: 'FileUploader',
+        tags: 'textInput',
+        screen: 'UploaderScreen',
+      },
+      {
+        title: 'Map',
+        tags: 'textInput',
+        screen: 'MapScreen',
+      },
+      {
+        title: 'RadioButton',
+        tags: 'radio button group controls',
+        screen: 'RadioButtonScreen',
       },
       {
         title: 'TextInput',
@@ -45,14 +70,9 @@ export const screens = {
         screen: 'PickerScreen',
       },
       {
-        title: 'DateTimePicker',
+        title: 'DateTime Picker',
         tags: 'date time picker form',
         screen: 'DateTimePickerScreen',
-      },
-      {
-        title: 'RadioButton',
-        tags: 'radio button group controls',
-        screen: 'RadioButtonScreen',
       },
       {
         title: 'Stepper',
@@ -68,11 +88,6 @@ export const screens = {
         title: 'Switch',
         tags: 'switch toggle',
         screen: 'SwitchScreen',
-      },
-      {
-        title: 'ChipsInput',
-        tags: 'chips tags input form',
-        screen: 'ChipsInputScreen',
       },
     ],
   },
@@ -99,13 +114,6 @@ export const screens = {
         tags: 'skeleton loading',
         screen: 'SkeletonViewScreen',
       },
-
-      {
-        title: 'Modal',
-        tags: 'modal topbar screen',
-        screen: 'ModalScreen',
-      },
-
       {
         title: 'TabController',
         tags: 'tabbar controller native',

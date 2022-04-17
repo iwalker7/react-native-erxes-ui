@@ -1,3 +1,4 @@
+/* eslint-disable react-native/no-inline-styles */
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useCallback, useState } from 'react';
 import { SectionList, StyleSheet, View } from 'react-native';
@@ -75,7 +76,8 @@ export default function MainScreen({ navigation }: any) {
           <TextView
             bold
             style={{
-              padding: 15,
+              paddingHorizontal: 30,
+              paddingVertical: 15,
               backgroundColor: 'white',
               color: Colors.primaryDark3,
             }}
