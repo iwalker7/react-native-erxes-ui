@@ -1,14 +1,14 @@
 /* eslint-disable react-native/no-inline-styles */
-import React, { useState } from 'react';
+import React from 'react';
 import { View } from 'react-native';
 import { TextView, Colors } from 'react-native-erxes-ui';
 import styles from '../styles';
 
 const UplaoderScreen: React.FC<any> = () => {
-  const [visible, onVisible] = useState(false);
+  //const [visible, onVisible] = useState(false);
   return (
     <View style={styles.container}>
-      <View style={styles.segment}>{/* <Uploader> */}</View>
+      <View style={styles.segment}>{/* <Uploader /> */}</View>
 
       <View style={styles.segment}>
         <View style={styles.props}>

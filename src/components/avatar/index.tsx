@@ -2,21 +2,20 @@
 import React from 'react';
 import type { ViewStyle } from 'react-native';
 import { Image, StyleSheet, View, StyleProp, ImageProps } from 'react-native';
-import { Colors } from 'src/style/colors';
 import images from '../../assets/images';
 
 export type AvatarProps = ImageProps & {
   size?: number;
   active?: boolean;
   containerStyle?: StyleProp<ViewStyle>;
-  source: string;
+  uri: string;
 };
 
 const Avatar: React.FC<AvatarProps> = ({
   size,
   active,
   containerStyle,
-  source,
+  uri,
 }) => {
   return (
     <View
@@ -30,7 +29,7 @@ const Avatar: React.FC<AvatarProps> = ({
       ]}
     >
       <Image
-        source={source || images.avatar}
+        source={typeof uri !== 'string' ? images.avatar : { uri: source }}
         resizeMode={'cover'}
         style={[styles.image, { borderRadius: size ? size : 40 }]}
       />
@@ -45,7 +44,7 @@ const Avatar: React.FC<AvatarProps> = ({
             bottom: size ? size / 80 : 0,
             right: size ? size / 80 : 0,
           }}
-        ></View>
+        />
       )}
     </View>
   );

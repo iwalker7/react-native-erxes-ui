@@ -1,21 +1,32 @@
 /* eslint-disable react-native/no-inline-styles */
 import React from 'react';
-import { View } from 'react-native';
-import { TextView, Colors } from 'react-native-erxes-ui';
+import { View, Linking } from 'react-native';
+import { TextView, Colors, Touchable } from 'react-native-erxes-ui';
 import styles from '../styles';
-
-// const renderItem = (prop: any) => {
-//   return (
-//     <View style={styles.item}>
-//       <TextView color={Colors.primaryDark1}>{prop.toLowerCase()}</TextView>
-//       <TextView>Sample text</TextView>
-//     </View>
-//   );
-// };
 
 const TextScreen: React.FC<any> = () => {
   return (
     <View style={styles.container}>
+      <View style={[styles.segment, { height: 70, marginBottom: 10 }]}>
+        <TextView bold color={Colors.grey600}>
+          {`Props + React native-ын TextProps`}
+        </TextView>
+
+        <Touchable
+          style={{ position: 'absolute', bottom: 5, right: 0 }}
+          onPress={() => Linking.openURL('https://reactnative.dev/docs/text')}
+        >
+          <TextView bold small color={Colors.blue600}>
+            {`See React Native TextProps \u2192`}
+          </TextView>
+        </Touchable>
+      </View>
+
+      <View style={styles.segment}>
+        <TextView large bold color="red">
+          {' ХИЧЭЭЛДЭЭ АНХААРНА УУ ТА'}
+        </TextView>
+      </View>
       <View
         style={{
           width: '100%',

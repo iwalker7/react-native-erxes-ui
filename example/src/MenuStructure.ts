@@ -2,11 +2,11 @@ export const screens = {
   Basic: {
     title: 'Basic',
     screens: [
-      //   {
-      //     title: 'Alert',
-      //     tags: 'image cover overlay',
-      //     screen: 'AlertScreen',
-      //   },
+      {
+        title: 'Alert',
+        tags: 'image cover overlay',
+        screen: 'AlertScreen',
+      },
       {
         title: 'Avatar',
         tags: 'avatar',
@@ -45,6 +45,11 @@ export const screens = {
         screen: 'ChipsInputScreen',
       },
       {
+        title: 'Dropdown',
+        tags: 'picker form',
+        screen: 'DropdownScreen',
+      },
+      {
         title: 'FileUploader',
         tags: 'textInput',
         screen: 'UploaderScreen',
@@ -63,11 +68,6 @@ export const screens = {
         title: 'TextInput',
         tags: 'textInput',
         screen: 'TextInputScreen',
-      },
-      {
-        title: 'Picker',
-        tags: 'picker form',
-        screen: 'PickerScreen',
       },
       {
         title: 'DateTime Picker',

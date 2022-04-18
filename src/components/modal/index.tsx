@@ -1,5 +1,5 @@
 /* eslint-disable react-native/no-inline-styles */
-import React, { SetStateAction } from 'react';
+import React, { RefObject, SetStateAction } from 'react';
 import { Pressable } from 'react-native';
 import {
   Modal as RNModal,
@@ -11,6 +11,7 @@ import {
   ViewProps as RNViewProps,
   ViewStyle,
 } from 'react-native';
+import type { Rect } from 'react-native-safe-area-context';
 import TextView from '../typography';
 
 export type ModalProps = RNModalProps &
@@ -75,11 +76,17 @@ const Modal: React.FC<ModalProps> = ({
               style,
             ]}
           >
-            <Pressable style={styles.xbutton} onPress={() => onVisible(false)}>
-              <TextView small color={'#616161'}>
-                Close
-              </TextView>
-            </Pressable>
+            {cancelable && (
+              <Pressable
+                style={styles.xbutton}
+                onPress={() => onVisible(false)}
+              >
+                <TextView small color={'#616161'}>
+                  Close
+                </TextView>
+              </Pressable>
+            )}
+
             {children}
           </View>
         </View>
@@ -102,14 +109,15 @@ const styles = StyleSheet.create({
   modalView: {
     backgroundColor: 'white',
     borderRadius: 20,
-    padding: 35,
+    paddingVertical: 30,
+    paddingHorizontal: 20,
     alignItems: 'center',
     shadowColor: '#000',
     shadowOffset: {
-      width: 1,
-      height: 1,
+      width: 1.5,
+      height: 1.5,
     },
-    shadowOpacity: 0.2,
+    shadowOpacity: 0.5,
     shadowRadius: 30,
     elevation: 5,
   },

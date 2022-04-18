@@ -93,6 +93,7 @@ export default function MainScreen({ navigation }: any) {
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: '#fff' }}>
       <SectionList
+        keyExtractor={(data, index) => data.tags + index}
         ListHeaderComponent={
           <View style={styles.search}>
             <TextInput

@@ -1,3 +1,43 @@
+export const coreBaseUrl = 'api.office.erxes.io';
+
+export const getAttachmentUrl = (baseUrl: string, value: string) => {
+  if (value && !value.includes('http')) {
+    return `https://${baseUrl}/read-file?key=` + value;
+  }
+  return value;
+};
+
+export const getNameChip = (item: any, isUser: boolean, isItem: boolean) => {
+  return (
+    item.details?.fullName ||
+    item.username ||
+    item.email ||
+    item.name ||
+    item.primaryName ||
+    (isUser ? renderFullName(item) : isItem ? item : 'Unknown')
+  );
+};
+
+export const renderFullName = (item: any) => {
+  let fullName = '';
+  if (item.firstName || item.lastName) {
+    if (item.firstName) {
+      fullName += item.firstName + ' ';
+    }
+    if (item.lastName) {
+      fullName += item.lastName;
+    }
+    return fullName;
+  }
+  if (item.primaryEmail) {
+    return item.primaryEmail;
+  }
+  if (item.visitorContactInfo?.email) {
+    return item.visitorContactInfo.email;
+  }
+  return 'Unknown';
+};
+
 export const initialBravo = {
   title: '',
   description: '',

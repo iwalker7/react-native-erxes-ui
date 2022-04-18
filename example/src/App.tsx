@@ -16,6 +16,7 @@ import {
 } from './screens';
 import TouchableScreen from './screens/TouchableScreen';
 import LoaderScreen from './screens/LoaderScreen';
+import DropdownScreen from './screens/DropdownScreen';
 
 const Stack = createStackNavigator();
 
@@ -55,6 +56,11 @@ export default function App() {
         <Stack.Screen
           name="Uploader"
           component={UplaoderScreen}
+          options={option}
+        />
+        <Stack.Screen
+          name="Dropdown"
+          component={DropdownScreen}
           options={option}
         />
       </Stack.Navigator>

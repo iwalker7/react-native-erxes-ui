@@ -6,17 +6,6 @@ const ios = Platform.OS === 'ios';
 const PERPAGE = 10;
 const PERPAGE20 = 20;
 
-const baseUrl = 'api.office.erxes.io';
-
-const apiUrl = `https://${baseUrl}`;
-
-const getAttachmentUrl = (value: string) => {
-  if (value && !value.includes('http')) {
-    return `${apiUrl}/read-file?key=` + value;
-  }
-  return value;
-};
-
 const setNavigationHome = ({ navigation, headerLeft, headerRight }: any) => {
   navigation.setOptions({
     headerLeft: () => headerLeft,
@@ -43,21 +32,6 @@ const isIphoneWithNotch = () => {
       dimen.width === 926)
   );
 };
-
-const COLORS = [
-  '#01aecc',
-  '#D9E3F0',
-  '#F47373',
-  '#697689',
-  '#4bbf6b',
-  '#0078bf',
-  '#89609d',
-  '#838c91',
-  '#cd5a91',
-  '#d29034',
-  '#63D2D6',
-  '#F7CE53',
-];
 
 const deviceHeight = Dimensions.get('window').height;
 const deviceWidth = Dimensions.get('window').width;
@@ -331,7 +305,6 @@ export {
   intersection,
   union,
   difference,
-  getAttachmentUrl,
   androidCameraPermission,
   setNavigationHome,
   PERPAGE,
@@ -339,7 +312,6 @@ export {
   ios,
   deviceHeight,
   deviceWidth,
-  COLORS,
   isIphoneWithNotch,
   getNameUser,
   getModifableArray,
