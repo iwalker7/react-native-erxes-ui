@@ -19,14 +19,14 @@ const AvatarScreen: React.FC<any> = () => {
           justifyContent: 'space-around',
         }}
       >
-        <View style={{ paddingBottom: 10 }}>
+        {/* <View style={{ paddingBottom: 10 }}>
           <TextView>Default</TextView>
           <Avatar source={images.avatar} size={50} />
         </View>
         <View>
           <TextView>Active status</TextView>
           <Avatar active source={images.avatar} size={50} />
-        </View>
+        </View> */}
       </View>
 
       <ScrollView

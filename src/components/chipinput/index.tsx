@@ -24,6 +24,7 @@
 // };
 
 // export type ChipProp = {
+//   key: string;
 //   uri: string;
 //   onRemove: (index: number) => void;
 // };
@@ -109,7 +110,7 @@
 //           flexWrap: 'wrap',
 //         }}
 //       >
-//         {/* {chipItems?.map((item: any, index: number) => (
+//         {chipItems?.map((item: any, index: number) => (
 //           <Chip
 //             key={index.toString()}
 //             item={item}
@@ -118,7 +119,7 @@
 //             isUser={isUser}
 //             onRemove={onRemove}
 //           />
-//         ))} */}
+//         ))}
 //       </View>
 //       {onFocus && (
 //         <TextInput

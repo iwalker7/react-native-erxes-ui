@@ -8,7 +8,7 @@ export type AvatarProps = ImageProps & {
   size?: number;
   active?: boolean;
   containerStyle?: StyleProp<ViewStyle>;
-  uri: string;
+  uri?: string;
 };
 
 const Avatar: React.FC<AvatarProps> = ({
@@ -29,7 +29,7 @@ const Avatar: React.FC<AvatarProps> = ({
       ]}
     >
       <Image
-        source={typeof uri !== 'string' ? images.avatar : { uri: source }}
+        source={typeof uri !== 'string' ? images.avatar : { uri: uri }}
         resizeMode={'cover'}
         style={[styles.image, { borderRadius: size ? size : 40 }]}
       />

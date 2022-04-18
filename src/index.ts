@@ -12,4 +12,4 @@ export { default as TextView, TextViewProps } from './components/typography';
 export { default as TextInput, TextInputProps } from './components/textInput';
 export { default as Touchable, TouchableProps } from './components/touchable';
 export { default as Modal, ModalProps } from './components/modal';
-//export { default as Modal, ModalProps } from './components/modal';
+export { default as Uplaoder, UploaderProps } from './components/uploader';

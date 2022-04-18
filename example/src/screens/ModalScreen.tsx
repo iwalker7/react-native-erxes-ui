@@ -42,7 +42,7 @@ const ModalScreen: React.FC<any> = () => {
       <View style={styles.segment}>
         <Modal isVisible={visible} onVisible={onVisible}>
           <View>
-            <Avatar source={images.avatar} size={80} />
+            <Avatar source={images.avatar} uri={undefined} size={80} />
             <TextView center style={{ marginTop: 10 }}>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
               eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
@@ -52,7 +52,7 @@ const ModalScreen: React.FC<any> = () => {
         </Modal>
         <Modal bottom isVisible={bottomVisible} onVisible={onBottomVisible}>
           <View>
-            <Avatar source={images.avatar} size={80} />
+            <Avatar source={images.avatar} uri={undefined} size={80} />
             <TextView center style={{ marginTop: 10 }}>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
               eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
