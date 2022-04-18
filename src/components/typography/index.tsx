@@ -23,6 +23,7 @@ export type TextViewProps = TextProps & {
   style?: StyleProp<TextStyle>;
   capitalize?: boolean;
   uppercase?: boolean;
+  required?: boolean;
   flex?: boolean;
   lineHeight?: number;
   center?: boolean;
@@ -50,6 +51,7 @@ const TextView: React.FC<TextViewProps> = ({
   lineHeight,
   center,
   color,
+  required,
   onPress,
   onLongPress,
   ...rest
@@ -83,6 +85,9 @@ const TextView: React.FC<TextViewProps> = ({
       {...rest}
     >
       {rest.children}
+      {required && (
+        <Text style={{ color: '#FF4949', fontWeight: 'bold' }}> *</Text>
+      )}
     </Text>
   );
 };

@@ -22,11 +22,6 @@ const TextScreen: React.FC<any> = () => {
         </Touchable>
       </View>
 
-      <View style={styles.segment}>
-        <TextView large bold color="red">
-          {' ХИЧЭЭЛДЭЭ АНХААРНА УУ ТА'}
-        </TextView>
-      </View>
       <View
         style={{
           width: '100%',
@@ -93,13 +88,25 @@ const TextScreen: React.FC<any> = () => {
             width: '75%',
             flexDirection: 'row',
             justifyContent: 'space-between',
-            flexWrap: 'wrap',
           }}
         >
-          <TextView bold>bold</TextView>
-          <TextView boldless>boldless</TextView>
-          <TextView italic>italic</TextView>
-          <TextView uppercase>uppercase</TextView>
+          <View style={{ flexDirection: 'column' }}>
+            <View
+              style={{
+                flexWrap: 'wrap',
+              }}
+            >
+              <TextView bold>bold</TextView>
+              <TextView boldless>boldless</TextView>
+              <TextView italic>italic</TextView>
+            </View>
+          </View>
+          <View style={{ flexDirection: 'column', width: '50%' }}>
+            <View>
+              <TextView uppercase>uppercase</TextView>
+              <TextView required>Required</TextView>
+            </View>
+          </View>
         </View>
       </View>
     </View>
