@@ -1,5 +1,5 @@
 /* eslint-disable react-native/no-inline-styles */
-import React, { RefObject, SetStateAction } from 'react';
+import React, { SetStateAction } from 'react';
 import { Pressable } from 'react-native';
 import {
   Modal as RNModal,
@@ -11,7 +11,6 @@ import {
   ViewProps as RNViewProps,
   ViewStyle,
 } from 'react-native';
-import type { Rect } from 'react-native-safe-area-context';
 import TextView from '../typography';
 
 export type ModalProps = RNModalProps &

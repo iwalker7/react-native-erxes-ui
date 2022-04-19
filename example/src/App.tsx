@@ -8,15 +8,16 @@ import {
   AvatarScreen,
   ButtonScreen,
   CardScreen,
+  DropdownScreen,
   EmptyScreen,
+  LoaderScreen,
   ModalScreen,
   TextInputScreen,
   TextScreen,
   UplaoderScreen,
+  TouchableScreen,
+  ThemeScreen,
 } from './screens';
-import TouchableScreen from './screens/TouchableScreen';
-import LoaderScreen from './screens/LoaderScreen';
-import DropdownScreen from './screens/DropdownScreen';
 
 const Stack = createStackNavigator();
 
@@ -35,6 +36,9 @@ export default function App() {
           options={{ headerShown: false }}
         />
 
+        <Stack.Screen name="Theme" component={ThemeScreen} options={option} />
+
+        {/* { components} */}
         <Stack.Screen name="Alert" component={AlertScreen} options={option} />
         <Stack.Screen name="Avatar" component={AvatarScreen} options={option} />
         <Stack.Screen name="Button" component={ButtonScreen} options={option} />

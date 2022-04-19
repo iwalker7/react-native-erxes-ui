@@ -1,4 +1,11 @@
 export const screens = {
+  //   Foundation: {
+  //     title: 'Foundation',
+  //     screens: [
+  //       { title: 'Theme', tags: 'theme', screen: 'ThemeScreen' },
+  //       //   { title: 'Color', tags: 'color', screen: 'ColorScreen' },
+  //     ],
+  //   },
   Basic: {
     title: 'Basic',
     screens: [

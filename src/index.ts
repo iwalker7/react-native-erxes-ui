@@ -1,5 +1,5 @@
 export { default as Colors } from './style/colors';
-
+export { default as IconCore } from './theme/icon/IconCore';
 export { default as Avatar, AvatarProps } from './components/avatar';
 export { default as Button, ButtonProps } from './components/button';
 export { default as Card, CardProps } from './components/card';
