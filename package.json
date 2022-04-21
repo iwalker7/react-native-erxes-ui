@@ -2,10 +2,10 @@
   "name": "react-native-erxes-ui",
   "version": "0.1.1",
   "description": "erxes react native ui library",
-  "main": "lib/commonjs/index.js",
-  "module": "lib/module/index.js",
+  "main": "lib/commonjs/index",
+  "module": "lib/module/index",
   "types": "lib/typescript/src/index.d.ts",
-  "react-native": "src/index.tsx",
+  "react-native": "src/index",
   "source": "src/index",
   "files": [
     "src",
