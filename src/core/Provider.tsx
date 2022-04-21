@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import * as React from 'react';
 import {
   AccessibilityInfo,
@@ -7,11 +8,11 @@ import {
 } from 'react-native';
 import { ThemeProvider } from './theming';
 import { Provider as SettingsProvider, Settings } from './settings';
-import ErxesIcon from '../icon/ErxesIcon';
-import DefaultTheme from '../DefaultTheme';
-import DarkTheme from '../DarkTheme';
-import { addEventListener } from '../utils';
-import PortalHost from './Portal/PortalHost';
+import MaterialCommunityIcon from '../components/MaterialCommunityIcons';
+import DefaultTheme from '../styles/DefaultTheme';
+import DarkTheme from '../styles/DarkTheme';
+import { addEventListener } from '../utils/addEventListener';
+import PortalHost from '../components/Portal/PortalHost';
 
 type Props = {
   children: React.ReactNode;
@@ -93,7 +94,7 @@ const Provider = ({ ...props }: Props) => {
   const { children, settings } = props;
   return (
     <PortalHost>
-      <SettingsProvider value={settings || { icon: ErxesIcon }}>
+      <SettingsProvider value={settings || { icon: MaterialCommunityIcon }}>
         <ThemeProvider theme={getTheme()}>{children}</ThemeProvider>
       </SettingsProvider>
     </PortalHost>

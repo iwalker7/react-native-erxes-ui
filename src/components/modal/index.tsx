@@ -11,7 +11,7 @@ import {
   ViewProps as RNViewProps,
   ViewStyle,
 } from 'react-native';
-import TextView from '../typography';
+import TextView from '../Typography';
 
 export type ModalProps = RNModalProps &
   RNViewProps & {

@@ -8,7 +8,7 @@ import {
   ViewStyle,
 } from 'react-native';
 import { Modal, Touchable, TextView } from '../../index';
-import Divider from '../divider';
+import Divider from '../Divider';
 
 export type DropdownProps = {
   selectedIndex?: number;

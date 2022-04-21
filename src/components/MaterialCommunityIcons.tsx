@@ -1,4 +1,3 @@
-/* eslint-disable quotes */
 import * as React from 'react';
 import { StyleSheet, Text, Platform, TextProps, ViewProps } from 'react-native';
 
@@ -10,7 +9,7 @@ export type IconProps = {
   allowFontScaling?: boolean;
 };
 
-let ErxesIcons: React.ComponentType<
+let MaterialCommunityIcons: React.ComponentType<
   TextProps & {
     name: string;
     color: string;
@@ -21,12 +20,13 @@ let ErxesIcons: React.ComponentType<
 
 try {
   // Optionally require vector-icons
-  ErxesIcons = require('./IconCore').default;
+  MaterialCommunityIcons =
+    require('react-native-vector-icons/MaterialCommunityIcons').default;
 } catch (e) {
   let isErrorLogged = false;
 
   // Fallback component for icons
-  ErxesIcons = ({ name, color, size, ...rest }) => {
+  MaterialCommunityIcons = ({ color, size, ...rest }) => {
     if (!isErrorLogged) {
       if (
         !/(Cannot find module|Module not found|Cannot resolve module)/.test(
@@ -37,8 +37,7 @@ try {
       }
 
       console.warn(
-        `Tried to use the icon '${name}' in a component from 'erxes', but 'IconCore' could not be loaded.`,
-        `To remove this warning, try installing 'react-native-vector-icons' and create custom icon with erxes-icon`
+        `To remove this warning, try installing 'react-native-vector-icons'`
       );
 
       isErrorLogged = true;
@@ -77,7 +76,7 @@ const defaultIcon = ({
   direction,
   allowFontScaling,
 }: IconProps) => (
-  <ErxesIcons
+  <MaterialCommunityIcons
     allowFontScaling={allowFontScaling}
     name={name}
     color={color}

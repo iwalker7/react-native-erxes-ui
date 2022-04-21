@@ -1,6 +1,6 @@
 import type { ShadowStyleIOS } from 'react-native';
 import _ from 'lodash';
-import Colors from './colors';
+import * as Colors from './colors';
 
 type Shadow = {
   top?: ShadowStyleIOS;

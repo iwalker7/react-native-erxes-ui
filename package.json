@@ -58,9 +58,11 @@
     "@commitlint/config-conventional": "^11.0.0",
     "@react-native-community/eslint-config": "^2.0.0",
     "@release-it/conventional-changelog": "^2.0.0",
+    "@types/color": "^3.0.3",
     "@types/hoist-non-react-statics": "^3.3.1",
     "@types/jest": "^26.0.0",
     "@types/lodash": "^4.14.181",
+    "@types/moment": "^2.13.0",
     "@types/react": "^17.0.38",
     "@types/react-native": "^0.67.4",
     "@types/react-native-vector-icons": "^6.4.10",
@@ -80,7 +82,8 @@
   },
   "peerDependencies": {
     "react": "*",
-    "react-native": "*"
+    "react-native": "*",
+    "react-native-vector-icons": "*"
   },
   "jest": {
     "preset": "react-native",
@@ -152,15 +155,8 @@
   },
   "dependencies": {
     "@callstack/react-theme-provider": "^3.0.7",
-    "@expo/vector-icons": "^12.0.5",
     "@react-navigation/drawer": "^6.4.1",
-    "@types/color": "^3.0.3",
-    "@types/moment": "^2.13.0",
     "color": "^4.2.3",
-    "expo-asset": "^8.4.6",
-    "expo-constants": "^13.0.2",
-    "expo-font": "^10.0.5",
-    "expo-modules-core": "^0.6.5",
     "lodash": "^4.17.21",
     "moment": "^2.29.2",
     "react-native-document-picker": "^8.1.0",

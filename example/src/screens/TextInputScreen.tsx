@@ -146,7 +146,7 @@ const style = StyleSheet.create({
   search: { backgroundColor: '#fff', width: '100%' },
   sectionItem: {
     borderBottomWidth: 1,
-    borderColor: Colors.surface,
+    borderColor: Colors.grey100,
   },
 });
 export default TextInputScreen;

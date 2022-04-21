@@ -2,11 +2,19 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useCallback, useState } from 'react';
 import { SectionList, StyleSheet, View } from 'react-native';
-import { TextView, Touchable, TextInput, Colors } from 'react-native-erxes-ui';
+import {
+  TextView,
+  Touchable,
+  TextInput,
+  Colors,
+  useTheme,
+  Button,
+} from 'react-native-erxes-ui';
 
 import _ from 'lodash';
 import { screens } from './MenuStructure';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 const sections = _.map(screens, (section, key) => {
   return {
@@ -17,6 +25,7 @@ const sections = _.map(screens, (section, key) => {
 
 export default function MainScreen({ navigation }: any) {
   const [searchText, setSearchText] = useState('');
+  const theme = useTheme();
 
   const includedInSearch = (text = '') => {
     return text.toLowerCase().includes(searchText.toLowerCase());
@@ -39,7 +48,7 @@ export default function MainScreen({ navigation }: any) {
             backgroundColor: '#DED9E8',
           }}
         >
-          <TextView uppercase bold color={Colors.primaryDark3}>
+          <TextView uppercase bold color={theme.colors.primary}>
             {section.key}
           </TextView>
         </View>
@@ -79,7 +88,7 @@ export default function MainScreen({ navigation }: any) {
               paddingHorizontal: 30,
               paddingVertical: 15,
               backgroundColor: 'white',
-              color: Colors.primaryDark3,
+              color: theme.colors.primary,
             }}
           >
             {item.title}
@@ -96,6 +105,10 @@ export default function MainScreen({ navigation }: any) {
         keyExtractor={(data, index) => data.tags + index}
         ListHeaderComponent={
           <View style={styles.search}>
+            <Button onPress={() => {}} iconName="eye">
+              Hello World
+            </Button>
+            <MaterialCommunityIcons name="eye" size={32} />
             <TextInput
               placeholder="Search component name"
               onChangeText={(text: string) => setSearchText(text)}
@@ -115,6 +128,6 @@ const styles = StyleSheet.create({
   search: { backgroundColor: '#fff', width: '100%' },
   sectionItem: {
     borderBottomWidth: 1,
-    borderColor: Colors.surface,
+    borderColor: Colors.grey300,
   },
 });

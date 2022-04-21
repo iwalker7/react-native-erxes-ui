@@ -17,14 +17,14 @@ export default class PortalManager extends React.PureComponent<{}, State> {
   };
 
   mount = (key: number, children: React.ReactNode) => {
-    this.setState((state) => ({
+    this.setState(state => ({
       portals: [...state.portals, { key, children }],
     }));
   };
 
   update = (key: number, children: React.ReactNode) =>
-    this.setState((state) => ({
-      portals: state.portals.map((item) => {
+    this.setState(state => ({
+      portals: state.portals.map(item => {
         if (item.key === key) {
           return { ...item, children };
         }
@@ -33,8 +33,8 @@ export default class PortalManager extends React.PureComponent<{}, State> {
     }));
 
   unmount = (key: number) =>
-    this.setState((state) => ({
-      portals: state.portals.filter((item) => item.key !== key),
+    this.setState(state => ({
+      portals: state.portals.filter(item => item.key !== key),
     }));
 
   render() {
@@ -45,8 +45,7 @@ export default class PortalManager extends React.PureComponent<{}, State> {
           false /* Need collapsable=false here to clip the elevations, otherwise they appear above sibling components */
         }
         pointerEvents="box-none"
-        style={StyleSheet.absoluteFill}
-      >
+        style={StyleSheet.absoluteFill}>
         {children}
       </View>
     ));

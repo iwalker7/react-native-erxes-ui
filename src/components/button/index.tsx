@@ -1,8 +1,8 @@
 /* eslint-disable react-native/no-inline-styles */
 import React from 'react';
 import type { StyleProp, ViewProps, ViewStyle } from 'react-native';
-import Touchable from '../touchable';
-import TextView from '../typography';
+import Touchable from '../Touchable';
+import TextView from '../Typography';
 
 export type ButtonProps = ViewProps & {
   type?: 'default' | 'outline';

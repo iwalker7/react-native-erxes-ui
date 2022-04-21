@@ -1,10 +1,12 @@
 /* eslint-disable react-native/no-inline-styles */
 import React from 'react';
 import { View } from 'react-native';
-import { TextView, Colors, Loader } from 'react-native-erxes-ui';
+import { TextView, Colors, Loader, useTheme } from 'react-native-erxes-ui';
 import styles from '../styles';
 
 const LoaderScreen: React.FC<any> = () => {
+  const theme = useTheme();
+
   return (
     <View style={styles.container}>
       <View style={styles.segment}>
@@ -26,7 +28,7 @@ const LoaderScreen: React.FC<any> = () => {
 
         <View style={{ height: 50, flexDirection: 'row' }}>
           <Loader />
-          <Loader color={Colors.secondary} />
+          <Loader color={theme.colors.accent} />
           <Loader color={Colors.grey600} />
         </View>
       </View>

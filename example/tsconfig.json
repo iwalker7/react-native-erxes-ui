@@ -1,10 +1,10 @@
 {
   "compilerOptions": {
     "jsx": "react-native",
-    "target": "ESNext",
+    "target": "esnext",
     "lib": [
       "DOM",
-      "ESNext"
+      "esnext"
     ],
     "allowJs": true,
     "skipLibCheck": true,

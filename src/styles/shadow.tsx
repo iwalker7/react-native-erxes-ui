@@ -1,4 +1,4 @@
-import { Colors } from '../style/colors';
+import * as Colors from './colors';
 import { Animated } from 'react-native';
 
 const SHADOW_COLOR = Colors.black;

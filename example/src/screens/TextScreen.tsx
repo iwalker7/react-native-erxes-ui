@@ -1,10 +1,12 @@
 /* eslint-disable react-native/no-inline-styles */
 import React from 'react';
 import { View, Linking } from 'react-native';
-import { TextView, Colors, Touchable } from 'react-native-erxes-ui';
+import { TextView, Colors, Touchable, useTheme } from 'react-native-erxes-ui';
 import styles from '../styles';
 
 const TextScreen: React.FC<any> = () => {
+  const theme = useTheme();
+
   return (
     <View style={styles.container}>
       <View style={[styles.segment, { height: 70, marginBottom: 10 }]}>
@@ -30,7 +32,7 @@ const TextScreen: React.FC<any> = () => {
           justifyContent: 'space-between',
           alignContent: 'center',
           borderColor: 'transparent',
-          borderBottomColor: Colors.surface,
+          borderBottomColor: theme.colors.surface,
           borderWidth: 1,
         }}
       >
@@ -74,7 +76,7 @@ const TextScreen: React.FC<any> = () => {
           paddingVertical: 10,
           justifyContent: 'space-between',
           borderColor: 'transparent',
-          borderBottomColor: Colors.surface,
+          borderBottomColor: Colors.grey100,
           borderWidth: 1,
         }}
       >

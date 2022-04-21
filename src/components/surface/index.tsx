@@ -1,7 +1,9 @@
 import * as React from 'react';
 import type { StyleProp } from 'react-native';
 import { Animated, StyleSheet, View, ViewStyle } from 'react-native';
-import { overlay, shadow, withTheme } from '../../theme';
+import { withTheme } from '../../core/theming';
+import overlay from '../../styles/overlay';
+import shadow from '../../styles/shadow';
 
 export type TSurface = React.ComponentPropsWithRef<typeof View> & {
   children: React.ReactNode;

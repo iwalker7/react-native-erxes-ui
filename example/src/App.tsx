@@ -18,8 +18,67 @@ import {
   TouchableScreen,
   ThemeScreen,
 } from './screens';
+import {
+  Provider as ThemeProvider,
+  DarkTheme,
+  DefaultTheme,
+} from 'react-native-erxes-ui';
 
 const Stack = createStackNavigator();
+
+declare global {
+  namespace ReactNativeErxes {
+    interface ThemeFonts {
+      superLight: ThemeFont;
+    }
+    interface ThemeColors {
+      customColor: string;
+    }
+    interface ThemeAnimation {
+      customProperty: number;
+    }
+    interface Theme {
+      userDefinedThemeProperty: string;
+    }
+  }
+}
+
+const PERSISTENCE_KEY = 'NAVIGATION_STATE';
+const PREFERENCES_KEY = 'APP_PREFERENCES';
+
+const CustomDarkTheme: ReactNativeErxes.Theme = {
+  ...DarkTheme,
+  colors: {
+    ...DarkTheme.colors,
+    customColor: '#BADA55',
+  },
+  fonts: {
+    ...DarkTheme.fonts,
+    superLight: { ...DarkTheme.fonts.light },
+  },
+  userDefinedThemeProperty: '',
+  animation: {
+    ...DarkTheme.animation,
+    customProperty: 1,
+  },
+};
+
+const CustomDefaultTheme = {
+  ...DefaultTheme,
+  colors: {
+    ...DefaultTheme.colors,
+    customColor: '#BADA55',
+  },
+  fonts: {
+    ...DefaultTheme.fonts,
+    superLight: { ...DefaultTheme.fonts['light'] },
+  },
+  userDefinedThemeProperty: '',
+  animation: {
+    ...DefaultTheme.animation,
+    customProperty: 1,
+  },
+};
 
 export default function App() {
   const option = {
@@ -28,46 +87,60 @@ export default function App() {
     },
   };
   return (
-    <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen
-          name="Main"
-          component={MainScreen}
-          options={{ headerShown: false }}
-        />
+    <ThemeProvider theme={CustomDefaultTheme}>
+      <NavigationContainer>
+        <Stack.Navigator>
+          <Stack.Screen
+            name="Main"
+            component={MainScreen}
+            options={{ headerShown: false }}
+          />
 
-        <Stack.Screen name="Theme" component={ThemeScreen} options={option} />
+          <Stack.Screen name="Theme" component={ThemeScreen} options={option} />
 
-        {/* { components} */}
-        <Stack.Screen name="Alert" component={AlertScreen} options={option} />
-        <Stack.Screen name="Avatar" component={AvatarScreen} options={option} />
-        <Stack.Screen name="Button" component={ButtonScreen} options={option} />
-        <Stack.Screen name="Card" component={CardScreen} options={option} />
-        <Stack.Screen name="Empty" component={EmptyScreen} options={option} />
-        <Stack.Screen name="Loader" component={LoaderScreen} options={option} />
-        <Stack.Screen name="Modal" component={ModalScreen} options={option} />
-        <Stack.Screen name="Text" component={TextScreen} options={option} />
-        <Stack.Screen
-          name="TextInput"
-          component={TextInputScreen}
-          options={option}
-        />
-        <Stack.Screen
-          name="Touchable"
-          component={TouchableScreen}
-          options={option}
-        />
-        <Stack.Screen
-          name="Uploader"
-          component={UplaoderScreen}
-          options={option}
-        />
-        <Stack.Screen
-          name="Dropdown"
-          component={DropdownScreen}
-          options={option}
-        />
-      </Stack.Navigator>
-    </NavigationContainer>
+          {/* { components} */}
+          <Stack.Screen name="Alert" component={AlertScreen} options={option} />
+          <Stack.Screen
+            name="Avatar"
+            component={AvatarScreen}
+            options={option}
+          />
+          <Stack.Screen
+            name="Button"
+            component={ButtonScreen}
+            options={option}
+          />
+          <Stack.Screen name="Card" component={CardScreen} options={option} />
+          <Stack.Screen name="Empty" component={EmptyScreen} options={option} />
+          <Stack.Screen
+            name="Loader"
+            component={LoaderScreen}
+            options={option}
+          />
+          <Stack.Screen name="Modal" component={ModalScreen} options={option} />
+          <Stack.Screen name="Text" component={TextScreen} options={option} />
+          <Stack.Screen
+            name="TextInput"
+            component={TextInputScreen}
+            options={option}
+          />
+          <Stack.Screen
+            name="Touchable"
+            component={TouchableScreen}
+            options={option}
+          />
+          <Stack.Screen
+            name="Uploader"
+            component={UplaoderScreen}
+            options={option}
+          />
+          <Stack.Screen
+            name="Dropdown"
+            component={DropdownScreen}
+            options={option}
+          />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </ThemeProvider>
   );
 }

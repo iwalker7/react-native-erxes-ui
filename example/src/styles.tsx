@@ -16,14 +16,14 @@ const styles = StyleSheet.create({
     marginVertical: 10,
     padding: 3,
     borderBottomWidth: 1,
-    borderColor: Colors.surface,
+    borderColor: Colors.grey100,
   },
   segment: {
     width: '100%',
     flexDirection: 'column',
     paddingVertical: 15,
     borderColor: 'transparent',
-    borderBottomColor: Colors.surface,
+    borderBottomColor: Colors.grey100,
     borderWidth: 1,
   },
   props: {

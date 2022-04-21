@@ -1,11 +1,12 @@
 /* eslint-disable react-native/no-inline-styles */
 import React from 'react';
 import { View, ScrollView } from 'react-native';
-import { TextView, Colors, Avatar } from 'react-native-erxes-ui';
-import images from '../../assets/images';
+import { TextView, Colors, useTheme } from 'react-native-erxes-ui';
 import styles from '../styles';
 
 const AvatarScreen: React.FC<any> = () => {
+  const theme = useTheme();
+
   return (
     <View style={styles.container}>
       <View
@@ -14,7 +15,7 @@ const AvatarScreen: React.FC<any> = () => {
           flexDirection: 'row',
           paddingVertical: 10,
           borderColor: 'transparent',
-          borderBottomColor: Colors.surface,
+          borderBottomColor: theme.colors.primary,
           borderWidth: 1,
           justifyContent: 'space-around',
         }}

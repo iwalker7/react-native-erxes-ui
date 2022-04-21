@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import * as React from 'react';
 import {
   Image,
@@ -5,9 +6,9 @@ import {
   Platform,
   ImageSourcePropType,
 } from 'react-native';
-import { withTheme } from '..';
+import { withTheme } from '../core/theming';
 import { Consumer as SettingsConsumer } from '../core/settings';
-import { accessibilityProps } from './ErxesIcon';
+import { accessibilityProps } from './MaterialCommunityIcons';
 
 type IconSourceBase = string | ImageSourcePropType;
 

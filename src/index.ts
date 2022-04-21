@@ -1,15 +1,26 @@
-export { default as Colors } from './style/colors';
-export { default as IconCore } from './theme/icon/IconCore';
-export { default as Avatar, AvatarProps } from './components/avatar';
-export { default as Button, ButtonProps } from './components/button';
-export { default as Card, CardProps } from './components/card';
-export { default as Divider, DividerProps } from './components/divider';
-export { default as Dropdown, DropdownProps } from './components/dropdown';
-export { default as Empty, EmptyProps } from './components/empty';
-export { default as Indicator, IndicatorProps } from './components/indicator';
-export { default as Loader, LoaderProps } from './components/loader';
-export { default as TextView, TextViewProps } from './components/typography';
-export { default as TextInput, TextInputProps } from './components/textInput';
-export { default as Touchable, TouchableProps } from './components/touchable';
-export { default as Modal, ModalProps } from './components/modal';
-export { default as Uplaoder, UploaderProps } from './components/uploader';
+export { default as Avatar, AvatarProps } from './components/Avatar';
+export { default as Button, ButtonProps } from './components/Button';
+export { default as Card, CardProps } from './components/Card';
+export { default as Divider, DividerProps } from './components/Divider';
+export { default as Dropdown, DropdownProps } from './components/Dropdown';
+export { default as Empty, EmptyProps } from './components/Empty';
+export { default as Indicator, IndicatorProps } from './components/Indicator';
+export { default as Loader, LoaderProps } from './components/Loader';
+export { default as TextView, TextViewProps } from './components/Typography';
+export { default as TextInput, TextInputProps } from './components/TextInput';
+export { default as Touchable, TouchableProps } from './components/Touchable';
+export { default as Modal, ModalProps } from './components/Modal';
+export { default as Uplaoder, UploaderProps } from './components/Uploader';
+
+import * as Colors from './styles/colors';
+
+export { Colors };
+
+export { useTheme, withTheme, ThemeProvider } from './core/theming';
+
+export { default as Provider } from './core/Provider';
+export { default as DefaultTheme } from './styles/DefaultTheme';
+export { default as DarkTheme } from './styles/DarkTheme';
+export { default as shadow } from './styles/shadow';
+export { default as overlay } from './styles/overlay';
+export { default as configureFonts } from './styles/fonts';
