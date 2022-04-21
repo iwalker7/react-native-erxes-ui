@@ -1,11 +1,11 @@
 export const screens = {
-  //   Foundation: {
-  //     title: 'Foundation',
-  //     screens: [
-  //       { title: 'Theme', tags: 'theme', screen: 'ThemeScreen' },
-  //       //   { title: 'Color', tags: 'color', screen: 'ColorScreen' },
-  //     ],
-  //   },
+  Foundation: {
+    title: 'Foundation',
+    screens: [
+      { title: 'Theme', tags: 'theme', screen: 'ThemeScreen' },
+      //   { title: 'Color', tags: 'color', screen: 'ColorScreen' },
+    ],
+  },
   Basic: {
     title: 'Basic',
     screens: [
@@ -57,20 +57,10 @@ export const screens = {
         screen: 'DropdownScreen',
       },
       {
-        title: 'FileUploader',
-        tags: 'textInput',
-        screen: 'UploaderScreen',
+        title: 'RadioButton',
+        tags: 'radio button group controls',
+        screen: 'RadioButtonScreen',
       },
-      //   {
-      //     title: 'Map',
-      //     tags: 'textInput',
-      //     screen: 'MapScreen',
-      //   },
-      //   {
-      //     title: 'RadioButton',
-      //     tags: 'radio button group controls',
-      //     screen: 'RadioButtonScreen',
-      //   },
       {
         title: 'TextInput',
         tags: 'textInput',
@@ -98,7 +88,17 @@ export const screens = {
       //   },
     ],
   },
-  LayoutsAndTemplates: {
+  Utils: {
+    title: 'Utils',
+    screens: [
+      {
+        title: 'FileUploader',
+        tags: 'textInput',
+        screen: 'UploaderScreen',
+      },
+    ],
+  },
+  Layouts: {
     title: 'Layouts & Templates',
     screens: [
       //   {
@@ -143,44 +143,4 @@ export const screens = {
       //   },
     ],
   },
-  //   AnimationsAndGestures: {
-  //     title: 'Animations & Gestures',
-  //     screens: [
-  //       {
-  //         title: 'Animated Image',
-  //         tags: 'animated image',
-  //         screen: 'AnimatedImageScreen',
-  //       },
-  //       {
-  //         title: 'Haptic feedback',
-  //         tags: 'haptic feedback',
-  //         screen: 'HapticScreen',
-  //       },
-  //       {
-  //         title: 'ProgressiveImage',
-  //         tags: 'progressive image cover overlay',
-  //         screen: 'ProgressiveImageScreen',
-  //       },
-  //       {
-  //         title: 'Card Scanner',
-  //         tags: 'card scanner process',
-  //         screen: 'unicorn.animations.CardScannerScreen',
-  //       },
-  //       {
-  //         title: 'Pan Dismissible',
-  //         tags: 'pan swipe drag dismiss',
-  //         screen: 'PanDismissibleScreen',
-  //       },
-  //       {
-  //         title: 'Pan Listener',
-  //         tags: 'pan swipe drag listener',
-  //         screen: 'PanListenerScreen',
-  //       },
-  //       {
-  //         title: 'Pan Responder',
-  //         tags: 'pan swipe drag responder',
-  //         screen: 'PanResponderScreen',
-  //       },
-  //     ],
-  //   },
 };

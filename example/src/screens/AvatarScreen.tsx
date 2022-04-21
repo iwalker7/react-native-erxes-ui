@@ -1,7 +1,8 @@
 /* eslint-disable react-native/no-inline-styles */
 import React from 'react';
 import { View, ScrollView } from 'react-native';
-import { TextView, Colors, useTheme } from 'react-native-erxes-ui';
+import { TextView, Colors, useTheme, Avatar } from 'react-native-erxes-ui';
+import images from '../../assets/images';
 import styles from '../styles';
 
 const AvatarScreen: React.FC<any> = () => {
@@ -20,14 +21,14 @@ const AvatarScreen: React.FC<any> = () => {
           justifyContent: 'space-around',
         }}
       >
-        {/* <View style={{ paddingBottom: 10 }}>
+        <View style={{ paddingBottom: 10 }}>
           <TextView>Default</TextView>
           <Avatar source={images.avatar} size={50} />
         </View>
         <View>
           <TextView>Active status</TextView>
           <Avatar active source={images.avatar} size={50} />
-        </View> */}
+        </View>
       </View>
 
       <ScrollView

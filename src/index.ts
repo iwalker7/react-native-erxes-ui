@@ -11,6 +11,7 @@ export { default as TextInput, TextInputProps } from './components/TextInput';
 export { default as Touchable, TouchableProps } from './components/Touchable';
 export { default as Modal, ModalProps } from './components/Modal';
 export { default as Uplaoder, UploaderProps } from './components/Uploader';
+export { default as RadioButton } from './components/RadioButton';
 
 import * as Colors from './styles/colors';
 

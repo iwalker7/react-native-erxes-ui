@@ -1,6 +1,8 @@
 /* eslint-disable react-native/no-inline-styles */
 import React from 'react';
 import type { StyleProp, ViewProps, ViewStyle } from 'react-native';
+import { View } from 'react-native';
+import { StyleSheet } from 'react-native';
 import Touchable from '../Touchable';
 import TextView from '../Typography';
 
@@ -16,8 +18,10 @@ export type ButtonProps = ViewProps & {
   onPress: () => void;
   onLongPress?: () => void;
   hasIcon?: boolean;
-  iconSrc?: string;
   iconName?: string;
+  iconColor?: string;
+  iconSize?: number;
+  iconPosition?: string;
   width?: number;
 };
 
@@ -33,10 +37,15 @@ const Button: React.FC<ButtonProps> = ({
   borderColor,
   children,
   width,
+  iconName,
+  iconColor,
+  iconSize,
+  iconPosition = 'left',
 }) => {
   const defaultStyle = {
     minHeight: 40,
-    width: width ? width : block ? '100%' : 100,
+    minWidth: 100,
+    width: width ? width : block ? '100%' : undefined,
     borderWidth: 1,
     borderColor:
       borderColor || (type === 'outline' && mode === 'active')
@@ -63,26 +72,72 @@ const Button: React.FC<ButtonProps> = ({
   };
   return (
     <Touchable
+      activeOpacity={0.5}
       onPress={onPress}
       onLongPress={onLongPress}
       style={[defaultStyle as ViewStyle, style]}
     >
-      <TextView
-        bold
-        color={
-          textColor || (type === 'outline' && mode === 'active')
-            ? '#472D9A'
-            : type === 'outline' && mode === 'verify'
-            ? '#17CE65'
-            : mode === 'disabled'
-            ? '#9e9e9e'
-            : '#fff'
-        }
+      <View
+        style={[
+          styles.inView,
+          {
+            flexDirection: iconPosition === 'right' ? 'row-reverse' : 'row',
+          },
+        ]}
       >
-        {children}
-      </TextView>
+        {iconName && (
+          <View
+            style={[
+              {
+                marginEnd: iconPosition === 'right' ? 0 : 5,
+                marginStart: iconPosition === 'left' ? 0 : 5,
+              },
+            ]}
+          >
+            {/* <Icon
+              source={iconName}
+              size={iconSize || 16}
+              color={iconColor || '#fff'}
+            /> */}
+          </View>
+        )}
+        <TextView
+          bold
+          color={
+            textColor || (type === 'outline' && mode === 'active')
+              ? '#472D9A'
+              : type === 'outline' && mode === 'verify'
+              ? '#17CE65'
+              : mode === 'disabled'
+              ? '#9e9e9e'
+              : '#fff'
+          }
+        >
+          {children}
+        </TextView>
+      </View>
     </Touchable>
   );
 };
+
+const styles = StyleSheet.create({
+  inView: {
+    flexDirection: 'row',
+    alignSelf: 'center',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  defaultText: {
+    color: '#fff',
+    fontWeight: '500',
+    fontSize: 15,
+    textAlign: 'center',
+  },
+  linearGradient: {
+    paddingVertical: 12,
+    paddingHorizontal: 24,
+    borderRadius: 22,
+  },
+});
 
 export default Button;

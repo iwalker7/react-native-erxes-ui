@@ -23,6 +23,7 @@ import {
   DarkTheme,
   DefaultTheme,
 } from 'react-native-erxes-ui';
+import RadioButtonScreen from './screens/RadioButtonScreen';
 
 const Stack = createStackNavigator();
 
@@ -137,6 +138,11 @@ export default function App() {
           <Stack.Screen
             name="Dropdown"
             component={DropdownScreen}
+            options={option}
+          />
+          <Stack.Screen
+            name="RadioButton"
+            component={RadioButtonScreen}
             options={option}
           />
         </Stack.Navigator>
