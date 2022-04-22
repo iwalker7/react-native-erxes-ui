@@ -64,7 +64,7 @@ const RadioButton: React.FC<RadioButtonProps> = ({
     }
   }, [status, borderAnim, radioAnim, scale]);
 
-  const checkedColor = rest.color || '#472D9A';
+  const checkedColor = rest.color || '#644BB9';
   const uncheckedColor =
     rest.uncheckedColor || color('#000').alpha(0.7).rgb().string();
 

@@ -5,7 +5,7 @@ import { TextView, Colors, TextInput } from 'react-native-erxes-ui';
 import styles from '../styles';
 
 const TextInputScreen: React.FC<any> = () => {
-  const [searchText, setSearchText] = useState('');
+  const [searchText, setSearchText] = React.useState<string>('');
   return (
     <View style={styles.container}>
       <View style={styles.segment}>
@@ -41,7 +41,6 @@ const TextInputScreen: React.FC<any> = () => {
                 onChangeText={(text: string) => setSearchText(text)}
                 value={searchText}
               />
-
               <TextInput
                 type="outline"
                 placeholder="Outline"
@@ -57,6 +56,35 @@ const TextInputScreen: React.FC<any> = () => {
               />
             </View>
           </View>
+        </View>
+
+        <View style={styles.segment}>
+          <TextView bold>
+            required
+            <TextView color={Colors.grey600}>{`: boolean`}</TextView>
+          </TextView>
+          <TextInput
+            required
+            placeholder="Outline"
+            onChangeText={(text: string) => setSearchText(text)}
+            value={searchText}
+          />
+        </View>
+
+        <View style={styles.segment}>
+          <TextView bold>
+            floating
+            <TextView
+              color={Colors.grey600}
+            >{`: boolean  (label-тай байх)`}</TextView>
+          </TextView>
+          <TextInput
+            label="Label"
+            floating
+            placeholder="Outline"
+            onChangeText={(text: string) => setSearchText(text)}
+            value={searchText}
+          />
         </View>
 
         <View style={styles.segment}>
@@ -109,13 +137,13 @@ const TextInputScreen: React.FC<any> = () => {
 
         <View style={styles.segment}>
           <TextView bold>
-            floating
-            <TextView color={Colors.grey600}>{`: boolean`}</TextView>
+            onFocus
+            <TextView
+              color={Colors.grey600}
+            >{`: (value: string) => void`}</TextView>
           </TextView>
           <View style={{ marginVertical: 10 }}>
-            <TextView small>
-              True үед placeholder баруун дээд булан руу хөдөлгөөнтөөр шилжинэ
-            </TextView>
+            <TextView small>Фокуслах үед дуудагдах функц</TextView>
           </View>
         </View>
 

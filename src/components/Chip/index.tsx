@@ -64,9 +64,14 @@ const Chip: React.FC<ChipProps> = ({
     }).start();
   };
 
+  const handleOnPress = () => {
+    setSelect(!select);
+    onPress && onPress();
+  };
+
   return (
     <Touchable
-      onPress={onPress}
+      onPress={handleOnPress}
       onLongPress={onLongPress}
       onPressIn={handlePressIn}
       onPressOut={handlePressOut}
@@ -137,6 +142,7 @@ const styles = StyleSheet.create({
     marginBottom: 3,
     borderWidth: 1,
     borderColor: 'transparent',
+    paddingLeft: 3,
   },
   chipName: {
     marginStart: 5,

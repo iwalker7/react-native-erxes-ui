@@ -1,28 +1,132 @@
 /* eslint-disable react-native/no-inline-styles */
 import React from 'react';
 import { View } from 'react-native';
-import { TextView, useTheme, RadioButton } from 'react-native-erxes-ui';
+import { TextView, RadioButton, Colors, Divider } from 'react-native-erxes-ui';
+import { ScrollView } from 'react-native-gesture-handler';
 import styles from '../styles';
 
 const RadioButtonScreen: React.FC<any> = () => {
-  // const theme = useTheme();
-  const [value, setValue] = React.useState('first');
+  const [value, setValue] = React.useState('leading');
 
   return (
     <View style={styles.container}>
-      <View style={{ padding: 10 }}>
-        <TextView>
-          Сонгосон: <TextView bold>{value}</TextView>
-        </TextView>
-      </View>
-
-      <RadioButton.Group
-        onValueChange={(val: any) => setValue(val)}
-        value={value}
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        style={{ width: '100%' }}
       >
-        <RadioButton.Item label="First item" value="first" />
-        <RadioButton.Item label="Second item" value="second" />
-      </RadioButton.Group>
+        <TextView large bold style={{ marginTop: 20 }}>
+          RadioButton.Group
+        </TextView>
+
+        <View style={styles.segment}>
+          <TextView bold>
+            value
+            <TextView color={Colors.grey600}>{`: string`}</TextView>
+          </TextView>
+          <View style={{ marginVertical: 10 }}>
+            <TextView small>Сонгогдсон утга</TextView>
+          </View>
+        </View>
+        <View style={styles.segment}>
+          <TextView bold>
+            onValueChange
+            <TextView
+              color={Colors.grey600}
+            >{`: (value: string) => void`}</TextView>
+          </TextView>
+          <View style={{ marginVertical: 10 }}>
+            <TextView small>
+              RadioButton.Item -аас утга сонгогдоход дуудагдах функц
+            </TextView>
+          </View>
+        </View>
+
+        <TextView large bold style={{ marginTop: 20 }}>
+          RadioButton.Item
+        </TextView>
+
+        <View style={styles.segment}>
+          <View style={styles.props}>
+            <TextView bold>
+              position<TextView color={Colors.grey600}>: string </TextView>
+            </TextView>
+
+            <View
+              style={{
+                backgroundColor: Colors.grey200,
+                padding: 5,
+                borderRadius: 5,
+              }}
+            >
+              <TextView small>leading | trailing </TextView>
+            </View>
+          </View>
+          <RadioButton.Group
+            onValueChange={(val: any) => setValue(val)}
+            value={value}
+          >
+            <RadioButton.Item label="Leading position" value="leading" />
+            <RadioButton.Item
+              position="trailing"
+              label="Trailing position"
+              value="trailing"
+              style={{ width: 150 }}
+            />
+          </RadioButton.Group>
+        </View>
+
+        <View style={styles.segment}>
+          <TextView bold>
+            color
+            <TextView color={Colors.grey600}>{`: string`}</TextView>
+          </TextView>
+          <View style={{ marginVertical: 10 }}>
+            <TextView small>RadioButton-ы өнгө</TextView>
+          </View>
+        </View>
+
+        <View style={styles.segment}>
+          <TextView bold>
+            labelColor
+            <TextView color={Colors.grey600}>{`: string`}</TextView>
+          </TextView>
+          <View style={{ marginVertical: 10 }}>
+            <TextView small>Label өнгө</TextView>
+          </View>
+        </View>
+
+        <View style={styles.segment}>
+          <TextView bold>
+            uncheckedColor
+            <TextView color={Colors.grey600}>{`: string`}</TextView>
+          </TextView>
+          <View style={{ marginVertical: 10 }}>
+            <TextView small>Сонгогдоогүй RadioButton-ы өнгө</TextView>
+          </View>
+        </View>
+        <View style={styles.segment}>
+          <TextView bold>
+            style
+            <TextView
+              color={Colors.grey600}
+            >{`: StyleProp<ViewStyle>`}</TextView>
+          </TextView>
+          <View style={{ marginVertical: 10 }}>
+            <TextView small>Агуулагчийн style</TextView>
+          </View>
+        </View>
+        <View style={styles.segment}>
+          <TextView bold>
+            labelStyle
+            <TextView
+              color={Colors.grey600}
+            >{`: StyleProp<TextStyle>`}</TextView>
+          </TextView>
+          <View style={{ marginVertical: 10 }}>
+            <TextView small>Label style</TextView>
+          </View>
+        </View>
+      </ScrollView>
     </View>
   );
 };

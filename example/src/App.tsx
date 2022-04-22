@@ -120,7 +120,6 @@ export default function App() {
             options={option}
           />
           <Stack.Screen name="Modal" component={ModalScreen} options={option} />
-          {/* / <Stack.Screen name="Dialog" component={Dialog} options={option} /> */}
           <Stack.Screen name="Text" component={TextScreen} options={option} />
           <Stack.Screen
             name="TextInput"

@@ -24,6 +24,7 @@ export type RBItemProps = {
   color?: string;
   status?: 'checked' | 'unchecked';
   style?: StyleProp<ViewStyle>;
+  labelColor?: string;
   labelStyle?: StyleProp<TextStyle>;
   testID?: string;
   position?: 'leading' | 'trailing';
@@ -33,6 +34,7 @@ const RadioButtonItem: React.FC<RBItemProps> = ({
   value,
   label,
   style,
+  labelColor = '#000',
   labelStyle,
   onPress,
   disabled,
@@ -71,7 +73,7 @@ const RadioButtonItem: React.FC<RBItemProps> = ({
                 style={[
                   styles.label,
                   {
-                    color: '#000',
+                    color: labelColor,
                     textAlign: 'left',
                   },
                   labelStyle,
@@ -96,12 +98,11 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'space-between',
+    // justifyContent: 'space-between',
     paddingVertical: 8,
-    paddingHorizontal: 16,
   },
   label: {
-    fontSize: 16,
+    fontSize: 14,
     flexShrink: 1,
     flexGrow: 1,
   },

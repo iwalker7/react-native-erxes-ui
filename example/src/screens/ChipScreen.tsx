@@ -7,7 +7,7 @@ import styles from '../styles';
 const ChipScreen: React.FC<any> = () => {
   return (
     <View style={styles.container}>
-      <Chip text="nandir" mode="flat" type="avatar" />
+      <Chip text="User" mode="outline" type="avatar" />
       <View style={styles.segment}>
         <TextView bold>
           onPress
