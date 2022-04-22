@@ -1,18 +1,9 @@
 import * as React from 'react';
 import { View } from 'react-native';
 
-export type RBGroupProps = {
-  /**
-   * Function to execute on selection change.
-   */
+export type RadioButtonGroupProps = {
   onValueChange: (value: string) => void;
-  /**
-   * Value of the currently selected radio button.
-   */
   value: string;
-  /**
-   * React elements containing radio buttons.
-   */
   children: React.ReactNode;
 };
 
@@ -25,7 +16,7 @@ export const RadioButtonContext = React.createContext<RadioButtonContextType>(
   null as any
 );
 
-const RadioButtonGroup: React.FC<RBGroupProps> = ({
+const RadioButtonGroup: React.FC<RadioButtonGroupProps> = ({
   value,
   onValueChange,
   children,

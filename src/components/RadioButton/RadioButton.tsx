@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import * as React from 'react';
 import { Animated, View, StyleSheet } from 'react-native';
 import color from 'color';
@@ -5,26 +6,11 @@ import { RadioButtonContext, RadioButtonContextType } from './RadioButtonGroup';
 import { handlePress, isChecked } from './utils';
 import Touchable from '../Touchable';
 
-export type Props = {
-  /**
-   * Value of the radio button
-   */
+export type RadioButtonProps = {
   value: string;
-  /**
-   * Status of radio button.
-   */
   status?: 'checked' | 'unchecked';
-  /**
-   * Whether radio is disabled.
-   */
   disabled?: boolean;
-  /**
-   * Function to execute on press.
-   */
   onPress?: (param?: any) => void;
-  /**
-   * Custom color for unchecked radio.
-   */
   uncheckedColor?: string;
   color?: string;
   testID?: string;
@@ -32,14 +18,14 @@ export type Props = {
 
 const BORDER_WIDTH = 2;
 
-const RadioButton = ({
+const RadioButton: React.FC<RadioButtonProps> = ({
   disabled,
   onPress,
   value,
   status,
   testID,
   ...rest
-}: Props) => {
+}) => {
   const { current: borderAnim } = React.useRef<Animated.Value>(
     new Animated.Value(BORDER_WIDTH)
   );
@@ -175,3 +161,6 @@ const styles = StyleSheet.create({
 });
 
 export default RadioButton;
+
+const RadioButtonWithTheme = RadioButton;
+export { RadioButtonWithTheme as RadioButton };

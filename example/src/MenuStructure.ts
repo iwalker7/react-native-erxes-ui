@@ -26,12 +26,17 @@ export const screens = {
       },
       {
         title: 'Card',
-        tags: 'cards feed',
+        tags: 'card',
         screen: 'CardScreen',
       },
       {
+        title: 'Dialog',
+        tags: 'dialog',
+        screen: 'DialogScreen',
+      },
+      {
         title: 'Modal',
-        tags: 'modal topbar screen',
+        tags: 'modal',
         screen: 'ModalScreen',
       },
       { title: 'Text', tags: 'text', screen: 'TextScreen' },
@@ -41,11 +46,11 @@ export const screens = {
   Form: {
     title: 'Form',
     screens: [
-      //   {
-      //     title: 'Checkbox',
-      //     tags: 'checkbox toggle controls',
-      //     screen: 'CheckboxScreen',
-      //   },
+      {
+        title: 'Checkbox',
+        tags: 'checkbox toggle controls',
+        screen: 'CheckboxScreen',
+      },
       //   {
       //     title: 'ChipsInput',
       //     tags: 'picker form',

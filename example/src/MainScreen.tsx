@@ -105,10 +105,10 @@ export default function MainScreen({ navigation }: any) {
         keyExtractor={(data, index) => data.tags + index}
         ListHeaderComponent={
           <View style={styles.search}>
-            {/* <Button onPress={() => {}} iconName="times">
+            <Button onPress={() => {}} iconName="eye">
               Hello World
             </Button>
-            <MaterialCommunityIcons name="eye" size={32} /> */}
+            <MaterialCommunityIcons name="eye" size={32} />
             <TextInput
               placeholder="Search component name"
               onChangeText={(text: string) => setSearchText(text)}

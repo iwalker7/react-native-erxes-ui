@@ -14,61 +14,22 @@ import { handlePress } from './utils';
 import RadioButton from './RadioButton';
 import Touchable from '../Touchable';
 
-export type Props = {
-  /**
-   * Value of the radio button.
-   */
+export type RBItemProps = {
   value: string;
-  /**
-   * Label to be displayed on the item.
-   */
   label: string;
-  /**
-   * Whether radio is disabled.
-   */
   disabled?: boolean;
-  /**
-   * Function to execute on press.
-   */
   onPress?: () => void;
-  /**
-   * Accessibility label for the touchable. This is read by the screen reader when the user taps the touchable.
-   */
   accessibilityLabel?: string;
-  /**
-   * Custom color for unchecked radio.
-   */
   uncheckedColor?: string;
-  /**
-   * Custom color for radio.
-   */
   color?: string;
-  /**
-   * Status of radio button.
-   */
   status?: 'checked' | 'unchecked';
-  /**
-   * Additional styles for container View.
-   */
   style?: StyleProp<ViewStyle>;
-  /**
-   * Style that is passed to Label element.
-   */
   labelStyle?: StyleProp<TextStyle>;
-
   testID?: string;
-  /**
-   * Whether `<RadioButton.Android />` or `<RadioButton.IOS />` should be used.
-   * Left undefined `<RadioButton />` will be used.
-   */
-  mode?: 'android' | 'ios';
-  /**
-   * Radio button control position.
-   */
   position?: 'leading' | 'trailing';
 };
 
-const RadioButtonItem = ({
+const RadioButtonItem: React.FC<RBItemProps> = ({
   value,
   label,
   style,
@@ -81,9 +42,9 @@ const RadioButtonItem = ({
   accessibilityLabel,
   testID,
   position = 'leading',
-}: Props) => {
+}) => {
   const radioButtonProps = { value, disabled, status, color, uncheckedColor };
-  const isLeading = position === 'leading';
+  const isTrealing = position === 'trailing';
   let radioButton = <RadioButton {...radioButtonProps} />;
 
   return (
@@ -105,7 +66,7 @@ const RadioButtonItem = ({
             testID={testID}
           >
             <View style={[styles.container, style]} pointerEvents="none">
-              {isLeading && radioButton}
+              {!isTrealing && radioButton}
               <Text
                 style={[
                   styles.label,
@@ -119,7 +80,7 @@ const RadioButtonItem = ({
                 {label}
               </Text>
 
-              {!isLeading && radioButton}
+              {isTrealing && radioButton}
             </View>
           </Touchable>
         );
@@ -129,7 +90,6 @@ const RadioButtonItem = ({
 };
 
 RadioButtonItem.displayName = 'RadioButton.Item';
-
 export default RadioButtonItem;
 
 const styles = StyleSheet.create({

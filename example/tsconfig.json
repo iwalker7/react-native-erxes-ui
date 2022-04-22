@@ -1,11 +1,13 @@
 {
   "compilerOptions": {
+    "paths": {
+      "react-native-vector-icons/MaterialCommunityIcons": [
+        "./node_modules/@expo/vector-icons/MaterialCommunityIcons.js"
+      ]
+    },
     "jsx": "react-native",
     "target": "esnext",
-    "lib": [
-      "DOM",
-      "esnext"
-    ],
+    "lib": ["DOM", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
     "noEmit": true,

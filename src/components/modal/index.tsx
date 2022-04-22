@@ -49,48 +49,59 @@ const Modal: React.FC<ModalProps> = ({
   };
 
   return (
-    <TouchableOpacity
-      onPressOut={() => {
+    <RNModal
+      visible={isVisible}
+      animationType={animationType || 'slide'}
+      transparent
+      onRequestClose={() => {
         onHideComplete();
       }}
-      style={styles.centeredView}
     >
-      <RNModal
-        visible={isVisible}
-        animationType={animationType || 'slide'}
-        transparent
-        onRequestClose={() => {
-          onHideComplete();
-        }}
+      <View
+        style={[
+          {
+            flex: 1,
+            width: '100%',
+            justifyContent: 'flex-end',
+          },
+          style,
+        ]}
       >
-        <View style={bottom ? styles.bottomView : styles.centeredView}>
-          <View
-            style={[
-              styles.modalView,
-              {
-                width: bottom ? '100%' : width ? width : '90%',
-                shadowRadius: shadowRadius,
-                minHeight: bottom ? 150 : 50,
-              },
-              style,
-            ]}
-          >
-            {cancelable && (
-              <Pressable
-                style={styles.xbutton}
-                onPress={() => onVisible(false)}
-              >
-                <TextView small color={'#616161'}>
-                  Close
-                </TextView>
-              </Pressable>
-            )}
+        <TouchableOpacity
+          onPressOut={() => {
+            onHideComplete();
+          }}
+          style={styles.centeredView}
+        >
+          <View style={bottom ? styles.bottomView : styles.centeredView}>
+            <View
+              style={[
+                styles.modalView,
+                {
+                  width: bottom ? '100%' : width ? width : '90%',
+                  shadowRadius: shadowRadius,
+                  minHeight: bottom ? 150 : 50,
+                },
+                style,
+              ]}
+            >
+              {cancelable && (
+                <Pressable
+                  style={styles.xbutton}
+                  onPress={() => onVisible(false)}
+                >
+                  <TextView small color={'#616161'}>
+                    Close
+                  </TextView>
+                </Pressable>
+              )}
 
-            {children}
+              {children}
+            </View>
           </View>
-        </View>
-      </RNModal>
-    </TouchableOpacity>
+        </TouchableOpacity>
+      </View>
+    </RNModal>
   );
 };
 

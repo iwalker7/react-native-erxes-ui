@@ -1,6 +1,8 @@
 export { default as Avatar, AvatarProps } from './components/Avatar';
 export { default as Button, ButtonProps } from './components/Button';
 export { default as Card, CardProps } from './components/Card';
+export { default as Checkbox } from './components/Checkbox';
+export { default as Dialog, DialogProps } from './components/Dialog';
 export { default as Divider, DividerProps } from './components/Divider';
 export { default as Dropdown, DropdownProps } from './components/Dropdown';
 export { default as Empty, EmptyProps } from './components/Empty';

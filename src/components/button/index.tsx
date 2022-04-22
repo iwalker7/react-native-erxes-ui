@@ -5,6 +5,8 @@ import { View } from 'react-native';
 import { StyleSheet } from 'react-native';
 import Touchable from '../Touchable';
 import TextView from '../Typography';
+//import MaterialCommunityIcons from '../MaterialCommunityIcons';
+import type { TextStyle } from 'react-native';
 
 export type ButtonProps = ViewProps & {
   type?: 'default' | 'outline';
@@ -15,6 +17,7 @@ export type ButtonProps = ViewProps & {
   textColor?: string;
   borderColor?: string;
   style?: StyleProp<ViewStyle>;
+  textstyle?: StyleProp<TextStyle>;
   onPress: () => void;
   onLongPress?: () => void;
   hasIcon?: boolean;
@@ -32,14 +35,13 @@ const Button: React.FC<ButtonProps> = ({
   onPress,
   onLongPress,
   style,
+  textstyle,
   color,
   textColor,
   borderColor,
   children,
   width,
   iconName,
-  iconColor,
-  iconSize,
   iconPosition = 'left',
 }) => {
   const defaultStyle = {
@@ -56,14 +58,15 @@ const Button: React.FC<ButtonProps> = ({
         ? '#17CE65'
         : 'rgba(255, 255, 255, 0)',
     borderRadius: 8,
-    backgroundColor:
-      color || type === 'outline'
-        ? '#fff'
-        : type === 'default' && mode === 'disabled'
-        ? '#E0E0E0'
-        : type === 'default' && mode === 'verify'
-        ? '#17CE65'
-        : '#4F33AF',
+    backgroundColor: color
+      ? color
+      : type === 'outline'
+      ? '#fff'
+      : type === 'default' && mode === 'disabled'
+      ? '#E0E0E0'
+      : type === 'default' && mode === 'verify'
+      ? '#17CE65'
+      : '#4F33AF',
     justifyContent: 'center',
     alignItems: 'center',
     alignContent: 'center',
@@ -94,15 +97,17 @@ const Button: React.FC<ButtonProps> = ({
               },
             ]}
           >
-            {/* <Icon
-              source={iconName}
-              size={iconSize || 16}
-              color={iconColor || '#fff'}
+            {/* <MaterialCommunityIcons
+              name={iconName}
+              size={iconSize ? iconSize : 16}
+              color={iconColor ? iconColor : '#fff'}
+              direction={'ltr'}
             /> */}
           </View>
         )}
         <TextView
           bold
+          style={textstyle}
           color={
             textColor || (type === 'outline' && mode === 'active')
               ? '#472D9A'

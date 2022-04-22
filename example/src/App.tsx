@@ -24,6 +24,8 @@ import {
   DefaultTheme,
 } from 'react-native-erxes-ui';
 import RadioButtonScreen from './screens/RadioButtonScreen';
+import CheckboxScreen from './screens/CheckBoxScreen';
+import DialogScreen from './screens/DialogScreen';
 
 const Stack = createStackNavigator();
 
@@ -96,9 +98,7 @@ export default function App() {
             component={MainScreen}
             options={{ headerShown: false }}
           />
-
           <Stack.Screen name="Theme" component={ThemeScreen} options={option} />
-
           {/* { components} */}
           <Stack.Screen name="Alert" component={AlertScreen} options={option} />
           <Stack.Screen
@@ -119,6 +119,7 @@ export default function App() {
             options={option}
           />
           <Stack.Screen name="Modal" component={ModalScreen} options={option} />
+          {/* / <Stack.Screen name="Dialog" component={Dialog} options={option} /> */}
           <Stack.Screen name="Text" component={TextScreen} options={option} />
           <Stack.Screen
             name="TextInput"
@@ -143,6 +144,16 @@ export default function App() {
           <Stack.Screen
             name="RadioButton"
             component={RadioButtonScreen}
+            options={option}
+          />
+          <Stack.Screen
+            name="Checkbox"
+            component={CheckboxScreen}
+            options={option}
+          />
+          <Stack.Screen
+            name="Dialog"
+            component={DialogScreen}
             options={option}
           />
         </Stack.Navigator>
