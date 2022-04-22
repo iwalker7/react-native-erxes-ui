@@ -1,3 +1,23 @@
+export const Brand = {
+  primary: '#4F33AF',
+  primaryLight1: '#644BB9',
+  primaryLight2: '#806CC4',
+  primaryLight3: '#9685CF',
+  primaryDark1: '#472D9A',
+  primaryDark2: '#39257E',
+  primaryDark3: '#2F1F69',
+
+  secondary: '#F1A73E',
+  surface: '#F1EFF9',
+
+  error: '#FF4949',
+  warning: '#FFC82C',
+  success: '#17CE65',
+
+  medium: 'rgba(0, 0, 0, 0.62)',
+  disabled: ' rgba(0, 0, 0, 0.34)',
+};
+
 export const transparent = 'rgba(255, 255, 255, 0)';
 
 export const red50 = '#ffebee';

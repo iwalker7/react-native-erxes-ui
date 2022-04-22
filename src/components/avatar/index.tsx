@@ -58,7 +58,7 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
   },
   image: {
-    borderColor: '#F1EFF9',
+    borderColor: 'transparent',
     borderWidth: 1,
     width: '100%',
     height: undefined,

@@ -26,6 +26,7 @@ import {
 import RadioButtonScreen from './screens/RadioButtonScreen';
 import CheckboxScreen from './screens/CheckBoxScreen';
 import DialogScreen from './screens/DialogScreen';
+import ChipScreen from './screens/ChipScreen';
 
 const Stack = createStackNavigator();
 
@@ -156,6 +157,7 @@ export default function App() {
             component={DialogScreen}
             options={option}
           />
+          <Stack.Screen name="Chip" component={ChipScreen} options={option} />
         </Stack.Navigator>
       </NavigationContainer>
     </ThemeProvider>

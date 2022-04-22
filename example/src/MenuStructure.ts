@@ -9,11 +9,11 @@ export const screens = {
   Basic: {
     title: 'Basic',
     screens: [
-      {
-        title: 'Alert',
-        tags: 'image cover overlay',
-        screen: 'AlertScreen',
-      },
+      //   {
+      //     title: 'Alert',
+      //     tags: 'image cover overlay',
+      //     screen: 'AlertScreen',
+      //   },
       {
         title: 'Avatar',
         tags: 'avatar',
@@ -28,6 +28,11 @@ export const screens = {
         title: 'Card',
         tags: 'card',
         screen: 'CardScreen',
+      },
+      {
+        title: 'Chip',
+        tags: 'chip',
+        screen: 'ChipScreen',
       },
       {
         title: 'Dialog',

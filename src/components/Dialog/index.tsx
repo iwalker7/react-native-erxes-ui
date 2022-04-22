@@ -3,7 +3,6 @@ import React, { SetStateAction } from 'react';
 import {
   Modal,
   StyleSheet,
-  Text,
   View,
   TouchableOpacity,
   TouchableWithoutFeedback,
