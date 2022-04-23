@@ -17,16 +17,19 @@ import {
   UplaoderScreen,
   TouchableScreen,
   ThemeScreen,
+  RadioButtonScreen,
+  CheckboxScreen,
+  DialogScreen,
+  ChipScreen,
+  SnackbarScreen,
+  ExpandableSectionScreen,
 } from './screens';
+
 import {
   Provider as ThemeProvider,
   DarkTheme,
   DefaultTheme,
 } from 'react-native-erxes-ui';
-import RadioButtonScreen from './screens/RadioButtonScreen';
-import CheckboxScreen from './screens/CheckBoxScreen';
-import DialogScreen from './screens/DialogScreen';
-import ChipScreen from './screens/ChipScreen';
 
 const Stack = createStackNavigator();
 
@@ -157,6 +160,16 @@ export default function App() {
             options={option}
           />
           <Stack.Screen name="Chip" component={ChipScreen} options={option} />
+          <Stack.Screen
+            name="Snackbar"
+            component={SnackbarScreen}
+            options={option}
+          />
+          <Stack.Screen
+            name="ExpandableSection"
+            component={ExpandableSectionScreen}
+            options={option}
+          />
         </Stack.Navigator>
       </NavigationContainer>
     </ThemeProvider>

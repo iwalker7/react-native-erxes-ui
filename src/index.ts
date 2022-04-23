@@ -15,6 +15,11 @@ export { default as Touchable, TouchableProps } from './components/Touchable';
 export { default as Modal, ModalProps } from './components/Modal';
 export { default as Uplaoder, UploaderProps } from './components/Uploader';
 export { default as RadioButton } from './components/RadioButton';
+export { default as Snackbar, SnackbarProps } from './components/Snackbar';
+export {
+  default as ExpandableSection,
+  ExpandableSectionType,
+} from './components/ExpandableSection';
 
 import * as Colors from './styles/colors';
 

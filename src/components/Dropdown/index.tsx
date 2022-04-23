@@ -1,5 +1,6 @@
 /* eslint-disable react-native/no-inline-styles */
 import React, { useState } from 'react';
+import { Dimensions } from 'react-native';
 import {
   ScrollView,
   StyleProp,
@@ -27,14 +28,12 @@ const Dropdown: React.FC<DropdownProps> = ({
 
   return (
     <>
-      <Touchable onPress={() => onOpen(!isOpen)}>
-        <View style={[styles.container, containerStyle]}>
-          <TextView style={{ fontSize: 13 }}>
-            {selectedIndex > -1 ? data[selectedIndex] : 'Choose'}
-          </TextView>
-        </View>
-      </Touchable>
-      <Modal bottom isVisible={isOpen} onVisible={onOpen}>
+      <Modal
+        bottom
+        isVisible={isOpen}
+        onVisible={onOpen}
+        style={{ width: Dimensions.get('window').width }}
+      >
         <ScrollView
           style={{ maxHeight: 200, width: '100%' }}
           showsVerticalScrollIndicator={false}
@@ -63,6 +62,13 @@ const Dropdown: React.FC<DropdownProps> = ({
           </View>
         </ScrollView>
       </Modal>
+      <Touchable onPress={() => onOpen(!isOpen)}>
+        <View style={[styles.container, containerStyle]}>
+          <TextView style={{ fontSize: 13 }}>
+            {selectedIndex > -1 ? data[selectedIndex] : 'Choose'}
+          </TextView>
+        </View>
+      </Touchable>
     </>
   );
 };

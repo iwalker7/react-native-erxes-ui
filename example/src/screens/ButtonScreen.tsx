@@ -3,6 +3,7 @@ import React from 'react';
 import { View } from 'react-native';
 import { TextView, Colors, Button } from 'react-native-erxes-ui';
 import { ScrollView } from 'react-native-gesture-handler';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import styles from '../styles';
 
 const ButtonScreen: React.FC<any> = () => {
@@ -29,18 +30,54 @@ const ButtonScreen: React.FC<any> = () => {
             </View>
           </View>
           <View style={{ flexDirection: 'row' }}>
+            <TextView style={{ marginRight: 42 }}>Without icon</TextView>
             <Button
               type="default"
-              onPress={() => console.log('pressed')}
-              onLongPress={() => console.log('pressed')}
+              onPress={() => {}}
+              onLongPress={() => {}}
+              style={{ marginRight: 20 }}
+            >
+              Default
+            </Button>
+            <Button type="outline" onPress={() => {}} onLongPress={() => {}}>
+              Outlined
+            </Button>
+          </View>
+          <View
+            style={{
+              flexDirection: 'row',
+              marginTop: 10,
+            }}
+          >
+            <TextView style={{ marginRight: 61 }}>With icon</TextView>
+            <Button
+              iconPosition="left"
+              icon={
+                <MaterialCommunityIcons
+                  name="cloud-check"
+                  color="#fff"
+                  size={15}
+                />
+              }
+              type="default"
+              onPress={() => {}}
+              onLongPress={() => {}}
               style={{ marginRight: 20 }}
             >
               Default
             </Button>
             <Button
               type="outline"
-              onPress={() => console.log('pressed')}
-              onLongPress={() => console.log('pressed')}
+              iconPosition="right"
+              icon={
+                <MaterialCommunityIcons
+                  name="cloud-check"
+                  color="#472D9A"
+                  size={15}
+                />
+              }
+              onPress={() => {}}
+              onLongPress={() => {}}
             >
               Outlined
             </Button>
@@ -74,8 +111,8 @@ const ButtonScreen: React.FC<any> = () => {
               <Button
                 type="default"
                 mode="active"
-                onPress={() => console.log('pressed')}
-                onLongPress={() => console.log('pressed')}
+                onPress={() => {}}
+                onLongPress={() => {}}
                 style={{ marginBottom: 10 }}
               >
                 Active
@@ -83,8 +120,8 @@ const ButtonScreen: React.FC<any> = () => {
               <Button
                 type="outline"
                 mode="active"
-                onPress={() => console.log('pressed')}
-                onLongPress={() => console.log('pressed')}
+                onPress={() => {}}
+                onLongPress={() => {}}
               >
                 Active
               </Button>
@@ -94,8 +131,8 @@ const ButtonScreen: React.FC<any> = () => {
               <Button
                 type="default"
                 mode="disabled"
-                onPress={() => console.log('pressed')}
-                onLongPress={() => console.log('pressed')}
+                onPress={() => {}}
+                onLongPress={() => {}}
                 style={{ marginBottom: 10 }}
               >
                 Disabled
@@ -103,8 +140,8 @@ const ButtonScreen: React.FC<any> = () => {
               <Button
                 type="outline"
                 mode="disabled"
-                onPress={() => console.log('pressed')}
-                onLongPress={() => console.log('pressed')}
+                onPress={() => {}}
+                onLongPress={() => {}}
               >
                 Disabled
               </Button>
@@ -113,8 +150,8 @@ const ButtonScreen: React.FC<any> = () => {
               <Button
                 type="default"
                 mode="verify"
-                onPress={() => console.log('pressed')}
-                onLongPress={() => console.log('pressed')}
+                onPress={() => {}}
+                onLongPress={() => {}}
                 style={{ marginBottom: 10 }}
               >
                 Verify
@@ -122,8 +159,8 @@ const ButtonScreen: React.FC<any> = () => {
               <Button
                 type="outline"
                 mode="verify"
-                onPress={() => console.log('pressed')}
-                onLongPress={() => console.log('pressed')}
+                onPress={() => {}}
+                onLongPress={() => {}}
               >
                 Verify
               </Button>
@@ -163,10 +200,12 @@ const ButtonScreen: React.FC<any> = () => {
 
         <View style={styles.segment}>
           <TextView bold>
-            hasIcon<TextView color={Colors.grey600}>: boolean</TextView>
+            icon<TextView color={Colors.grey600}>: JSX.Element</TextView>
           </TextView>
           <View style={{ marginVertical: 10 }}>
-            <TextView small>Товч icon-той эсэх</TextView>
+            <TextView small color={Colors.grey600}>
+              {`Example: <Button icon={<Icon name="cloud-check" size={15} />}`}
+            </TextView>
           </View>
         </View>
 

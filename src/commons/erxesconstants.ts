@@ -7,61 +7,6 @@ export const getAttachmentUrl = (baseUrl: string, value: string) => {
   return value;
 };
 
-export const getNameChip = (item: any, isUser: boolean, isItem: boolean) => {
-  return (
-    item.details?.fullName ||
-    item.username ||
-    item.email ||
-    item.name ||
-    item.primaryName ||
-    (isUser ? renderFullName(item) : isItem ? item : 'Unknown')
-  );
-};
-
-export const renderFullName = (item: any) => {
-  let fullName = '';
-  if (item.firstName || item.lastName) {
-    if (item.firstName) {
-      fullName += item.firstName + ' ';
-    }
-    if (item.lastName) {
-      fullName += item.lastName;
-    }
-    return fullName;
-  }
-  if (item.primaryEmail) {
-    return item.primaryEmail;
-  }
-  if (item.visitorContactInfo?.email) {
-    return item.visitorContactInfo.email;
-  }
-  return 'Unknown';
-};
-
-export const initialBravo = {
-  title: '',
-  description: '',
-  recipientIds: [],
-};
-
-export const initialThank = {
-  description: '',
-  recipientIds: [],
-};
-
-export const initialAction = {
-  onPress: () => {},
-  label: 'Dismiss',
-};
-
-export const initialAlert = {
-  isOpen: false,
-  message: 'This',
-  type: '',
-  backgroundColor: 'transparent',
-  action: undefined,
-};
-
 export const DURATION_SHORT = 1500;
 export const DURATION_MEDIUM = 2500;
 export const DURATION_LONG = 5000;

@@ -17,10 +17,10 @@ export type ButtonProps = ViewProps & {
   textColor?: string;
   borderColor?: string;
   style?: StyleProp<ViewStyle>;
-  textstyle?: StyleProp<TextStyle>;
+  textStyle?: StyleProp<TextStyle>;
   onPress: () => void;
   onLongPress?: () => void;
-  hasIcon?: boolean;
+  icon?: JSX.Element;
   iconName?: string;
   iconColor?: string;
   iconSize?: number;
@@ -35,17 +35,17 @@ const Button: React.FC<ButtonProps> = ({
   onPress,
   onLongPress,
   style,
-  textstyle,
+  textStyle,
   color,
   textColor,
   borderColor,
   children,
   width,
-  iconName,
+  icon,
   iconPosition = 'left',
 }) => {
   const defaultStyle = {
-    minHeight: 40,
+    minHeight: 36,
     minWidth: 100,
     width: width ? width : block ? '100%' : undefined,
     borderWidth: 1,
@@ -57,7 +57,7 @@ const Button: React.FC<ButtonProps> = ({
         : type === 'outline' && mode === 'verify'
         ? '#17CE65'
         : 'rgba(255, 255, 255, 0)',
-    borderRadius: 8,
+    borderRadius: 10,
     backgroundColor: color
       ? color
       : type === 'outline'
@@ -88,26 +88,22 @@ const Button: React.FC<ButtonProps> = ({
           },
         ]}
       >
-        {iconName && (
+        {icon && (
           <View
             style={[
               {
-                marginEnd: iconPosition === 'right' ? 0 : 5,
-                marginStart: iconPosition === 'left' ? 0 : 5,
+                marginLeft: iconPosition === 'right' ? 5 : 0,
+                marginRight: iconPosition === 'right' ? 0 : 5,
               },
             ]}
           >
-            {/* <MaterialCommunityIcons
-              name={iconName}
-              size={iconSize ? iconSize : 16}
-              color={iconColor ? iconColor : '#fff'}
-              direction={'ltr'}
-            /> */}
+            {icon}
           </View>
         )}
         <TextView
           bold
-          style={textstyle}
+          small
+          style={[{ fontSize: icon ? 12 : 13 }, textStyle]}
           color={
             textColor || (type === 'outline' && mode === 'active')
               ? '#472D9A'
@@ -127,16 +123,9 @@ const Button: React.FC<ButtonProps> = ({
 
 const styles = StyleSheet.create({
   inView: {
-    flexDirection: 'row',
     alignSelf: 'center',
     alignItems: 'center',
     justifyContent: 'center',
-  },
-  defaultText: {
-    color: '#fff',
-    fontWeight: '500',
-    fontSize: 15,
-    textAlign: 'center',
   },
   linearGradient: {
     paddingVertical: 12,

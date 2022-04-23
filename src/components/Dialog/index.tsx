@@ -94,7 +94,7 @@ const Dialog: React.FC<DialogProps> = ({
                   color="#E0E0E0"
                   iconName="times-circle"
                   iconColor={'#373737'}
-                  textstyle={{ color: '#373737', fontSize: 13 }}
+                  textStyle={{ color: '#373737', fontSize: 13 }}
                   onPress={() => {
                     onVisible(false);
                     onClose && onClose();
@@ -111,7 +111,7 @@ const Dialog: React.FC<DialogProps> = ({
                   style={{ marginStart: 10 }}
                   iconName="times-circle"
                   iconColor={'#373737'}
-                  textstyle={{ fontSize: 13 }}
+                  textStyle={{ fontSize: 13 }}
                   onPress={() => {
                     onVisible(false);
                     onSave && onSave();

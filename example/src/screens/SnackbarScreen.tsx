@@ -1,13 +1,24 @@
-/* eslint-disable react-native/no-inline-styles */
 import React from 'react';
 import { View } from 'react-native';
-import { TextView, Colors, Chip } from 'react-native-erxes-ui';
+import { TextView, Colors, Snackbar, Button } from 'react-native-erxes-ui';
 import styles from '../styles';
 
-const ChipScreen: React.FC<any> = () => {
+const SnackbarScreen: React.FC<any> = () => {
+  const [visible, onVisible] = React.useState<boolean>(false);
   return (
     <View style={styles.container}>
-      <Chip text="User" mode="outline" type="avatar" index={0} avatarSrc={''} />
+      <Snackbar
+        text="this is"
+        visible={visible}
+        backgroundColor={Colors.Brand.success}
+        onDismiss={() => {}}
+      >
+        {'sss'}
+      </Snackbar>
+      <View style={styles.segment}>
+        <Button onPress={() => onVisible(!visible)}>Click me</Button>
+      </View>
+
       <View style={styles.segment}>
         <TextView bold>
           onPress
@@ -37,8 +48,20 @@ const ChipScreen: React.FC<any> = () => {
           <TextView small>Агуулагчийн style</TextView>
         </View>
       </View>
+
+      <View style={styles.segment}>
+        <TextView bold>
+          ref
+          <TextView
+            color={Colors.grey600}
+          >{`: LegacyRef<TouchableOpacity | any>`}</TextView>
+        </TextView>
+        <View style={{ marginVertical: 10 }}>
+          <TextView small>Reference</TextView>
+        </View>
+      </View>
     </View>
   );
 };
 
-export default ChipScreen;
+export default SnackbarScreen;

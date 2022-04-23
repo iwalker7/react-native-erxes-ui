@@ -9,12 +9,12 @@ import {
   Colors,
   useTheme,
   Button,
+  ExpandableSection,
 } from 'react-native-erxes-ui';
 
 import _ from 'lodash';
 import { screens } from './MenuStructure';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 const sections = _.map(screens, (section, key) => {
   return {
@@ -42,6 +42,9 @@ export default function MainScreen({ navigation }: any) {
       }
 
       return (
+        //   <ExpandableSection >
+
+        //   </ExpandableSection>
         <View
           style={{
             padding: 20,
@@ -105,10 +108,6 @@ export default function MainScreen({ navigation }: any) {
         keyExtractor={(data, index) => data.tags + index}
         ListHeaderComponent={
           <View style={styles.search}>
-            {/* <Button onPress={() => {}} iconName="eye">
-              Hello World
-            </Button>
-            <MaterialCommunityIcons name="eye" size={32} /> */}
             <TextInput
               placeholder="Search component name"
               onChangeText={(text: string) => setSearchText(text)}

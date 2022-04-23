@@ -9,15 +9,15 @@ export const screens = {
   Basic: {
     title: 'Basic',
     screens: [
-      //   {
-      //     title: 'Alert',
-      //     tags: 'image cover overlay',
-      //     screen: 'AlertScreen',
-      //   },
       {
         title: 'Avatar',
         tags: 'avatar',
         screen: 'AvatarScreen',
+      },
+      {
+        title: 'Activity indicator',
+        tags: 'loader, indicator, activity indicator',
+        screen: 'LoaderScreen',
       },
       {
         title: 'Button',
@@ -43,6 +43,11 @@ export const screens = {
         title: 'Modal',
         tags: 'modal',
         screen: 'ModalScreen',
+      },
+      {
+        title: 'Snackbar',
+        tags: 'snackbar, alert, toast',
+        screen: 'SnackbarScreen',
       },
       { title: 'Text', tags: 'text', screen: 'TextScreen' },
       { title: 'Touchable', tags: 'touchable', screen: 'TouchableScreen' },
@@ -122,9 +127,9 @@ export const screens = {
         screen: 'EmptyScreen',
       },
       {
-        title: 'Loader',
-        tags: 'loader screen',
-        screen: 'LoaderScreen',
+        title: 'Expandable Section',
+        tags: 'Expandable',
+        screen: 'ExpandableSectionScreen',
       },
       //   {
       //     title: 'Skeleton (Shimmer)',

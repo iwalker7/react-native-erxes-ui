@@ -1,18 +1,16 @@
 /* eslint-disable react-native/no-inline-styles */
 import { Dimensions, Platform, PermissionsAndroid } from 'react-native';
 
-const ios = Platform.OS === 'ios';
+export const coreBaseUrl = 'api.office.erxes.io';
 
-const PERPAGE = 10;
-const PERPAGE20 = 20;
-
-const setNavigationHome = ({ navigation, headerLeft, headerRight }: any) => {
-  navigation.setOptions({
-    headerLeft: () => headerLeft,
-    headerRight: () => headerRight,
-    headerTitle: () => null,
-  });
+const getAttachmentUrl = (baseUrl: string, value: string) => {
+  if (value && !value.includes('http')) {
+    return `https://${baseUrl}/read-file?key=` + value;
+  }
+  return value;
 };
+
+const ios = Platform.OS === 'ios';
 
 const isIphoneWithNotch = () => {
   const dimen = Dimensions.get('window');
@@ -306,10 +304,6 @@ export {
   union,
   difference,
   androidCameraPermission,
-  setNavigationHome,
-  PERPAGE,
-  PERPAGE20,
-  ios,
   deviceHeight,
   deviceWidth,
   isIphoneWithNotch,
@@ -331,4 +325,6 @@ export {
   getUserBorder,
   regexRemoveTags,
   numberWithCommas,
+  getAttachmentUrl,
+  ios,
 };

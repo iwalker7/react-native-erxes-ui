@@ -165,16 +165,6 @@ const DialogScreen: React.FC<any> = () => {
 
         <View style={styles.segment}>
           <TextView bold>
-            closeText
-            <TextView color={Colors.grey600}>{`: string`}</TextView>
-          </TextView>
-          <View style={{ marginVertical: 10 }}>
-            <TextView small>Диалогийн тайлбар</TextView>
-          </View>
-        </View>
-
-        <View style={styles.segment}>
-          <TextView bold>
             saveText
             <TextView color={Colors.grey600}>{`: string`}</TextView>
           </TextView>

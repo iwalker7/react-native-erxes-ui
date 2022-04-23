@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import { View, ScrollView, StyleSheet } from 'react-native';
 import { TextView, Colors, TextInput } from 'react-native-erxes-ui';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import styles from '../styles';
 
 const TextInputScreen: React.FC<any> = () => {
@@ -60,19 +61,6 @@ const TextInputScreen: React.FC<any> = () => {
 
         <View style={styles.segment}>
           <TextView bold>
-            required
-            <TextView color={Colors.grey600}>{`: boolean`}</TextView>
-          </TextView>
-          <TextInput
-            required
-            placeholder="Outline"
-            onChangeText={(text: string) => setSearchText(text)}
-            value={searchText}
-          />
-        </View>
-
-        <View style={styles.segment}>
-          <TextView bold>
             floating
             <TextView
               color={Colors.grey600}
@@ -81,6 +69,41 @@ const TextInputScreen: React.FC<any> = () => {
           <TextInput
             label="Label"
             floating
+            onChangeText={(text: string) => setSearchText(text)}
+            value={searchText}
+          />
+        </View>
+
+        <View style={styles.segment}>
+          <TextView bold>
+            icon
+            <TextView color={Colors.grey600}>{`: JSX.Element`}</TextView>
+          </TextView>
+          <TextInput
+            iconPosition="left"
+            icon={
+              <MaterialCommunityIcons name="eye" color="#757575" size={15} />
+            }
+            placeholder="Outline"
+            onChangeText={(text: string) => setSearchText(text)}
+            value={searchText}
+          />
+          <TextView
+            small
+            color={Colors.grey600}
+            style={{ paddingHorizontal: 10 }}
+          >
+            {`Example: <Button icon={<Icon name="cloud-check" size={15} />}`}
+          </TextView>
+        </View>
+
+        <View style={styles.segment}>
+          <TextView bold>
+            required
+            <TextView color={Colors.grey600}>{`: boolean`}</TextView>
+          </TextView>
+          <TextInput
+            required
             placeholder="Outline"
             onChangeText={(text: string) => setSearchText(text)}
             value={searchText}
