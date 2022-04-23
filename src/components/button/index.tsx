@@ -21,7 +21,7 @@ export type ButtonProps = ViewProps & {
   onPress: () => void;
   onLongPress?: () => void;
   icon?: JSX.Element;
-  iconPosition?: string;
+  iconPosition?: 'left' | 'right';
   width?: number;
 };
 

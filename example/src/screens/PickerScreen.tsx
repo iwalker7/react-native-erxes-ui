@@ -2,19 +2,27 @@
 /* eslint-disable react-native/no-inline-styles */
 import React, { useState } from 'react';
 import { View } from 'react-native';
-import { TextView, Colors, Dropdown } from 'react-native-erxes-ui';
+import { TextView, Colors, Picker } from 'react-native-erxes-ui';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import styles from '../styles';
 
-const DropdownScreen: React.FC<any> = () => {
+const PickerScreen: React.FC<any> = () => {
   const data = ['EXM', 'ERXES'];
   const [indexBoard, setIndexBoard] = useState<number>(-1);
   return (
     <View style={styles.container}>
       <View style={{ width: '100%' }}>
-        <Dropdown
+        <Picker
           selectedIndex={indexBoard}
           data={data}
           onSelect={(i: any) => setIndexBoard(i)}
+          icon={
+            <MaterialCommunityIcons
+              name={'chevron-down'}
+              color="#757575"
+              size={18}
+            />
+          }
         />
       </View>
 
@@ -52,11 +60,29 @@ const DropdownScreen: React.FC<any> = () => {
 
       <View style={styles.segment}>
         <TextView bold>
-          containerStyle
-          <TextView color={Colors.grey600}>{`: StyleProp<ViewStyle>`}</TextView>
+          icon<TextView color={Colors.grey600}>: JSX.Element</TextView>
         </TextView>
         <View style={{ marginVertical: 10 }}>
-          <TextView small>Агуулагчийн style</TextView>
+          <TextView small color={Colors.grey600}>
+            {`Example: <Picker icon={<Icon name="cloud-check" size={15} />}`}
+          </TextView>
+        </View>
+      </View>
+
+      <View style={styles.segment}>
+        <View style={styles.props}>
+          <TextView bold>
+            iconPosition<TextView color={Colors.grey600}>: string</TextView>
+          </TextView>
+          <View
+            style={{
+              backgroundColor: Colors.grey200,
+              padding: 5,
+              borderRadius: 5,
+            }}
+          >
+            <TextView small> left | right </TextView>
+          </View>
         </View>
       </View>
 
@@ -71,8 +97,18 @@ const DropdownScreen: React.FC<any> = () => {
           <TextView small>Reference</TextView>
         </View>
       </View>
+
+      <View style={styles.segment}>
+        <TextView bold>
+          containerStyle
+          <TextView color={Colors.grey600}>{`: StyleProp<ViewStyle>`}</TextView>
+        </TextView>
+        <View style={{ marginVertical: 10 }}>
+          <TextView small>Агуулагчийн style</TextView>
+        </View>
+      </View>
     </View>
   );
 };
 
-export default DropdownScreen;
+export default PickerScreen;

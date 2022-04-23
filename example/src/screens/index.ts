@@ -5,7 +5,7 @@ import CardScreen from './CardScreen';
 import CheckboxScreen from './CheckBoxScreen';
 import ChipScreen from './ChipScreen';
 import DialogScreen from './DialogScreen';
-import DropdownScreen from './DropdownScreen';
+import PickerScreen from './PickerScreen';
 import EmptyScreen from './EmptyScreen';
 import ExpandableSectionScreen from './ExpandableSectionScreen';
 import LoaderScreen from './LoaderScreen';
@@ -26,7 +26,7 @@ export {
   CheckboxScreen,
   ChipScreen,
   DialogScreen,
-  DropdownScreen,
+  PickerScreen,
   EmptyScreen,
   ExpandableSectionScreen,
   LoaderScreen,

@@ -8,7 +8,7 @@ import {
   AvatarScreen,
   ButtonScreen,
   CardScreen,
-  DropdownScreen,
+  PickerScreen,
   EmptyScreen,
   LoaderScreen,
   ModalScreen,
@@ -140,8 +140,8 @@ export default function App() {
             options={option}
           />
           <Stack.Screen
-            name="Dropdown"
-            component={DropdownScreen}
+            name="Picker"
+            component={PickerScreen}
             options={option}
           />
           <Stack.Screen

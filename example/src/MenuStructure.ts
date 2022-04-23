@@ -1,11 +1,11 @@
 export const screens = {
-  Foundation: {
-    title: 'Foundation',
-    screens: [
-      { title: 'Theme', tags: 'theme', screen: 'ThemeScreen' },
-      //   { title: 'Color', tags: 'color', screen: 'ColorScreen' },
-    ],
-  },
+  //   Foundation: {
+  //     title: 'Foundation',
+  //     screens: [
+  //       { title: 'Theme', tags: 'theme', screen: 'ThemeScreen' },
+  //       { title: 'Color', tags: 'color', screen: 'ColorScreen' },
+  //     ],
+  //   },
   Basic: {
     title: 'Basic',
     screens: [
@@ -67,9 +67,9 @@ export const screens = {
       //     screen: 'ChipsInputScreen',
       //   },
       {
-        title: 'Dropdown',
+        title: 'Picker',
         tags: 'picker form',
-        screen: 'DropdownScreen',
+        screen: 'PickerScreen',
       },
       {
         title: 'RadioButton',

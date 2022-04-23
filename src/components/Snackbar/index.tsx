@@ -3,7 +3,6 @@ import React, { useRef, useState, useEffect, useLayoutEffect } from 'react';
 import { Text, Animated, SafeAreaView, StyleSheet, View } from 'react-native';
 import Button from '../Button';
 import Surface from '../Surface';
-import Touchable from '../Touchable';
 
 enum DURATION {
   DURATION_SHORT = 1500,

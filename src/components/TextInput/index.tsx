@@ -37,7 +37,7 @@ export type TextInputProps = RNProps & {
   maxLength?: number;
   onFocus?: (args: any) => void;
   icon?: JSX.Element;
-  iconPosition?: string;
+  iconPosition?: 'left' | 'right';
   iconOnPress?: () => void;
 };
 const TextInput: React.ForwardRefRenderFunction<unknown, TextInputProps> = ({

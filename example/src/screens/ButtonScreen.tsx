@@ -210,18 +210,9 @@ const ButtonScreen: React.FC<any> = () => {
         </View>
 
         <View style={styles.segment}>
-          <TextView bold>
-            iconName<TextView color={Colors.grey600}>: string</TextView>
-          </TextView>
-          <View style={{ marginVertical: 10 }}>
-            <TextView small>icon-ы нэр</TextView>
-          </View>
-        </View>
-
-        <View style={styles.segment}>
           <View style={styles.props}>
             <TextView bold>
-              iconSrc<TextView color={Colors.grey600}>: string</TextView>
+              iconPosition<TextView color={Colors.grey600}>: string</TextView>
             </TextView>
             <View
               style={{
@@ -230,11 +221,8 @@ const ButtonScreen: React.FC<any> = () => {
                 borderRadius: 5,
               }}
             >
-              <TextView small>core | team</TextView>
+              <TextView small> left | right </TextView>
             </View>
-          </View>
-          <View style={{ marginVertical: 10 }}>
-            <TextView small>Товчинд харагдах icon</TextView>
           </View>
         </View>
       </ScrollView>

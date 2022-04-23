@@ -12,11 +12,11 @@ import TextView from '../Typography';
 
 export type ChipProps = {
   mode?: 'flat' | 'outline';
-  type?: 'avatar' | 'icon';
   index: number;
   text: string;
   selected?: boolean;
-  avatarSrc: string;
+  icon?: JSX.Element;
+  removeIcon?: JSX.Element;
   selectedColor?: string;
   removable?: boolean;
   disabled?: boolean;
@@ -29,11 +29,11 @@ export type ChipProps = {
 
 const Chip: React.FC<ChipProps> = ({
   mode,
-  type,
-  avatarSrc,
   selected = false,
   index,
   text,
+  icon,
+  removeIcon,
   selectedColor = Brand.primaryLight3,
   removable = true,
   disabled = false,
@@ -88,12 +88,7 @@ const Chip: React.FC<ChipProps> = ({
         containerStyle,
       ]}
     >
-      {type === 'avatar' ? (
-        <Avatar uri={avatarSrc} size={20} source={{ uri: avatarSrc }} />
-      ) : type === 'icon' ? (
-        <></>
-      ) : null}
-
+      {icon && icon}
       <TextView
         small
         style={[
@@ -113,18 +108,7 @@ const Chip: React.FC<ChipProps> = ({
           onPressIn={handlePressIn}
           onPressOut={handlePressOut}
         >
-          <View style={styles.chipRemove}>
-            {/* <MaterialCommunityIcons
-            name="times"
-            color={'#fff'}
-            style={{
-              position: 'absolute',
-              alignSelf: 'center',
-            }}
-            size={15}
-          /> */}
-            <TextView color={'#fff'}>x</TextView>
-          </View>
+          <View style={styles.chipRemove}>{removeIcon}</View>
         </Touchable>
       )}
     </Touchable>

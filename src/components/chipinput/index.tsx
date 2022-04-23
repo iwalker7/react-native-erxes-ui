@@ -149,7 +149,7 @@
 //             keyboardShouldPersistTaps="handled"
 //             contentContainerStyle={{ paddingVertical: 4 }}
 //             showsVerticalScrollIndicator={false}
-//             style={styles.dropdown}
+//             style={styles.Picker}
 //             nestedScrollEnabled={true}
 //             scrollEventThrottle={0}
 //           >
@@ -189,7 +189,7 @@
 //     padding: 0,
 //     paddingVertical: ios ? 8 : 5,
 //   },
-//   dropdown: {
+//   Picker: {
 //     maxHeight: 200,
 //     backgroundColor: '#fff',
 //     width: '100%',

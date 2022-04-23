@@ -51,9 +51,6 @@ const ExpandableSectionScreen: React.FC<any> = () => {
           sectionHeader
           <TextView color={Colors.grey600}>{`: JSX.Element`}</TextView>
         </TextView>
-        <View style={{ marginVertical: 10 }}>
-          <TextView small>Дээр нь удаан дарах үед дуудагдах функц</TextView>
-        </View>
       </View>
 
       <View style={styles.segment}>

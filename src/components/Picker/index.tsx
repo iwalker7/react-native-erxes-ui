@@ -11,17 +11,21 @@ import {
 import { Modal, Touchable, TextView } from '../../index';
 import Divider from '../Divider';
 
-export type DropdownProps = {
+export type PickerProps = {
   selectedIndex?: number;
   data?: any[];
+  icon?: JSX.Element;
+  iconPosition?: 'left' | 'right';
   onSelect: (i: number) => void;
   containerStyle?: StyleProp<ViewStyle>;
   ref?: any;
 };
-const Dropdown: React.FC<DropdownProps> = ({
+const Picker: React.FC<PickerProps> = ({
   selectedIndex = 0,
   data = [],
   onSelect,
+  icon,
+  iconPosition = 'right',
   containerStyle,
 }) => {
   const [isOpen, onOpen] = useState(false);
@@ -67,6 +71,19 @@ const Dropdown: React.FC<DropdownProps> = ({
           <TextView style={{ fontSize: 13 }}>
             {selectedIndex > -1 ? data[selectedIndex] : 'Choose'}
           </TextView>
+
+          {icon && (
+            <View
+              style={[
+                {
+                  marginLeft: iconPosition === 'right' ? 5 : 0,
+                  marginRight: iconPosition === 'right' ? 0 : 5,
+                },
+              ]}
+            >
+              {icon}
+            </View>
+          )}
         </View>
       </Touchable>
     </>
@@ -80,6 +97,7 @@ const styles = StyleSheet.create({
     marginVertical: 5,
     paddingHorizontal: 10,
     flexDirection: 'row',
+    justifyContent: 'space-between',
     alignItems: 'center',
     backgroundColor: '#F5F5F5',
   },
@@ -91,4 +109,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Dropdown;
+export default Picker;
