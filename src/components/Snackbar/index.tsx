@@ -1,6 +1,6 @@
 /* eslint-disable react-native/no-inline-styles */
 import React, { useRef, useState, useEffect, useLayoutEffect } from 'react';
-import { Text, Animated, SafeAreaView, StyleSheet } from 'react-native';
+import { Text, Animated, SafeAreaView, StyleSheet, View } from 'react-native';
 import Button from '../Button';
 import Surface from '../Surface';
 import Touchable from '../Touchable';
@@ -22,6 +22,8 @@ export type SnackbarProps = {
   text: string;
   placement?: 'top' | 'bottom';
   visible: boolean;
+  icon?: JSX.Element;
+  iconPosition?: string;
   action?: TAction;
   duration?: number | DURATION;
   onDismiss: () => void;
@@ -39,6 +41,8 @@ const Snackbar: React.FC<SnackbarProps> = ({
   onDismiss,
   children,
   backgroundColor,
+  icon,
+  iconPosition = 'right',
 }) => {
   const { current: opacity } = useRef(new Animated.Value(0.0));
   const [hidden, setHidden] = useState<boolean>(!visible);
@@ -96,8 +100,8 @@ const Snackbar: React.FC<SnackbarProps> = ({
   }
 
   return (
-    <Touchable
-      activeOpacity={1}
+    <SafeAreaView
+      pointerEvents="box-none"
       style={[
         {
           position: 'absolute',
@@ -107,73 +111,71 @@ const Snackbar: React.FC<SnackbarProps> = ({
         },
         { backgroundColor: backgroundColor },
       ]}
-      onPress={() => onDismiss()}
     >
-      <SafeAreaView>
-        <Surface
-          pointerEvents="box-none"
-          accessibilityLiveRegion="polite"
-          style={[
-            styles.container,
-            {
-              opacity: opacity,
-              transform: [
-                {
-                  scale: visible
-                    ? opacity.interpolate({
-                        inputRange: [0, 1],
-                        outputRange: [0, 1],
-                      })
-                    : 1,
-                },
-              ],
-            },
-            { backgroundColor: 'transparent' },
-          ]}
-        >
-          {/* <IconErxes
-            name={
-              type === 'error'
-                ? 'times-circle'
-                : type === 'success'
-                ? 'check-circle'
-                : 'info-circle'
-            }
-            style={{ marginStart: 10, color: colors.colorWhite }}
-            size={18}
-          /> */}
-          <Text
-            maxFontSizeMultiplier={1}
-            ellipsizeMode="tail"
-            numberOfLines={3}
+      <Surface
+        pointerEvents="box-none"
+        accessibilityLiveRegion="polite"
+        style={[
+          styles.container,
+          {
+            opacity: opacity,
+            transform: [
+              {
+                scale: visible
+                  ? opacity.interpolate({
+                      inputRange: [0, 1],
+                      outputRange: [0.9, 1],
+                    })
+                  : 1,
+              },
+            ],
+          },
+          { backgroundColor: 'transparent' },
+        ]}
+      >
+        {icon && (
+          <View
             style={[
-              styles.content,
-              { marginRight: action ? 0 : 16, color: '#fff' },
+              {
+                marginLeft: iconPosition === 'right' ? 5 : 0,
+                marginRight: iconPosition === 'right' ? 0 : 5,
+              },
             ]}
           >
-            {text}
-          </Text>
-          {children}
-          {action && (
-            <Button
-              onPress={() => {
-                action.onPress && action.onPress();
-                onDismiss();
-              }}
-              style={styles.button}
-              color={'#fff'}
-              textStyle={{
-                fontSize: 14,
-                textTransform: 'capitalize',
-                color: '#fff',
-              }}
-            >
-              {action.label}
-            </Button>
-          )}
-        </Surface>
-      </SafeAreaView>
-    </Touchable>
+            {icon}
+          </View>
+        )}
+        <Text
+          maxFontSizeMultiplier={1}
+          ellipsizeMode="tail"
+          numberOfLines={3}
+          style={[
+            styles.content,
+            { marginRight: action ? 0 : 16, color: '#fff' },
+          ]}
+        >
+          {text}
+        </Text>
+        {children}
+        {action && (
+          <Button
+            onPress={() => {
+              action.onPress && action.onPress();
+              onDismiss();
+            }}
+            style={styles.button}
+            color={'#fff'}
+            textStyle={{
+              fontSize: 14,
+              textTransform: 'capitalize',
+              color: '#fff',
+            }}
+          >
+            {action.label}
+          </Button>
+        )}
+      </Surface>
+    </SafeAreaView>
   );
 };
 
@@ -183,6 +185,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
+    padding: 10,
   },
   content: {
     marginLeft: 10,

@@ -1,22 +1,28 @@
+/* eslint-disable react-native/no-inline-styles */
 import React from 'react';
 import { View } from 'react-native';
 import { TextView, Colors, Snackbar, Button } from 'react-native-erxes-ui';
 import styles from '../styles';
 
 const SnackbarScreen: React.FC<any> = () => {
-  const [visible, onVisible] = React.useState<boolean>(false);
+  const [visible, setVisible] = React.useState<boolean>(false);
   return (
     <View style={styles.container}>
       <Snackbar
-        text="this is"
         visible={visible}
-        backgroundColor={Colors.Brand.success}
-        onDismiss={() => {}}
+        onDismiss={() => setVisible(false)}
+        action={{
+          label: 'Undo',
+          onPress: () => {
+            // Do something
+          },
+        }}
+        duration={2000}
       >
-        {'sss'}
+        Hey there! I&apos;m a Snackbar.
       </Snackbar>
       <View style={styles.segment}>
-        <Button onPress={() => onVisible(!visible)}>Click me</Button>
+        <Button onPress={() => setVisible(!visible)}>Click me</Button>
       </View>
 
       <View style={styles.segment}>
