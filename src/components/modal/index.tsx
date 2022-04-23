@@ -51,7 +51,7 @@ const Modal: React.FC<ModalProps> = ({
   return (
     <RNModal
       visible={isVisible}
-      animationType={animationType || 'slide'}
+      animationType={animationType || 'fade'}
       transparent
       onRequestClose={() => {
         onHideComplete();
@@ -63,6 +63,7 @@ const Modal: React.FC<ModalProps> = ({
             flex: 1,
             width: '100%',
             justifyContent: 'flex-end',
+            backgroundColor: 'rgba(0, 0, 0, 0.2)',
           },
           style,
         ]}
