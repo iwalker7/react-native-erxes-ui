@@ -9,9 +9,10 @@ import PickerScreen from './PickerScreen';
 import EmptyScreen from './EmptyScreen';
 import ExpandableSectionScreen from './ExpandableSectionScreen';
 import LoaderScreen from './LoaderScreen';
+import ModalScreen from './ModalScreen';
 import RadioButtonScreen from './RadioButtonScreen';
 import SnackbarScreen from './SnackbarScreen';
-import ModalScreen from './ModalScreen';
+import SwipeableListScreen from './SwipeableListScreen';
 import TextScreen from './TextScreen';
 import TouchableScreen from './TouchableScreen';
 import TextInputScreen from './TextInputScreen';
@@ -30,9 +31,10 @@ export {
   EmptyScreen,
   ExpandableSectionScreen,
   LoaderScreen,
+  ModalScreen,
   RadioButtonScreen,
   SnackbarScreen,
-  ModalScreen,
+  SwipeableListScreen,
   TextInputScreen,
   TextScreen,
   TouchableScreen,

@@ -5,8 +5,6 @@ import { StyleSheet } from 'react-native';
 import { Animated } from 'react-native';
 import { StyleProp, TextStyle, View, ViewStyle } from 'react-native';
 import { Brand } from '../../styles/colors';
-import Avatar from '../Avatar';
-import MaterialCommunityIcons from '../MaterialCommunityIcons';
 import Touchable from '../Touchable';
 import TextView from '../Typography';
 

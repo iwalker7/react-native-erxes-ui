@@ -1,8 +1,7 @@
 /* eslint-disable react-native/no-inline-styles */
 import React from 'react';
 import { View } from 'react-native';
-import { TextView, Colors, Button } from 'react-native-erxes-ui';
-import { ScrollView } from 'react-native-gesture-handler';
+import { TextView, Colors, Button, ScrollView } from 'react-native-erxes-ui';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import styles from '../styles';
 

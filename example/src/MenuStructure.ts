@@ -49,6 +49,11 @@ export const screens = {
         tags: 'snackbar, alert, toast',
         screen: 'SnackbarScreen',
       },
+      //   {
+      //     title: 'Swipeable List',
+      //     tags: 'Swipeable',
+      //     screen: 'SwipeableListScreen',
+      //   },
       { title: 'Text', tags: 'text', screen: 'TextScreen' },
       { title: 'Touchable', tags: 'touchable', screen: 'TouchableScreen' },
     ],

@@ -23,6 +23,7 @@ import {
   ChipScreen,
   SnackbarScreen,
   ExpandableSectionScreen,
+  SwipeableItemScreen,
 } from './screens';
 
 import {
@@ -30,6 +31,7 @@ import {
   DarkTheme,
   DefaultTheme,
 } from 'react-native-erxes-ui';
+import SwipeableListScreen from './screens/SwipeableListScreen';
 
 const Stack = createStackNavigator();
 
@@ -168,6 +170,11 @@ export default function App() {
           <Stack.Screen
             name="ExpandableSection"
             component={ExpandableSectionScreen}
+            options={option}
+          />
+          <Stack.Screen
+            name="SwipeableList"
+            component={SwipeableListScreen}
             options={option}
           />
         </Stack.Navigator>
