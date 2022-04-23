@@ -7,37 +7,6 @@ import images from '../../assets/images';
 import styles from '../styles';
 
 const CardScreen: React.FC<any> = () => {
-  const buttons = () => {
-    return (
-      <View
-        style={{
-          flexDirection: 'row',
-          paddingHorizontal: 10,
-          justifyContent: 'space-between',
-        }}
-      >
-        <Button
-          type="outline"
-          mode="disabled"
-          onPress={() => {}}
-          onLongPress={() => {}}
-        >
-          Action 1
-        </Button>
-
-        <Button
-          type="default"
-          mode="verify"
-          onPress={() => {}}
-          onLongPress={() => {}}
-          style={{ marginBottom: 10 }}
-        >
-          Action 2
-        </Button>
-      </View>
-    );
-  };
-
   return (
     <View style={styles.container}>
       <Card
@@ -63,7 +32,34 @@ const CardScreen: React.FC<any> = () => {
             style={{ resizeMode: 'cover', height: 120, width: '100%' }}
           />
         }
-        actions={buttons}
+        actions={
+          <View
+            style={{
+              flexDirection: 'row',
+              paddingHorizontal: 10,
+              justifyContent: 'space-between',
+            }}
+          >
+            <Button
+              type="outline"
+              mode="disabled"
+              onPress={() => {}}
+              onLongPress={() => {}}
+            >
+              Action 1
+            </Button>
+
+            <Button
+              type="default"
+              mode="verify"
+              onPress={() => {}}
+              onLongPress={() => {}}
+              style={{ marginBottom: 10 }}
+            >
+              Action 2
+            </Button>
+          </View>
+        }
         supportingText="This is supporting text. Supporting text include text like an article summary or a description."
       />
 

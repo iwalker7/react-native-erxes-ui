@@ -8,13 +8,7 @@ import styles from '../styles';
 const ChipScreen: React.FC<any> = () => {
   return (
     <View style={styles.container}>
-      <Chip
-        text="User"
-        mode="outline"
-        type="avatar"
-        index={0}
-        avatarSrc={images.avatar}
-      />
+      <Chip text="User" mode="outline" index={0} />
 
       <ScrollView
         showsVerticalScrollIndicator={false}

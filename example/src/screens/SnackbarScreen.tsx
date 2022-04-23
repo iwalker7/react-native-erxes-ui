@@ -9,6 +9,7 @@ const SnackbarScreen: React.FC<any> = () => {
   return (
     <View style={styles.container}>
       <Snackbar
+        text="Text"
         visible={visible}
         onDismiss={() => setVisible(false)}
         action={{

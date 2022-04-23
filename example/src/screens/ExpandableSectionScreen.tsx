@@ -9,6 +9,7 @@ import {
 } from 'react-native-erxes-ui';
 import styles from '../styles';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import images from '../../assets/images';
 
 const ExpandableSectionScreen: React.FC<any> = () => {
   const [visible, onVisible] = useState(false);
@@ -36,7 +37,7 @@ const ExpandableSectionScreen: React.FC<any> = () => {
             padding: 10,
           }}
         >
-          <Avatar />
+          <Avatar source={images.avatar} />
           <TextView center style={{ marginTop: 10 }}>
             Lorem ipsum dolor sit amet, elit. laoreet risus, ats finibus turpis.
             Mauris ornare accumsan sempesdr. Morbi quis leo dolor. Nulla

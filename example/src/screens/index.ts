@@ -12,7 +12,6 @@ import LoaderScreen from './LoaderScreen';
 import ModalScreen from './ModalScreen';
 import RadioButtonScreen from './RadioButtonScreen';
 import SnackbarScreen from './SnackbarScreen';
-import SwipeableListScreen from './SwipeableListScreen';
 import TextScreen from './TextScreen';
 import TouchableScreen from './TouchableScreen';
 import TextInputScreen from './TextInputScreen';
@@ -34,7 +33,6 @@ export {
   ModalScreen,
   RadioButtonScreen,
   SnackbarScreen,
-  SwipeableListScreen,
   TextInputScreen,
   TextScreen,
   TouchableScreen,
