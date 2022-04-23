@@ -24,6 +24,7 @@ export type DialogProps = {
   containerStyle?: StyleProp<ViewStyle>;
   isVisible: boolean;
   onVisible: SetStateAction<any>;
+  icon?: JSX.Element;
   children?: React.ReactNode;
 };
 
@@ -31,6 +32,7 @@ const Dialog: React.FC<DialogProps> = ({
   onClose,
   onSave,
   title,
+  icon,
   supportingText,
   closeText,
   saveText,
@@ -40,6 +42,7 @@ const Dialog: React.FC<DialogProps> = ({
   onVisible,
   children,
 }) => {
+  const subColor = '#373737';
   return (
     <Modal
       visible={isVisible}
@@ -59,17 +62,12 @@ const Dialog: React.FC<DialogProps> = ({
         <TouchableWithoutFeedback>
           <View style={[styles.container, containerStyle]}>
             {(action === 'alert' || action === 'confirm') && (
-              <View style={{ padding: 20, alignItems: 'center' }}>
-                {/* action === 'alert' && <IconCore
-                  name="exclamation-triangle"
-                  color={colors.colorSecondary}
-                  size={35}
-                  style={{ marginBottom: 5 }}
-                /> */}
-                <TextView bold style={{ marginBottom: 5, color: '#373737' }}>
+              <View style={styles.body}>
+                {icon}
+                <TextView bold style={styles.subText}>
                   {title ? title : 'Are you sure?'}
                 </TextView>
-                <TextView small color="#373737">
+                <TextView small color={subColor} style={styles.subText}>
                   {supportingText ? supportingText : 'This cannot be undone.'}
                 </TextView>
               </View>
@@ -77,10 +75,10 @@ const Dialog: React.FC<DialogProps> = ({
             {children && action === 'simple' && (
               <>
                 <View style={styles.header}>
-                  <TextView bold color="#373737">
+                  <TextView bold color={subColor}>
                     {title}
                   </TextView>
-                  <TextView small color="#373737" style={{ marginTop: 3 }}>
+                  <TextView small color={subColor} style={{ marginTop: 3 }}>
                     {supportingText ? supportingText : 'This cannot be undone.'}
                   </TextView>
                 </View>
@@ -92,9 +90,7 @@ const Dialog: React.FC<DialogProps> = ({
               <View style={styles.buttonsContainer}>
                 <Button
                   color="#E0E0E0"
-                  iconName="times-circle"
-                  iconColor={'#373737'}
-                  textStyle={{ color: '#373737', fontSize: 13 }}
+                  textStyle={{ color: subColor, fontSize: 13 }}
                   onPress={() => {
                     onVisible(false);
                     onClose && onClose();
@@ -109,8 +105,6 @@ const Dialog: React.FC<DialogProps> = ({
                 <Button
                   mode="verify"
                   style={{ marginStart: 10 }}
-                  iconName="times-circle"
-                  iconColor={'#373737'}
                   textStyle={{ fontSize: 13 }}
                   onPress={() => {
                     onVisible(false);
@@ -163,6 +157,16 @@ const styles = StyleSheet.create({
     paddingHorizontal: 15,
     borderTopLeftRadius: 10,
     borderTopRightRadius: 10,
+  },
+  body: {
+    paddingTop: 20,
+    paddingBottom: 5,
+    paddingHorizontal: 5,
+    alignItems: 'center',
+  },
+  subText: {
+    color: '#373737',
+    marginBottom: 5,
   },
 });
 

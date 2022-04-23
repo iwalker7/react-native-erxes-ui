@@ -9,6 +9,7 @@ import {
   Avatar,
   Divider,
 } from 'react-native-erxes-ui';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import styles from '../styles';
 
 const DialogScreen: React.FC<any> = () => {
@@ -72,7 +73,18 @@ const DialogScreen: React.FC<any> = () => {
           isVisible={confirm}
           onVisible={onConfirm}
         />
-        <Dialog action="alert" isVisible={alert} onVisible={onAlert} />
+        <Dialog
+          action="alert"
+          isVisible={alert}
+          onVisible={onAlert}
+          icon={
+            <MaterialCommunityIcons
+              name="alert-outline"
+              color="#F1A73E"
+              size={30}
+            />
+          }
+        />
         <Dialog
           action="simple"
           title="Title"
