@@ -1,16 +1,37 @@
 /* eslint-disable react-native/no-inline-styles */
 import React from 'react';
 import { Image, View } from 'react-native';
-import { TextView, Colors, Card, Button } from 'react-native-erxes-ui';
+import { TextView, Colors, Card, Button, Picker } from 'react-native-erxes-ui';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import images from '../../assets/images';
 import styles from '../styles';
 
 const CardScreen: React.FC<any> = () => {
+  const data = ['elevated', 'outline'];
+  const [indexBoard, setIndexBoard] = React.useState<number>(-1);
+  const [a, setA] = React.useState(data[0]);
   return (
     <View style={styles.container}>
+      <View style={{ width: '100%', marginVertical: 5 }}>
+        <Picker
+          selectedIndex={indexBoard}
+          data={data}
+          placeholderText="Choose alert type"
+          onSelect={(i: any) => {
+            setIndexBoard(i);
+            setA(data[i]);
+          }}
+          icon={
+            <MaterialCommunityIcons
+              name={'chevron-down'}
+              color="#757575"
+              size={20}
+            />
+          }
+        />
+      </View>
       <Card
-        type="elevated"
+        type={a}
         title="Title"
         thumbnail={
           <Image
@@ -36,26 +57,16 @@ const CardScreen: React.FC<any> = () => {
           <View
             style={{
               flexDirection: 'row',
-              paddingHorizontal: 10,
+              paddingHorizontal: 8,
               justifyContent: 'space-between',
+              marginBottom: 3,
             }}
           >
-            <Button
-              type="outline"
-              mode="disabled"
-              onPress={() => {}}
-              onLongPress={() => {}}
-            >
+            <Button mode="disabled" onPress={() => {}} onLongPress={() => {}}>
               Action 1
             </Button>
 
-            <Button
-              type="default"
-              mode="verify"
-              onPress={() => {}}
-              onLongPress={() => {}}
-              style={{ marginBottom: 10 }}
-            >
+            <Button type="default" onPress={() => {}} onLongPress={() => {}}>
               Action 2
             </Button>
           </View>
@@ -76,7 +87,7 @@ const CardScreen: React.FC<any> = () => {
               borderRadius: 5,
             }}
           >
-            <TextView small> elevated | outlined </TextView>
+            <TextView small> elevated | outline </TextView>
           </View>
         </View>
       </View>

@@ -6,7 +6,7 @@ export type CardProps = {
   title: string;
   secondaryText?: string;
   supportingText?: string;
-  type?: 'elevated' | 'outlined';
+  type?: 'elevated' | 'outline' | string;
   thumbnail?: JSX.Element;
   media?: JSX.Element;
   actions?: JSX.Element;
@@ -14,7 +14,7 @@ export type CardProps = {
 };
 
 const Card: React.FC<CardProps> = ({
-  type = 'outlined',
+  type = 'elevated',
   title,
   secondaryText,
   supportingText,
@@ -84,9 +84,9 @@ const styles = StyleSheet.create({
   outlined: {
     width: '100%',
     paddingBottom: 5,
-    borderRadius: 5,
+    borderRadius: 10,
     backgroundColor: '#fff',
-    borderColor: '#757575',
+    borderColor: 'rgba(0, 0, 0, 0.34)',
     borderWidth: 1,
   },
   mb: { marginBottom: 1 },

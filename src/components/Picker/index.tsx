@@ -19,6 +19,7 @@ export type PickerProps = {
   onSelect: (i: number) => void;
   containerStyle?: StyleProp<ViewStyle>;
   ref?: any;
+  placeholderText?: string;
 };
 const Picker: React.FC<PickerProps> = ({
   selectedIndex = 0,
@@ -27,6 +28,7 @@ const Picker: React.FC<PickerProps> = ({
   icon,
   iconPosition = 'right',
   containerStyle,
+  placeholderText,
 }) => {
   const [isOpen, onOpen] = useState(false);
 
@@ -69,7 +71,11 @@ const Picker: React.FC<PickerProps> = ({
       <Touchable onPress={() => onOpen(!isOpen)}>
         <View style={[styles.container, containerStyle]}>
           <TextView style={{ fontSize: 13 }}>
-            {selectedIndex > -1 ? data[selectedIndex] : 'Choose'}
+            {selectedIndex > -1
+              ? data[selectedIndex]
+              : placeholderText
+              ? placeholderText
+              : 'Choose'}
           </TextView>
 
           {icon && (

@@ -1,8 +1,13 @@
 /* eslint-disable react-native/no-inline-styles */
+import color from 'color';
 import React, { useRef, useState, useEffect, useLayoutEffect } from 'react';
-import { Text, Animated, SafeAreaView, StyleSheet, View } from 'react-native';
+import type { StyleProp } from 'react-native';
+import type { TextProps } from 'react-native';
+import type { ViewStyle } from 'react-native';
+import { Animated, SafeAreaView, StyleSheet, View } from 'react-native';
 import Button from '../Button';
 import Surface from '../Surface';
+import TextView from '../Typography';
 
 enum DURATION {
   DURATION_SHORT = 1500,
@@ -11,41 +16,48 @@ enum DURATION {
   DURATION_INFINITY = Number.NEGATIVE_INFINITY,
 }
 
-export type TAction = {
-  onPress: () => void;
-  label: string;
-};
-
 export type SnackbarProps = {
-  type?: string;
-  text: string;
-  placement?: 'top' | 'bottom';
   visible: boolean;
-  icon?: JSX.Element;
-  iconPosition?: string;
-  action?: TAction;
-  duration?: number | DURATION;
+  action?: Omit<React.ComponentProps<typeof Button>, 'children'> & {
+    label: string;
+  };
+  placement?: 'top' | 'bottom';
+  duration?: number;
   onDismiss: () => void;
-  children?: React.ReactNode;
-  backgroundColor?: string;
+  icon?: JSX.Element;
+  iconPosition?: 'left' | 'right';
+  message: string;
+  type?: 'success' | 'warning' | 'info' | 'error' | string;
+  textStyle?: StyleProp<TextProps>;
+  wrapperStyle?: StyleProp<ViewStyle>;
+  style?: StyleProp<ViewStyle>;
+  ref?: React.RefObject<View>;
+  theme?: ReactNativeErxes.Theme;
 };
 
 const Snackbar: React.FC<SnackbarProps> = ({
-  type,
-  text,
-  placement = 'top',
   visible,
   action,
+  message,
+  placement = 'top',
   duration = DURATION.DURATION_MEDIUM,
   onDismiss,
-  children,
-  backgroundColor,
   icon,
-  iconPosition = 'right',
+  iconPosition = 'left',
+  type = 'info',
+  ...rest
 }) => {
   const { current: opacity } = useRef(new Animated.Value(0.0));
   const [hidden, setHidden] = useState<boolean>(!visible);
   const hideTimeout = useRef<NodeJS.Timeout>();
+  const mainColor =
+    type === 'error'
+      ? '#FF4949'
+      : type === 'success'
+      ? '#17CE65'
+      : type === 'warning'
+      ? '#FFC82C'
+      : '#42a5f5';
 
   useEffect(() => {
     return () => {
@@ -57,7 +69,6 @@ const Snackbar: React.FC<SnackbarProps> = ({
 
   useLayoutEffect(() => {
     if (visible) {
-      // show
       if (hideTimeout.current) {
         clearTimeout(hideTimeout.current);
       }
@@ -78,7 +89,6 @@ const Snackbar: React.FC<SnackbarProps> = ({
         }
       });
     } else {
-      // hide
       if (hideTimeout.current) {
         clearTimeout(hideTimeout.current);
       }
@@ -94,7 +104,7 @@ const Snackbar: React.FC<SnackbarProps> = ({
     }
   }, [visible, duration, opacity, onDismiss]);
 
-  if (hidden || !type) {
+  if (hidden) {
     return null;
   }
 
@@ -107,8 +117,8 @@ const Snackbar: React.FC<SnackbarProps> = ({
           top: placement === 'top' ? 0 : undefined,
           bottom: placement === 'bottom' ? 10 : undefined,
           width: '100%',
+          zIndex: 5000,
         },
-        { backgroundColor: backgroundColor },
       ]}
     >
       <Surface
@@ -116,6 +126,7 @@ const Snackbar: React.FC<SnackbarProps> = ({
         accessibilityLiveRegion="polite"
         style={[
           styles.container,
+          { borderLeftColor: mainColor },
           {
             opacity: opacity,
             transform: [
@@ -129,49 +140,51 @@ const Snackbar: React.FC<SnackbarProps> = ({
               },
             ],
           },
-          { backgroundColor: 'transparent' },
+          rest?.wrapperStyle,
         ]}
       >
-        {icon && (
-          <View
+        <View
+          style={{ width: '72%', alignItems: 'center', flexDirection: 'row' }}
+        >
+          {icon && (
+            <View
+              style={[
+                {
+                  marginLeft: iconPosition === 'right' ? 5 : 0,
+                  marginRight: iconPosition === 'right' ? 0 : 5,
+                },
+              ]}
+            >
+              {icon}
+            </View>
+          )}
+          <TextView
+            bold
             style={[
-              {
-                marginLeft: iconPosition === 'right' ? 5 : 0,
-                marginRight: iconPosition === 'right' ? 0 : 5,
-              },
+              styles.content,
+              { marginRight: action ? 0 : 16, color: '#373737' },
+              rest?.textStyle,
             ]}
           >
-            {icon}
-          </View>
-        )}
-        <Text
-          maxFontSizeMultiplier={1}
-          ellipsizeMode="tail"
-          numberOfLines={3}
-          style={[
-            styles.content,
-            { marginRight: action ? 0 : 16, color: '#fff' },
-          ]}
-        >
-          {text}
-        </Text>
-        {children}
+            {message}
+          </TextView>
+        </View>
         {action && (
-          <Button
-            onPress={() => {
-              action.onPress && action.onPress();
-              onDismiss();
-            }}
-            style={styles.button}
-            color={'#fff'}
-            textStyle={{
-              fontSize: 14,
-              textTransform: 'capitalize',
-              color: '#fff',
-            }}
-          >
-            {action.label}
-          </Button>
+          <View style={{ justifyContent: 'flex-end' }}>
+            <Button
+              onPress={() => {
+                action.onPress && action.onPress();
+                onDismiss();
+              }}
+              color={color(mainColor).alpha(0.08).rgb().string()}
+              textColor={color(mainColor).darken(0.1).rgb().string()}
+              style={{
+                borderRadius: 8,
+              }}
+            >
+              {action.label}
+            </Button>
+          </View>
         )}
       </Surface>
     </SafeAreaView>
@@ -180,22 +193,27 @@ const Snackbar: React.FC<SnackbarProps> = ({
 
 const styles = StyleSheet.create({
   container: {
-    elevation: 4,
     flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    padding: 10,
+    paddingLeft: 15,
+    paddingRight: 5,
+    paddingVertical: 8,
+    borderRadius: 5,
+    width: '100%',
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 0,
+    },
+    shadowOpacity: 0.1,
+    shadowRadius: 7,
+    borderWidth: 2,
+    borderColor: '#fff',
   },
   content: {
     marginLeft: 10,
     marginVertical: 10,
     flexWrap: 'wrap',
     flex: 1,
-  },
-  button: {
-    marginHorizontal: 10,
-    marginVertical: 5,
-    backgroundColor: '#FAFAFA',
   },
 });
 export default Snackbar;

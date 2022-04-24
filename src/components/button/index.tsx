@@ -43,7 +43,7 @@ const Button: React.FC<ButtonProps> = ({
 }) => {
   const defaultStyle = {
     minHeight: 36,
-    minWidth: 100,
+    minWidth: 90,
     width: width ? width : block ? '100%' : undefined,
     borderWidth: 1,
     borderColor:
@@ -102,7 +102,9 @@ const Button: React.FC<ButtonProps> = ({
           small
           style={[{ fontSize: icon ? 12 : 13 }, textStyle]}
           color={
-            textColor || (type === 'outline' && mode === 'active')
+            textColor
+              ? textColor
+              : type === 'outline' && mode === 'active'
               ? '#472D9A'
               : type === 'outline' && mode === 'verify'
               ? '#17CE65'
