@@ -44,22 +44,19 @@ const SnackbarScreen: React.FC<any> = () => {
         message="You receive an alert"
         visible={visible}
         onDismiss={() => setVisible(false)}
-        action={{
-          label: 'Undo',
-          onPress: () => {
-            // Do something
-          },
-        }}
         placement="top"
         type={alert.type}
         iconPosition="left"
         icon={
-          <MaterialCommunityIcons
-            name={alert.icon}
-            color={alert.color}
-            size={20}
-          />
+          <MaterialCommunityIcons name={alert.icon} color={'#fff'} size={20} />
         }
+        closeIcon={
+          <MaterialCommunityIcons name={'close'} color={'#fff'} size={10} />
+        }
+        // action={{
+        //   label: 'Undo',
+        //   onPress: () => {},
+        // }}
       />
 
       <ScrollView

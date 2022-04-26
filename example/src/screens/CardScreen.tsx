@@ -10,6 +10,7 @@ const CardScreen: React.FC<any> = () => {
   const data = ['elevated', 'outline'];
   const [indexBoard, setIndexBoard] = React.useState<number>(-1);
   const [a, setA] = React.useState(data[0]);
+  const [thVisible, setThVisible] = React.useState(0);
   return (
     <View style={styles.container}>
       <View style={{ width: '100%', marginVertical: 5 }}>
@@ -34,19 +35,22 @@ const CardScreen: React.FC<any> = () => {
         type={a}
         title="Title"
         thumbnail={
-          <Image
-            source={images.avatar}
-            style={{ resizeMode: 'contain', height: 50, width: '100%' }}
-          />
+          thVisible ? (
+            <Image
+              source={images.avatar}
+              style={{ resizeMode: 'contain', height: 50, width: '100%' }}
+            />
+          ) : null
         }
         secondaryText={'This is secondary text'}
-        overflowMenu={
+        overflowIcon={
           <MaterialCommunityIcons
             name="dots-vertical"
             color="#757575"
             size={15}
           />
         }
+        overflowAction={() => {}}
         media={
           <Image
             source={images.cover}
@@ -62,12 +66,19 @@ const CardScreen: React.FC<any> = () => {
               marginBottom: 3,
             }}
           >
-            <Button mode="disabled" onPress={() => {}} onLongPress={() => {}}>
-              Action 1
+            <Button
+              mode="disabled"
+              onPress={() => setThVisible(false)}
+              onLongPress={() => {}}
+            >
+              Hide thumbnail
             </Button>
-
-            <Button type="default" onPress={() => {}} onLongPress={() => {}}>
-              Action 2
+            <Button
+              type="default"
+              onPress={() => setThVisible(true)}
+              onLongPress={() => {}}
+            >
+              Show thumbnail
             </Button>
           </View>
         }

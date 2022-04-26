@@ -1,6 +1,8 @@
+/* eslint-disable react-native/no-inline-styles */
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import TextView from '../Typography';
+import Touchable from '../Touchable';
 
 export type CardProps = {
   title: string;
@@ -10,7 +12,9 @@ export type CardProps = {
   thumbnail?: JSX.Element;
   media?: JSX.Element;
   actions?: JSX.Element;
-  overflowMenu?: JSX.Element;
+  //   overflowMenu?: JSX.Element;
+  overflowIcon?: JSX.Element;
+  overflowAction?: () => void;
 };
 
 const Card: React.FC<CardProps> = ({
@@ -21,14 +25,19 @@ const Card: React.FC<CardProps> = ({
   thumbnail,
   media,
   actions,
-  overflowMenu,
+  overflowIcon,
+  overflowAction,
 }) => {
   return (
     <View style={type === 'elevated' ? styles.elevated : styles.outlined}>
       <View style={styles.header}>
-        <View style={styles.thumbnail}>{thumbnail}</View>
-        {<View style={styles.overflow}>{overflowMenu}</View>}
-        <View style={styles.column}>
+        {thumbnail && <View style={styles.thumbnail}>{thumbnail}</View>}
+        {overflowAction && (
+          <View style={styles.overflow}>
+            <Touchable onPress={overflowAction}>{overflowIcon}</Touchable>
+          </View>
+        )}
+        <View style={[styles.column, { width: thumbnail ? '80%' : '100%' }]}>
           <TextView large bold style={styles.mb}>
             {title}
           </TextView>
@@ -56,7 +65,6 @@ const styles = StyleSheet.create({
   },
   column: {
     flexDirection: 'column',
-    width: '80%',
     paddingHorizontal: 10,
   },
   thumbnail: {

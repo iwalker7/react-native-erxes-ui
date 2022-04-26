@@ -8,8 +8,9 @@ import { Animated, SafeAreaView, StyleSheet, View } from 'react-native';
 import Button from '../Button';
 import Surface from '../Surface';
 import TextView from '../Typography';
+import Touchable from '../Touchable';
 
-enum DURATION {
+export enum DURATION {
   DURATION_SHORT = 1500,
   DURATION_MEDIUM = 2500,
   DURATION_LONG = 5000,
@@ -22,12 +23,13 @@ export type SnackbarProps = {
     label: string;
   };
   placement?: 'top' | 'bottom';
+  message: string;
+  type?: 'success' | 'warning' | 'info' | 'error' | string;
   duration?: number;
   onDismiss: () => void;
   icon?: JSX.Element;
   iconPosition?: 'left' | 'right';
-  message: string;
-  type?: 'success' | 'warning' | 'info' | 'error' | string;
+  closeIcon?: JSX.Element;
   textStyle?: StyleProp<TextProps>;
   wrapperStyle?: StyleProp<ViewStyle>;
   style?: StyleProp<ViewStyle>;
@@ -45,6 +47,7 @@ const Snackbar: React.FC<SnackbarProps> = ({
   icon,
   iconPosition = 'left',
   type = 'info',
+  closeIcon,
   ...rest
 }) => {
   const { current: opacity } = useRef(new Animated.Value(0.0));
@@ -126,7 +129,7 @@ const Snackbar: React.FC<SnackbarProps> = ({
         accessibilityLiveRegion="polite"
         style={[
           styles.container,
-          { borderLeftColor: mainColor },
+          { backgroundColor: mainColor },
           {
             opacity: opacity,
             transform: [
@@ -144,8 +147,17 @@ const Snackbar: React.FC<SnackbarProps> = ({
         ]}
       >
         <View
-          style={{ width: '72%', alignItems: 'center', flexDirection: 'row' }}
+          style={{
+            width: action ? '72%' : '100%',
+            alignItems: 'center',
+            flexDirection: 'row',
+          }}
         >
+          {closeIcon && (
+            <View style={styles.overflow}>
+              <Touchable onPress={() => setHidden(true)}>{closeIcon}</Touchable>
+            </View>
+          )}
           {icon && (
             <View
               style={[
@@ -162,7 +174,7 @@ const Snackbar: React.FC<SnackbarProps> = ({
             bold
             style={[
               styles.content,
-              { marginRight: action ? 0 : 16, color: '#373737' },
+              { marginRight: action ? 0 : 16, color: '#fff' },
               rest?.textStyle,
             ]}
           >
@@ -176,8 +188,8 @@ const Snackbar: React.FC<SnackbarProps> = ({
                 action.onPress && action.onPress();
                 onDismiss();
               }}
-              color={color(mainColor).alpha(0.08).rgb().string()}
-              textColor={color(mainColor).darken(0.1).rgb().string()}
+              color={'rgba(255, 255, 255, 0.6)'}
+              textColor={color(mainColor).darken(0.6).rgb().string()}
               style={{
                 borderRadius: 8,
               }}
@@ -193,6 +205,7 @@ const Snackbar: React.FC<SnackbarProps> = ({
 
 const styles = StyleSheet.create({
   container: {
+    margin: 5,
     flexDirection: 'row',
     paddingLeft: 15,
     paddingRight: 5,
@@ -206,14 +219,20 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 0.1,
     shadowRadius: 7,
-    borderWidth: 2,
-    borderColor: '#fff',
+    // borderWidth: 2,
+    // borderColor: '#fff',
   },
   content: {
     marginLeft: 10,
     marginVertical: 10,
     flexWrap: 'wrap',
     flex: 1,
+  },
+
+  overflow: {
+    position: 'absolute',
+    top: 0,
+    right: 0,
   },
 });
 export default Snackbar;
