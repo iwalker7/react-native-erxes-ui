@@ -161,6 +161,7 @@ const Uploader: React.FC<UploaderProps> = ({
             flexDirection: 'column',
             justifyContent: 'center',
             alignItems: 'center',
+            width: '90%',
           }}
         >
           <ActivityIndicator size="small" color="#4F33AF" />
@@ -171,6 +172,7 @@ const Uploader: React.FC<UploaderProps> = ({
               color: '#4F33AF',
               alignSelf: 'center',
               marginBottom: 15,
+              marginTop: 8,
             }}
           >
             {text ? text : 'Please wait'}

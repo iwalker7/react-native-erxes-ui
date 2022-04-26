@@ -14,10 +14,12 @@ export type ExpandableSectionType = ViewProps & {
   setExpanded?: SetStateAction<any>;
   sectionHeader?: React.ReactNode;
   headerText?: string;
+  bordered?: boolean;
   children?: React.ReactNode;
   onPress?: () => void;
   headerStyle?: StyleProp<ViewStyle>;
   headerTextStyle?: StyleProp<TextStyle>;
+  containerStyle?: StyleProp<ViewStyle>;
 };
 
 const ExpandableSection: React.FC<ExpandableSectionType> = ({
@@ -29,10 +31,12 @@ const ExpandableSection: React.FC<ExpandableSectionType> = ({
   onPress,
   headerStyle,
   headerTextStyle,
+  containerStyle,
+  bordered = false,
 }) => {
   const [expand, setExpand] = useState(expanded);
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, bordered && styles.border, containerStyle]}>
       <Touchable
         style={styles.header || headerStyle}
         onPress={() => {
@@ -56,11 +60,13 @@ const ExpandableSection: React.FC<ExpandableSectionType> = ({
 };
 const styles = StyleSheet.create({
   container: {
-    borderRadius: 10,
+    width: '100%',
     backgroundColor: '#fff',
+  },
+  border: {
+    borderRadius: 10,
     borderColor: 'rgba(0, 0, 0, 0.1)',
     borderWidth: 1,
-    width: '100%',
   },
   header: {
     padding: 10,

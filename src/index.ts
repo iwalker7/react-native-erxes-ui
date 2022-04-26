@@ -13,7 +13,7 @@ export { default as TextView, TextViewProps } from './components/Typography';
 export { default as TextInput, TextInputProps } from './components/TextInput';
 export { default as Touchable, TouchableProps } from './components/Touchable';
 export { default as Modal, ModalProps } from './components/Modal';
-export { default as Uplaoder, UploaderProps } from './components/Uploader';
+export { default as Uploader, UploaderProps } from './components/Uploader';
 export { default as RadioButton } from './components/RadioButton';
 export {
   default as Snackbar,

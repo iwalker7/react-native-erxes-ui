@@ -19,6 +19,7 @@ export type PickerProps = {
   containerStyle?: StyleProp<ViewStyle>;
   ref?: any;
   placeholderText?: string;
+  selectionLimit?: number;
 };
 const Picker: React.FC<PickerProps> = ({
   selectedIndex = 0,

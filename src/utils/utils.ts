@@ -1,10 +1,9 @@
 /* eslint-disable react-native/no-inline-styles */
-import { PermissionsAndroid, ColorValue } from 'react-native';
+import { PermissionsAndroid } from 'react-native';
 import type {
   NativeEventSubscription,
   EmitterSubscription,
 } from 'react-native';
-import color from 'color';
 
 export function addEventListener<
   T extends {
@@ -76,6 +75,7 @@ export const androidCameraPermission = async (callback: () => void) => {
     console.warn(err);
   }
 };
+
 export const range = (start: number, stop: number) => {
   return Array.from(Array(stop), (_, i) => start + i);
 };
@@ -166,6 +166,47 @@ export const getCustomerBorder = (
     return incomingSolo;
   }
 };
+export const getUserBorder = (
+  conversationMessages: string | any[] | undefined,
+  position: number
+) => {
+  if (conversationMessages === undefined) {
+    return {};
+  }
+  if (position > 0) {
+    if (
+      conversationMessages[position]?.createdUser?._id ===
+      conversationMessages[position - 1]?.createdUser?._id
+    ) {
+      if (
+        conversationMessages[position]?.createdUser?._id ===
+        conversationMessages[position + 1]?.createdUser?._id
+      ) {
+        return outcomingMiddle;
+      } else {
+        return outcomingTop;
+      }
+    } else if (
+      conversationMessages[position]?.createdUser?._id ===
+      conversationMessages[position + 1]?.createdUser?._id
+    ) {
+      return outcomingBottom;
+    } else {
+      return outcomingSolo;
+    }
+  } else if (position + 1 < conversationMessages.length) {
+    if (
+      conversationMessages[position]?.createdUser?._id ===
+      conversationMessages[position + 1]?.createdUser?._id
+    ) {
+      return outcomingBottom;
+    } else {
+      return outcomingSolo;
+    }
+  } else {
+    return outcomingSolo;
+  }
+};
 export const outcomingBottom = { borderTopRightRadius: 0, marginBottom: 10 };
 export const outcomingMiddle = {
   borderBottomRightRadius: 0,
@@ -177,17 +218,7 @@ export const outcomingSolo = {
   borderTopRightRadius: 20,
   marginBottom: 10,
 };
-export function getContrastingColor(
-  input: ColorValue,
-  light: string,
-  dark: string
-): string {
-  if (typeof input === 'string') {
-    return color(input).isLight() ? dark : light;
-  }
 
-  return light;
-}
 export function getIconName(key?: string) {
   switch (key) {
     case 'docx':
@@ -256,47 +287,6 @@ export const renderUserFullName = (data: any) => {
   }
 
   return 'Unknown';
-};
-export const getUserBorder = (
-  conversationMessages: string | any[] | undefined,
-  position: number
-) => {
-  if (conversationMessages === undefined) {
-    return {};
-  }
-  if (position > 0) {
-    if (
-      conversationMessages[position]?.createdUser?._id ===
-      conversationMessages[position - 1]?.createdUser?._id
-    ) {
-      if (
-        conversationMessages[position]?.createdUser?._id ===
-        conversationMessages[position + 1]?.createdUser?._id
-      ) {
-        return outcomingMiddle;
-      } else {
-        return outcomingTop;
-      }
-    } else if (
-      conversationMessages[position]?.createdUser?._id ===
-      conversationMessages[position + 1]?.createdUser?._id
-    ) {
-      return outcomingBottom;
-    } else {
-      return outcomingSolo;
-    }
-  } else if (position + 1 < conversationMessages.length) {
-    if (
-      conversationMessages[position]?.createdUser?._id ===
-      conversationMessages[position + 1]?.createdUser?._id
-    ) {
-      return outcomingBottom;
-    } else {
-      return outcomingSolo;
-    }
-  } else {
-    return outcomingSolo;
-  }
 };
 export const getAttachmentUrl = (baseUrl: string, value: string) => {
   if (value && !value.includes('http')) {

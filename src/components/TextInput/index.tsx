@@ -140,7 +140,6 @@ const TextInput: React.ForwardRefRenderFunction<unknown, TextInputProps> = ({
     <View
       style={[
         styles.container,
-        containerStyle,
         {
           flexDirection: 'row',
           alignItems: 'center',
@@ -158,6 +157,7 @@ const TextInput: React.ForwardRefRenderFunction<unknown, TextInputProps> = ({
               : 'transparent',
           borderWidth: 1,
         },
+        containerStyle,
       ]}
     >
       {/* {label && (
