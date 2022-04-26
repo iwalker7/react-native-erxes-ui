@@ -6,11 +6,8 @@ import {
   MediaType,
 } from 'react-native-image-picker';
 import { View } from 'react-native';
-import {
-  androidCameraPermission,
-  ios,
-  isIphoneWithNotch,
-} from '../../commons/utils';
+import { androidCameraPermission } from '../../utils/utils';
+import ScreenUtils from '../../utils/screenUtils';
 import { Touchable, TextView, Modal, Divider } from '../../index';
 import { ActivityIndicator } from 'react-native';
 import DocumentPicker from 'react-native-document-picker';
@@ -65,7 +62,7 @@ const Uploader: React.FC<UploaderProps> = ({
   };
 
   const mLaunchCamera = (mediaType: MediaType) => {
-    if (!ios) {
+    if (!ScreenUtils.isIOS) {
       return androidCameraPermission(() => launchCameraCallback(mediaType));
     }
     launchCameraCallback(mediaType);
@@ -181,7 +178,9 @@ const Uploader: React.FC<UploaderProps> = ({
         </View>
       </Modal>
       <Modal bottom isVisible={isVisible} onVisible={onVisible}>
-        <View style={{ paddingBottom: isIphoneWithNotch() ? 30 : 0 }}>
+        <View
+          style={{ paddingBottom: ScreenUtils.isIphoneWithNotch() ? 30 : 0 }}
+        >
           {children}
           {children && <Divider style={{ marginStart: 20 }} />}
           <Touchable

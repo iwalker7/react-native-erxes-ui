@@ -1,5 +1,5 @@
 /* eslint-disable react-native/no-inline-styles */
-import React, { useState } from 'react';
+import React from 'react';
 import { View, ScrollView, StyleSheet } from 'react-native';
 import { TextView, Colors, TextInput } from 'react-native-erxes-ui';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -41,12 +41,14 @@ const TextInputScreen: React.FC<any> = () => {
                 placeholder="Default"
                 onChangeText={(text: string) => setSearchText(text)}
                 value={searchText}
+                containerStyle={{ marginVertical: 5 }}
               />
               <TextInput
                 type="outline"
                 placeholder="Outline"
                 onChangeText={(text: string) => setSearchText(text)}
                 value={searchText}
+                containerStyle={{ marginVertical: 5 }}
               />
 
               <TextInput
@@ -54,24 +56,10 @@ const TextInputScreen: React.FC<any> = () => {
                 placeholder="Filled"
                 onChangeText={(text: string) => setSearchText(text)}
                 value={searchText}
+                containerStyle={{ marginVertical: 5 }}
               />
             </View>
           </View>
-        </View>
-
-        <View style={styles.segment}>
-          <TextView bold>
-            floating
-            <TextView
-              color={Colors.grey600}
-            >{`: boolean  (label-тай байх)`}</TextView>
-          </TextView>
-          <TextInput
-            label="Label"
-            floating
-            onChangeText={(text: string) => setSearchText(text)}
-            value={searchText}
-          />
         </View>
 
         <View style={styles.segment}>
@@ -87,6 +75,7 @@ const TextInputScreen: React.FC<any> = () => {
             placeholder="Outline"
             onChangeText={(text: string) => setSearchText(text)}
             value={searchText}
+            containerStyle={{ marginVertical: 5 }}
           />
           <TextView
             small
@@ -107,6 +96,7 @@ const TextInputScreen: React.FC<any> = () => {
             placeholder="Outline"
             onChangeText={(text: string) => setSearchText(text)}
             value={searchText}
+            containerStyle={{ marginVertical: 5 }}
           />
         </View>
 

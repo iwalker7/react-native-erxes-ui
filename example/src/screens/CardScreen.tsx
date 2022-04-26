@@ -1,47 +1,36 @@
 /* eslint-disable react-native/no-inline-styles */
 import React from 'react';
 import { Image, View } from 'react-native';
-import { TextView, Colors, Card, Button, Picker } from 'react-native-erxes-ui';
+import { TextView, Colors, Card, Button } from 'react-native-erxes-ui';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import images from '../../assets/images';
 import styles from '../styles';
 
 const CardScreen: React.FC<any> = () => {
-  const data = ['elevated', 'outline'];
-  const [indexBoard, setIndexBoard] = React.useState<number>(-1);
-  const [a, setA] = React.useState(data[0]);
   const [thVisible, setThVisible] = React.useState(false);
+  const renderMedia = () => {
+    return (
+      <Image
+        source={images.cover}
+        style={{ resizeMode: 'cover', height: 120, width: '100%' }}
+      />
+    );
+  };
+
+  const renderThumb = () => {
+    return (
+      <Image
+        source={images.avatar}
+        style={{ resizeMode: 'contain', height: 50, width: '100%' }}
+      />
+    );
+  };
   return (
     <View style={styles.container}>
-      <View style={{ width: '100%', marginVertical: 5 }}>
-        <Picker
-          selectedIndex={indexBoard}
-          data={data}
-          placeholderText="Choose alert type"
-          onSelect={(i: any) => {
-            setIndexBoard(i);
-            setA(data[i]);
-          }}
-          icon={
-            <MaterialCommunityIcons
-              name={'chevron-down'}
-              color="#757575"
-              size={20}
-            />
-          }
-        />
-      </View>
       <Card
-        type={a}
+        type="elevated"
         title="Title"
-        thumbnail={
-          thVisible ? (
-            <Image
-              source={images.avatar}
-              style={{ resizeMode: 'contain', height: 50, width: '100%' }}
-            />
-          ) : undefined
-        }
+        thumbnail={thVisible ? renderThumb() : undefined}
         secondaryText={'This is secondary text'}
         overflowIcon={
           <MaterialCommunityIcons
@@ -51,12 +40,7 @@ const CardScreen: React.FC<any> = () => {
           />
         }
         overflowAction={() => {}}
-        media={
-          <Image
-            source={images.cover}
-            style={{ resizeMode: 'cover', height: 120, width: '100%' }}
-          />
-        }
+        media={renderMedia()}
         actions={
           <View
             style={{

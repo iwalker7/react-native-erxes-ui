@@ -12,7 +12,7 @@ import TextView from '../Typography';
 export type ExpandableSectionType = ViewProps & {
   expanded?: boolean;
   setExpanded?: SetStateAction<any>;
-  sectionHeader?: JSX.Element;
+  sectionHeader?: React.ReactNode;
   headerText?: string;
   children?: React.ReactNode;
   onPress?: () => void;

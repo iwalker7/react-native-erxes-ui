@@ -1,6 +1,6 @@
-import constants from '../commons/constants';
+import ScreenUtils from '../utils/screenUtils';
 
-const isIOS = constants.isIOS;
+const isIOS = ScreenUtils.isIOS;
 
 const BorderRadius = {
   br0: isIOS ? 0 : 0,

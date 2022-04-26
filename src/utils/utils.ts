@@ -1,49 +1,59 @@
 /* eslint-disable react-native/no-inline-styles */
-import { Dimensions, Platform, PermissionsAndroid } from 'react-native';
+import { PermissionsAndroid, ColorValue } from 'react-native';
+import type {
+  NativeEventSubscription,
+  EmitterSubscription,
+} from 'react-native';
+import color from 'color';
 
-export const coreBaseUrl = 'api.office.erxes.io';
-
-export const getAttachmentUrl = (baseUrl: string, value: string) => {
-  if (value && !value.includes('http')) {
-    return `https://${baseUrl}/read-file?key=` + value;
+export function addEventListener<
+  T extends {
+    addEventListener: (
+      ...args: any
+    ) => NativeEventSubscription | EmitterSubscription;
+    removeEventListener: (...args: any) => void;
   }
-  return value;
-};
+>(Module: T, ...rest: Parameters<typeof Module.addEventListener>) {
+  const [eventName, handler] = rest;
 
-export const ios = Platform.OS === 'ios';
+  let removed = false;
 
-export const isIphoneWithNotch = () => {
-  const dimen = Dimensions.get('window');
-  return (
-    Platform.OS === 'ios' &&
-    !Platform.isPad &&
-    !Platform.isTVOS &&
-    (dimen.height === 780 ||
-      dimen.width === 780 ||
-      dimen.height === 812 ||
-      dimen.width === 812 ||
-      dimen.height === 844 ||
-      dimen.width === 844 ||
-      dimen.height === 896 ||
-      dimen.width === 896 ||
-      dimen.height === 926 ||
-      dimen.width === 926)
-  );
-};
+  const subscription = Module.addEventListener(eventName, handler) ?? {
+    remove: () => {
+      if (removed) {
+        return;
+      }
 
-export const deviceHeight = Dimensions.get('window').height;
-export const deviceWidth = Dimensions.get('window').width;
+      Module.removeEventListener(eventName, handler);
+      removed = true;
+    },
+  };
 
-export const getNameUser = (item: any) => {
-  return (
-    item?.userDetail?.details?.fullName ||
-    item?.details?.fullName ||
-    item?.username ||
-    item?.email ||
-    'Unknown'
-  );
-};
+  return subscription;
+}
+export function addListener<
+  T extends {
+    addListener: (...args: any) => EmitterSubscription;
+    removeEventListener: (...args: any) => void;
+  }
+>(Module: T, ...rest: Parameters<typeof Module.addListener>) {
+  const [eventName, handler] = rest;
 
+  let removed = false;
+
+  const subscription = Module.addListener(eventName, handler) ?? {
+    remove: () => {
+      if (removed) {
+        return;
+      }
+
+      Module.removeEventListener(eventName, handler);
+      removed = true;
+    },
+  };
+
+  return subscription;
+}
 export const androidCameraPermission = async (callback: () => void) => {
   try {
     const granted = await PermissionsAndroid.request(
@@ -66,7 +76,6 @@ export const androidCameraPermission = async (callback: () => void) => {
     console.warn(err);
   }
 };
-
 export const range = (start: number, stop: number) => {
   return Array.from(Array(stop), (_, i) => start + i);
 };
@@ -100,91 +109,11 @@ export const getModifableArray = (array: any) => {
   return JSON.parse(JSON.stringify(array));
 };
 
-export function getIconName(key?: string) {
-  switch (key) {
-    case 'docx':
-      return 'doc';
-    case 'pptx':
-      return 'ppt';
-    case 'xlsx':
-      return 'xls';
-    case 'mp4':
-    case 'zip':
-      return 'zip';
-    case 'csv':
-      return 'csv';
-    case 'doc':
-      return 'doc';
-    case 'ppt':
-      return 'ppt';
-    case 'psd':
-      return 'psd';
-    case 'avi':
-      return 'avi';
-    case 'txt':
-      return 'txt';
-    case 'rar':
-      return 'rar';
-    case 'mp3':
-      return 'mp3';
-    case 'pdf':
-      return 'pdf';
-    case 'png':
-      return 'png';
-    case 'xls':
-      return 'xls';
-    default:
-      return 'file-2';
-  }
-}
-
-export const getNameChip = (item: any, isUser: boolean, isItem: boolean) => {
-  return (
-    item.details?.fullName ||
-    item.username ||
-    item.email ||
-    item.name ||
-    item.primaryName ||
-    (isUser ? renderFullName(item) : isItem ? item : 'Unknown')
-  );
-};
-
-export const renderFullName = (item: any) => {
-  let fullName = '';
-  if (item.firstName || item.lastName) {
-    if (item.firstName) {
-      fullName += item.firstName + ' ';
-    }
-    if (item.lastName) {
-      fullName += item.lastName;
-    }
-    return fullName;
-  }
-  if (item.primaryEmail) {
-    return item.primaryEmail;
-  }
-  if (item.visitorContactInfo?.email) {
-    return item.visitorContactInfo.email;
-  }
-  return 'Unknown';
-};
-
-export const renderUserFullName = (data: any) => {
-  const { details } = data;
-
-  if (details && details.fullName) {
-    return details.fullName;
-  }
-
-  if (data.email || data.username) {
-    return data.email || data.username;
-  }
-
-  return 'Unknown';
+export const numberWithCommas = (number: number) => {
+  return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 };
 
 export const regexRemoveTags = /(<([^>]+)>)/gi;
-
 export const incomingBottom = { borderTopLeftRadius: 0, marginBottom: 10 };
 export const incomingMiddle = {
   borderBottomLeftRadius: 0,
@@ -196,7 +125,6 @@ export const incomingSolo = {
   borderTopLeftRadius: 20,
   marginBottom: 10,
 };
-
 export const getCustomerBorder = (
   conversationMessages: string | any[] | undefined,
   position: number
@@ -238,7 +166,6 @@ export const getCustomerBorder = (
     return incomingSolo;
   }
 };
-
 export const outcomingBottom = { borderTopRightRadius: 0, marginBottom: 10 };
 export const outcomingMiddle = {
   borderBottomRightRadius: 0,
@@ -250,7 +177,86 @@ export const outcomingSolo = {
   borderTopRightRadius: 20,
   marginBottom: 10,
 };
+export function getContrastingColor(
+  input: ColorValue,
+  light: string,
+  dark: string
+): string {
+  if (typeof input === 'string') {
+    return color(input).isLight() ? dark : light;
+  }
 
+  return light;
+}
+export function getIconName(key?: string) {
+  switch (key) {
+    case 'docx':
+      return 'doc';
+    case 'pptx':
+      return 'ppt';
+    case 'xlsx':
+      return 'xls';
+    case 'mp4':
+    case 'zip':
+      return 'zip';
+    case 'csv':
+      return 'csv';
+    case 'doc':
+      return 'doc';
+    case 'ppt':
+      return 'ppt';
+    case 'psd':
+      return 'psd';
+    case 'avi':
+      return 'avi';
+    case 'txt':
+      return 'txt';
+    case 'rar':
+      return 'rar';
+    case 'mp3':
+      return 'mp3';
+    case 'pdf':
+      return 'pdf';
+    case 'png':
+      return 'png';
+    case 'xls':
+      return 'xls';
+    default:
+      return 'file-2';
+  }
+}
+export const renderFullName = (item: any) => {
+  let fullName = '';
+  if (item.firstName || item.lastName) {
+    if (item.firstName) {
+      fullName += item.firstName + ' ';
+    }
+    if (item.lastName) {
+      fullName += item.lastName;
+    }
+    return fullName;
+  }
+  if (item.primaryEmail) {
+    return item.primaryEmail;
+  }
+  if (item.visitorContactInfo?.email) {
+    return item.visitorContactInfo.email;
+  }
+  return 'Unknown';
+};
+export const renderUserFullName = (data: any) => {
+  const { details } = data;
+
+  if (details && details.fullName) {
+    return details.fullName;
+  }
+
+  if (data.email || data.username) {
+    return data.email || data.username;
+  }
+
+  return 'Unknown';
+};
 export const getUserBorder = (
   conversationMessages: string | any[] | undefined,
   position: number
@@ -292,7 +298,18 @@ export const getUserBorder = (
     return outcomingSolo;
   }
 };
-
-export const numberWithCommas = (number: number) => {
-  return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+export const getAttachmentUrl = (baseUrl: string, value: string) => {
+  if (value && !value.includes('http')) {
+    return `https://${baseUrl}/read-file?key=` + value;
+  }
+  return value;
+};
+export const getNameUser = (item: any) => {
+  return (
+    item?.userDetail?.details?.fullName ||
+    item?.details?.fullName ||
+    item?.username ||
+    item?.email ||
+    'Unknown'
+  );
 };

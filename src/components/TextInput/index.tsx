@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react-native/no-inline-styles */
 import React, { LegacyRef } from 'react';
@@ -17,9 +18,8 @@ import Touchable from '../Touchable';
 import { Brand } from '../../styles/colors';
 
 export type TextInputProps = RNProps & {
-  type?: 'default' | 'outline' | 'filled';
+  type?: 'default' | 'outline' | 'filled' | 'floating';
   placeholder?: string;
-  floating?: boolean;
   required?: boolean;
   password?: boolean;
   disabled?: boolean;
@@ -29,7 +29,7 @@ export type TextInputProps = RNProps & {
     value: NativeSyntheticEvent<TextInputSubmitEditingEventData>
   ) => void;
   inputRef?: LegacyRef<RNTextInput>;
-  style?: StyleProp<TextStyle> | undefined;
+  containerStyle?: StyleProp<TextStyle> | undefined;
   placeholderTextColor?: string;
   label?: string | React.ReactElement;
   labelColor?: string;
@@ -41,10 +41,10 @@ export type TextInputProps = RNProps & {
   iconOnPress?: () => void;
 };
 const TextInput: React.ForwardRefRenderFunction<unknown, TextInputProps> = ({
-  style,
+  containerStyle,
   value,
   type = 'default',
-  floating = false,
+  //   floating = false,
   onChangeText,
   onSubmitEditing,
   placeholder,
@@ -61,7 +61,6 @@ const TextInput: React.ForwardRefRenderFunction<unknown, TextInputProps> = ({
   ...rest
 }) => {
   const p = password ? '*****' : placeholder ? placeholder : '';
-  //   const [ph, setPh] = React.useState(p);
   const [mainColor, setMainColor] = React.useState('#5629B6');
   const [charCount, setCharCount] = React.useState(0);
 
@@ -80,9 +79,6 @@ const TextInput: React.ForwardRefRenderFunction<unknown, TextInputProps> = ({
 
   React.useEffect(() => {
     if (focused || value !== '') {
-      //   if (floating) {
-      //     setPh(placeholder);
-      //   }
       Animated.timing(labeled, {
         toValue: 1,
         duration: 200,
@@ -101,8 +97,10 @@ const TextInput: React.ForwardRefRenderFunction<unknown, TextInputProps> = ({
     if (disabled) {
       return;
     }
-    setCharCount(value.length);
     onChangeText && onChangeText(v);
+
+    //zasah shaardlagatai
+    setCharCount(value.length);
   };
 
   const animStyle = {
@@ -137,11 +135,12 @@ const TextInput: React.ForwardRefRenderFunction<unknown, TextInputProps> = ({
       onSubmitEditing && onSubmitEditing(e);
     }
   };
+
   return (
     <View
       style={[
         styles.container,
-        style,
+        containerStyle,
         {
           flexDirection: 'row',
           alignItems: 'center',
@@ -161,13 +160,13 @@ const TextInput: React.ForwardRefRenderFunction<unknown, TextInputProps> = ({
         },
       ]}
     >
-      {label && (
+      {/* {label && (
         <Animated.View style={[styles.animatedStyle, animStyle]}>
           <TextView boldless color={rest?.labelColor || Brand.primaryDark3}>
             {label}
           </TextView>
         </Animated.View>
-      )}
+      )} */}
 
       {icon && (
         <Touchable
@@ -183,7 +182,7 @@ const TextInput: React.ForwardRefRenderFunction<unknown, TextInputProps> = ({
         </Touchable>
       )}
       <RNTextInput
-        style={floating && styles.input}
+        // style={styles.input}
         ref={inputRef}
         selectionColor={mainColor}
         autoCapitalize="none"
@@ -225,7 +224,6 @@ const TextInput: React.ForwardRefRenderFunction<unknown, TextInputProps> = ({
 const styles = StyleSheet.create({
   container: {
     minHeight: 50,
-    margin: 12,
     backgroundColor: '#F5F5F5',
     borderRadius: 8,
     paddingHorizontal: 15,

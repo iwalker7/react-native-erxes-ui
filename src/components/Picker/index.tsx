@@ -1,6 +1,5 @@
 /* eslint-disable react-native/no-inline-styles */
 import React, { useState } from 'react';
-import { Dimensions } from 'react-native';
 import {
   ScrollView,
   StyleProp,
@@ -34,12 +33,7 @@ const Picker: React.FC<PickerProps> = ({
 
   return (
     <>
-      <Modal
-        bottom
-        isVisible={isOpen}
-        onVisible={onOpen}
-        style={{ width: Dimensions.get('window').width }}
-      >
+      <Modal bottom isVisible={isOpen} onVisible={onOpen}>
         <ScrollView
           style={{ maxHeight: 200, width: '100%' }}
           showsVerticalScrollIndicator={false}

@@ -1,6 +1,7 @@
 import React from 'react';
 import { View } from 'react-native';
 import { TextView, Colors, Empty } from 'react-native-erxes-ui';
+import images from '../../assets/images';
 import styles from '../styles';
 
 const EmptyScreen: React.FC<any> = () => {
@@ -24,7 +25,7 @@ const EmptyScreen: React.FC<any> = () => {
         </View>
 
         <View style={{ height: 200 }}>
-          <Empty />
+          <Empty imageSource={images.noStage} />
         </View>
       </View>
     </View>

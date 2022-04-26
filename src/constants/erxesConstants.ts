@@ -1,12 +1,3 @@
-export const coreBaseUrl = 'api.office.erxes.io';
-
-export const getAttachmentUrl = (baseUrl: string, value: string) => {
-  if (value && !value.includes('http')) {
-    return `https://${baseUrl}/read-file?key=` + value;
-  }
-  return value;
-};
-
 export const DURATION_SHORT = 1500;
 export const DURATION_MEDIUM = 2500;
 export const DURATION_LONG = 5000;

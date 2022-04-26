@@ -5,6 +5,7 @@ type Props = {
   onShow: () => void;
   onHide: () => void;
 };
+
 export default function useIsKeyboardShown({ onShow, onHide }: Props) {
   React.useEffect(() => {
     let willShowSubscription: NativeEventSubscription | undefined;

@@ -8,26 +8,23 @@ import {
   TextStyle,
   ViewStyle,
 } from 'react-native';
-import images from '../../assets/images';
 
 export type EmptyProps = {
-  iconColor?: string;
-  iconName?: string;
-  iconStyle?: StyleProp<TextStyle>;
-  iconSize?: number;
-  textStyle?: StyleProp<TextStyle>;
   text?: string;
+  imageSource?: any;
   containerStyle?: StyleProp<ViewStyle>;
+  textStyle?: StyleProp<TextStyle>;
 };
 
-const Empty: React.FC<EmptyProps> = ({ textStyle, text, containerStyle }) => {
+const Empty: React.FC<EmptyProps> = ({
+  text,
+  imageSource,
+  containerStyle,
+  textStyle,
+}) => {
   return (
     <View style={[styles.container, containerStyle]}>
-      <Image
-        source={images.no_stage}
-        resizeMode="contain"
-        style={styles.image}
-      />
+      <Image source={imageSource} resizeMode="contain" style={styles.image} />
       <Text maxFontSizeMultiplier={1} style={[styles.text, textStyle]}>
         {text ? text : 'There is no data'}
       </Text>

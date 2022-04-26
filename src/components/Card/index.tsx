@@ -8,11 +8,10 @@ export type CardProps = {
   title: string;
   secondaryText?: string;
   supportingText?: string;
-  type?: 'elevated' | 'outline' | string;
-  thumbnail?: JSX.Element;
+  type?: 'elevated' | 'outline';
+  thumbnail?: React.ReactNode;
   media?: JSX.Element;
-  actions?: JSX.Element;
-  //   overflowMenu?: JSX.Element;
+  actions?: React.ReactNode;
   overflowIcon?: JSX.Element;
   overflowAction?: () => void;
 };

@@ -1,3 +1,5 @@
+export const PERPAGE = 10;
+export const PERPAGE20 = 20;
 import {
   Platform,
   Dimensions,
@@ -11,25 +13,6 @@ export enum orientations {
   PORTRAIT = 'portrait',
   LANDSCAPE = 'landscape',
 }
-
-export const PERPAGE = 10;
-export const PERPAGE20 = 20;
-
-export const DURATION_SHORT = 1500;
-export const DURATION_MEDIUM = 2500;
-export const DURATION_LONG = 5000;
-export const DURATION_INFINITY = Number.NEGATIVE_INFINITY;
-
-export const REMINDER_MINUTES = [
-  { _id: '0', name: 'At Time of Due Date' },
-  { _id: '5', name: '5 Minutes Before' },
-  { _id: '10', name: '10 Minutes Before' },
-  { _id: '15', name: '15 Minutes Before' },
-  { _id: '60', name: '1 Hour Before' },
-  { _id: '120', name: '2 Hour Before' },
-  { _id: '1440', name: '1 Day Before' },
-  { _id: '2880', name: '2 Day Before' },
-];
 
 const isAndroid: boolean = Platform.OS === 'android';
 const isIOS: boolean = Platform.OS === 'ios';
@@ -58,7 +41,7 @@ function getOrientation(height: number, width: number) {
   return width < height ? orientations.PORTRAIT : orientations.LANDSCAPE;
 }
 
-export function updateConstants(dimensions: any) {
+function updateConstants(dimensions: any) {
   screenHeight = dimensions.screen.height;
   screenWidth = dimensions.screen.width;
   windowWidth = dimensions.window.width;
@@ -90,7 +73,7 @@ function setAccessibility() {
 
 setAccessibility();
 
-const constants = {
+const ScreenUtils = {
   /* Platform */
   orientations,
   isAndroid,
@@ -146,6 +129,24 @@ const constants = {
       ? { left: 44, right: 44, bottom: 24, top: 0 }
       : { left: 0, right: 0, bottom: 34, top: 44 };
   },
+  isIphoneWithNotch: () => {
+    const dimen = Dimensions.get('window');
+    return (
+      Platform.OS === 'ios' &&
+      !Platform.isPad &&
+      !Platform.isTVOS &&
+      (dimen.height === 780 ||
+        dimen.width === 780 ||
+        dimen.height === 812 ||
+        dimen.width === 812 ||
+        dimen.height === 844 ||
+        dimen.width === 844 ||
+        dimen.height === 896 ||
+        dimen.width === 896 ||
+        dimen.height === 926 ||
+        dimen.width === 926)
+    );
+  },
   /* Devices */
   get isIphoneX() {
     return (
@@ -181,4 +182,4 @@ const constants = {
 setStatusBarHeight();
 Dimensions.addEventListener('change', updateConstants);
 
-export default constants;
+export default ScreenUtils;
