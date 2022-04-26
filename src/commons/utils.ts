@@ -3,16 +3,16 @@ import { Dimensions, Platform, PermissionsAndroid } from 'react-native';
 
 export const coreBaseUrl = 'api.office.erxes.io';
 
-const getAttachmentUrl = (baseUrl: string, value: string) => {
+export const getAttachmentUrl = (baseUrl: string, value: string) => {
   if (value && !value.includes('http')) {
     return `https://${baseUrl}/read-file?key=` + value;
   }
   return value;
 };
 
-const ios = Platform.OS === 'ios';
+export const ios = Platform.OS === 'ios';
 
-const isIphoneWithNotch = () => {
+export const isIphoneWithNotch = () => {
   const dimen = Dimensions.get('window');
   return (
     Platform.OS === 'ios' &&
@@ -31,10 +31,10 @@ const isIphoneWithNotch = () => {
   );
 };
 
-const deviceHeight = Dimensions.get('window').height;
-const deviceWidth = Dimensions.get('window').width;
+export const deviceHeight = Dimensions.get('window').height;
+export const deviceWidth = Dimensions.get('window').width;
 
-const getNameUser = (item: any) => {
+export const getNameUser = (item: any) => {
   return (
     item?.userDetail?.details?.fullName ||
     item?.details?.fullName ||
@@ -44,7 +44,7 @@ const getNameUser = (item: any) => {
   );
 };
 
-const androidCameraPermission = async (callback: () => void) => {
+export const androidCameraPermission = async (callback: () => void) => {
   try {
     const granted = await PermissionsAndroid.request(
       PermissionsAndroid.PERMISSIONS.CAMERA,
@@ -67,26 +67,26 @@ const androidCameraPermission = async (callback: () => void) => {
   }
 };
 
-const range = (start: number, stop: number) => {
+export const range = (start: number, stop: number) => {
   return Array.from(Array(stop), (_, i) => start + i);
 };
 
 // Return the list of values that are the intersection of two arrays
-const intersection = (array1: any, array2: any) => {
+export const intersection = (array1: any, array2: any) => {
   return array1.filter((n: any) => array2.includes(n));
 };
 
 // Computes the union of the passed-in arrays: the list of unique items
-const union = (array1: any, array2: any) => {
+export const union = (array1: any, array2: any) => {
   return array1.concat(array2.filter((n: any) => !array1.includes(n)));
 };
 
 // Similar to without, but returns the values from array that are not present in the other arrays.
-const difference = (array1: any, array2: any) => {
+export const difference = (array1: any, array2: any) => {
   return array1.filter((n: any) => !array2.includes(n));
 };
 
-const isEmpty = (str: string) => {
+export const isEmpty = (str: string) => {
   return (
     str === undefined ||
     str === 'undefined' ||
@@ -96,11 +96,11 @@ const isEmpty = (str: string) => {
   );
 };
 
-const getModifableArray = (array: any) => {
+export const getModifableArray = (array: any) => {
   return JSON.parse(JSON.stringify(array));
 };
 
-function getIconName(key?: string) {
+export function getIconName(key?: string) {
   switch (key) {
     case 'docx':
       return 'doc';
@@ -138,7 +138,7 @@ function getIconName(key?: string) {
   }
 }
 
-const getNameChip = (item: any, isUser: boolean, isItem: boolean) => {
+export const getNameChip = (item: any, isUser: boolean, isItem: boolean) => {
   return (
     item.details?.fullName ||
     item.username ||
@@ -149,7 +149,7 @@ const getNameChip = (item: any, isUser: boolean, isItem: boolean) => {
   );
 };
 
-const renderFullName = (item: any) => {
+export const renderFullName = (item: any) => {
   let fullName = '';
   if (item.firstName || item.lastName) {
     if (item.firstName) {
@@ -169,7 +169,7 @@ const renderFullName = (item: any) => {
   return 'Unknown';
 };
 
-const renderUserFullName = (data: any) => {
+export const renderUserFullName = (data: any) => {
   const { details } = data;
 
   if (details && details.fullName) {
@@ -183,21 +183,21 @@ const renderUserFullName = (data: any) => {
   return 'Unknown';
 };
 
-const regexRemoveTags = /(<([^>]+)>)/gi;
+export const regexRemoveTags = /(<([^>]+)>)/gi;
 
-const incomingBottom = { borderTopLeftRadius: 0, marginBottom: 10 };
-const incomingMiddle = {
+export const incomingBottom = { borderTopLeftRadius: 0, marginBottom: 10 };
+export const incomingMiddle = {
   borderBottomLeftRadius: 0,
   borderTopLeftRadius: 0,
 };
-const incomingTop = { borderBottomLeftRadius: 0 };
-const incomingSolo = {
+export const incomingTop = { borderBottomLeftRadius: 0 };
+export const incomingSolo = {
   borderBottomLeftRadius: 20,
   borderTopLeftRadius: 20,
   marginBottom: 10,
 };
 
-const getCustomerBorder = (
+export const getCustomerBorder = (
   conversationMessages: string | any[] | undefined,
   position: number
 ) => {
@@ -239,19 +239,19 @@ const getCustomerBorder = (
   }
 };
 
-const outcomingBottom = { borderTopRightRadius: 0, marginBottom: 10 };
-const outcomingMiddle = {
+export const outcomingBottom = { borderTopRightRadius: 0, marginBottom: 10 };
+export const outcomingMiddle = {
   borderBottomRightRadius: 0,
   borderTopRightRadius: 0,
 };
-const outcomingTop = { borderBottomRightRadius: 0 };
-const outcomingSolo = {
+export const outcomingTop = { borderBottomRightRadius: 0 };
+export const outcomingSolo = {
   borderBottomRightRadius: 20,
   borderTopRightRadius: 20,
   marginBottom: 10,
 };
 
-const getUserBorder = (
+export const getUserBorder = (
   conversationMessages: string | any[] | undefined,
   position: number
 ) => {
@@ -293,38 +293,6 @@ const getUserBorder = (
   }
 };
 
-const numberWithCommas = (number: number) => {
+export const numberWithCommas = (number: number) => {
   return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-};
-
-export {
-  isEmpty,
-  range,
-  intersection,
-  union,
-  difference,
-  androidCameraPermission,
-  deviceHeight,
-  deviceWidth,
-  isIphoneWithNotch,
-  getNameUser,
-  getModifableArray,
-  getIconName,
-  getNameChip,
-  renderFullName,
-  renderUserFullName,
-  incomingBottom,
-  incomingMiddle,
-  incomingSolo,
-  incomingTop,
-  outcomingBottom,
-  outcomingMiddle,
-  outcomingSolo,
-  outcomingTop,
-  getCustomerBorder,
-  getUserBorder,
-  regexRemoveTags,
-  numberWithCommas,
-  getAttachmentUrl,
-  ios,
 };

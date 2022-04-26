@@ -33,6 +33,12 @@ import * as Colors from './styles/colors';
 
 export { Colors };
 
+import * as Utils from './commons/utils';
+export { Utils };
+
+import * as ErxesConstants from './commons/erxesconstants';
+export { ErxesConstants };
+
 export { useTheme, withTheme, ThemeProvider } from './core/theming';
 
 export { default as Provider } from './core/Provider';
