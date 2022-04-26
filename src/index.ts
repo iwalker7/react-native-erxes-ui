@@ -28,13 +28,11 @@ export {
 export { default as ScreenUtils } from './utils/screenUtils';
 
 import * as Colors from './styles/colors';
-export { Colors };
-
 import * as Constants from './constants/erxesConstants';
-export { Constants };
-
 import * as Utils from './utils/utils';
-export { Utils };
+import * as ColorUtils from './utils//colorUtils';
+
+export { Colors, Constants, Utils, ColorUtils };
 
 export { useTheme, withTheme, ThemeProvider } from './core/theming';
 
