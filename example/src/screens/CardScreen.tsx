@@ -10,7 +10,7 @@ const CardScreen: React.FC<any> = () => {
   const data = ['elevated', 'outline'];
   const [indexBoard, setIndexBoard] = React.useState<number>(-1);
   const [a, setA] = React.useState(data[0]);
-  const [thVisible, setThVisible] = React.useState(0);
+  const [thVisible, setThVisible] = React.useState(false);
   return (
     <View style={styles.container}>
       <View style={{ width: '100%', marginVertical: 5 }}>
@@ -40,7 +40,7 @@ const CardScreen: React.FC<any> = () => {
               source={images.avatar}
               style={{ resizeMode: 'contain', height: 50, width: '100%' }}
             />
-          ) : null
+          ) : undefined
         }
         secondaryText={'This is secondary text'}
         overflowIcon={
