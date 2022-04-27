@@ -78,6 +78,8 @@ const ScreenUtils = {
   orientations,
   isAndroid,
   isIOS,
+  PERPAGE,
+  PERPAGE20,
   getAndroidVersion: () => {
     return isAndroid ? parseInt(Platform.Version as string, 10) : undefined;
   },

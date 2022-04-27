@@ -1,5 +1,22 @@
-import { rgba, darken, lighten } from 'src/utils/colorUtils';
+import color from 'color';
 
+function rgba(hex: any, opacity: number) {
+  return color(hex).alpha(opacity).toString();
+}
+
+// Sass's darken function
+function darken(hex: any, amount: number) {
+  return color(hex)
+    .darken(amount / 100)
+    .toString();
+}
+
+// Sass's lighten function
+function lighten(hex: any, amount: number) {
+  return color(hex)
+    .lighten(amount / 100)
+    .toString();
+}
 export const Brand = {
   primary: '#4F33AF',
   primaryLight1: '#644BB9',

@@ -23,7 +23,7 @@ export type TextInputProps = RNProps & {
   required?: boolean;
   password?: boolean;
   disabled?: boolean;
-  value: string;
+  value?: string;
   onChangeText?: (value: string) => void;
   onSubmitEditing?: (
     value: NativeSyntheticEvent<TextInputSubmitEditingEventData>
@@ -33,7 +33,7 @@ export type TextInputProps = RNProps & {
   placeholderTextColor?: string;
   label?: string | React.ReactElement;
   labelColor?: string;
-  affix?: boolean;
+  count?: boolean;
   maxLength?: number;
   onFocus?: (args: any) => void;
   icon?: JSX.Element;
@@ -54,7 +54,7 @@ const TextInput: React.ForwardRefRenderFunction<unknown, TextInputProps> = ({
   password = false,
   label,
   disabled = false,
-  affix = false,
+  count = false,
   maxLength = 30,
   icon,
   iconPosition = 'left',
@@ -100,7 +100,7 @@ const TextInput: React.ForwardRefRenderFunction<unknown, TextInputProps> = ({
     onChangeText && onChangeText(v);
 
     //zasah shaardlagatai
-    setCharCount(value.length);
+    // setCharCount(value.length);
   };
 
   const animStyle = {
@@ -204,7 +204,7 @@ const TextInput: React.ForwardRefRenderFunction<unknown, TextInputProps> = ({
           required
         />
       )}
-      {affix && (
+      {count && (
         <TextView
           xxsmall
           style={{

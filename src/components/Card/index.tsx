@@ -3,6 +3,8 @@ import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import TextView from '../Typography';
 import Touchable from '../Touchable';
+import type { StyleProp } from 'react-native';
+import type { ViewStyle } from 'react-native';
 
 export type CardProps = {
   title: string;
@@ -14,6 +16,8 @@ export type CardProps = {
   actions?: React.ReactNode;
   overflowIcon?: JSX.Element;
   overflowAction?: () => void;
+  mediaStyle?: StyleProp<ViewStyle>;
+  containerStyle?: StyleProp<ViewStyle>;
 };
 
 const Card: React.FC<CardProps> = ({
@@ -26,9 +30,17 @@ const Card: React.FC<CardProps> = ({
   actions,
   overflowIcon,
   overflowAction,
+  children,
+  containerStyle,
+  mediaStyle,
 }) => {
   return (
-    <View style={type === 'elevated' ? styles.elevated : styles.outlined}>
+    <View
+      style={[
+        type === 'elevated' ? styles.elevated : styles.outlined,
+        containerStyle,
+      ]}
+    >
       <View style={styles.header}>
         {thumbnail && <View style={styles.thumbnail}>{thumbnail}</View>}
         {overflowAction && (
@@ -45,13 +57,13 @@ const Card: React.FC<CardProps> = ({
           </TextView>
         </View>
       </View>
-      <View style={styles.med}>{media}</View>
-
+      {media && <View style={[styles.med, mediaStyle]}>{media}</View>}
       {supportingText && (
         <TextView color="#757575" style={(styles.mb, styles.mt, styles.p)}>
           {supportingText}
         </TextView>
       )}
+      {children}
       {actions}
     </View>
   );
