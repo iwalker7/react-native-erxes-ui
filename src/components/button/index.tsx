@@ -7,6 +7,7 @@ import Touchable from '../Touchable';
 import TextView from '../Typography';
 //import MaterialCommunityIcons from '../MaterialCommunityIcons';
 import type { TextStyle } from 'react-native';
+import type { ColorValue } from 'react-native';
 
 export type ButtonProps = ViewProps & {
   type?: 'default' | 'outline';
@@ -20,8 +21,17 @@ export type ButtonProps = ViewProps & {
   textStyle?: StyleProp<TextStyle>;
   onPress: () => void;
   onLongPress?: () => void;
-  icon?: JSX.Element;
-  iconPosition?: 'left' | 'right';
+  rightIcon?: JSX.Element;
+  rightIconName?: string;
+  rightIconSize?: number;
+  rightIconColor?: ColorValue | number | undefined;
+  leftIcon?: JSX.Element;
+  leftIconName?: string;
+  leftIconSize?: number;
+  leftIconColor?: ColorValue | number | undefined;
+  isLoading?: boolean;
+  positionLoader?: 'left' | 'right';
+
   width?: number;
 };
 

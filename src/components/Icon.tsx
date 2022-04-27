@@ -9,6 +9,7 @@ import {
 import { withTheme } from '../core/theming';
 import { Consumer as SettingsConsumer } from '../core/settings';
 import { accessibilityProps } from './MaterialCommunityIcons';
+import type { ColorValue } from 'react-native';
 
 type IconSourceBase = string | ImageSourcePropType;
 
@@ -18,7 +19,9 @@ export type IconSource =
   | ((props: IconProps & { color: string }) => React.ReactNode);
 
 type IconProps = {
-  size: number;
+  size?: number;
+  name: string;
+  color?: ColorValue | number | undefined;
   allowFontScaling?: boolean;
 };
 
@@ -66,7 +69,7 @@ export const isValidIcon = (source: any) =>
 export const isEqualIcon = (a: any, b: any) =>
   a === b || getIconId(a) === getIconId(b);
 
-const Icon = ({ source, color, size, theme, ...rest }: Props) => {
+const Icon = ({ source, color, size = 24, theme, ...rest }: Props) => {
   const direction =
     typeof source === 'object' && source.direction && source.source
       ? source.direction === 'auto'
