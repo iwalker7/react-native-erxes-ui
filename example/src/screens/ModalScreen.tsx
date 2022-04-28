@@ -40,7 +40,12 @@ const ModalScreen: React.FC<any> = () => {
         <Button onPress={() => onBottomVisible(true)}>Click here </Button>
       </View>
       <View style={styles.segment}>
-        <Modal isVisible={visible} onVisible={onVisible}>
+        <Modal
+          isVisible={visible}
+          onVisible={onVisible}
+          withHeader
+          headerText="hi"
+        >
           <View>
             <Avatar source={images.avatar} uri={undefined} size={80} />
             <TextView center style={{ marginTop: 10 }}>

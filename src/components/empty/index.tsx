@@ -8,10 +8,14 @@ import {
   TextStyle,
   ViewStyle,
 } from 'react-native';
+import Icon from '../Icon';
 
 export type EmptyProps = {
   text?: string;
   imageSource?: any;
+  iconColor?: string;
+  iconName?: string;
+  iconSize?: number;
   containerStyle?: StyleProp<ViewStyle>;
   textStyle?: StyleProp<TextStyle>;
 };
@@ -21,10 +25,23 @@ const Empty: React.FC<EmptyProps> = ({
   imageSource,
   containerStyle,
   textStyle,
+
+  iconColor,
+  iconName,
+  iconSize = 16,
 }) => {
   return (
     <View style={[styles.container, containerStyle]}>
-      <Image source={imageSource} resizeMode="contain" style={styles.image} />
+      {iconName ? (
+        <Icon
+          name={iconName}
+          size={iconSize}
+          color={iconColor || '#000'}
+          source={undefined}
+        />
+      ) : (
+        <Image source={imageSource} resizeMode="contain" style={styles.image} />
+      )}
       <Text maxFontSizeMultiplier={1} style={[styles.text, textStyle]}>
         {text ? text : 'There is no data'}
       </Text>

@@ -1,6 +1,6 @@
 {
   "name": "react-native-erxes-ui",
-  "version": "0.1.12",
+  "version": "0.1.13",
   "description": "erxes react native ui library",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
@@ -162,6 +162,8 @@
     "react-native-document-picker": "^8.1.0",
     "react-native-gesture-handler": "^2.4.0",
     "react-native-image-picker": "^4.7.3",
+    "react-native-linear-gradient": "^2.5.6",
+    "react-native-popover-view": "^5.0.1",
     "react-native-safe-area-context": "^4.2.4",
     "react-native-vector-icons": "^9.1.0"
   },

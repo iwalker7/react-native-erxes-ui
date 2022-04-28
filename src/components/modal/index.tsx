@@ -1,6 +1,6 @@
 /* eslint-disable react-native/no-inline-styles */
 import React, { SetStateAction } from 'react';
-import { Pressable } from 'react-native';
+import { Pressable, TouchableWithoutFeedback } from 'react-native';
 import {
   Modal as RNModal,
   ModalProps as RNModalProps,
@@ -13,7 +13,10 @@ import {
 } from 'react-native';
 import TextView from '../Typography';
 import Divider from '../Divider';
-import { bgLight, coreGray } from '../../styles/colors';
+import { bgDialog, bgLight, coreGray } from '../../styles/colors';
+import { KeyboardAvoidingView } from 'react-native';
+import { Platform } from 'react-native';
+import ScreenUtils from '../../utils/screenUtils';
 
 export type ModalProps = RNModalProps &
   RNViewProps & {
@@ -30,7 +33,6 @@ export type ModalProps = RNModalProps &
     animationType?: 'fade' | 'none' | 'slide' | undefined;
     bgColor?: string;
     shadowRadius?: string;
-    width?: number;
     modalHeader?: JSX.Element;
   };
 
@@ -43,11 +45,12 @@ const Modal: React.FC<ModalProps> = ({
   cancelable = true,
   animationType,
   bottom = false,
-  width,
   shadowRadius,
   modalHeader,
   withHeader,
   headerText,
+  withoutTouch,
+  ...rest
 }) => {
   const onHideComplete = () => {
     if (cancelable) {
@@ -65,12 +68,21 @@ const Modal: React.FC<ModalProps> = ({
         onHideComplete();
       }}
     >
-      <TouchableOpacity
-        onPressOut={() => {
-          onHideComplete();
-        }}
-        style={styles.centeredView}
-      >
+      {withoutTouch ? (
+        <View style={styles.dialogContainer}>
+          <View
+            style={[
+              {
+                flex: 1,
+                width: '100%',
+              },
+              style,
+            ]}
+          >
+            {children}
+          </View>
+        </View>
+      ) : (
         <View
           style={[
             {
@@ -82,46 +94,77 @@ const Modal: React.FC<ModalProps> = ({
             style,
           ]}
         >
-          <View style={bottom ? styles.bottomView : styles.centeredView}>
-            <View
-              style={[
-                styles.modalView,
-                {
-                  width: bottom ? '100%' : width ? width : '90%',
-                  shadowRadius: shadowRadius,
-                  minHeight: bottom ? 150 : 50,
-                },
-                style,
-              ]}
-            >
-              {cancelable && (
-                <Pressable
-                  style={styles.xbutton}
-                  onPress={() => onVisible(false)}
-                >
-                  <TextView small color={'#616161'}>
-                    Close
-                  </TextView>
-                </Pressable>
-              )}
-              {withHeader && (
-                <View
-                  style={{
-                    borderTopLeftRadius: 20,
-                    borderTopRightRadius: 20,
-                    backgroundColor: bgLight,
-                  }}
-                >
-                  <TextView style={styles.popoverHeader}>{headerText}</TextView>
-                  <Divider />
-                </View>
-              )}
-              {modalHeader}
-              {children}
-            </View>
-          </View>
+          <TouchableOpacity
+            style={styles.dialogContainer}
+            activeOpacity={1}
+            onPressOut={() => {
+              onHideComplete();
+            }}
+          >
+            {bottom ? (
+              <View style={[{ flex: 1, justifyContent: 'flex-end' }]}>
+                <TouchableWithoutFeedback>
+                  <KeyboardAvoidingView
+                    style={[
+                      styles.modalView,
+                      {
+                        marginBottom: ScreenUtils.isIphoneWithNotch() ? 30 : 10,
+                        backgroundColor: rest?.bgColor ? rest?.bgColor : '#fff',
+                      },
+                    ]}
+                    behavior={Platform.OS === 'ios' ? 'padding' : undefined}
+                  >
+                    {children}
+                  </KeyboardAvoidingView>
+                </TouchableWithoutFeedback>
+              </View>
+            ) : (
+              <View style={styles.centeredView}>
+                <TouchableWithoutFeedback>
+                  <View
+                    style={[
+                      styles.modalView,
+                      {
+                        width: '90%',
+                        shadowRadius: shadowRadius,
+                        minHeight: 50,
+                      },
+                      style,
+                    ]}
+                  >
+                    {withHeader && (
+                      <View
+                        style={{
+                          borderTopLeftRadius: 20,
+                          borderTopRightRadius: 20,
+                          backgroundColor: bgLight,
+                        }}
+                      >
+                        <TextView style={styles.popoverHeader}>
+                          {headerText}
+                        </TextView>
+                        <Divider />
+                      </View>
+                    )}
+                    {cancelable && (
+                      <Pressable
+                        style={styles.xbutton}
+                        onPress={() => onVisible(false)}
+                      >
+                        <TextView small color={'#616161'}>
+                          Close
+                        </TextView>
+                      </Pressable>
+                    )}
+                    {modalHeader}
+                    {children}
+                  </View>
+                </TouchableWithoutFeedback>
+              </View>
+            )}
+          </TouchableOpacity>
         </View>
-      </TouchableOpacity>
+      )}
     </RNModal>
   );
 };
@@ -132,18 +175,9 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  bottomView: {
-    flex: 1,
-    justifyContent: 'flex-end',
-    alignItems: 'center',
-  },
   modalView: {
     backgroundColor: 'white',
     borderRadius: 20,
-    paddingBottom: 30,
-    paddingHorizontal: 20,
-    alignItems: 'center',
-    width: '100%',
   },
   xbutton: {
     position: 'absolute',
@@ -159,6 +193,21 @@ const styles = StyleSheet.create({
     textTransform: 'uppercase',
     fontSize: 13,
     fontWeight: '500',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  headerText: {
+    color: coreGray,
+    textTransform: 'uppercase',
+    fontSize: 13,
+    fontWeight: '500',
+    height: 50,
+    backgroundColor: 'red',
+  },
+  dialogContainer: {
+    flex: 1,
+    width: '100%',
+    backgroundColor: bgDialog,
   },
 });
 

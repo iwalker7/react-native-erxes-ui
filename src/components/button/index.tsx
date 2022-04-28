@@ -9,6 +9,7 @@ import TextView from '../Typography';
 import type { TextStyle } from 'react-native';
 import type { ColorValue } from 'react-native';
 import Icon from '../Icon';
+import { ActivityIndicator } from 'react-native';
 
 export type ButtonProps = ViewProps & {
   type?: 'default' | 'outline';
@@ -52,6 +53,7 @@ const Button: React.FC<ButtonProps> = ({
   leftIcon,
   leftIconName,
   rightIconName,
+  isLoading,
   ...rest
 }) => {
   const defaultsize = 20;
@@ -92,11 +94,11 @@ const Button: React.FC<ButtonProps> = ({
       style={[defaultStyle as ViewStyle, containerStyle]}
     >
       <View style={[styles.inView]}>
-        {rightIconName ||
-          (rightIcon && (
+        {leftIconName ||
+          (leftIcon && (
             <View style={{ marginHorizontal: 5 }}>
-              {rightIcon ? (
-                rightIcon
+              {leftIcon ? (
+                leftIcon
               ) : (
                 <Icon
                   name={leftIconName || ''}
@@ -107,6 +109,21 @@ const Button: React.FC<ButtonProps> = ({
               )}
             </View>
           ))}
+        {isLoading && (
+          <ActivityIndicator
+            size="small"
+            color={
+              type === 'default'
+                ? '#fff'
+                : mode === 'verify'
+                ? '#17CE65'
+                : color
+                ? color
+                : '#472D9A'
+            }
+            style={{ marginEnd: 7, height: 16 }}
+          />
+        )}
         <TextView
           bold
           small
@@ -123,23 +140,23 @@ const Button: React.FC<ButtonProps> = ({
               : '#fff'
           }
         >
-          {leftIconName ||
-            (leftIcon && (
-              <View style={{ marginHorizontal: 5 }}>
-                {leftIcon ? (
-                  leftIcon
-                ) : (
-                  <Icon
-                    name={leftIconName || ''}
-                    color={rest?.leftIconColor || '#fff'}
-                    size={rest?.leftIconSize || defaultsize}
-                    source={undefined}
-                  />
-                )}
-              </View>
-            ))}
           {children}
         </TextView>
+        {rightIconName ||
+          (rightIcon && (
+            <View style={{ marginHorizontal: 5 }}>
+              {rightIcon ? (
+                rightIcon
+              ) : (
+                <Icon
+                  name={leftIconName || ''}
+                  color={rest?.leftIconColor || '#fff'}
+                  size={rest?.leftIconSize || defaultsize}
+                  source={undefined}
+                />
+              )}
+            </View>
+          ))}
       </View>
     </Touchable>
   );

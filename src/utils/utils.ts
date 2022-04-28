@@ -4,6 +4,7 @@ import type {
   NativeEventSubscription,
   EmitterSubscription,
 } from 'react-native';
+import { useSettings } from 'src/core/settings';
 
 export function addEventListener<
   T extends {
@@ -302,4 +303,40 @@ export const getNameUser = (item: any) => {
     item?.email ||
     'Unknown'
   );
+};
+
+export const DeleteHandler = (
+  fileName: any,
+  onStart: () => void,
+  onError: (value: string) => void,
+  onEnd: () => void
+) => {
+  const settings = useSettings();
+  const apiUrl = settings.apiUrl;
+
+  if (!fileName) {
+    return onError && onError('fileName is Required! Dev');
+  }
+  const url = apiUrl + '/delete-file';
+
+  onStart && onStart();
+
+  fetch(`${url}`, {
+    method: 'POST',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+    },
+    body: `fileName=${fileName}`,
+    credentials: 'include',
+  })
+    .then((res: any) => {
+      if (res.status !== 200) {
+        return onError && onError(res.statusText);
+      }
+      onEnd && onEnd();
+    })
+    .catch((e: any) => {
+      onError && onError('uploadHandler: ' + e);
+    });
 };

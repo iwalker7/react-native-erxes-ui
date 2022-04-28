@@ -8,10 +8,12 @@ import {
 } from 'react-native';
 import { ThemeProvider } from './theming';
 import { Provider as SettingsProvider, Settings } from './settings';
+import AlertProvider from './alert';
+
 import MaterialCommunityIcon from '../components/MaterialCommunityIcons';
 import DefaultTheme from '../styles/DefaultTheme';
 import DarkTheme from '../styles/DarkTheme';
-import { addEventListener } from '../utils/addEventListener';
+import { addEventListener } from '../utils/utils';
 import PortalHost from '../components/Portal/PortalHost';
 
 type Props = {
@@ -94,8 +96,17 @@ const Provider = ({ ...props }: Props) => {
   const { children, settings } = props;
   return (
     <PortalHost>
-      <SettingsProvider value={settings || { icon: MaterialCommunityIcon }}>
-        <ThemeProvider theme={getTheme()}>{children}</ThemeProvider>
+      <SettingsProvider
+        value={
+          settings || {
+            icon: MaterialCommunityIcon,
+            apiUrl: 'office.erxes.io/gateway',
+          }
+        }
+      >
+        <ThemeProvider theme={getTheme()}>
+          <AlertProvider>{children}</AlertProvider>
+        </ThemeProvider>
       </SettingsProvider>
     </PortalHost>
   );

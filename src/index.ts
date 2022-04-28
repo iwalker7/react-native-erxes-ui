@@ -1,5 +1,7 @@
 export { default as Avatar, AvatarProps } from './components/Avatar';
 export { default as Button, ButtonProps } from './components/Button';
+export { default as CrossFadedIcon } from './components/Button/CrossFadedIcon';
+export { default as IconButton } from './components/Button/IconButton';
 export { default as Card, CardProps } from './components/Card';
 export { default as Chip, ChipProps } from './components/Chip';
 export { default as Checkbox } from './components/Checkbox';
@@ -15,6 +17,8 @@ export { default as Touchable, TouchableProps } from './components/Touchable';
 export { default as Modal, ModalProps } from './components/Modal';
 export { default as Uploader, UploaderProps } from './components/Uploader';
 export { default as RadioButton } from './components/RadioButton';
+export { default as Searchbar, SearchbarProps } from './components/Searchbar';
+export { default as PreparedAttachments } from './components/PreparedAttachments';
 export {
   default as Snackbar,
   SnackbarProps,
@@ -24,6 +28,12 @@ export {
   default as ExpandableSection,
   ExpandableSectionType,
 } from './components/ExpandableSection';
+export {
+  default as TouchableRipple,
+  TouchableRippleProps,
+} from './components/Button/TouchableRipple';
+export { default as Popover, PopoverProps } from './components/Popover';
+export { default as Pagination, generatePages } from './components/Pagination';
 
 export { default as ScreenUtils } from './utils/screenUtils';
 
