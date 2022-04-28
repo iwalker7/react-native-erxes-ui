@@ -8,6 +8,7 @@ import TextView from '../Typography';
 //import MaterialCommunityIcons from '../MaterialCommunityIcons';
 import type { TextStyle } from 'react-native';
 import type { ColorValue } from 'react-native';
+import Icon from '../Icon';
 
 export type ButtonProps = ViewProps & {
   type?: 'default' | 'outline';
@@ -17,21 +18,20 @@ export type ButtonProps = ViewProps & {
   color?: string;
   textColor?: string;
   borderColor?: string;
-  style?: StyleProp<ViewStyle>;
+  containerStyle?: StyleProp<ViewStyle>;
   textStyle?: StyleProp<TextStyle>;
   onPress: () => void;
   onLongPress?: () => void;
   rightIcon?: JSX.Element;
   rightIconName?: string;
   rightIconSize?: number;
-  rightIconColor?: ColorValue | number | undefined;
+  rightIconColor?: ColorValue | string | undefined;
   leftIcon?: JSX.Element;
   leftIconName?: string;
   leftIconSize?: number;
-  leftIconColor?: ColorValue | number | undefined;
+  leftIconColor?: ColorValue | string | undefined;
   isLoading?: boolean;
   positionLoader?: 'left' | 'right';
-
   width?: number;
 };
 
@@ -41,16 +41,20 @@ const Button: React.FC<ButtonProps> = ({
   block = false,
   onPress,
   onLongPress,
-  style,
+  containerStyle,
   textStyle,
   color,
   textColor,
   borderColor,
   children,
   width,
-  icon,
-  iconPosition = 'left',
+  rightIcon,
+  leftIcon,
+  leftIconName,
+  rightIconName,
+  ...rest
 }) => {
+  const defaultsize = 20;
   const defaultStyle = {
     minHeight: 36,
     minWidth: 90,
@@ -85,32 +89,28 @@ const Button: React.FC<ButtonProps> = ({
       activeOpacity={0.5}
       onPress={onPress}
       onLongPress={onLongPress}
-      style={[defaultStyle as ViewStyle, style]}
+      style={[defaultStyle as ViewStyle, containerStyle]}
     >
-      <View
-        style={[
-          styles.inView,
-          {
-            flexDirection: iconPosition === 'right' ? 'row-reverse' : 'row',
-          },
-        ]}
-      >
-        {icon && (
-          <View
-            style={[
-              {
-                marginLeft: iconPosition === 'right' ? 5 : 0,
-                marginRight: iconPosition === 'right' ? 0 : 5,
-              },
-            ]}
-          >
-            {icon}
-          </View>
-        )}
+      <View style={[styles.inView]}>
+        {rightIconName ||
+          (rightIcon && (
+            <View style={{ marginHorizontal: 5 }}>
+              {rightIcon ? (
+                rightIcon
+              ) : (
+                <Icon
+                  name={leftIconName || ''}
+                  color={rest?.leftIconColor || '#fff'}
+                  size={rest?.leftIconSize || defaultsize}
+                  source={undefined}
+                />
+              )}
+            </View>
+          ))}
         <TextView
           bold
           small
-          style={[{ fontSize: icon ? 12 : 13 }, textStyle]}
+          style={[{ fontSize: leftIcon || rightIcon ? 12 : 13 }, textStyle]}
           color={
             textColor
               ? textColor
@@ -123,6 +123,21 @@ const Button: React.FC<ButtonProps> = ({
               : '#fff'
           }
         >
+          {leftIconName ||
+            (leftIcon && (
+              <View style={{ marginHorizontal: 5 }}>
+                {leftIcon ? (
+                  leftIcon
+                ) : (
+                  <Icon
+                    name={leftIconName || ''}
+                    color={rest?.leftIconColor || '#fff'}
+                    size={rest?.leftIconSize || defaultsize}
+                    source={undefined}
+                  />
+                )}
+              </View>
+            ))}
           {children}
         </TextView>
       </View>
@@ -132,6 +147,7 @@ const Button: React.FC<ButtonProps> = ({
 
 const styles = StyleSheet.create({
   inView: {
+    flexDirection: 'row',
     alignSelf: 'center',
     alignItems: 'center',
     justifyContent: 'center',

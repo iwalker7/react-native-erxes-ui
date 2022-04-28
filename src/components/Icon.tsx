@@ -21,16 +21,13 @@ export type IconSource =
 type IconProps = {
   size?: number;
   name: string;
-  color?: ColorValue | number | undefined;
+  color?: ColorValue | string | undefined;
   allowFontScaling?: boolean;
 };
 
 type Props = IconProps & {
-  color?: string;
+  color?: ColorValue | string | undefined;
   source: any;
-  /**
-   * @optional
-   */
   theme: ReactNativeErxes.Theme;
 };
 
@@ -93,7 +90,6 @@ const Icon = ({ source, color, size = 24, theme, ...rest }: Props) => {
           {
             transform: [{ scaleX: direction === 'rtl' ? -1 : 1 }],
           },
-          // eslint-disable-next-line react-native/no-inline-styles
           {
             width: size,
             height: size,

@@ -12,6 +12,8 @@ import {
   ViewStyle,
 } from 'react-native';
 import TextView from '../Typography';
+import Divider from '../Divider';
+import { bgLight, coreGray } from '../../styles/colors';
 
 export type ModalProps = RNModalProps &
   RNViewProps & {
@@ -22,11 +24,14 @@ export type ModalProps = RNModalProps &
     style?: StyleProp<ViewStyle> | any | {};
     cancelable?: boolean | true;
     bottom?: boolean;
+    withHeader?: boolean;
+    headerText?: string;
     withoutTouch?: boolean;
     animationType?: 'fade' | 'none' | 'slide' | undefined;
     bgColor?: string;
     shadowRadius?: string;
     width?: number;
+    modalHeader?: JSX.Element;
   };
 
 const Modal: React.FC<ModalProps> = ({
@@ -40,6 +45,9 @@ const Modal: React.FC<ModalProps> = ({
   bottom = false,
   width,
   shadowRadius,
+  modalHeader,
+  withHeader,
+  headerText,
 }) => {
   const onHideComplete = () => {
     if (cancelable) {
@@ -57,22 +65,22 @@ const Modal: React.FC<ModalProps> = ({
         onHideComplete();
       }}
     >
-      <View
-        style={[
-          {
-            flex: 1,
-            width: '100%',
-            justifyContent: 'flex-end',
-            backgroundColor: 'rgba(0, 0, 0, 0.2)',
-          },
-          style,
-        ]}
+      <TouchableOpacity
+        onPressOut={() => {
+          onHideComplete();
+        }}
+        style={styles.centeredView}
       >
-        <TouchableOpacity
-          onPressOut={() => {
-            onHideComplete();
-          }}
-          style={styles.centeredView}
+        <View
+          style={[
+            {
+              flex: 1,
+              width: '100%',
+              justifyContent: 'flex-end',
+              backgroundColor: 'rgba(0, 0, 0, 0.2)',
+            },
+            style,
+          ]}
         >
           <View style={bottom ? styles.bottomView : styles.centeredView}>
             <View
@@ -96,12 +104,24 @@ const Modal: React.FC<ModalProps> = ({
                   </TextView>
                 </Pressable>
               )}
-
+              {withHeader && (
+                <View
+                  style={{
+                    borderTopLeftRadius: 20,
+                    borderTopRightRadius: 20,
+                    backgroundColor: bgLight,
+                  }}
+                >
+                  <TextView style={styles.popoverHeader}>{headerText}</TextView>
+                  <Divider />
+                </View>
+              )}
+              {modalHeader}
               {children}
             </View>
           </View>
-        </TouchableOpacity>
-      </View>
+        </View>
+      </TouchableOpacity>
     </RNModal>
   );
 };
@@ -116,22 +136,14 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'flex-end',
     alignItems: 'center',
-    width: '100%',
   },
   modalView: {
     backgroundColor: 'white',
     borderRadius: 20,
-    paddingVertical: 30,
+    paddingBottom: 30,
     paddingHorizontal: 20,
     alignItems: 'center',
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 1.5,
-      height: 1.5,
-    },
-    shadowOpacity: 0.5,
-    shadowRadius: 30,
-    elevation: 5,
+    width: '100%',
   },
   xbutton: {
     position: 'absolute',
@@ -139,6 +151,14 @@ const styles = StyleSheet.create({
     right: 10,
     width: 40,
     height: 20,
+  },
+  popoverHeader: {
+    paddingHorizontal: 20,
+    paddingVertical: 10,
+    color: coreGray,
+    textTransform: 'uppercase',
+    fontSize: 13,
+    fontWeight: '500',
   },
 });
 

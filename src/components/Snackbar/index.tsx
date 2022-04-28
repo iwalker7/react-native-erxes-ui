@@ -9,6 +9,9 @@ import Button from '../Button';
 import Surface from '../Surface';
 import TextView from '../Typography';
 import Touchable from '../Touchable';
+import type { ColorValue } from 'react-native';
+import { Dimensions } from 'react-native';
+import Icon from '../Icon';
 
 export enum DURATION {
   DURATION_SHORT = 1500,
@@ -23,13 +26,18 @@ export type SnackbarProps = {
     label: string;
   };
   placement?: 'top' | 'bottom';
-  message: string;
   type?: 'success' | 'warning' | 'info' | 'error' | string;
-  duration?: number;
+  duration?: number | DURATION;
+  message: string;
   onDismiss: () => void;
-  icon?: JSX.Element;
-  iconPosition?: 'left' | 'right';
+  rightIcon?: JSX.Element;
+  rightIconName?: string;
+  rightIconSize?: number;
+  rightIconColor?: ColorValue | string | undefined;
   closeIcon?: JSX.Element;
+  closeIconName?: string;
+  closeIconSize?: number;
+  closeIconColor?: ColorValue | string | undefined;
   textStyle?: StyleProp<TextProps>;
   wrapperStyle?: StyleProp<ViewStyle>;
   style?: StyleProp<ViewStyle>;
@@ -44,12 +52,15 @@ const Snackbar: React.FC<SnackbarProps> = ({
   placement = 'top',
   duration = DURATION.DURATION_MEDIUM,
   onDismiss,
-  icon,
-  iconPosition = 'left',
   type = 'info',
+  rightIconName,
+  rightIconColor,
+  rightIconSize,
+  rightIcon,
   closeIcon,
   ...rest
 }) => {
+  const defaultsize = 20;
   const { current: opacity } = useRef(new Animated.Value(0.0));
   const [hidden, setHidden] = useState<boolean>(!visible);
   const hideTimeout = useRef<NodeJS.Timeout>();
@@ -112,94 +123,107 @@ const Snackbar: React.FC<SnackbarProps> = ({
   }
 
   return (
-    <SafeAreaView
-      pointerEvents="box-none"
-      style={[
-        {
-          position: 'absolute',
-          top: placement === 'top' ? 0 : undefined,
-          bottom: placement === 'bottom' ? 10 : undefined,
-          width: '100%',
-          zIndex: 5000,
-        },
-      ]}
+    <Touchable
+      onPress={() => {
+        if (!action) {
+          setHidden(true);
+        }
+      }}
     >
-      <Surface
-        pointerEvents="box-none"
-        accessibilityLiveRegion="polite"
+      <SafeAreaView
         style={[
-          styles.container,
-          { backgroundColor: mainColor },
           {
-            opacity: opacity,
-            transform: [
-              {
-                scale: visible
-                  ? opacity.interpolate({
-                      inputRange: [0, 1],
-                      outputRange: [0.9, 1],
-                    })
-                  : 1,
-              },
-            ],
+            position: 'absolute',
+            top: placement === 'top' ? 0 : undefined,
+            bottom: placement === 'bottom' ? 10 : undefined,
+            left: 3,
+            width: '100%',
+            zIndex: 5000,
           },
-          rest?.wrapperStyle,
         ]}
       >
-        <View
-          style={{
-            width: action ? '72%' : '100%',
-            alignItems: 'center',
-            flexDirection: 'row',
-          }}
-        >
-          {closeIcon && (
-            <View style={styles.overflow}>
-              <Touchable onPress={() => setHidden(true)}>{closeIcon}</Touchable>
-            </View>
-          )}
-          {icon && (
-            <View
-              style={[
+        <Surface
+          accessibilityLiveRegion="polite"
+          style={[
+            styles.container,
+            { backgroundColor: mainColor },
+            {
+              opacity: opacity,
+              transform: [
                 {
-                  marginLeft: iconPosition === 'right' ? 5 : 0,
-                  marginRight: iconPosition === 'right' ? 0 : 5,
+                  scale: visible
+                    ? opacity.interpolate({
+                        inputRange: [0, 1],
+                        outputRange: [0.9, 1],
+                      })
+                    : 1,
                 },
+              ],
+            },
+            rest?.wrapperStyle,
+          ]}
+        >
+          <View
+            style={{
+              width: action ? '72%' : '100%',
+              alignItems: 'center',
+              flexDirection: 'row',
+            }}
+          >
+            {rightIconName ||
+              (rightIcon && (
+                <View style={{ marginHorizontal: 5 }}>
+                  {rightIcon ? (
+                    rightIcon
+                  ) : (
+                    <Icon
+                      name={rightIconName || ''}
+                      color={rightIconColor || '#fff'}
+                      size={rightIconSize || defaultsize}
+                      source={undefined}
+                    />
+                  )}
+                </View>
+              ))}
+            <TextView
+              bold
+              style={[
+                styles.content,
+                { marginRight: action ? 0 : 16, color: '#fff' },
+                rest?.textStyle,
               ]}
             >
-              {icon}
+              {message}
+            </TextView>
+            {closeIcon ||
+              (closeIcon && (
+                <View style={styles.overflow}>
+                  <Touchable onPress={() => setHidden(true)}>
+                    {closeIcon}
+                  </Touchable>
+                </View>
+              ))}
+          </View>
+          {action && (
+            <View style={{ justifyContent: 'flex-end' }}>
+              <Button
+                onPress={() => {
+                  action.onPress && action.onPress();
+                  onDismiss();
+                }}
+                color={'rgba(255, 255, 255, 0.6)'}
+                textColor={color(mainColor).darken(0.6).rgb().string()}
+                style={{
+                  borderRadius: 8,
+                }}
+              >
+                {action.label}
+              </Button>
             </View>
           )}
-          <TextView
-            bold
-            style={[
-              styles.content,
-              { marginRight: action ? 0 : 16, color: '#fff' },
-              rest?.textStyle,
-            ]}
-          >
-            {message}
-          </TextView>
-        </View>
-        {action && (
-          <View style={{ justifyContent: 'flex-end' }}>
-            <Button
-              onPress={() => {
-                action.onPress && action.onPress();
-                onDismiss();
-              }}
-              color={'rgba(255, 255, 255, 0.6)'}
-              textColor={color(mainColor).darken(0.6).rgb().string()}
-              style={{
-                borderRadius: 8,
-              }}
-            >
-              {action.label}
-            </Button>
-          </View>
-        )}
-      </Surface>
-    </SafeAreaView>
+        </Surface>
+      </SafeAreaView>
+    </Touchable>
   );
 };
 
@@ -211,7 +235,7 @@ const styles = StyleSheet.create({
     paddingRight: 5,
     paddingVertical: 8,
     borderRadius: 5,
-    width: '100%',
+    width: Dimensions.get('screen').width - 15,
     shadowColor: '#000',
     shadowOffset: {
       width: 0,
@@ -219,8 +243,6 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 0.1,
     shadowRadius: 7,
-    // borderWidth: 2,
-    // borderColor: '#fff',
   },
   content: {
     marginLeft: 10,

@@ -50,14 +50,9 @@ const ButtonScreen: React.FC<any> = () => {
           >
             <TextView style={{ marginRight: 61 }}>With icon</TextView>
             <Button
-              iconPosition="left"
-              icon={
-                <MaterialCommunityIcons
-                  name="cloud-check"
-                  color="#fff"
-                  size={15}
-                />
-              }
+              leftIconName="cloud-check"
+              rightIconColor="#fff"
+              rightIconSize={15}
               type="default"
               onPress={() => {}}
               onLongPress={() => {}}
@@ -67,14 +62,9 @@ const ButtonScreen: React.FC<any> = () => {
             </Button>
             <Button
               type="outline"
-              iconPosition="right"
-              icon={
-                <MaterialCommunityIcons
-                  name="cloud-check"
-                  color="#472D9A"
-                  size={15}
-                />
-              }
+              //   rightIconName="cloud-check"
+              //   rightIconColor="#472D9A"
+              //   rightIconSize={15}
               onPress={() => {}}
               onLongPress={() => {}}
             >

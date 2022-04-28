@@ -1,10 +1,17 @@
 import * as React from 'react';
-import { StyleSheet, Text, Platform, TextProps, ViewProps } from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  Platform,
+  TextProps,
+  ViewProps,
+  ColorValue,
+} from 'react-native';
 
 export type IconProps = {
   name: string;
-  color: string;
-  size: number;
+  color: ColorValue | string | undefined;
+  size?: number;
   direction: 'rtl' | 'ltr';
   allowFontScaling?: boolean;
 };
@@ -12,8 +19,8 @@ export type IconProps = {
 let MaterialCommunityIcons: React.ComponentType<
   TextProps & {
     name: string;
-    color: string;
-    size: number;
+    color: string | ColorValue | undefined;
+    size?: number;
     pointerEvents?: ViewProps['pointerEvents'];
   }
 >;
