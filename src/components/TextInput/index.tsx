@@ -15,7 +15,8 @@ import {
 } from 'react-native';
 import TextView from '../Typography';
 import Touchable from '../Touchable';
-import { Brand } from '../../styles/colors';
+import { bgTransparent, Brand } from '../../styles/colors';
+import { withTheme } from 'src/core/theming';
 
 export type TextInputProps = RNProps & {
   type?: 'default' | 'outline' | 'filled' | 'text';
@@ -30,7 +31,8 @@ export type TextInputProps = RNProps & {
     value: NativeSyntheticEvent<TextInputSubmitEditingEventData>
   ) => void;
   inputRef?: LegacyRef<RNTextInput>;
-  style?: StyleProp<TextStyle> | undefined;
+  labelStyle?: StyleProp<TextStyle>;
+  containerStyle?: StyleProp<TextStyle>;
   placeholderTextColor?: string;
   label?: string | React.ReactElement;
   labelColor?: string;
@@ -39,6 +41,7 @@ export type TextInputProps = RNProps & {
   icon?: JSX.Element;
   iconPosition?: 'left' | 'right';
   iconOnPress?: () => void;
+  theme: ReactNativeErxes.Theme;
 };
 const TextInput: React.ForwardRefRenderFunction<unknown, TextInputProps> = ({
   style,
@@ -164,12 +167,16 @@ const TextInput: React.ForwardRefRenderFunction<unknown, TextInputProps> = ({
               : 'transparent',
           borderWidth: 1,
         },
-        style,
+        rest?.containerStyle,
       ]}
     >
       {label && (
         <View style={[styles.animatedStyle]}>
-          <TextView small color={rest?.labelColor || Brand.primaryDark3}>
+          <TextView
+            small
+            color={rest?.labelColor || Brand.primaryDark3}
+            style={rest?.labelStyle}
+          >
             {label}
           </TextView>
         </View>
@@ -203,6 +210,7 @@ const TextInput: React.ForwardRefRenderFunction<unknown, TextInputProps> = ({
         onChangeText={handleChangeText}
         onSubmitEditing={handleSubmit}
         value={value && value}
+        underlineColorAndroid={bgTransparent}
         {...rest}
       />
       {required && (
@@ -234,4 +242,4 @@ const styles = StyleSheet.create({
     zIndex: 10000,
   },
 });
-export default TextInput;
+export default withTheme(TextInput);

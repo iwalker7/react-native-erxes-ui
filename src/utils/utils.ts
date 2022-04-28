@@ -305,6 +305,16 @@ export const getNameUser = (item: any) => {
   );
 };
 
+export const readFile = (apiUrl: any, value: any) => {
+  if (!value) {
+    return null;
+  }
+  if (value.includes('http')) {
+    return value;
+  }
+  return `${apiUrl}/read-file?key=${value}`;
+};
+
 export const DeleteHandler = (
   fileName: any,
   onStart: () => void,

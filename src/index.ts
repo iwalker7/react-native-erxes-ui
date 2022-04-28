@@ -34,6 +34,7 @@ export {
 } from './components/Button/TouchableRipple';
 export { default as Popover, PopoverProps } from './components/Popover';
 export { default as Pagination, generatePages } from './components/Pagination';
+export { default as GradientButton } from './components/Button/GradientButton';
 
 export { default as ScreenUtils } from './utils/screenUtils';
 
