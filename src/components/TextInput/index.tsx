@@ -17,6 +17,7 @@ import TextView from '../Typography';
 import Touchable from '../Touchable';
 import { bgTransparent, Brand } from '../../styles/colors';
 import { withTheme } from 'src/core/theming';
+import type { ViewStyle } from 'react-native';
 
 export type TextInputProps = RNProps & {
   type?: 'default' | 'outline' | 'filled' | 'text';
@@ -25,14 +26,14 @@ export type TextInputProps = RNProps & {
   required?: boolean;
   password?: boolean;
   disabled?: boolean;
-  value: string;
+  value?: string;
   onChangeText?: (value: string) => void;
   onSubmitEditing?: (
     value: NativeSyntheticEvent<TextInputSubmitEditingEventData>
   ) => void;
   inputRef?: LegacyRef<RNTextInput>;
   labelStyle?: StyleProp<TextStyle>;
-  containerStyle?: StyleProp<TextStyle>;
+  containerStyle?: StyleProp<ViewStyle>;
   placeholderTextColor?: string;
   label?: string | React.ReactElement;
   labelColor?: string;

@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 import { ThemeProvider } from './theming';
 import { Provider as SettingsProvider, Settings } from './settings';
-import AlertProvider from './alert';
+import AlertProvider, { TAlert } from './alert';
 
 import MaterialCommunityIcon from '../components/MaterialCommunityIcons';
 import DefaultTheme from '../styles/DefaultTheme';
@@ -20,6 +20,7 @@ type Props = {
   children: React.ReactNode;
   theme?: ReactNativeErxes.Theme;
   settings?: Settings;
+  alert?: TAlert;
 };
 
 const Provider = ({ ...props }: Props) => {
@@ -104,9 +105,9 @@ const Provider = ({ ...props }: Props) => {
           }
         }
       >
-        <ThemeProvider theme={getTheme()}>
-          <AlertProvider>{children}</AlertProvider>
-        </ThemeProvider>
+        <AlertProvider>
+          <ThemeProvider theme={getTheme()}>{children}</ThemeProvider>
+        </AlertProvider>
       </SettingsProvider>
     </PortalHost>
   );

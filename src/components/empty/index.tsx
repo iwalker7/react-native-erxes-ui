@@ -34,13 +34,17 @@ const Empty: React.FC<EmptyProps> = ({
     <View style={[styles.container, containerStyle]}>
       {iconName ? (
         <Icon
-          name={iconName}
-          size={iconSize}
+          name={iconName || 'box'}
+          size={iconSize || 20}
           color={iconColor || '#000'}
           source={undefined}
         />
       ) : (
-        <Image source={imageSource} resizeMode="contain" style={styles.image} />
+        <Image
+          source={imageSource || require('../../assets/images/box.png')}
+          resizeMode="contain"
+          style={[styles.image, imageSource === undefined && { opacity: 0.3 }]}
+        />
       )}
       <Text maxFontSizeMultiplier={1} style={[styles.text, textStyle]}>
         {text ? text : 'There is no data'}

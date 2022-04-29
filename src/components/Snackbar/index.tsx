@@ -28,12 +28,12 @@ export type SnackbarProps = {
   placement?: 'top' | 'bottom';
   type?: 'success' | 'warning' | 'info' | 'error' | string;
   duration?: number | DURATION;
-  message: string;
+  message?: string;
   onDismiss: () => void;
-  rightIcon?: JSX.Element;
-  rightIconName?: string;
-  rightIconSize?: number;
-  rightIconColor?: ColorValue | string | undefined;
+  leftIcon?: JSX.Element;
+  leftIconName?: string;
+  leftIconSize?: number;
+  leftIconColor?: ColorValue | string | undefined;
   closeIcon?: JSX.Element;
   closeIconName?: string;
   closeIconSize?: number;
@@ -53,10 +53,10 @@ const Snackbar: React.FC<SnackbarProps> = ({
   duration = DURATION.DURATION_MEDIUM,
   onDismiss,
   type = 'info',
-  rightIconName,
-  rightIconColor,
-  rightIconSize,
-  rightIcon,
+  leftIconName,
+  leftIconColor,
+  leftIconSize,
+  leftIcon,
   closeIcon,
   ...rest
 }) => {
@@ -170,16 +170,16 @@ const Snackbar: React.FC<SnackbarProps> = ({
               flexDirection: 'row',
             }}
           >
-            {rightIconName ||
-              (rightIcon && (
+            {leftIconName ||
+              (leftIcon && (
                 <View style={{ marginHorizontal: 5 }}>
-                  {rightIcon ? (
-                    rightIcon
+                  {leftIcon ? (
+                    leftIcon
                   ) : (
                     <Icon
-                      name={rightIconName || ''}
-                      color={rightIconColor || '#fff'}
-                      size={rightIconSize || defaultsize}
+                      name={leftIconName || ''}
+                      color={leftIconColor || '#fff'}
+                      size={leftIconSize || defaultsize}
                       source={undefined}
                     />
                   )}

@@ -20,7 +20,7 @@ export type IconSource =
 
 type IconProps = {
   size?: number;
-  name: string;
+  name?: string;
   color?: ColorValue | string | undefined;
   allowFontScaling?: boolean;
 };

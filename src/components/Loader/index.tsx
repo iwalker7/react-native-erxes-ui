@@ -13,9 +13,15 @@ export type LoaderProps = ViewProps & {
   backgroundColor?: string;
   color?: string;
   style?: StyleProp<ViewStyle>;
+  custom?: JSX.Element;
 };
 
-const Loader: React.FC<LoaderProps> = ({ backgroundColor, style, color }) => {
+const Loader: React.FC<LoaderProps> = ({
+  backgroundColor,
+  style,
+  color,
+  custom,
+}) => {
   return (
     <View style={{ flex: 1 }}>
       <View
@@ -27,7 +33,11 @@ const Loader: React.FC<LoaderProps> = ({ backgroundColor, style, color }) => {
           style,
         ]}
       >
-        <ActivityIndicator size="small" color={color || '#5629B6'} />
+        {custom ? (
+          custom
+        ) : (
+          <ActivityIndicator size="small" color={color || '#5629B6'} />
+        )}
       </View>
     </View>
   );

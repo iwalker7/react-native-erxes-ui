@@ -118,15 +118,15 @@ function AlertProvider({ children }: any) {
         action={alertState.action}
         message={alertState.message || ''}
         wrapperStyle={{ width: Dimensions.get('screen').width - 18 }}
-        rightIconName={
+        leftIconName={
           alertState.type === 'error'
             ? 'alert-line'
             : alertState.type === 'success'
             ? 'checkbox-circle-line'
             : 'information-line'
         }
-        rightIconColor={'#fff'}
-        rightIconSize={18}
+        leftIconColor={'#fff'}
+        leftIconSize={18}
       />
     </>
   );

@@ -56,7 +56,12 @@ export default function BottomSheetContainer({
                   paddingHorizontal: 10,
                 }}
               >
-                <Icon name="arrow-left-s-line" size={24} source={undefined} />
+                <Icon
+                  name="arrow-left-s-line"
+                  size={24}
+                  color={'#757575'}
+                  source={undefined}
+                />
               </Touchable>
             )}
           </View>

@@ -24,7 +24,7 @@ export type ModalProps = RNModalProps &
     isVisible: boolean;
     onVisible: SetStateAction<any>;
     children?: React.ReactNode;
-    style?: StyleProp<ViewStyle> | any | {};
+    style?: StyleProp<ViewStyle> | {};
     cancelable?: boolean | true;
     bottom?: boolean;
     withHeader?: boolean;
