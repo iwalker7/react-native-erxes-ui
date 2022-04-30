@@ -12,7 +12,7 @@ import {
   ViewStyle,
   TextStyle,
 } from 'react-native';
-import { withTheme } from '../../../src/core/theming';
+import { withTheme } from '../../core/theming';
 import IconButton from '../Button/IconButton';
 import type { IconSource } from '../Icon';
 import Icon from '../Icon';

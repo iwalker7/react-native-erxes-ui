@@ -10,7 +10,7 @@ import type { ColorValue } from 'react-native';
 import Icon from '../Icon';
 import TextView from '../Typography';
 import Touchable from '../Touchable';
-import { useTheme } from '../../../src/core/theming';
+import { useTheme } from '../../core/theming';
 
 export type GradientButtonProps = {
   onPress?:

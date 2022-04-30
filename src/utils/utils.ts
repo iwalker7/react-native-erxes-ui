@@ -3,7 +3,7 @@ import type {
   NativeEventSubscription,
   EmitterSubscription,
 } from 'react-native';
-import { useSettings } from '../../src/core/settings';
+import { useSettings } from '../core/settings';
 
 export function addEventListener<
   T extends {

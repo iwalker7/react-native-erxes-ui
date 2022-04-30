@@ -5,7 +5,7 @@ import TextView from '../Typography';
 import Touchable from '../Touchable';
 import { StyleSheet, View, FlatList, ActivityIndicator } from 'react-native';
 import { Colors } from 'react-native-erxes-ui';
-import { useAlertContext } from '../../../src/core/alert';
+import { useAlertContext } from '../../core/alert';
 
 const PreparedAttachment: React.FC<any> = ({
   attachments,

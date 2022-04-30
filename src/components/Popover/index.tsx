@@ -10,7 +10,7 @@ import React from 'react';
 import { StyleSheet, Easing } from 'react-native';
 import { PopoverPlacement } from 'react-native-popover-view';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { bgDialog } from '../../../src/styles/colors';
+import { bgDialog } from '../../styles/colors';
 
 export type PopoverProps = {
   isVisible: boolean;

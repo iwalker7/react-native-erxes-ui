@@ -16,7 +16,7 @@ import TextView from '../Typography';
 import Touchable from '../Touchable';
 import { bgTransparent, Brand } from '../../styles/colors';
 import type { ViewStyle } from 'react-native';
-import { withTheme } from '../../../src/core/theming';
+import { withTheme } from '../../core/theming';
 
 export type TextInputProps = RNProps & {
   type?: 'default' | 'outline' | 'filled' | 'text';

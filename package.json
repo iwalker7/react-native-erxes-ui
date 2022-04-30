@@ -1,6 +1,6 @@
 {
   "name": "react-native-erxes-ui",
-  "version": "0.1.14",
+  "version": "0.1.17",
   "description": "erxes react native ui library",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
@@ -97,7 +97,9 @@
   "peerDependencies": {
     "react": "*",
     "react-native": "*",
-    "react-native-vector-icons": "*"
+    "react-native-vector-icons": "*",
+    "@expo/vector-icons": "*",
+    "expo-font": "*"
   },
   "jest": {
     "preset": "react-native",

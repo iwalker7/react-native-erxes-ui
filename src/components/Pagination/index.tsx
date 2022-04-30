@@ -4,7 +4,7 @@ import React from 'react';
 import { ScrollView, View } from 'react-native';
 import Touchable from '../Touchable';
 import TextView from '../Typography';
-import { coreLightGray, primary } from '../../../src/styles/colors';
+import { coreLightGray, primary } from '../../styles/colors';
 import Icon from '../Icon';
 
 export const generatePages = (pageCount: number, currentPage: number) => {

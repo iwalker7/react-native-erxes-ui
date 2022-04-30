@@ -3,7 +3,7 @@ import color from 'color';
 import type { StyleProp } from 'react-native';
 import type { ViewStyle } from 'react-native';
 import { StyleSheet, View } from 'react-native';
-import { withTheme } from '../../../src/core/theming';
+import { withTheme } from '../../core/theming';
 
 export type $Omit<T, K> = Pick<T, Exclude<keyof T, K>>;
 export type $RemoveChildren<T extends React.ComponentType<any>> = $Omit<
