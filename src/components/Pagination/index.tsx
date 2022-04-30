@@ -4,8 +4,9 @@ import React from 'react';
 import { ScrollView, View } from 'react-native';
 import Touchable from '../Touchable';
 import TextView from '../Typography';
-import { coreLightGray, primary } from '../../styles/colors';
+import { black, grey300, white } from '../../styles/colors';
 import Icon from '../Icon';
+import { withTheme } from '../../core/theming';
 
 export const generatePages = (pageCount: number, currentPage: number) => {
   const w = 4;
@@ -67,7 +68,8 @@ export const generatePages = (pageCount: number, currentPage: number) => {
 };
 
 const Page = (props: any) => {
-  const { onPage, currentPage, page } = props;
+  const { onPage, currentPage, page, theme } = props;
+  const { colors } = theme;
   const goto = (pg: number) => {
     onPage(pg);
   };
@@ -84,7 +86,7 @@ const Page = (props: any) => {
           paddingVertical: 5,
           borderRadius: 30,
           marginHorizontal: 3,
-          backgroundColor: page === currentPage ? primary : '#fff',
+          backgroundColor: page === currentPage ? colors.primary : white,
         }}
         onPress={() => page !== currentPage && onClick()}
       >
@@ -120,7 +122,9 @@ const Pagination = (props: any) => {
     isPaginated,
     pages = [],
     containerStyle,
+    theme,
   } = props;
+
   const goto = (page: number) => {
     onPage(page);
   };
@@ -153,7 +157,7 @@ const Pagination = (props: any) => {
           {
             flexGrow: 1,
             justifyContent: 'center',
-            backgroundColor: '#fff',
+            backgroundColor: black,
           },
           containerStyle,
         ]}
@@ -172,10 +176,9 @@ const Pagination = (props: any) => {
             onPress={() => currentPage > 1 && onPrev()}
           >
             <Icon
-              name="arrow-left-line"
+              source="arrow-left-line"
               size={20}
-              color={currentPage > 1 ? '#000' : coreLightGray}
-              source={undefined}
+              color={currentPage > 1 ? black : grey300}
             />
           </Touchable>
 
@@ -185,6 +188,7 @@ const Pagination = (props: any) => {
               currentPage={currentPage}
               page={page}
               onPage={onPage}
+              theme={theme}
             />
           ))}
           <Touchable
@@ -193,10 +197,9 @@ const Pagination = (props: any) => {
             onPress={() => currentPage < totalPagesCount && onNext()}
           >
             <Icon
-              name="arrow-right-line"
+              source="arrow-right-line"
               size={20}
-              color={currentPage < totalPagesCount ? '#000' : coreLightGray}
-              source={undefined}
+              color={currentPage < totalPagesCount ? black : grey300}
             />
           </Touchable>
         </View>
@@ -231,4 +234,4 @@ const PaginationContainer = (props: any) => {
   return <Pagination {...childProps} />;
 };
 
-export default PaginationContainer;
+export default withTheme(PaginationContainer);

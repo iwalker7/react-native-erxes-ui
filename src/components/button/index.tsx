@@ -1,15 +1,16 @@
 /* eslint-disable react-native/no-inline-styles */
 import React from 'react';
-import type { StyleProp, ViewProps, ViewStyle } from 'react-native';
-import { View } from 'react-native';
-import { StyleSheet } from 'react-native';
+import { View, StyleSheet, ActivityIndicator } from 'react-native';
+import type {
+  ColorValue,
+  TextStyle,
+  StyleProp,
+  ViewProps,
+  ViewStyle,
+} from 'react-native';
 import Touchable from '../Touchable';
 import TextView from '../Typography';
-//import MaterialCommunityIcons from '../MaterialCommunityIcons';
-import type { TextStyle } from 'react-native';
-import type { ColorValue } from 'react-native';
 import Icon from '../Icon';
-import { ActivityIndicator } from 'react-native';
 
 export type ButtonProps = ViewProps & {
   type?: 'default' | 'outline';
@@ -101,10 +102,9 @@ const Button: React.FC<ButtonProps> = ({
                 leftIcon
               ) : (
                 <Icon
-                  name={leftIconName || ''}
+                  source={leftIconName || ''}
                   color={rest?.leftIconColor || '#fff'}
                   size={rest?.leftIconSize || defaultsize}
-                  source={undefined}
                 />
               )}
             </View>
@@ -149,10 +149,9 @@ const Button: React.FC<ButtonProps> = ({
                 rightIcon
               ) : (
                 <Icon
-                  name={leftIconName || ''}
+                  source={leftIconName || ''}
                   color={rest?.leftIconColor || '#fff'}
                   size={rest?.leftIconSize || defaultsize}
-                  source={undefined}
                 />
               )}
             </View>

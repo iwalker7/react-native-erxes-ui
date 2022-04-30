@@ -1,10 +1,10 @@
 /* eslint-disable react-native/no-inline-styles */
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
+import type { StyleProp, ViewStyle } from 'react-native';
+
 import TextView from '../Typography';
 import Touchable from '../Touchable';
-import type { StyleProp } from 'react-native';
-import type { ViewStyle } from 'react-native';
 import { Colors } from 'react-native-erxes-ui';
 
 export type CardProps = {

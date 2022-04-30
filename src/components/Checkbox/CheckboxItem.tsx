@@ -1,12 +1,12 @@
 /* eslint-disable react-native/no-inline-styles */
 import * as React from 'react';
-import { Text } from 'react-native';
 import {
   StyleProp,
   StyleSheet,
   TextStyle,
   View,
   ViewStyle,
+  Text,
 } from 'react-native';
 import Touchable from '../Touchable';
 import Checkbox from './Checkbox';

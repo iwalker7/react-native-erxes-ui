@@ -1,9 +1,7 @@
-import React, { useState, createContext } from 'react';
-import { useContext } from 'react';
+import React, { useState, createContext, useContext } from 'react';
 import { Dimensions } from 'react-native';
-import Snackbar from '../components/Snackbar';
-import { DURATION } from '../components/Snackbar';
-import { Brand } from '../styles/colors';
+import Snackbar, { DURATION } from '../components/Snackbar';
+import { blue400, green400, orange400, red400, white } from '../styles/colors';
 
 export type TAlert = {
   isOpen: boolean;
@@ -31,7 +29,7 @@ export const AlertContext = createContext({} as IAlert);
 
 const { Provider } = AlertContext;
 
-export function useAlertContext() {
+export function useAlert() {
   const mContext = useContext(AlertContext);
 
   return mContext;
@@ -56,23 +54,23 @@ function AlertProvider({ children }: any) {
   };
 
   const alert = (message?: string, action?: TAction) => {
-    show(message, 'simple', Brand.secondary, action);
+    show(message, 'simple', orange400, action);
   };
 
   const info = (message?: string, action?: TAction) => {
-    show(message, 'info', Brand.coreBlue, action);
+    show(message, 'info', blue400, action);
   };
 
   const error = (message?: string, action?: TAction) => {
-    show(message, 'error', Brand.error, action);
+    show(message, 'error', red400, action);
   };
 
   const success = (message?: string, action?: TAction) => {
-    show(message, 'success', Brand.success, action);
+    show(message, 'success', green400, action);
   };
 
   const infinity = (message?: string, action?: TAction) => {
-    show(message, 'infinity', Brand.coreBlue, action);
+    show(message, 'infinity', blue400, action);
   };
 
   const show = (
@@ -125,7 +123,7 @@ function AlertProvider({ children }: any) {
             ? 'checkbox-circle-line'
             : 'information-line'
         }
-        leftIconColor={'#fff'}
+        leftIconColor={white}
         leftIconSize={18}
       />
     </>

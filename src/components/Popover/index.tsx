@@ -1,16 +1,14 @@
 /* eslint-disable react-native/no-inline-styles */
-import type { View } from 'react-native';
-import type { StyleProp } from 'react-native';
-import type { ViewStyle } from 'react-native';
-import type { RefObject } from 'react';
-import type { SetStateAction } from 'react';
-import type { Rect } from 'react-native-popover-view';
-import Popover from 'react-native-popover-view/dist/Popover';
 import React from 'react';
 import { StyleSheet, Easing } from 'react-native';
+import type { RefObject, SetStateAction } from 'react';
+import type { View, StyleProp, ViewStyle } from 'react-native';
+import type { Rect } from 'react-native-popover-view';
+import Popover from 'react-native-popover-view/dist/Popover';
 import { PopoverPlacement } from 'react-native-popover-view';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { bgDialog } from '../../styles/colors';
+import { black } from '../../styles/colors';
+import { withTheme } from '../../core/theming';
 
 export type PopoverProps = {
   isVisible: boolean;
@@ -26,6 +24,7 @@ export type PopoverProps = {
   isFixed70?: boolean;
   isFixed50?: boolean;
   onRequestClose?: () => void;
+  theme: ReactNativeErxes.Theme;
 };
 const XPopover: React.FC<PopoverProps> = ({
   isVisible,
@@ -38,7 +37,9 @@ const XPopover: React.FC<PopoverProps> = ({
   isFixed70 = false,
   isFixed50 = false,
   onRequestClose,
+  theme,
 }) => {
+  const { colors } = theme;
   const insets = useSafeAreaInsets();
 
   return (
@@ -65,7 +66,9 @@ const XPopover: React.FC<PopoverProps> = ({
         easing: Easing.inOut(Easing.quad),
       }}
       backgroundStyle={{
-        backgroundColor: popBackgroundColor ? popBackgroundColor : bgDialog,
+        backgroundColor: popBackgroundColor
+          ? popBackgroundColor
+          : colors.backdrop,
       }}
       onRequestClose={() => {
         onRequestClose && onRequestClose();
@@ -80,11 +83,11 @@ const XPopover: React.FC<PopoverProps> = ({
 const styles = StyleSheet.create({
   popoverShadow: {
     overflow: 'visible',
-    shadowColor: '#000',
+    shadowColor: black,
     shadowOpacity: 0.5,
     shadowRadius: 3,
     elevation: 5,
   },
 });
 
-export default XPopover;
+export default withTheme(XPopover);

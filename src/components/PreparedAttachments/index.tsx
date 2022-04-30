@@ -1,18 +1,23 @@
 /* eslint-disable react-native/no-inline-styles */
 import React, { useEffect, useRef } from 'react';
-import IconTeam from '../Icon';
+import { StyleSheet, View, FlatList, ActivityIndicator } from 'react-native';
+
+import Icon from '../Icon';
 import TextView from '../Typography';
 import Touchable from '../Touchable';
-import { StyleSheet, View, FlatList, ActivityIndicator } from 'react-native';
-import { Colors } from 'react-native-erxes-ui';
-import { useAlertContext } from '../../core/alert';
+import { useAlert } from '../../core/alert';
+import { white } from '../../styles/colors';
+import { withTheme } from '../../core/theming';
 
 const PreparedAttachment: React.FC<any> = ({
   attachments,
   setAttachments,
   deleteHandler,
+  theme,
 }) => {
-  const alert = useAlertContext();
+  const { colors } = theme;
+
+  const alert = useAlert();
 
   const attachmentsRef = useRef<any>();
   const indexDeleteAttachment = useRef<number>(0);
@@ -59,16 +64,11 @@ const PreparedAttachment: React.FC<any> = ({
 
   const renderPreparedAttachments = ({ item, index }: any) => {
     return (
-      <View style={styles.group}>
-        <IconTeam
-          name={'file-line'}
-          size={18}
-          color={'#fff'}
-          source={undefined}
-        />
+      <View style={[styles.group, { backgroundColor: colors.primary }]}>
+        <Icon source={'file-line'} size={18} color={white} />
         <TextView
           style={{
-            color: '#fff',
+            color: white,
             marginStart: 5,
           }}
         >
@@ -77,16 +77,11 @@ const PreparedAttachment: React.FC<any> = ({
         <View style={{ marginStart: 5 }}>
           {!item.isLoading ? (
             <Touchable onPress={() => onPress(index)}>
-              <IconTeam
-                name={'close-line'}
-                size={20}
-                color={'#fff'}
-                source={undefined}
-              />
+              <Icon source={'close-line'} size={20} color={white} />
             </Touchable>
           ) : (
             <View style={styles.loaderGroup}>
-              <ActivityIndicator size="small" color={'#fff'} />
+              <ActivityIndicator size="small" color={white} />
             </View>
           )}
         </View>
@@ -135,7 +130,7 @@ const PreparedAttachment: React.FC<any> = ({
   return null;
 };
 
-export default PreparedAttachment;
+export default withTheme(PreparedAttachment);
 
 const styles = StyleSheet.create({
   container: { marginHorizontal: 20, marginBottom: 10 },
@@ -145,7 +140,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     padding: 5,
     paddingStart: 10,
-    backgroundColor: Colors.primary,
   },
   loaderGroup: {
     width: 20,

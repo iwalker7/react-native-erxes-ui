@@ -1,17 +1,22 @@
 /* eslint-disable react-native/no-inline-styles */
 import color from 'color';
 import React, { useRef, useState, useEffect, useLayoutEffect } from 'react';
-import type { StyleProp } from 'react-native';
-import type { TextProps } from 'react-native';
-import type { ViewStyle } from 'react-native';
-import { Animated, SafeAreaView, StyleSheet, View } from 'react-native';
+import {
+  Animated,
+  SafeAreaView,
+  StyleSheet,
+  View,
+  Dimensions,
+} from 'react-native';
+import type { ColorValue, ViewStyle, TextProps, StyleProp } from 'react-native';
 import Button from '../Button';
 import Surface from '../Surface';
 import TextView from '../Typography';
 import Touchable from '../Touchable';
-import type { ColorValue } from 'react-native';
-import { Dimensions } from 'react-native';
-import Icon from '../Icon';
+// import Icon from '../Icon';
+import { white, black } from '../../styles/colors';
+import { withTheme } from '../../core/theming';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
 export enum DURATION {
   DURATION_SHORT = 1500,
@@ -42,8 +47,10 @@ export type SnackbarProps = {
   wrapperStyle?: StyleProp<ViewStyle>;
   style?: StyleProp<ViewStyle>;
   ref?: React.RefObject<View>;
-  theme?: ReactNativeErxes.Theme;
+  theme: ReactNativeErxes.Theme;
 };
+
+const defaultsize = 20;
 
 const Snackbar: React.FC<SnackbarProps> = ({
   visible,
@@ -54,24 +61,26 @@ const Snackbar: React.FC<SnackbarProps> = ({
   onDismiss,
   type = 'info',
   leftIconName,
-  leftIconColor,
-  leftIconSize,
+  leftIconColor = white,
+  leftIconSize = defaultsize,
   leftIcon,
   closeIcon,
+  theme,
   ...rest
 }) => {
-  const defaultsize = 20;
+  const { colors } = theme;
+
   const { current: opacity } = useRef(new Animated.Value(0.0));
   const [hidden, setHidden] = useState<boolean>(!visible);
   const hideTimeout = useRef<NodeJS.Timeout>();
   const mainColor =
     type === 'error'
-      ? '#FF4949'
+      ? colors.error
       : type === 'success'
-      ? '#17CE65'
+      ? colors.success
       : type === 'warning'
-      ? '#FFC82C'
-      : '#42a5f5';
+      ? colors.warn
+      : colors.accent;
 
   useEffect(() => {
     return () => {
@@ -123,107 +132,106 @@ const Snackbar: React.FC<SnackbarProps> = ({
   }
 
   return (
-    <Touchable
-      onPress={() => {
-        if (!action) {
-          setHidden(true);
-        }
-      }}
+    // <Touchable
+    //   onPress={() => {
+    //     if (!action) {
+    //       setHidden(true);
+    //     }
+    //   }}
+    // >
+    <SafeAreaView
+      style={[
+        {
+          position: 'absolute',
+          top: placement === 'top' ? 0 : undefined,
+          bottom: placement === 'bottom' ? 10 : undefined,
+          left: 3,
+          width: '100%',
+          zIndex: 5000,
+        },
+      ]}
     >
-      <SafeAreaView
+      <Surface
+        accessibilityLiveRegion="polite"
         style={[
+          styles.container,
+          { backgroundColor: mainColor },
           {
-            position: 'absolute',
-            top: placement === 'top' ? 0 : undefined,
-            bottom: placement === 'bottom' ? 10 : undefined,
-            left: 3,
-            width: '100%',
-            zIndex: 5000,
+            opacity: opacity,
+            transform: [
+              {
+                scale: visible
+                  ? opacity.interpolate({
+                      inputRange: [0, 1],
+                      outputRange: [0.9, 1],
+                    })
+                  : 1,
+              },
+            ],
           },
+          rest?.wrapperStyle,
         ]}
       >
-        <Surface
-          accessibilityLiveRegion="polite"
-          style={[
-            styles.container,
-            { backgroundColor: mainColor },
-            {
-              opacity: opacity,
-              transform: [
-                {
-                  scale: visible
-                    ? opacity.interpolate({
-                        inputRange: [0, 1],
-                        outputRange: [0.9, 1],
-                      })
-                    : 1,
-                },
-              ],
-            },
-            rest?.wrapperStyle,
-          ]}
+        <View
+          style={{
+            width: action ? '72%' : '100%',
+            alignItems: 'center',
+            flexDirection: 'row',
+          }}
         >
-          <View
-            style={{
-              width: action ? '72%' : '100%',
-              alignItems: 'center',
-              flexDirection: 'row',
-            }}
-          >
-            {leftIconName ||
-              (leftIcon && (
-                <View style={{ marginHorizontal: 5 }}>
-                  {leftIcon ? (
-                    leftIcon
-                  ) : (
-                    <Icon
-                      name={leftIconName || ''}
-                      color={leftIconColor || '#fff'}
-                      size={leftIconSize || defaultsize}
-                      source={undefined}
-                    />
-                  )}
-                </View>
-              ))}
-            <TextView
-              bold
-              style={[
-                styles.content,
-                { marginRight: action ? 0 : 16, color: '#fff' },
-                rest?.textStyle,
-              ]}
-            >
-              {message}
-            </TextView>
-            {closeIcon ||
-              (closeIcon && (
-                <View style={styles.overflow}>
-                  <Touchable onPress={() => setHidden(true)}>
-                    {closeIcon}
-                  </Touchable>
-                </View>
-              ))}
-          </View>
-          {action && (
-            <View style={{ justifyContent: 'flex-end' }}>
-              <Button
-                onPress={() => {
-                  action.onPress && action.onPress();
-                  onDismiss();
-                }}
-                color={'rgba(255, 255, 255, 0.6)'}
-                textColor={color(mainColor).darken(0.6).rgb().string()}
-                style={{
-                  borderRadius: 8,
-                }}
-              >
-                {action.label}
-              </Button>
+          {leftIconName || leftIcon ? (
+            <View style={{ marginHorizontal: 5 }}>
+              {leftIcon ? (
+                leftIcon
+              ) : (
+                <FontAwesome
+                  name={leftIconName || ''}
+                  color={leftIconColor || white}
+                  size={leftIconSize || defaultsize}
+                />
+              )}
             </View>
-          )}
-        </Surface>
-      </SafeAreaView>
-    </Touchable>
+          ) : null}
+
+          <TextView
+            bold
+            style={[
+              styles.content,
+              { marginRight: action ? 0 : 16, color: white },
+              rest?.textStyle,
+            ]}
+          >
+            {message}
+          </TextView>
+          {closeIcon ||
+            (closeIcon && (
+              <View style={styles.overflow}>
+                <Touchable onPress={() => setHidden(true)}>
+                  {closeIcon}
+                </Touchable>
+              </View>
+            ))}
+        </View>
+        {action ? (
+          <View style={{ justifyContent: 'flex-end' }}>
+            <Button
+              onPress={() => {
+                action.onPress && action.onPress();
+                onDismiss();
+              }}
+              color={'rgba(255, 255, 255, 0.6)'}
+              textColor={color(mainColor).darken(0.6).rgb().string()}
+              style={{
+                borderRadius: 8,
+              }}
+            >
+              {action.label}
+            </Button>
+          </View>
+        ) : null}
+      </Surface>
+    </SafeAreaView>
+    // </Touchable>
   );
 };
 
@@ -236,7 +244,7 @@ const styles = StyleSheet.create({
     paddingVertical: 8,
     borderRadius: 5,
     width: Dimensions.get('screen').width - 15,
-    shadowColor: '#000',
+    shadowColor: black,
     shadowOffset: {
       width: 0,
       height: 0,
@@ -257,4 +265,4 @@ const styles = StyleSheet.create({
     right: 0,
   },
 });
-export default Snackbar;
+export default withTheme(Snackbar);

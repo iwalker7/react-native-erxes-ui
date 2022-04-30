@@ -8,7 +8,7 @@ import {
 import { View } from 'react-native';
 import { androidCameraPermission } from '../../utils/utils';
 import ScreenUtils from '../../utils/screenUtils';
-import { Touchable, TextView, Modal, Divider } from '../../index';
+import { Touchable, TextView, Modal, Divider, withTheme } from '../../index';
 import { ActivityIndicator } from 'react-native';
 import DocumentPicker from 'react-native-document-picker';
 
@@ -28,6 +28,7 @@ export type UploaderProps = {
   onlyPhoto?: boolean;
   uploadHandler: (e: any) => void;
   text?: string;
+  theme: ReactNativeErxes.Theme;
 };
 
 const Uploader: React.FC<UploaderProps> = ({
@@ -40,8 +41,11 @@ const Uploader: React.FC<UploaderProps> = ({
   isCover,
   text,
   onlyPhoto = false,
+  theme,
   uploadHandler,
 }) => {
+  const { colors } = theme;
+
   const [isUploading, onUploading] = useState<boolean>(false);
 
   const onStart = () => {
@@ -164,12 +168,12 @@ const Uploader: React.FC<UploaderProps> = ({
             width: '90%',
           }}
         >
-          <ActivityIndicator size="small" color="#4F33AF" />
+          <ActivityIndicator size="small" color={colors.primary} />
           <TextView
             bold
             large
             style={{
-              color: '#4F33AF',
+              color: colors.primary,
               alignSelf: 'center',
               marginBottom: 15,
               marginTop: 8,
@@ -222,4 +226,4 @@ const Uploader: React.FC<UploaderProps> = ({
   );
 };
 
-export default Uploader;
+export default withTheme(Uploader);

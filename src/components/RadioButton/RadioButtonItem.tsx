@@ -13,6 +13,7 @@ import { RadioButtonContext, RadioButtonContextType } from './RadioButtonGroup';
 import { handlePress } from './utils';
 import RadioButton from './RadioButton';
 import Touchable from '../Touchable';
+import { black } from '../../styles/colors';
 
 export type RBItemProps = {
   value: string;
@@ -34,7 +35,7 @@ const RadioButtonItem: React.FC<RBItemProps> = ({
   value,
   label,
   style,
-  labelColor = '#000',
+  labelColor = black,
   labelStyle,
   onPress,
   disabled,

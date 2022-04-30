@@ -151,12 +151,7 @@ const Searchbar = React.forwardRef<TextInputHandles, SearchbarProps>(
           icon={
             icon ||
             (({ size, color }) => (
-              <Icon
-                name="search"
-                color={color}
-                size={size}
-                source={undefined}
-              />
+              <Icon source="search" color={color} size={size} />
             ))
           }
           accessibilityLabel={searchAccessibilityLabel}
@@ -194,7 +189,7 @@ const Searchbar = React.forwardRef<TextInputHandles, SearchbarProps>(
           icon={
             clearIcon ||
             (({ size, color }) => (
-              <Icon name="times" color={color} size={size} source={undefined} />
+              <Icon source="times" color={color} size={size} />
             ))
           }
           // @ts-expect-error We keep old a11y props for backwards compat with old RN versions

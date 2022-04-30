@@ -22,7 +22,6 @@ export type $RemoveChildren<T extends React.ComponentType<any>> = $Omit<
 
 type Props = $RemoveChildren<typeof TouchableRipple> & {
   icon: IconSource;
-  name?: string;
   color?: string;
   size?: number;
   disabled?: boolean;
@@ -35,7 +34,6 @@ type Props = $RemoveChildren<typeof TouchableRipple> & {
 };
 
 const IconButton = ({
-  icon,
   color: customColor,
   size = 24,
   accessibilityLabel,
@@ -44,7 +42,7 @@ const IconButton = ({
   animated = false,
   theme,
   style,
-  name,
+  icon,
   ...rest
 }: Props) => {
   const iconColor =
@@ -78,12 +76,7 @@ const IconButton = ({
       {...rest}
     >
       <View>
-        <IconComponent
-          color={iconColor}
-          source={icon}
-          size={size}
-          name={name || ''}
-        />
+        <IconComponent color={iconColor} source={icon || ''} size={size} />
       </View>
     </TouchableRipple>
   );

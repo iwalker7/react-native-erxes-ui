@@ -14,9 +14,17 @@ import {
 } from 'react-native';
 import TextView from '../Typography';
 import Touchable from '../Touchable';
-import { bgTransparent, Brand } from '../../styles/colors';
+import {
+  grey100,
+  grey600,
+  red100,
+  red400,
+  transparent,
+  white,
+} from '../../styles/colors';
 import type { ViewStyle } from 'react-native';
 import { withTheme } from '../../core/theming';
+import { primaryDark3 } from '../../utils/colorUtils';
 
 export type TextInputProps = RNProps & {
   type?: 'default' | 'outline' | 'filled' | 'text';
@@ -59,11 +67,14 @@ const TextInput: React.ForwardRefRenderFunction<unknown, TextInputProps> = ({
   maxLength = 30,
   icon,
   iconPosition = 'left',
+  theme,
   ...rest
 }) => {
+  const { colors } = theme;
+
   const p = password ? '*****' : placeholder ? placeholder : '';
   //   const [ph, setPh] = React.useState(p);
-  const [mainColor, setMainColor] = React.useState('#5629B6');
+  const [mainColor, setMainColor] = React.useState(colors.primary);
   const [focused, setFocused] = React.useState<boolean>(false);
   const { current: labeled } = React.useRef<Animated.Value>(
     new Animated.Value(0)
@@ -144,7 +155,7 @@ const TextInput: React.ForwardRefRenderFunction<unknown, TextInputProps> = ({
               borderColor: 'transparent',
               paddingLeft: 5,
               paddingTop: 15,
-              borderBottomColor: Brand.medium,
+              borderBottomColor: grey600,
               minHeight: 50,
             }
           : styles.container,
@@ -155,16 +166,16 @@ const TextInput: React.ForwardRefRenderFunction<unknown, TextInputProps> = ({
             type === 'filled'
               ? 'rgba(79, 51, 175, 0.12)'
               : type === 'outline'
-              ? '#fff'
-              : '#F5F5F5',
+              ? white
+              : grey100,
           borderColor:
             type === 'filled'
               ? mainColor
               : type === 'outline'
               ? mainColor
               : required
-              ? Brand.error
-              : 'transparent',
+              ? red400
+              : transparent,
           borderWidth: 1,
         },
         rest?.containerStyle,
@@ -174,7 +185,7 @@ const TextInput: React.ForwardRefRenderFunction<unknown, TextInputProps> = ({
         <View style={[styles.animatedStyle]}>
           <TextView
             small
-            color={rest?.labelColor || Brand.primaryDark3}
+            color={rest?.labelColor || primaryDark3(colors.primary)}
             style={rest?.labelStyle}
           >
             {label}
@@ -210,7 +221,7 @@ const TextInput: React.ForwardRefRenderFunction<unknown, TextInputProps> = ({
         onChangeText={handleChangeText}
         onSubmitEditing={handleSubmit}
         value={value && value}
-        underlineColorAndroid={bgTransparent}
+        underlineColorAndroid={transparent}
         {...rest}
       />
       {required && (
@@ -226,7 +237,7 @@ const TextInput: React.ForwardRefRenderFunction<unknown, TextInputProps> = ({
 const styles = StyleSheet.create({
   container: {
     minHeight: 50,
-    backgroundColor: '#F5F5F5',
+    backgroundColor: grey100,
     borderRadius: 8,
     paddingHorizontal: 15,
   },

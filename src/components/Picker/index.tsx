@@ -7,6 +7,7 @@ import {
   View,
   ViewStyle,
 } from 'react-native';
+import { grey100 } from '../../styles/colors';
 import { Modal, Touchable, TextView } from '../../index';
 import Divider from '../Divider';
 
@@ -100,7 +101,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    backgroundColor: '#F5F5F5',
+    backgroundColor: grey100,
   },
 
   itemText: {

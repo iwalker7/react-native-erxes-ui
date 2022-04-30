@@ -87,12 +87,7 @@ const CrossFadeIcon: React.FC<CrossFadedIconProps> = ({
             },
           ]}
         >
-          <Icon
-            source={previousIcon}
-            size={iconSize}
-            color={iconColor}
-            name={iconName || ''}
-          />
+          <Icon source={iconName || ''} size={iconSize} color={iconColor} />
         </Animated.View>
       ) : null}
       <Animated.View
@@ -104,12 +99,7 @@ const CrossFadeIcon: React.FC<CrossFadedIconProps> = ({
           },
         ]}
       >
-        <Icon
-          source={previousIcon}
-          size={iconSize}
-          color={iconColor}
-          name={iconName || ''}
-        />
+        <Icon source={iconName || ''} size={iconSize} color={iconColor} />
       </Animated.View>
     </View>
   );

@@ -4,6 +4,7 @@ import type { StyleProp } from 'react-native';
 import type { ViewStyle } from 'react-native';
 import { StyleSheet, View } from 'react-native';
 import { withTheme } from '../../core/theming';
+import { black, white } from '../../styles/colors';
 
 export type $Omit<T, K> = Pick<T, Exclude<keyof T, K>>;
 export type $RemoveChildren<T extends React.ComponentType<any>> = $Omit<
@@ -33,11 +34,11 @@ const Divider: React.FC<DividerProps> = ({ inset, style, theme, ...rest }) => {
 
 const styles = StyleSheet.create({
   light: {
-    backgroundColor: color('#000').alpha(0.12).rgb().string(),
+    backgroundColor: color(black).alpha(0.12).rgb().string(),
     height: StyleSheet.hairlineWidth,
   },
   dark: {
-    backgroundColor: color('#fff').alpha(0.12).rgb().string(),
+    backgroundColor: color(white).alpha(0.12).rgb().string(),
     height: StyleSheet.hairlineWidth,
   },
   inset: {

@@ -8,6 +8,7 @@ import {
   TextStyle,
   ViewStyle,
 } from 'react-native';
+import { black } from '../../styles/colors';
 import Icon from '../Icon';
 
 export type EmptyProps = {
@@ -25,7 +26,6 @@ const Empty: React.FC<EmptyProps> = ({
   imageSource,
   containerStyle,
   textStyle,
-
   iconColor,
   iconName,
   iconSize = 16,
@@ -34,10 +34,9 @@ const Empty: React.FC<EmptyProps> = ({
     <View style={[styles.container, containerStyle]}>
       {iconName ? (
         <Icon
-          name={iconName || 'box'}
+          source={iconName || 'box'}
           size={iconSize || 20}
-          color={iconColor || '#000'}
-          source={undefined}
+          color={iconColor || black}
         />
       ) : (
         <Image
@@ -69,7 +68,7 @@ const styles = StyleSheet.create({
     marginVertical: 10,
   },
   text: {
-    color: '#000',
+    color: black,
     marginTop: 10,
   },
 });

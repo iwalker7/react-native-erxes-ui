@@ -8,12 +8,15 @@ import {
   StyleProp,
   ViewProps,
 } from 'react-native';
+import { withTheme } from '../../core/theming';
+import { white } from '../../styles/colors';
 
 export type LoaderProps = ViewProps & {
   backgroundColor?: string;
   color?: string;
   style?: StyleProp<ViewStyle>;
   custom?: JSX.Element;
+  theme: ReactNativeErxes.Theme;
 };
 
 const Loader: React.FC<LoaderProps> = ({
@@ -21,14 +24,17 @@ const Loader: React.FC<LoaderProps> = ({
   style,
   color,
   custom,
+  theme,
 }) => {
+  const { colors } = theme;
+
   return (
     <View style={{ flex: 1 }}>
       <View
         style={[
           styles.container,
           {
-            backgroundColor: backgroundColor || 'rgba(255, 255, 255, 0.4)',
+            backgroundColor: backgroundColor || white,
           },
           style,
         ]}
@@ -36,7 +42,7 @@ const Loader: React.FC<LoaderProps> = ({
         {custom ? (
           custom
         ) : (
-          <ActivityIndicator size="small" color={color || '#5629B6'} />
+          <ActivityIndicator size="small" color={color || colors.primary} />
         )}
       </View>
     </View>
@@ -54,4 +60,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Loader;
+export default withTheme(Loader);

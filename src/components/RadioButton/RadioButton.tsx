@@ -5,6 +5,8 @@ import color from 'color';
 import { RadioButtonContext, RadioButtonContextType } from './RadioButtonGroup';
 import { handlePress, isChecked } from './utils';
 import Touchable from '../Touchable';
+import { withTheme } from '../../core/theming';
+import { black } from '../../styles/colors';
 
 export type RadioButtonProps = {
   value: string;
@@ -14,6 +16,7 @@ export type RadioButtonProps = {
   uncheckedColor?: string;
   color?: string;
   testID?: string;
+  theme: ReactNativeErxes.Theme;
 };
 
 const BORDER_WIDTH = 2;
@@ -24,8 +27,11 @@ const RadioButton: React.FC<RadioButtonProps> = ({
   value,
   status,
   testID,
+  theme,
   ...rest
 }) => {
+  const { colors } = theme;
+
   const { current: borderAnim } = React.useRef<Animated.Value>(
     new Animated.Value(BORDER_WIDTH)
   );
@@ -64,9 +70,9 @@ const RadioButton: React.FC<RadioButtonProps> = ({
     }
   }, [status, borderAnim, radioAnim, scale]);
 
-  const checkedColor = rest.color || '#644BB9';
+  const checkedColor = rest.color || colors.primary;
   const uncheckedColor =
-    rest.uncheckedColor || color('#000').alpha(0.7).rgb().string();
+    rest.uncheckedColor || color(black).alpha(0.7).rgb().string();
 
   let radioColor: string;
 
@@ -81,7 +87,7 @@ const RadioButton: React.FC<RadioButtonProps> = ({
           }) === 'checked';
 
         if (disabled) {
-          radioColor = color('#000').alpha(0.16).rgb().string();
+          radioColor = color(black).alpha(0.16).rgb().string();
         } else {
           radioColor = checked ? checkedColor : uncheckedColor;
         }
@@ -160,7 +166,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export default RadioButton;
+export default withTheme(RadioButton);
 
 const RadioButtonWithTheme = RadioButton;
 export { RadioButtonWithTheme as RadioButton };

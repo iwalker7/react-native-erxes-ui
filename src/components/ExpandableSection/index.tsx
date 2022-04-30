@@ -1,13 +1,13 @@
 /* eslint-disable react-native/no-inline-styles */
+import React, { useState } from 'react';
+import { View, StyleSheet, LayoutAnimation } from 'react-native';
+
 import type { SetStateAction } from 'react';
-import React from 'react';
-import { useState } from 'react';
 import type { TextStyle, ViewStyle, StyleProp, ViewProps } from 'react-native';
-import { StyleSheet } from 'react-native';
-import { LayoutAnimation } from 'react-native';
-import { View } from 'react-native';
+
 import Touchable from '../Touchable';
 import TextView from '../Typography';
+import { white, grey300 } from '../../styles/colors';
 
 export type ExpandableSectionType = ViewProps & {
   expanded?: boolean;
@@ -61,11 +61,11 @@ const ExpandableSection: React.FC<ExpandableSectionType> = ({
 const styles = StyleSheet.create({
   container: {
     width: '100%',
-    backgroundColor: '#fff',
+    backgroundColor: white,
   },
   border: {
     borderRadius: 10,
-    borderColor: 'rgba(0, 0, 0, 0.1)',
+    borderColor: grey300,
     borderWidth: 1,
   },
   header: {

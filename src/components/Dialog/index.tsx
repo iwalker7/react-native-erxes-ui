@@ -9,6 +9,7 @@ import {
   StyleProp,
   ViewStyle,
 } from 'react-native';
+import { grey800, grey300 } from '../../styles/colors';
 import Button from '../Button';
 import Divider from '../Divider';
 import TextView from '../Typography';
@@ -42,7 +43,6 @@ const Dialog: React.FC<DialogProps> = ({
   onVisible,
   children,
 }) => {
-  const subColor = '#373737';
   return (
     <Modal
       visible={isVisible}
@@ -67,7 +67,7 @@ const Dialog: React.FC<DialogProps> = ({
                 <TextView bold style={styles.subText}>
                   {title ? title : 'Are you sure?'}
                 </TextView>
-                <TextView small color={subColor} style={styles.subText}>
+                <TextView small color={grey800} style={styles.subText}>
                   {supportingText ? supportingText : 'This cannot be undone.'}
                 </TextView>
               </View>
@@ -75,10 +75,10 @@ const Dialog: React.FC<DialogProps> = ({
             {children && action === 'simple' && (
               <>
                 <View style={styles.header}>
-                  <TextView bold color={subColor}>
+                  <TextView bold color={grey800}>
                     {title}
                   </TextView>
-                  <TextView small color={subColor} style={{ marginTop: 3 }}>
+                  <TextView small color={grey800} style={{ marginTop: 3 }}>
                     {supportingText ? supportingText : 'This cannot be undone.'}
                   </TextView>
                 </View>
@@ -89,8 +89,8 @@ const Dialog: React.FC<DialogProps> = ({
             {action !== 'simple' && (
               <View style={styles.buttonsContainer}>
                 <Button
-                  color="#E0E0E0"
-                  textStyle={{ color: subColor, fontSize: 13 }}
+                  color={grey300}
+                  textStyle={{ color: grey800, fontSize: 13 }}
                   onPress={() => {
                     onVisible(false);
                     onClose && onClose();

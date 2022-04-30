@@ -1,3 +1,4 @@
+/* eslint-disable react-native/no-inline-styles */
 /* eslint-disable no-undef */
 import * as React from 'react';
 import {
@@ -20,14 +21,13 @@ export type IconSource =
 
 type IconProps = {
   size?: number;
-  name?: string;
   color?: ColorValue | string | undefined;
   allowFontScaling?: boolean;
 };
 
 type Props = IconProps & {
   color?: ColorValue | string | undefined;
-  source: any;
+  source?: any;
   theme: ReactNativeErxes.Theme;
 };
 

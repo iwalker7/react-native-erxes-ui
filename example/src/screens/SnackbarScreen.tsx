@@ -1,50 +1,24 @@
 /* eslint-disable react-native/no-inline-styles */
-import React, { useState } from 'react';
+import React from 'react';
 import { View, ScrollView } from 'react-native';
 import {
   TextView,
   Colors,
-  Snackbar,
   Picker,
   Button,
+  useAlert,
 } from 'react-native-erxes-ui';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+
 import styles from '../styles';
 
 const SnackbarScreen: React.FC<any> = () => {
-  const alerts = [
-    { type: 'success', color: '#17CE65', icon: 'checkbox-marked-circle' },
-    { type: 'warning', color: '#FFC82C', icon: 'alert-circle-outline' },
-    { type: 'error', color: '#FF4949', icon: 'alert-circle' },
-    { type: 'info', color: '#42a5f5', icon: 'information' },
-  ];
-
-  const [b, SetB] = React.useState(false);
-  const [visible, setVisible] = React.useState<boolean>(false);
   const data = ['success', 'warning', 'error', 'info'];
   const [indexBoard, setIndexBoard] = React.useState<number>(-1);
-  const [alert, setA] = useState(alerts[1]);
+
+  const alert = useAlert();
 
   return (
     <>
-      <Snackbar
-        message="You receive an alert"
-        visible={visible}
-        onDismiss={() => setVisible(false)}
-        placement="top"
-        type={alert.type}
-      />
-      <Snackbar
-        message="This is bottom snackbar"
-        visible={b}
-        onDismiss={() => SetB(false)}
-        action={{
-          label: 'Undo',
-          onPress: () => {},
-        }}
-        placement="bottom"
-        type="error"
-      />
       <View style={styles.container}>
         <View style={{ width: '100%' }}>
           <Picker
@@ -53,16 +27,8 @@ const SnackbarScreen: React.FC<any> = () => {
             placeholderText="Choose alert type"
             onSelect={(i: any) => {
               setIndexBoard(i);
-              setA(alerts[i]);
-              setVisible(true);
+              alert.error('Hello');
             }}
-            icon={
-              <MaterialCommunityIcons
-                name={'chevron-down'}
-                color="#757575"
-                size={20}
-              />
-            }
           />
         </View>
 
@@ -93,7 +59,7 @@ const SnackbarScreen: React.FC<any> = () => {
                 justifyContent: 'flex-start',
               }}
             >
-              <Button onPress={() => SetB(true)}>Click me</Button>
+              <Button onPress={() => {}}>Click me</Button>
             </View>
           </View>
 

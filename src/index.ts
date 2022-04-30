@@ -46,6 +46,7 @@ import * as ColorUtils from './utils//colorUtils';
 export { Colors, Constants, Utils, ColorUtils };
 
 export { useTheme, withTheme, ThemeProvider } from './core/theming';
+export { useAlert } from './core/alert';
 
 export { default as Provider } from './core/Provider';
 export { default as DefaultTheme } from './styles/DefaultTheme';

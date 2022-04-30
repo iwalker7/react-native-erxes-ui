@@ -97,18 +97,18 @@ const Provider = ({ ...props }: Props) => {
   const { children, settings } = props;
   return (
     <PortalHost>
-      <SettingsProvider
-        value={
-          settings || {
-            icon: MaterialCommunityIcon,
-            apiUrl: 'office.erxes.io/gateway',
+      <ThemeProvider theme={getTheme()}>
+        <SettingsProvider
+          value={
+            settings || {
+              icon: MaterialCommunityIcon,
+              apiUrl: 'office.erxes.io/gateway',
+            }
           }
-        }
-      >
-        <AlertProvider>
-          <ThemeProvider theme={getTheme()}>{children}</ThemeProvider>
-        </AlertProvider>
-      </SettingsProvider>
+        >
+          <AlertProvider>{children}</AlertProvider>
+        </SettingsProvider>
+      </ThemeProvider>
     </PortalHost>
   );
 };

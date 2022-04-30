@@ -7,6 +7,7 @@ import {
   TextProps,
   TextStyle,
 } from 'react-native';
+import { red400 } from '../../styles/colors';
 
 export type TextViewProps = TextProps & {
   xxsmall?: boolean;
@@ -86,7 +87,7 @@ const TextView: React.FC<TextViewProps> = ({
     >
       {rest.children}
       {required && (
-        <Text style={{ color: '#FF4949', fontWeight: 'bold' }}> *</Text>
+        <Text style={{ color: red400, fontWeight: 'bold' }}> *</Text>
       )}
     </Text>
   );

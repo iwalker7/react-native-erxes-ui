@@ -2,9 +2,7 @@ import * as React from 'react';
 import { Animated, View, StyleSheet } from 'react-native';
 import color from 'color';
 import Touchable from '../Touchable';
-//import MaterialCommunityIcons from '../MaterialCommunityIcons';
 import { withTheme } from '../../core/theming';
-import MaterialCommunityIcons from '../MaterialCommunityIcons';
 
 export type CheckBoxProps = {
   status: 'checked' | 'unchecked' | 'indeterminate';
@@ -62,7 +60,6 @@ const Checkbox: React.FC<CheckBoxProps> = ({
   }, [status, scaleAnim, scale]);
 
   const checked = status === 'checked';
-  const indeterminate = status === 'indeterminate';
   const checkedColor = rest.color || '#5629B6';
   const uncheckedColor =
     rest.uncheckedColor || color('#000').alpha(0.54).rgb().string();
@@ -79,12 +76,6 @@ const Checkbox: React.FC<CheckBoxProps> = ({
     inputRange: [0.8, 1],
     outputRange: [7, 0],
   });
-
-  const icon = indeterminate
-    ? 'minus-box'
-    : checked
-    ? 'checkbox-marked'
-    : 'checkbox-blank-outline';
 
   return (
     <Touchable

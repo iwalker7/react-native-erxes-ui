@@ -1,7 +1,8 @@
 /* eslint-disable react-native/no-inline-styles */
 import React, { SetStateAction } from 'react';
-import { Pressable, TouchableWithoutFeedback } from 'react-native';
 import {
+  Pressable,
+  TouchableWithoutFeedback,
   Modal as RNModal,
   ModalProps as RNModalProps,
   StyleProp,
@@ -10,13 +11,16 @@ import {
   View,
   ViewProps as RNViewProps,
   ViewStyle,
+  Platform,
+  KeyboardAvoidingView,
 } from 'react-native';
+import color from 'color';
+
 import TextView from '../Typography';
 import Divider from '../Divider';
-import { bgDialog, bgLight, coreGray } from '../../styles/colors';
-import { KeyboardAvoidingView } from 'react-native';
-import { Platform } from 'react-native';
+import { black, grey100, grey500, white } from '../../styles/colors';
 import ScreenUtils from '../../utils/screenUtils';
+import { withTheme } from '../../core/theming';
 
 export type ModalProps = RNModalProps &
   RNViewProps & {
@@ -33,9 +37,11 @@ export type ModalProps = RNModalProps &
     animationType?: 'fade' | 'none' | 'slide' | undefined;
     bgColor?: string;
     modalHeader?: JSX.Element;
+    theme: ReactNativeErxes.Theme;
   };
 
 const Modal: React.FC<ModalProps> = ({
+  theme,
   onHide,
   isVisible,
   onVisible,
@@ -50,6 +56,8 @@ const Modal: React.FC<ModalProps> = ({
   withoutTouch,
   ...rest
 }) => {
+  const { colors } = theme;
+
   const onHideComplete = () => {
     if (cancelable) {
       onHide && onHide();
@@ -87,7 +95,7 @@ const Modal: React.FC<ModalProps> = ({
               flex: 1,
               width: '100%',
               justifyContent: 'flex-end',
-              backgroundColor: 'rgba(0, 0, 0, 0.2)',
+              backgroundColor: colors.backdrop,
             },
             style,
           ]}
@@ -107,7 +115,7 @@ const Modal: React.FC<ModalProps> = ({
                       styles.modalView,
                       {
                         marginBottom: ScreenUtils.isIphoneWithNotch() ? 30 : 10,
-                        backgroundColor: rest?.bgColor ? rest?.bgColor : '#fff',
+                        backgroundColor: rest?.bgColor ? rest?.bgColor : white,
                       },
                     ]}
                     behavior={Platform.OS === 'ios' ? 'padding' : undefined}
@@ -134,7 +142,7 @@ const Modal: React.FC<ModalProps> = ({
                         style={{
                           borderTopLeftRadius: 20,
                           borderTopRightRadius: 20,
-                          backgroundColor: bgLight,
+                          backgroundColor: grey100,
                         }}
                       >
                         <TextView style={styles.popoverHeader}>
@@ -186,7 +194,7 @@ const styles = StyleSheet.create({
   popoverHeader: {
     paddingHorizontal: 20,
     paddingVertical: 10,
-    color: coreGray,
+    color: grey500,
     textTransform: 'uppercase',
     fontSize: 13,
     fontWeight: '500',
@@ -194,7 +202,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   headerText: {
-    color: coreGray,
+    color: grey500,
     textTransform: 'uppercase',
     fontSize: 13,
     fontWeight: '500',
@@ -204,8 +212,8 @@ const styles = StyleSheet.create({
   dialogContainer: {
     flex: 1,
     width: '100%',
-    backgroundColor: bgDialog,
+    backgroundColor: color(black).alpha(0.5).rgb().string(),
   },
 });
 
-export default Modal;
+export default withTheme(Modal);

@@ -105,10 +105,9 @@ const GradientBtn: React.FC<GradientButtonProps> = ({
                     leftIcon
                   ) : (
                     <Icon
-                      name={leftIconName || ''}
                       color={rest?.leftIconColor || '#fff'}
                       size={rest?.leftIconSize || defaultsize}
-                      source={undefined}
+                      source={leftIconName || ''}
                     />
                   )}
                 </View>
@@ -130,10 +129,9 @@ const GradientBtn: React.FC<GradientButtonProps> = ({
                     rightIcon
                   ) : (
                     <Icon
-                      name={leftIconName || ''}
                       color={rest?.leftIconColor || '#fff'}
                       size={rest?.leftIconSize || defaultsize}
-                      source={undefined}
+                      source={leftIconName || ''}
                     />
                   )}
                 </View>
