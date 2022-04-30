@@ -93,6 +93,7 @@ export default function App() {
       //   color: '#472D9A',
     },
   };
+
   return (
     <ThemeProvider theme={CustomDefaultTheme}>
       <NavigationContainer>

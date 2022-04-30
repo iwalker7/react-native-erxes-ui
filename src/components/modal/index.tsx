@@ -32,7 +32,6 @@ export type ModalProps = RNModalProps &
     withoutTouch?: boolean;
     animationType?: 'fade' | 'none' | 'slide' | undefined;
     bgColor?: string;
-    shadowRadius?: string;
     modalHeader?: JSX.Element;
   };
 
@@ -45,7 +44,6 @@ const Modal: React.FC<ModalProps> = ({
   cancelable = true,
   animationType,
   bottom = false,
-  shadowRadius,
   modalHeader,
   withHeader,
   headerText,
@@ -126,7 +124,6 @@ const Modal: React.FC<ModalProps> = ({
                       styles.modalView,
                       {
                         width: '90%',
-                        shadowRadius: shadowRadius,
                         minHeight: 50,
                       },
                       style,

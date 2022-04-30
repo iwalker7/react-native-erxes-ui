@@ -8,8 +8,6 @@ import {
   TextInput,
   Colors,
   useTheme,
-  Button,
-  ExpandableSection,
 } from 'react-native-erxes-ui';
 
 import _ from 'lodash';

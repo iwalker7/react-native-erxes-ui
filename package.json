@@ -54,6 +54,20 @@
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
   },
+  "dependencies": {
+    "@callstack/react-theme-provider": "^3.0.7",
+    "@react-navigation/drawer": "^6.4.1",
+    "color": "^4.2.3",
+    "lodash": "^4.17.21",
+    "moment": "^2.29.2",
+    "react-native-document-picker": "^8.1.0",
+    "react-native-gesture-handler": "^2.4.0",
+    "react-native-image-picker": "^4.7.3",
+    "react-native-linear-gradient": "^2.5.6",
+    "react-native-popover-view": "^5.0.1",
+    "react-native-safe-area-context": "^4.2.4",
+    "react-native-vector-icons": "^9.1.0"
+  },
   "devDependencies": {
     "@commitlint/config-conventional": "^11.0.0",
     "@react-native-community/eslint-config": "^2.0.0",
@@ -152,20 +166,6 @@
       "module",
       "typescript"
     ]
-  },
-  "dependencies": {
-    "@callstack/react-theme-provider": "^3.0.7",
-    "@react-navigation/drawer": "^6.4.1",
-    "color": "^4.2.3",
-    "lodash": "^4.17.21",
-    "moment": "^2.29.2",
-    "react-native-document-picker": "^8.1.0",
-    "react-native-gesture-handler": "^2.4.0",
-    "react-native-image-picker": "^4.7.3",
-    "react-native-linear-gradient": "^2.5.6",
-    "react-native-popover-view": "^5.0.1",
-    "react-native-safe-area-context": "^4.2.4",
-    "react-native-vector-icons": "^9.1.0"
   },
   "resolutions": {
     "@types/react": "^17.0.38"

@@ -1,8 +1,8 @@
 import React, { useState, createContext } from 'react';
 import { useContext } from 'react';
 import { Dimensions } from 'react-native';
-import Snackbar from 'src/components/Snackbar';
-import { DURATION } from 'src/components/Snackbar';
+import Snackbar from '../components/Snackbar';
+import { DURATION } from '../components/Snackbar';
 import { Brand } from '../styles/colors';
 
 export type TAlert = {

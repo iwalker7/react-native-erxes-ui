@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react-native/no-inline-styles */
 import React, { LegacyRef } from 'react';
 import { View } from 'react-native';
@@ -16,8 +15,8 @@ import {
 import TextView from '../Typography';
 import Touchable from '../Touchable';
 import { bgTransparent, Brand } from '../../styles/colors';
-import { withTheme } from 'src/core/theming';
 import type { ViewStyle } from 'react-native';
+import { withTheme } from '../../../src/core/theming';
 
 export type TextInputProps = RNProps & {
   type?: 'default' | 'outline' | 'filled' | 'text';
