@@ -5,6 +5,7 @@ import TextView from '../Typography';
 import Touchable from '../Touchable';
 import type { StyleProp } from 'react-native';
 import type { ViewStyle } from 'react-native';
+import { Colors } from 'react-native-erxes-ui';
 
 export type CardProps = {
   title: string;
@@ -52,14 +53,17 @@ const Card: React.FC<CardProps> = ({
           <TextView large bold style={styles.mb}>
             {title}
           </TextView>
-          <TextView style={{ flexWrap: 'wrap' }} color="#757575">
+          <TextView style={{ flexWrap: 'wrap' }} color={Colors.grey600}>
             {secondaryText}
           </TextView>
         </View>
       </View>
       {media && <View style={[styles.med, mediaStyle]}>{media}</View>}
       {supportingText && (
-        <TextView color="#757575" style={(styles.mb, styles.mt, styles.p)}>
+        <TextView
+          color={Colors.grey600}
+          style={(styles.mb, styles.mt, styles.p)}
+        >
           {supportingText}
         </TextView>
       )}
