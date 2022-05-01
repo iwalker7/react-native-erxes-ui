@@ -15,10 +15,9 @@ export { default as TextView, TextViewProps } from './components/Typography';
 export { default as TextInput, TextInputProps } from './components/TextInput';
 export { default as Touchable, TouchableProps } from './components/Touchable';
 export { default as Modal, ModalProps } from './components/Modal';
-export { default as Uploader, UploaderProps } from './components/Uploader';
 export { default as RadioButton } from './components/RadioButton';
 export { default as Searchbar, SearchbarProps } from './components/Searchbar';
-export { default as PreparedAttachments } from './components/PreparedAttachments';
+
 export {
   default as Snackbar,
   SnackbarProps,
@@ -32,7 +31,6 @@ export {
   default as TouchableRipple,
   TouchableRippleProps,
 } from './components/Button/TouchableRipple';
-export { default as Popover, PopoverProps } from './components/Popover';
 export { default as Pagination, generatePages } from './components/Pagination';
 export { default as GradientButton } from './components/Button/GradientButton';
 
@@ -46,7 +44,6 @@ import * as ColorUtils from './utils//colorUtils';
 export { Colors, Constants, Utils, ColorUtils };
 
 export { useTheme, withTheme, ThemeProvider } from './core/theming';
-export { useAlert } from './core/alert';
 
 export { default as Provider } from './core/Provider';
 export { default as DefaultTheme } from './styles/DefaultTheme';

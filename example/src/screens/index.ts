@@ -1,4 +1,3 @@
-import AlertScreen from './AlertScreen';
 import AvatarScreen from './AvatarScreen';
 import ButtonScreen from './ButtonScreen';
 import CardScreen from './CardScreen';
@@ -19,7 +18,6 @@ import ThemeScreen from './ThemeScreen';
 import UplaoderScreen from './UploaderScreen';
 
 export {
-  AlertScreen,
   AvatarScreen,
   ButtonScreen,
   CardScreen,

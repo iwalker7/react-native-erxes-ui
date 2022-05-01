@@ -2,7 +2,6 @@
 import React from 'react';
 import { View, ScrollView } from 'react-native';
 import { TextView, Colors, Button } from 'react-native-erxes-ui';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import styles from '../styles';
 
 const ButtonScreen: React.FC<any> = () => {

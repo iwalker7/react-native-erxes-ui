@@ -11,6 +11,10 @@ import type {
 import Touchable from '../Touchable';
 import TextView from '../Typography';
 import Icon from '../Icon';
+import { withTheme } from '../../core/theming';
+import { transparent, white } from '../../styles/colors';
+
+const defaultsize = 20;
 
 export type ButtonProps = ViewProps & {
   type?: 'default' | 'outline';
@@ -33,8 +37,9 @@ export type ButtonProps = ViewProps & {
   leftIconSize?: number;
   leftIconColor?: ColorValue | string | undefined;
   isLoading?: boolean;
-  positionLoader?: 'left' | 'right';
+  loaderPosition?: 'left' | 'right';
   width?: number;
+  theme: ReactNativeErxes.Theme;
 };
 
 const Button: React.FC<ButtonProps> = ({
@@ -51,42 +56,55 @@ const Button: React.FC<ButtonProps> = ({
   children,
   width,
   rightIcon,
+  rightIconName,
+  rightIconSize = defaultsize,
+  rightIconColor = white,
   leftIcon,
   leftIconName,
-  rightIconName,
+  leftIconSize = defaultsize,
+  leftIconColor = white,
   isLoading,
-  ...rest
+  loaderPosition,
+  theme,
 }) => {
-  const defaultsize = 20;
+  const { colors } = theme;
+
   const defaultStyle = {
     minHeight: 36,
     minWidth: 90,
     width: width ? width : block ? '100%' : undefined,
     borderWidth: 1,
-    borderColor:
-      borderColor || (type === 'outline' && mode === 'active')
-        ? '#4F33AF'
-        : type === 'outline' && mode === 'disabled'
-        ? '#E0E0E0'
-        : type === 'outline' && mode === 'verify'
-        ? '#17CE65'
-        : 'rgba(255, 255, 255, 0)',
+    borderColor: borderColor
+      ? borderColor
+      : type === 'outline'
+      ? mode === 'active'
+        ? colors.primary
+        : mode === 'disabled'
+        ? colors.disabled
+        : mode === 'verify'
+        ? colors.success
+        : transparent
+      : transparent,
+
     borderRadius: 10,
     backgroundColor: color
       ? color
       : type === 'outline'
-      ? '#fff'
-      : type === 'default' && mode === 'disabled'
-      ? '#E0E0E0'
-      : type === 'default' && mode === 'verify'
-      ? '#17CE65'
-      : '#4F33AF',
+      ? white
+      : type === 'default'
+      ? mode === 'disabled'
+        ? colors.disabled
+        : mode === 'verify'
+        ? colors.success
+        : colors.primary
+      : colors.primary,
     justifyContent: 'center',
     alignItems: 'center',
     alignContent: 'center',
     alignSelf: 'center',
     padding: 10,
   };
+
   return (
     <Touchable
       activeOpacity={0.5}
@@ -95,67 +113,74 @@ const Button: React.FC<ButtonProps> = ({
       style={[defaultStyle as ViewStyle, containerStyle]}
     >
       <View style={[styles.inView]}>
-        {leftIconName ||
-          (leftIcon && (
-            <View style={{ marginHorizontal: 5 }}>
-              {leftIcon ? (
-                leftIcon
-              ) : (
-                <Icon
-                  source={leftIconName || ''}
-                  color={rest?.leftIconColor || '#fff'}
-                  size={rest?.leftIconSize || defaultsize}
-                />
-              )}
-            </View>
-          ))}
-        {isLoading && (
-          <ActivityIndicator
-            size="small"
-            color={
-              type === 'default'
-                ? '#fff'
-                : mode === 'verify'
-                ? '#17CE65'
-                : color
-                ? color
-                : '#472D9A'
-            }
-            style={{ marginEnd: 7, height: 16 }}
-          />
-        )}
-        <TextView
-          bold
-          small
-          style={[{ fontSize: leftIcon || rightIcon ? 12 : 13 }, textStyle]}
-          color={
-            textColor
-              ? textColor
-              : type === 'outline' && mode === 'active'
-              ? '#472D9A'
-              : type === 'outline' && mode === 'verify'
-              ? '#17CE65'
-              : mode === 'disabled'
-              ? '#9e9e9e'
-              : '#fff'
-          }
+        {leftIcon ? (
+          leftIcon
+        ) : leftIconName ? (
+          <View style={{ marginHorizontal: 5 }}>
+            <Icon
+              source={leftIconName}
+              color={leftIconColor}
+              size={leftIconSize}
+            />
+          </View>
+        ) : null}
+
+        <View
+          style={{
+            flexDirection: loaderPosition === 'left' ? 'row' : 'row-reverse',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+          }}
         >
-          {children}
-        </TextView>
-        {rightIconName ||
-          (rightIcon && (
-            <View style={{ marginHorizontal: 5 }}>
-              {rightIcon ? (
-                rightIcon
-              ) : (
-                <Icon
-                  source={leftIconName || ''}
-                  color={rest?.leftIconColor || '#fff'}
-                  size={rest?.leftIconSize || defaultsize}
-                />
-              )}
-            </View>
-          ))}
+          {isLoading ? (
+            <ActivityIndicator
+              size="small"
+              color={
+                type === 'default'
+                  ? white
+                  : mode === 'verify'
+                  ? colors.success
+                  : color
+                  ? color
+                  : colors.primary
+              }
+              style={{
+                marginHorizontal: 10,
+              }}
+            />
+          ) : null}
+          <TextView
+            bold
+            small
+            style={[{ fontSize: leftIcon || rightIcon ? 12 : 13 }, textStyle]}
+            color={
+              textColor
+                ? textColor
+                : type === 'outline'
+                ? mode === 'active'
+                  ? colors.primary
+                  : mode === 'verify'
+                  ? colors.success
+                  : mode === 'disabled'
+                  ? colors.disabled
+                  : white
+                : white
+            }
+          >
+            {children}
+          </TextView>
+        </View>
+        {rightIcon ? (
+          rightIcon
+        ) : rightIconName ? (
+          <View style={{ marginHorizontal: 5 }}>
+            <Icon
+              source={rightIconName}
+              color={rightIconColor}
+              size={rightIconSize}
+            />
+          </View>
+        ) : null}
       </View>
     </Touchable>
   );
@@ -175,4 +200,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Button;
+export default withTheme(Button);

@@ -1,8 +1,8 @@
 /* eslint-disable react-native/no-inline-styles */
-import React, { useState } from 'react';
+import React from 'react';
 import { View, ScrollView, StyleSheet } from 'react-native';
 import { TextView, Colors, TextInput } from 'react-native-erxes-ui';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 import styles from '../styles';
 
 const TextInputScreen: React.FC<any> = () => {
@@ -41,8 +41,7 @@ const TextInputScreen: React.FC<any> = () => {
                 label="Label"
                 placeholder="Default"
                 type="text"
-                iconPosition="left"
-                icon={
+                leftIcon={
                   <MaterialCommunityIcons
                     name="eye"
                     color="#757575"
@@ -80,8 +79,7 @@ const TextInputScreen: React.FC<any> = () => {
             <TextView color={Colors.grey600}>{`: JSX.Element`}</TextView>
           </TextView>
           <TextInput
-            iconPosition="left"
-            icon={
+            leftIcon={
               <MaterialCommunityIcons name="eye" color="#757575" size={15} />
             }
             placeholder="Outline"

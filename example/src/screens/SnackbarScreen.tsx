@@ -1,21 +1,13 @@
 /* eslint-disable react-native/no-inline-styles */
 import React from 'react';
 import { View, ScrollView } from 'react-native';
-import {
-  TextView,
-  Colors,
-  Picker,
-  Button,
-  useAlert,
-} from 'react-native-erxes-ui';
+import { TextView, Colors, Picker, Button } from 'react-native-erxes-ui';
 
 import styles from '../styles';
 
 const SnackbarScreen: React.FC<any> = () => {
   const data = ['success', 'warning', 'error', 'info'];
   const [indexBoard, setIndexBoard] = React.useState<number>(-1);
-
-  const alert = useAlert();
 
   return (
     <>
@@ -27,7 +19,6 @@ const SnackbarScreen: React.FC<any> = () => {
             placeholderText="Choose alert type"
             onSelect={(i: any) => {
               setIndexBoard(i);
-              alert.error('Hello');
             }}
           />
         </View>

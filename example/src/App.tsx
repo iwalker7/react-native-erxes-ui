@@ -4,7 +4,6 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import MainScreen from './MainScreen';
 import {
-  AlertScreen,
   AvatarScreen,
   ButtonScreen,
   CardScreen,
@@ -105,7 +104,6 @@ export default function App() {
           />
           <Stack.Screen name="Theme" component={ThemeScreen} options={option} />
           {/* { components} */}
-          <Stack.Screen name="Alert" component={AlertScreen} options={option} />
           <Stack.Screen
             name="Avatar"
             component={AvatarScreen}

@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable react-native/no-inline-styles */
 import React, { LegacyRef } from 'react';
-import { View } from 'react-native';
+import { ActivityIndicator, ColorValue, View } from 'react-native';
 import { Animated } from 'react-native';
 import { StyleSheet } from 'react-native';
 import {
@@ -13,11 +13,10 @@ import {
   TextStyle,
 } from 'react-native';
 import TextView from '../Typography';
-import Touchable from '../Touchable';
+import Icon from '../Icon';
 import {
   grey100,
   grey600,
-  red100,
   red400,
   transparent,
   white,
@@ -46,14 +45,25 @@ export type TextInputProps = RNProps & {
   labelColor?: string;
   maxLength?: number;
   onFocus?: (args: any) => void;
-  icon?: JSX.Element;
-  iconPosition?: 'left' | 'right';
+  rightIcon?: JSX.Element;
+  rightIconContainer?: StyleProp<ViewStyle>;
+  rightIconName?: string;
+  rightIconSize?: number;
+  rightIconColor?: ColorValue | string | undefined;
+  leftIcon?: JSX.Element;
+  leftIconContainer?: StyleProp<ViewStyle>;
+  leftIconName?: string;
+  leftIconSize?: number;
+  leftIconColor?: ColorValue | string | undefined;
+  isLoading?: boolean;
+  loaderPosition?: 'left' | 'right';
   iconOnPress?: () => void;
   theme: ReactNativeErxes.Theme;
 };
 const TextInput: React.ForwardRefRenderFunction<unknown, TextInputProps> = ({
   style,
   value,
+  containerStyle,
   type = 'default',
   onChangeText,
   onSubmitEditing,
@@ -65,8 +75,18 @@ const TextInput: React.ForwardRefRenderFunction<unknown, TextInputProps> = ({
   label,
   disabled = false,
   maxLength = 30,
-  icon,
-  iconPosition = 'left',
+  rightIcon,
+  rightIconName,
+  rightIconSize,
+  rightIconColor,
+  leftIcon,
+  leftIconName,
+  leftIconSize,
+  leftIconColor,
+  isLoading = false,
+  loaderPosition,
+  labelColor,
+  labelStyle,
   theme,
   ...rest
 }) => {
@@ -153,7 +173,7 @@ const TextInput: React.ForwardRefRenderFunction<unknown, TextInputProps> = ({
           ? {
               borderWidth: 1,
               borderColor: 'transparent',
-              paddingLeft: 5,
+              paddingLeft: 15,
               paddingTop: 15,
               borderBottomColor: grey600,
               minHeight: 50,
@@ -178,52 +198,80 @@ const TextInput: React.ForwardRefRenderFunction<unknown, TextInputProps> = ({
               : transparent,
           borderWidth: 1,
         },
-        rest?.containerStyle,
+        containerStyle,
       ]}
     >
       {label && (
         <View style={[styles.animatedStyle]}>
           <TextView
             small
-            color={rest?.labelColor || primaryDark3(colors.primary)}
-            style={rest?.labelStyle}
+            color={labelColor || primaryDark3(colors.primary)}
+            style={labelStyle}
           >
             {label}
           </TextView>
         </View>
       )}
 
-      {icon && (
-        <Touchable
-          onPress={() => rest?.iconOnPress}
-          style={[
-            {
-              marginLeft: iconPosition === 'right' ? 5 : 0,
-              marginRight: iconPosition === 'right' ? 0 : 9,
-            },
-          ]}
-        >
-          {icon}
-        </Touchable>
-      )}
-      <RNTextInput
-        style={style}
-        ref={inputRef}
-        selectionColor={mainColor}
-        autoCapitalize="none"
-        autoCorrect={false}
-        secureTextEntry={password ? true : false}
-        placeholder={p}
-        placeholderTextColor={placeholderTextColor}
-        maxFontSizeMultiplier={1}
-        maxLength={maxLength}
-        onFocus={handleFocus}
-        onChangeText={handleChangeText}
-        onSubmitEditing={handleSubmit}
-        value={value && value}
-        underlineColorAndroid={transparent}
-        {...rest}
-      />
+      {leftIcon ? (
+        <View style={[{ marginEnd: 15, marginStart: 5 }]}>{leftIcon}</View>
+      ) : leftIconName ? (
+        <View style={{ marginHorizontal: 10 }}>
+          <Icon
+            source={leftIconName}
+            color={leftIconColor}
+            size={leftIconSize}
+          />
+        </View>
+      ) : null}
+
+      <View
+        style={{
+          flex: 1,
+          flexDirection: loaderPosition === 'left' ? 'row' : 'row-reverse',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+        }}
+      >
+        {isLoading ? (
+          <ActivityIndicator
+            size="small"
+            color={colors.primary}
+            style={{
+              marginHorizontal: 10,
+            }}
+          />
+        ) : null}
+        <RNTextInput
+          style={[{ flex: 1 }, style]}
+          ref={inputRef}
+          selectionColor={mainColor}
+          autoCapitalize="none"
+          autoCorrect={false}
+          secureTextEntry={password ? true : false}
+          placeholder={p}
+          placeholderTextColor={placeholderTextColor}
+          maxFontSizeMultiplier={1}
+          maxLength={maxLength}
+          onFocus={handleFocus}
+          onChangeText={handleChangeText}
+          onSubmitEditing={handleSubmit}
+          value={value && value}
+          underlineColorAndroid={transparent}
+          {...rest}
+        />
+      </View>
+      {rightIcon ? (
+        rightIcon
+      ) : rightIconName ? (
+        <View style={{ marginHorizontal: 5 }}>
+          <Icon
+            source={rightIconName}
+            color={rightIconColor}
+            size={rightIconSize}
+          />
+        </View>
+      ) : null}
       {required && (
         <TextView
           style={{ position: 'absolute', right: 10, top: 10 }}
@@ -247,10 +295,10 @@ const styles = StyleSheet.create({
     paddingHorizontal: 15,
   },
   animatedStyle: {
-    top: 5,
-    left: 5,
+    top: 3,
+    left: 15,
     position: 'absolute',
-    zIndex: 10000,
+    zIndex: 1000,
   },
 });
 export default withTheme(TextInput);
