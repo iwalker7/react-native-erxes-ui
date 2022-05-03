@@ -20,10 +20,12 @@ import {
   red400,
   transparent,
   white,
+  green100,
 } from '../../styles/colors';
 import type { ViewStyle } from 'react-native';
 import { withTheme } from '../../core/theming';
 import { primaryDark3 } from '../../utils/colorUtils';
+import Touchable from '../Touchable';
 
 export type TextInputProps = RNProps & {
   type?: 'default' | 'outline' | 'filled' | 'text';
@@ -50,14 +52,15 @@ export type TextInputProps = RNProps & {
   rightIconName?: string;
   rightIconSize?: number;
   rightIconColor?: ColorValue | string | undefined;
+  rightIconOnPress?: () => void;
   leftIcon?: JSX.Element;
   leftIconContainer?: StyleProp<ViewStyle>;
   leftIconName?: string;
   leftIconSize?: number;
   leftIconColor?: ColorValue | string | undefined;
+  leftIconOnPress?: () => void;
   isLoading?: boolean;
   loaderPosition?: 'left' | 'right';
-  iconOnPress?: () => void;
   theme: ReactNativeErxes.Theme;
 };
 const TextInput: React.ForwardRefRenderFunction<unknown, TextInputProps> = ({
@@ -77,17 +80,19 @@ const TextInput: React.ForwardRefRenderFunction<unknown, TextInputProps> = ({
   maxLength = 30,
   rightIcon,
   rightIconName,
-  rightIconSize,
+  rightIconSize = 16,
   rightIconColor,
   leftIcon,
   leftIconName,
-  leftIconSize,
+  leftIconSize = 16,
   leftIconColor,
   isLoading = false,
   loaderPosition,
   labelColor,
   labelStyle,
   theme,
+  rightIconOnPress,
+  leftIconOnPress,
   ...rest
 }) => {
   const { colors } = theme;
@@ -175,8 +180,11 @@ const TextInput: React.ForwardRefRenderFunction<unknown, TextInputProps> = ({
               borderColor: 'transparent',
               paddingLeft: 15,
               paddingTop: 15,
+              paddingBottom: 0,
+              backgroundColor: green100,
               borderBottomColor: grey600,
-              minHeight: 50,
+              minHeight: 52,
+              paddingEnd: 15,
             }
           : styles.container,
         {
@@ -214,15 +222,19 @@ const TextInput: React.ForwardRefRenderFunction<unknown, TextInputProps> = ({
       )}
 
       {leftIcon ? (
-        <View style={[{ marginEnd: 15, marginStart: 5 }]}>{leftIcon}</View>
+        <Touchable onPress={leftIconOnPress && leftIconOnPress}>
+          <View style={[{ marginEnd: 15, marginStart: 5 }]}>{leftIcon}</View>
+        </Touchable>
       ) : leftIconName ? (
-        <View style={{ marginHorizontal: 10 }}>
-          <Icon
-            source={leftIconName}
-            color={leftIconColor}
-            size={leftIconSize}
-          />
-        </View>
+        <Touchable onPress={leftIconOnPress && leftIconOnPress}>
+          <View style={{ marginEnd: 5 }}>
+            <Icon
+              source={leftIconName}
+              color={leftIconColor}
+              size={leftIconSize}
+            />
+          </View>
+        </Touchable>
       ) : null}
 
       <View
@@ -262,15 +274,19 @@ const TextInput: React.ForwardRefRenderFunction<unknown, TextInputProps> = ({
         />
       </View>
       {rightIcon ? (
-        rightIcon
+        <Touchable onPress={rightIconOnPress && rightIconOnPress}>
+          <View style={[{ marginEnd: 15, marginStart: 5 }]}>{leftIcon}</View>
+        </Touchable>
       ) : rightIconName ? (
-        <View style={{ marginHorizontal: 5 }}>
-          <Icon
-            source={rightIconName}
-            color={rightIconColor}
-            size={rightIconSize}
-          />
-        </View>
+        <Touchable onPress={rightIconOnPress && rightIconOnPress}>
+          <View style={{ marginStart: 5 }}>
+            <Icon
+              source={rightIconName}
+              color={rightIconColor}
+              size={rightIconSize}
+            />
+          </View>
+        </Touchable>
       ) : null}
       {required && (
         <TextView
@@ -284,7 +300,7 @@ const TextInput: React.ForwardRefRenderFunction<unknown, TextInputProps> = ({
 
 const styles = StyleSheet.create({
   container: {
-    minHeight: 50,
+    minHeight: 52,
     backgroundColor: grey100,
     borderRadius: 8,
     paddingHorizontal: 15,

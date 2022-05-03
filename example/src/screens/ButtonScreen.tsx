@@ -30,6 +30,7 @@ const ButtonScreen: React.FC<any> = () => {
           <View style={{ flexDirection: 'row' }}>
             <TextView style={{ marginRight: 42 }}>Without icon</TextView>
             <Button
+              height={20}
               type="default"
               onPress={() => {}}
               onLongPress={() => {}}
@@ -50,14 +51,14 @@ const ButtonScreen: React.FC<any> = () => {
             <TextView style={{ marginRight: 61 }}>With icon</TextView>
             <Button
               leftIconName="cloud-check"
-              rightIconColor="#fff"
-              rightIconSize={15}
+              leftIconSize={20}
               type="default"
               onPress={() => {}}
               onLongPress={() => {}}
               style={{ marginRight: 20 }}
+              width={200}
             >
-              Default
+              Defadsfcgvhbjnkml, mkjngfcdult
             </Button>
             <Button
               type="outline"

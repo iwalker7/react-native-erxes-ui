@@ -29,7 +29,7 @@ export type ModalProps = RNModalProps &
     onVisible: SetStateAction<any>;
     children?: React.ReactNode;
     style?: StyleProp<ViewStyle> | {};
-    cancelable?: boolean | true;
+    cancelable?: boolean;
     bottom?: boolean;
     withHeader?: boolean;
     headerText?: string;
@@ -114,7 +114,9 @@ const Modal: React.FC<ModalProps> = ({
                     style={[
                       styles.modalView,
                       {
-                        marginBottom: ScreenUtils.isIphoneWithNotch() ? 30 : 10,
+                        paddingBottom: ScreenUtils.isIphoneWithNotch()
+                          ? 30
+                          : 10,
                         backgroundColor: rest?.bgColor ? rest?.bgColor : white,
                       },
                     ]}

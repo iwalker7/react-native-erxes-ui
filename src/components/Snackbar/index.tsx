@@ -25,11 +25,14 @@ export enum DURATION {
   DURATION_INFINITY = Number.NEGATIVE_INFINITY,
 }
 
+export type TAction = {
+  onPress: () => void;
+  label: string;
+};
+
 export type SnackbarProps = {
   visible: boolean;
-  action?: Omit<React.ComponentProps<typeof Button>, 'children'> & {
-    label: string;
-  };
+  action?: TAction;
   placement?: 'top' | 'bottom';
   type?: 'success' | 'warning' | 'info' | 'error' | string;
   duration?: number | DURATION;
@@ -43,6 +46,7 @@ export type SnackbarProps = {
   closeIconName?: string;
   closeIconSize?: number;
   closeIconColor?: ColorValue | string | undefined;
+  backgroungColor?: ColorValue | string | undefined;
   textStyle?: StyleProp<TextProps>;
   wrapperStyle?: StyleProp<ViewStyle>;
   style?: StyleProp<ViewStyle>;
@@ -66,6 +70,7 @@ const Snackbar: React.FC<SnackbarProps> = ({
   leftIcon,
   closeIcon,
   theme,
+  backgroungColor,
   ...rest
 }) => {
   const { colors } = theme;
@@ -73,14 +78,15 @@ const Snackbar: React.FC<SnackbarProps> = ({
   const { current: opacity } = useRef(new Animated.Value(0.0));
   const [hidden, setHidden] = useState<boolean>(!visible);
   const hideTimeout = useRef<NodeJS.Timeout>();
-  const mainColor =
-    type === 'error'
-      ? colors.error
-      : type === 'success'
-      ? colors.success
-      : type === 'warning'
-      ? colors.warn
-      : colors.accent;
+  const mainColor = backgroungColor
+    ? backgroungColor
+    : type === 'error'
+    ? colors.error
+    : type === 'success'
+    ? colors.success
+    : type === 'warning'
+    ? colors.warn
+    : colors.accent;
 
   useEffect(() => {
     return () => {

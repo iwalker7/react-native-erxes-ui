@@ -34,7 +34,7 @@ const Loader: React.FC<LoaderProps> = ({
         style={[
           styles.container,
           {
-            backgroundColor: backgroundColor || white,
+            backgroundColor: backgroundColor || 'transparent',
           },
           style,
         ]}

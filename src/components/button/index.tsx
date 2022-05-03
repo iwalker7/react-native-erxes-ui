@@ -14,7 +14,7 @@ import Icon from '../Icon';
 import { withTheme } from '../../core/theming';
 import { transparent, white } from '../../styles/colors';
 
-const defaultsize = 20;
+const defaultsize = 16;
 
 export type ButtonProps = ViewProps & {
   type?: 'default' | 'outline';
@@ -39,6 +39,7 @@ export type ButtonProps = ViewProps & {
   isLoading?: boolean;
   loaderPosition?: 'left' | 'right';
   width?: number;
+  height?: number;
   theme: ReactNativeErxes.Theme;
 };
 
@@ -55,6 +56,7 @@ const Button: React.FC<ButtonProps> = ({
   borderColor,
   children,
   width,
+  height = 36,
   rightIcon,
   rightIconName,
   rightIconSize = defaultsize,
@@ -73,6 +75,7 @@ const Button: React.FC<ButtonProps> = ({
     minHeight: 36,
     minWidth: 90,
     width: width ? width : block ? '100%' : undefined,
+    height: height,
     borderWidth: 1,
     borderColor: borderColor
       ? borderColor
@@ -102,7 +105,6 @@ const Button: React.FC<ButtonProps> = ({
     alignItems: 'center',
     alignContent: 'center',
     alignSelf: 'center',
-    padding: 10,
   };
 
   return (

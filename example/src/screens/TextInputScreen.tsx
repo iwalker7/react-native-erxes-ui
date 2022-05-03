@@ -2,7 +2,6 @@
 import React from 'react';
 import { View, ScrollView, StyleSheet } from 'react-native';
 import { TextView, Colors, TextInput } from 'react-native-erxes-ui';
-import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 import styles from '../styles';
 
 const TextInputScreen: React.FC<any> = () => {
@@ -41,13 +40,7 @@ const TextInputScreen: React.FC<any> = () => {
                 label="Label"
                 placeholder="Default"
                 type="text"
-                leftIcon={
-                  <MaterialCommunityIcons
-                    name="eye"
-                    color="#757575"
-                    size={15}
-                  />
-                }
+                leftIconName="eye"
                 onChangeText={(text: string) => setSearchText(text)}
                 value={searchText}
               />
@@ -79,9 +72,8 @@ const TextInputScreen: React.FC<any> = () => {
             <TextView color={Colors.grey600}>{`: JSX.Element`}</TextView>
           </TextView>
           <TextInput
-            leftIcon={
-              <MaterialCommunityIcons name="eye" color="#757575" size={15} />
-            }
+            leftIconName="eye"
+            rightIconName="eye"
             placeholder="Outline"
             onChangeText={(text: string) => setSearchText(text)}
             value={searchText}
