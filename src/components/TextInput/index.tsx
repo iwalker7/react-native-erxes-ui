@@ -42,24 +42,22 @@ export type TextInputProps = RNProps & {
   inputRef?: LegacyRef<RNTextInput>;
   labelStyle?: StyleProp<TextStyle>;
   containerStyle?: StyleProp<ViewStyle>;
+  labelContainerStyle?: StyleProp<ViewStyle>;
   placeholderTextColor?: string;
   label?: string | React.ReactElement;
   labelColor?: string;
   labelIcon?: JSX.Element;
-  labelIconContainer?: StyleProp<ViewStyle>;
   labelIconName?: string;
   labelIconSize?: number;
   labelIconColor?: ColorValue | string | undefined;
   maxLength?: number;
   onFocus?: (args: any) => void;
   rightIcon?: JSX.Element;
-  rightIconContainer?: StyleProp<ViewStyle>;
   rightIconName?: string;
   rightIconSize?: number;
   rightIconColor?: ColorValue | string | undefined;
   rightIconOnPress?: () => void;
   leftIcon?: JSX.Element;
-  leftIconContainer?: StyleProp<ViewStyle>;
   leftIconName?: string;
   leftIconSize?: number;
   leftIconColor?: ColorValue | string | undefined;
@@ -89,7 +87,7 @@ const TextInput: React.ForwardRefRenderFunction<unknown, TextInputProps> = ({
   labelIconName,
   labelIconColor,
   labelIconSize = 10,
-  labelIconContainer,
+  labelContainerStyle,
   rightIcon,
   rightIconName,
   rightIconSize = 16,
@@ -224,7 +222,7 @@ const TextInput: React.ForwardRefRenderFunction<unknown, TextInputProps> = ({
       ]}
     >
       {label ? (
-        <View style={[styles.animatedStyle]}>
+        <View style={[styles.animatedStyle, labelContainerStyle]}>
           {labelIcon ? (
             labelIcon
           ) : labelIconName ? (
@@ -337,6 +335,8 @@ const styles = StyleSheet.create({
     position: 'absolute',
     zIndex: 1000,
     marginVertical: 3,
+    flexDirection: 'row',
+    alignItems: 'center',
   },
 });
 export default withTheme(TextInput);
