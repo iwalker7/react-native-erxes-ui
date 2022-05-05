@@ -37,7 +37,6 @@ const TextInputScreen: React.FC<any> = () => {
           <View style={{ flexDirection: 'row' }}>
             <View style={style.search}>
               <TextInput
-                label="Label"
                 placeholder="Default"
                 type="text"
                 leftIconName="eye"
@@ -45,11 +44,14 @@ const TextInputScreen: React.FC<any> = () => {
                 value={searchText}
               />
               <TextInput
+                height={40}
+                label={'Lable'}
                 placeholder="Default"
                 onChangeText={(text: string) => setSearchText(text)}
                 value={searchText}
               />
               <TextInput
+                label={'Lable'}
                 type="outline"
                 placeholder="Outline"
                 onChangeText={(text: string) => setSearchText(text)}
@@ -57,6 +59,9 @@ const TextInputScreen: React.FC<any> = () => {
               />
 
               <TextInput
+                height={100}
+                label={'BIG LABEL'}
+                backgroundColor={'white'}
                 type="filled"
                 placeholder="Filled"
                 onChangeText={(text: string) => setSearchText(text)}

@@ -7,6 +7,7 @@ import {
   ViewStyle,
   StyleSheet,
   Animated,
+  Image,
 } from 'react-native';
 
 import {
@@ -18,6 +19,7 @@ import { withTheme } from '../../core/theming';
 import Touchable from '../Touchable';
 import TextView from '../Typography';
 import { white } from '../../styles/colors';
+import images from '../../assets/images';
 
 export type ChipProps = {
   mode?: 'flat' | 'outline';
@@ -35,6 +37,9 @@ export type ChipProps = {
   textStyle?: StyleProp<TextStyle>;
   containerStyle?: StyleProp<ViewStyle>;
   theme: ReactNativeErxes.Theme;
+  item: any;
+  isAvatar: boolean;
+  isUser: boolean;
 };
 
 const Chip: React.FC<ChipProps> = ({
@@ -53,6 +58,9 @@ const Chip: React.FC<ChipProps> = ({
   onLongPress,
   textStyle,
   containerStyle,
+  item,
+  isAvatar = false,
+  isUser = false,
 }) => {
   const { colors } = theme;
 
@@ -110,6 +118,13 @@ const Chip: React.FC<ChipProps> = ({
           textStyle,
         ]}
       >
+        {isAvatar && (
+          <Image
+            source={{ uri: isUser ? item?.details?.avatar : item?.avatar }}
+            defaultSource={images.avatar}
+            style={styles.chipImage}
+          />
+        )}
         {text}
       </TextView>
       {removable && (
@@ -158,5 +173,11 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  chipImage: {
+    height: 22,
+    width: 22,
+    margin: 1,
+    borderRadius: 12,
   },
 });

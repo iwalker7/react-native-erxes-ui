@@ -17,7 +17,7 @@ export { default as Touchable, TouchableProps } from './components/Touchable';
 export { default as Modal, ModalProps } from './components/Modal';
 export { default as RadioButton } from './components/RadioButton';
 export { default as Searchbar, SearchbarProps } from './components/Searchbar';
-
+// export { default as TopTabBar, TopTabBarProps } from './components/TopTabBar';
 export {
   default as Snackbar,
   SnackbarProps,

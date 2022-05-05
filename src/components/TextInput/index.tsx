@@ -45,6 +45,11 @@ export type TextInputProps = RNProps & {
   placeholderTextColor?: string;
   label?: string | React.ReactElement;
   labelColor?: string;
+  labelIcon?: JSX.Element;
+  labelIconContainer?: StyleProp<ViewStyle>;
+  labelIconName?: string;
+  labelIconSize?: number;
+  labelIconColor?: ColorValue | string | undefined;
   maxLength?: number;
   onFocus?: (args: any) => void;
   rightIcon?: JSX.Element;
@@ -62,6 +67,8 @@ export type TextInputProps = RNProps & {
   isLoading?: boolean;
   loaderPosition?: 'left' | 'right';
   theme: ReactNativeErxes.Theme;
+  height?: number;
+  backgroundColor?: string;
 };
 const TextInput: React.ForwardRefRenderFunction<unknown, TextInputProps> = ({
   style,
@@ -75,9 +82,14 @@ const TextInput: React.ForwardRefRenderFunction<unknown, TextInputProps> = ({
   inputRef,
   required = false,
   password = false,
-  label,
   disabled = false,
   maxLength = 30,
+  label,
+  labelIcon,
+  labelIconName,
+  labelIconColor,
+  labelIconSize = 10,
+  labelIconContainer,
   rightIcon,
   rightIconName,
   rightIconSize = 16,
@@ -93,6 +105,8 @@ const TextInput: React.ForwardRefRenderFunction<unknown, TextInputProps> = ({
   theme,
   rightIconOnPress,
   leftIconOnPress,
+  height = 52,
+  backgroundColor,
   ...rest
 }) => {
   const { colors } = theme;
@@ -174,28 +188,28 @@ const TextInput: React.ForwardRefRenderFunction<unknown, TextInputProps> = ({
   return (
     <View
       style={[
+        { height: height },
         type === 'text'
           ? {
               borderWidth: 1,
               borderColor: 'transparent',
-              paddingLeft: 15,
-              paddingTop: 15,
-              paddingBottom: 0,
-              backgroundColor: green100,
-              borderBottomColor: grey600,
-              minHeight: 52,
-              paddingEnd: 15,
+              borderBottomColor: grey100,
+              paddingHorizontal: 15,
             }
           : styles.container,
         {
           flexDirection: 'row',
-          alignItems: 'center',
-          backgroundColor:
-            type === 'filled'
-              ? 'rgba(79, 51, 175, 0.12)'
-              : type === 'outline'
-              ? white
-              : grey100,
+          alignItems: label ? 'flex-end' : 'center',
+          paddingBottom: label ? 5 : 0,
+          backgroundColor: backgroundColor
+            ? backgroundColor
+            : type === 'filled'
+            ? 'rgba(79, 51, 175, 0.12)'
+            : type === 'outline'
+            ? white
+            : type === 'text'
+            ? 'transparent'
+            : grey100,
           borderColor:
             type === 'filled'
               ? mainColor
@@ -209,8 +223,19 @@ const TextInput: React.ForwardRefRenderFunction<unknown, TextInputProps> = ({
         containerStyle,
       ]}
     >
-      {label && (
+      {label ? (
         <View style={[styles.animatedStyle]}>
+          {labelIcon ? (
+            labelIcon
+          ) : labelIconName ? (
+            <View style={{ marginHorizontal: 5 }}>
+              <Icon
+                source={labelIconName}
+                color={labelColor}
+                size={labelIconSize}
+              />
+            </View>
+          ) : null}
           <TextView
             small
             color={labelColor || primaryDark3(colors.primary)}
@@ -219,22 +244,6 @@ const TextInput: React.ForwardRefRenderFunction<unknown, TextInputProps> = ({
             {label}
           </TextView>
         </View>
-      )}
-
-      {leftIcon ? (
-        <Touchable onPress={leftIconOnPress && leftIconOnPress}>
-          <View style={[{ marginEnd: 15, marginStart: 5 }]}>{leftIcon}</View>
-        </Touchable>
-      ) : leftIconName ? (
-        <Touchable onPress={leftIconOnPress && leftIconOnPress}>
-          <View style={{ marginEnd: 5 }}>
-            <Icon
-              source={leftIconName}
-              color={leftIconColor}
-              size={leftIconSize}
-            />
-          </View>
-        </Touchable>
       ) : null}
 
       <View
@@ -245,6 +254,18 @@ const TextInput: React.ForwardRefRenderFunction<unknown, TextInputProps> = ({
           justifyContent: 'space-between',
         }}
       >
+        {leftIcon ? (
+          leftIcon
+        ) : leftIconName ? (
+          <View style={{ marginHorizontal: 5 }}>
+            <Icon
+              source={leftIconName}
+              color={leftIconColor}
+              size={leftIconSize}
+            />
+          </View>
+        ) : null}
+
         {isLoading ? (
           <ActivityIndicator
             size="small"
@@ -254,6 +275,7 @@ const TextInput: React.ForwardRefRenderFunction<unknown, TextInputProps> = ({
             }}
           />
         ) : null}
+
         <RNTextInput
           style={[{ flex: 1 }, style]}
           ref={inputRef}
@@ -273,6 +295,7 @@ const TextInput: React.ForwardRefRenderFunction<unknown, TextInputProps> = ({
           {...rest}
         />
       </View>
+
       {rightIcon ? (
         <Touchable onPress={rightIconOnPress && rightIconOnPress}>
           <View style={[{ marginEnd: 15, marginStart: 5 }]}>{leftIcon}</View>
@@ -300,8 +323,6 @@ const TextInput: React.ForwardRefRenderFunction<unknown, TextInputProps> = ({
 
 const styles = StyleSheet.create({
   container: {
-    minHeight: 52,
-    backgroundColor: grey100,
     borderRadius: 8,
     paddingHorizontal: 15,
   },
@@ -315,6 +336,7 @@ const styles = StyleSheet.create({
     left: 15,
     position: 'absolute',
     zIndex: 1000,
+    marginVertical: 3,
   },
 });
 export default withTheme(TextInput);

@@ -13,14 +13,14 @@ const SnackbarScreen: React.FC<any> = () => {
     <>
       <View style={styles.container}>
         <View style={{ width: '100%' }}>
-          <Picker
+          {/* <Picker
             selectedIndex={indexBoard}
             data={data}
             placeholderText="Choose alert type"
             onSelect={(i: any) => {
               setIndexBoard(i);
             }}
-          />
+          /> */}
         </View>
 
         <ScrollView

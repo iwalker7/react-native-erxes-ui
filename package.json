@@ -1,6 +1,6 @@
 {
   "name": "react-native-erxes-ui",
-  "version": "0.1.23",
+  "version": "0.1.25",
   "description": "erxes react native ui library",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
@@ -60,7 +60,8 @@
     "color": "^4.2.3",
     "lodash": "^4.17.21",
     "moment": "^2.29.2",
-    "react-native-linear-gradient": "^2.5.6"
+    "react-native-linear-gradient": "^2.5.6",
+    "react-native-tab-view": "^3.1.1"
   },
   "devDependencies": {
     "@commitlint/config-conventional": "^11.0.0",
@@ -93,9 +94,9 @@
     "expo-font": "*",
     "react": "*",
     "react-native": "*",
-    "react-native-vector-icons": "*",
     "react-native-gesture-handler": ">=1.9.0",
-    "react-native-reanimated": ">=2.0.0"
+    "react-native-reanimated": ">=2.0.0",
+    "react-native-vector-icons": "*"
   },
   "jest": {
     "preset": "react-native",

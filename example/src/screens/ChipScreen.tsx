@@ -2,13 +2,12 @@
 import React from 'react';
 import { View, ScrollView } from 'react-native';
 import { TextView, Colors, Chip } from 'react-native-erxes-ui';
-import images from '../../assets/images';
 import styles from '../styles';
 
 const ChipScreen: React.FC<any> = () => {
   return (
     <View style={styles.container}>
-      <Chip text="User" mode="outline" index={0} />
+      {/* <Chip text="User" mode="outline" index={0} /> */}
 
       <ScrollView
         showsVerticalScrollIndicator={false}

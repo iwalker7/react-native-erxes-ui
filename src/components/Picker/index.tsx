@@ -1,5 +1,5 @@
 /* eslint-disable react-native/no-inline-styles */
-import React, { useState } from 'react';
+import React from 'react';
 import {
   ScrollView,
   StyleProp,
@@ -10,6 +10,8 @@ import {
 import { grey100 } from '../../styles/colors';
 import { Modal, Touchable, TextView } from '../../index';
 import Divider from '../Divider';
+import type { SetStateAction } from 'react';
+import type { RefObject } from 'react';
 
 export type PickerProps = {
   selectedIndex?: number;
@@ -17,10 +19,17 @@ export type PickerProps = {
   icon?: JSX.Element;
   iconPosition?: 'left' | 'right';
   onSelect: (i: number) => void;
+  from?:
+    | RefObject<View>
+    | ((sourceRef: RefObject<View>, openPopover: () => void) => React.ReactNode)
+    | React.ReactNode;
+  itemStyle: StyleProp<ViewStyle>;
+  style: StyleProp<ViewStyle>;
   containerStyle?: StyleProp<ViewStyle>;
-  ref?: any;
   placeholderText?: string;
   selectionLimit?: number;
+  isVisible: boolean;
+  onVisible: SetStateAction<any>;
 };
 const Picker: React.FC<PickerProps> = ({
   selectedIndex = 0,
@@ -28,20 +37,22 @@ const Picker: React.FC<PickerProps> = ({
   onSelect,
   icon,
   iconPosition = 'right',
-  containerStyle,
   placeholderText,
+  isVisible,
+  onVisible,
+  itemStyle,
+  style,
+  containerStyle,
 }) => {
-  const [isOpen, onOpen] = useState(false);
-
   return (
     <>
-      <Modal bottom isVisible={isOpen} onVisible={onOpen}>
+      <Modal bottom isVisible={isVisible} onVisible={onVisible}>
         <ScrollView
-          style={{ maxHeight: 200, width: '100%' }}
+          style={[{ maxHeight: 200, width: '100%' }, style]}
           showsVerticalScrollIndicator={false}
         >
           <View>
-            {data.map((item, index) => {
+            {data?.map((item, index) => {
               return (
                 <Touchable
                   key={index.toString()}
@@ -51,10 +62,10 @@ const Picker: React.FC<PickerProps> = ({
                     } else {
                       onSelect(-1);
                     }
-                    onOpen(false);
+                    onVisible(false);
                   }}
                 >
-                  <View style={styles.itemText}>
+                  <View style={[styles.itemText, itemStyle]}>
                     <TextView small>{item}</TextView>
                   </View>
                   <Divider />
@@ -64,7 +75,7 @@ const Picker: React.FC<PickerProps> = ({
           </View>
         </ScrollView>
       </Modal>
-      <Touchable onPress={() => onOpen(!isOpen)}>
+      <Touchable onPress={() => onVisible(!isVisible)}>
         <View style={[styles.container, containerStyle]}>
           <TextView style={{ fontSize: 13 }}>
             {selectedIndex > -1

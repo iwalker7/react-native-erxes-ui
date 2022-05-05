@@ -12,7 +12,7 @@ const PickerScreen: React.FC<any> = () => {
   return (
     <View style={styles.container}>
       <View style={{ width: '100%' }}>
-        <Picker
+        {/* <Picker
           selectedIndex={indexBoard}
           data={data}
           onSelect={(i: any) => setIndexBoard(i)}
@@ -23,7 +23,7 @@ const PickerScreen: React.FC<any> = () => {
               size={18}
             />
           }
-        />
+        /> */}
       </View>
 
       <View style={styles.segment}>
