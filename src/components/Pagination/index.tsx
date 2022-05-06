@@ -68,7 +68,15 @@ export const generatePages = (pageCount: number, currentPage: number) => {
 };
 
 const Page = (props: any) => {
-  const { onPage, currentPage, page, theme } = props;
+  const {
+    onPage,
+    currentPage,
+    page,
+    style,
+    theme,
+    textStyle,
+    hightlightColor = '#000',
+  } = props;
   const { colors } = theme;
   const goto = (pg: number) => {
     onPage(pg);
@@ -81,19 +89,30 @@ const Page = (props: any) => {
   if (page !== -1) {
     return (
       <Touchable
-        style={{
-          paddingHorizontal: 10,
-          paddingVertical: 5,
-          borderRadius: 30,
-          marginHorizontal: 3,
-          backgroundColor: page === currentPage ? colors.primary : white,
-        }}
+        style={[
+          {
+            paddingHorizontal: 10,
+            paddingVertical: 5,
+            borderRadius: 30,
+            marginHorizontal: 3,
+            backgroundColor:
+              page === currentPage
+                ? hightlightColor
+                  ? hightlightColor
+                  : colors.primary
+                : white,
+          },
+          style,
+        ]}
         onPress={() => page !== currentPage && onClick()}
       >
         <TextView
-          style={{
-            color: page === currentPage ? '#fff' : '#000',
-          }}
+          style={[
+            {
+              color: page === currentPage ? '#fff' : '#000',
+            },
+            textStyle,
+          ]}
         >
           {page}
         </TextView>
@@ -163,12 +182,16 @@ const Pagination = (props: any) => {
         ]}
       >
         <View
-          style={{
-            flexDirection: 'row',
-            alignItems: 'center',
-            justifyContent: 'center',
-            marginVertical: 5,
-          }}
+          style={[
+            {
+              flexDirection: 'row',
+              alignItems: 'center',
+              justifyContent: 'center',
+              marginVertical: 6,
+              backgroundColor: 'transparent',
+            },
+            containerStyle,
+          ]}
         >
           <Touchable
             activeOpacity={currentPage > 1 ? 0.6 : 1}
