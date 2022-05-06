@@ -8,7 +8,7 @@ import Touchable from '../Touchable';
 import { Colors } from 'react-native-erxes-ui';
 
 export type CardProps = {
-  title: string;
+  title?: string;
   secondaryText?: string;
   supportingText?: string;
   type?: 'elevated' | 'outline';
@@ -23,7 +23,7 @@ export type CardProps = {
 
 const Card: React.FC<CardProps> = ({
   type = 'elevated',
-  title,
+  title = '',
   secondaryText,
   supportingText,
   thumbnail,

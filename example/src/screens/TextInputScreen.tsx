@@ -1,7 +1,7 @@
 /* eslint-disable react-native/no-inline-styles */
 import React from 'react';
 import { View, ScrollView, StyleSheet } from 'react-native';
-import { TextView, Colors, TextInput } from 'react-native-erxes-ui';
+import { TextView, Colors, TextInput, Searchbar } from 'react-native-erxes-ui';
 import styles from '../styles';
 
 const TextInputScreen: React.FC<any> = () => {
@@ -14,6 +14,7 @@ const TextInputScreen: React.FC<any> = () => {
           color={Colors.grey600}
         >{`Props + React native-ын TextInputProps`}</TextView>
       </View>
+
       <ScrollView
         showsVerticalScrollIndicator={false}
         style={{ width: '100%' }}
@@ -36,6 +37,14 @@ const TextInputScreen: React.FC<any> = () => {
           </View>
           <View style={{ flexDirection: 'row' }}>
             <View style={style.search}>
+              <Searchbar
+                closeIcon
+                leftIconOnPress={() => console.log('sf')}
+                value={searchText}
+                placeholder="search"
+                onChangeText={(text: string) => setSearchText(text)}
+              />
+
               <TextInput
                 placeholder="Default"
                 type="text"

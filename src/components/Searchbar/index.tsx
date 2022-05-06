@@ -19,51 +19,22 @@ import Icon from '../Icon';
 import Surface from '../Surface';
 
 export type SearchbarProps = React.ComponentPropsWithRef<typeof TextInput> & {
-  /**
-   * Accessibility label for the button. This is read by the screen reader when the user taps the button.
-   */
   clearAccessibilityLabel?: string;
-  /**
-   * Accessibility label for the button. This is read by the screen reader when the user taps the button.
-   */
   searchAccessibilityLabel?: string;
-  /**
-   * Hint text shown when the input is empty.
-   */
   placeholder?: string;
-  /**
-   * The value of the text input.
-   */
   value: string;
-  /**
-   * Icon name for the left icon button (see `onIconPress`).
-   */
-  icon?: IconSource;
-  /**
-   * Callback that is called when the text input's text changes.
-   */
   onChangeText?: (query: string) => void;
-  /**
-   * Callback to execute if we want the left icon to act as button.
-   */
-  onIconPress?: () => void;
-  /**
-   * Set style of the TextInput component inside the searchbar
-   */
+  closeIcon?: boolean;
+  leftIconName?: IconSource;
+  leftIconColor?: string;
+  leftIconSize?: number;
+  leftIconOnPress?: () => void;
+  rightIconName?: IconSource;
+  rightIconColor?: string;
+  rightIconSize?: number;
   inputStyle?: StyleProp<TextStyle>;
   style?: StyleProp<ViewStyle>;
-
-  /**
-   * @optional
-   */
   theme: ReactNativeErxes.Theme;
-  /**
-   * Custom color for icon, default will be derived from theme
-   */
-  iconColor?: string;
-  /**
-   * Custom icon for clear button, default will be icon close
-   */
   clearIcon?: IconSource;
 };
 
@@ -76,11 +47,15 @@ const Searchbar = React.forwardRef<TextInputHandles, SearchbarProps>(
   (
     {
       clearAccessibilityLabel = 'clear',
-      clearIcon,
-      icon,
-      iconColor: customIconColor,
+      leftIconName = 'magnify',
+      leftIconColor = '#757575',
+      leftIconSize = 20,
+      leftIconOnPress,
+      rightIconName = 'close',
+      rightIconColor = '#757575',
+      rightIconSize = 16,
+      clearIcon = true,
       inputStyle,
-      onIconPress,
       placeholder,
       searchAccessibilityLabel = 'search',
       style,
@@ -126,15 +101,15 @@ const Searchbar = React.forwardRef<TextInputHandles, SearchbarProps>(
     const { colors, roundness, dark, fonts } = theme;
     const textColor = colors.text;
     const font = fonts.regular;
-    const iconColor =
-      customIconColor ||
-      (dark ? textColor : color(textColor).alpha(0.54).rgb().string());
+    const iconColor = dark
+      ? textColor
+      : color(textColor).alpha(0.54).rgb().string();
     const rippleColor = color(textColor).alpha(0.32).rgb().string();
 
     return (
       <Surface
         style={[
-          { borderRadius: roundness, elevation: 4 },
+          { borderRadius: roundness, elevation: 2 },
           styles.container,
           style,
         ]}
@@ -146,12 +121,16 @@ const Searchbar = React.forwardRef<TextInputHandles, SearchbarProps>(
           accessibilityRole="button"
           borderless
           rippleColor={rippleColor}
-          onPress={onIconPress}
+          onPress={leftIconOnPress}
           color={iconColor}
           icon={
-            icon ||
-            (({ size, color }) => (
-              <Icon source="search" color={color} size={size} />
+            leftIconName &&
+            (() => (
+              <Icon
+                source={leftIconName}
+                color={leftIconColor}
+                size={leftIconSize}
+              />
             ))
           }
           accessibilityLabel={searchAccessibilityLabel}
@@ -187,9 +166,13 @@ const Searchbar = React.forwardRef<TextInputHandles, SearchbarProps>(
           rippleColor={rippleColor}
           onPress={handleClearPress}
           icon={
-            clearIcon ||
-            (({ size, color }) => (
-              <Icon source="times" color={color} size={size} />
+            clearIcon &&
+            (() => (
+              <Icon
+                source={rightIconName}
+                color={rightIconColor}
+                size={rightIconSize}
+              />
             ))
           }
           // @ts-expect-error We keep old a11y props for backwards compat with old RN versions
@@ -209,7 +192,7 @@ const styles = StyleSheet.create({
   },
   input: {
     flex: 1,
-    fontSize: 18,
+    fontSize: 14,
     paddingLeft: 8,
     alignSelf: 'stretch',
     textAlign: I18nManager.isRTL ? 'right' : 'left',

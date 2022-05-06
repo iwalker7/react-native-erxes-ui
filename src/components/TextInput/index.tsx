@@ -14,14 +14,7 @@ import {
 } from 'react-native';
 import TextView from '../Typography';
 import Icon from '../Icon';
-import {
-  grey100,
-  grey600,
-  red400,
-  transparent,
-  white,
-  green100,
-} from '../../styles/colors';
+import { grey100, red400, transparent, white } from '../../styles/colors';
 import type { ViewStyle } from 'react-native';
 import { withTheme } from '../../core/theming';
 import { primaryDark3 } from '../../utils/colorUtils';
