@@ -24,7 +24,6 @@ export type SearchbarProps = React.ComponentPropsWithRef<typeof TextInput> & {
   placeholder?: string;
   value: string;
   onChangeText?: (query: string) => void;
-  closeIcon?: boolean;
   leftIconName?: IconSource;
   leftIconColor?: string;
   leftIconSize?: number;
@@ -35,7 +34,6 @@ export type SearchbarProps = React.ComponentPropsWithRef<typeof TextInput> & {
   inputStyle?: StyleProp<TextStyle>;
   style?: StyleProp<ViewStyle>;
   theme: ReactNativeErxes.Theme;
-  clearIcon?: IconSource;
 };
 
 type TextInputHandles = Pick<
@@ -54,7 +52,6 @@ const Searchbar = React.forwardRef<TextInputHandles, SearchbarProps>(
       rightIconName = 'close',
       rightIconColor = '#757575',
       rightIconSize = 16,
-      clearIcon = true,
       inputStyle,
       placeholder,
       searchAccessibilityLabel = 'search',
@@ -165,16 +162,13 @@ const Searchbar = React.forwardRef<TextInputHandles, SearchbarProps>(
           color={value ? iconColor : 'rgba(255, 255, 255, 0)'}
           rippleColor={rippleColor}
           onPress={handleClearPress}
-          icon={
-            clearIcon &&
-            (() => (
-              <Icon
-                source={rightIconName}
-                color={rightIconColor}
-                size={rightIconSize}
-              />
-            ))
-          }
+          icon={() => (
+            <Icon
+              source={rightIconName}
+              color={rightIconColor}
+              size={rightIconSize}
+            />
+          )}
           // @ts-expect-error We keep old a11y props for backwards compat with old RN versions
           accessibilityTraits="button"
           accessibilityComponentType="button"

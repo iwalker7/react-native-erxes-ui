@@ -38,7 +38,6 @@ const TextInputScreen: React.FC<any> = () => {
           <View style={{ flexDirection: 'row' }}>
             <View style={style.search}>
               <Searchbar
-                closeIcon
                 leftIconOnPress={() => console.log('sf')}
                 value={searchText}
                 placeholder="search"
