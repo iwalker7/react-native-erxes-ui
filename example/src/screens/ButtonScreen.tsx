@@ -58,7 +58,7 @@ const ButtonScreen: React.FC<any> = () => {
               style={{ marginRight: 20 }}
               width={200}
             >
-              Defadsfcgvhbjnkml, mkjngfcdult
+              Default
             </Button>
             <Button
               type="outline"

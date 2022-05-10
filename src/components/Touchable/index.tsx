@@ -1,4 +1,4 @@
-import React, { LegacyRef } from 'react';
+import React, { LegacyRef, forwardRef } from 'react';
 import {
   GestureResponderEvent,
   StyleProp,
@@ -16,14 +16,10 @@ export type TouchableProps = RNTouchableOpacityProps & {
   ref?: LegacyRef<TouchableOpacity | any>;
 };
 
-const Touchable: React.ForwardRefRenderFunction<unknown, TouchableProps> = ({
-  activeOpacity = 0.5,
-  style,
-  onPress,
-  onLongPress,
-  ref,
-  ...rest
-}) => {
+const Touchable: React.ForwardRefRenderFunction<unknown, TouchableProps> = (
+  { activeOpacity = 0.5, style, onPress, onLongPress, ...rest },
+  ref
+) => {
   let isCalled: boolean = false,
     timer: any;
 
@@ -52,4 +48,4 @@ const Touchable: React.ForwardRefRenderFunction<unknown, TouchableProps> = ({
   );
 };
 
-export default Touchable;
+export default forwardRef(Touchable);
