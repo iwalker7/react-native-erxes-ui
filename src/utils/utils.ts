@@ -266,9 +266,9 @@ export const getNameUser = (item: any) => {
 };
 
 //file
-export const getAttachmentUrl = (baseUrl: string, value: string) => {
+export const getAttachmentUrl = (apiUrl: string, value: string) => {
   if (value && !value.includes('http')) {
-    return `https://${baseUrl}/read-file?key=` + value;
+    return `${apiUrl}/read-file?key=` + value;
   }
   return value;
 };
@@ -411,12 +411,12 @@ export const dayDif = (
 export const fixedJson = (jsonStr: string) => {
   let fixedStr = jsonStr
     // Replace ":" with "@colon@" if it's between double-quotes
-    .replace(/:\s*"([^"]*)"/g, function (match, p1) {
+    .replace(/:\s*"([^"]*)"/g, function (_match, p1) {
       return ': "' + p1.replace(/:/g, '@colon@') + '"';
     })
 
     // Replace ":" with "@colon@" if it's between single-quotes
-    .replace(/:\s*'([^']*)'/g, function (match, p1) {
+    .replace(/:\s*'([^']*)'/g, function (_match, p1) {
       return ': "' + p1.replace(/:/g, '@colon@') + '"';
     })
 
