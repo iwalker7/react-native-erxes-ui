@@ -4,6 +4,7 @@ import type {
   EmitterSubscription,
 } from 'react-native';
 import { useSettings } from '../core/settings';
+import moment from 'moment';
 
 export function addEventListener<
   T extends {
@@ -53,6 +54,8 @@ export function addListener<
 
   return subscription;
 }
+
+//native
 export const androidCameraPermission = async (callback: () => void) => {
   try {
     const granted = await PermissionsAndroid.request(
@@ -74,43 +77,6 @@ export const androidCameraPermission = async (callback: () => void) => {
   } catch (err) {
     console.warn(err);
   }
-};
-
-export const range = (start: number, stop: number) => {
-  return Array.from(Array(stop), (_, i) => start + i);
-};
-
-// Return the list of values that are the intersection of two arrays
-export const intersection = (array1: any, array2: any) => {
-  return array1.filter((n: any) => array2.includes(n));
-};
-
-// Computes the union of the passed-in arrays: the list of unique items
-export const union = (array1: any, array2: any) => {
-  return array1.concat(array2.filter((n: any) => !array1.includes(n)));
-};
-
-// Similar to without, but returns the values from array that are not present in the other arrays.
-export const difference = (array1: any, array2: any) => {
-  return array1.filter((n: any) => !array2.includes(n));
-};
-
-export const isEmpty = (str: string) => {
-  return (
-    str === undefined ||
-    str === 'undefined' ||
-    str === null ||
-    str === 'null' ||
-    str.trim() === ''
-  );
-};
-
-export const getModifableArray = (array: any) => {
-  return JSON.parse(JSON.stringify(array));
-};
-
-export const numberWithCommas = (number: number) => {
-  return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 };
 
 export const regexRemoveTags = /(<([^>]+)>)/gi;
@@ -219,6 +185,7 @@ export const outcomingSolo = {
   marginBottom: 10,
 };
 
+//user related
 export function getIconName(key?: string) {
   switch (key) {
     case 'docx':
@@ -288,12 +255,6 @@ export const renderUserFullName = (data: any) => {
 
   return 'Unknown';
 };
-export const getAttachmentUrl = (baseUrl: string, value: string) => {
-  if (value && !value.includes('http')) {
-    return `https://${baseUrl}/read-file?key=` + value;
-  }
-  return value;
-};
 export const getNameUser = (item: any) => {
   return (
     item?.userDetail?.details?.fullName ||
@@ -302,6 +263,14 @@ export const getNameUser = (item: any) => {
     item?.email ||
     'Unknown'
   );
+};
+
+//file
+export const getAttachmentUrl = (baseUrl: string, value: string) => {
+  if (value && !value.includes('http')) {
+    return `https://${baseUrl}/read-file?key=` + value;
+  }
+  return value;
 };
 
 export const readFile = (apiUrl: any, value: any) => {
@@ -348,4 +317,126 @@ export const DeleteHandler = (
     .catch((e: any) => {
       onError && onError('uploadHandler: ' + e);
     });
+};
+
+//integration
+export const isSupportedKindInbox = (kind: string) => {
+  return (
+    kind === 'messenger' ||
+    kind === 'facebook-messenger' ||
+    kind === 'messfacebook-postenger' ||
+    kind === 'lead' ||
+    kind === 'nylas-imap' ||
+    kind === 'callpro'
+  );
+};
+
+// array
+export const shuffleArray = (arr: any[]) => arr.sort(() => 0.5 - Math.random());
+export const removeDuplicates = (arr: any[]) => [...new Set(arr)];
+export const isNotEmptyArray = (arr: any[]) =>
+  Array.isArray(arr) && arr.length > 0;
+
+export const range = (start: number, stop: number) => {
+  return Array.from(Array(stop), (_, i) => start + i);
+};
+// Return the list of values that are the intersection of two arrays
+export const intersection = (array1: any, array2: any) => {
+  return array1.filter((n: any) => array2.includes(n));
+};
+
+// Computes the union of the passed-in arrays: the list of unique items
+export const union = (array1: any, array2: any) => {
+  return array1.concat(array2.filter((n: any) => !array1.includes(n)));
+};
+
+// Similar to without, but returns the values from array that are not present in the other arrays.
+export const difference = (array1: any, array2: any) => {
+  return array1.filter((n: any) => !array2.includes(n));
+};
+
+//common
+export const generateRandomKey = (len: number) => {
+  var rdmString = '';
+  for (
+    ;
+    rdmString.length < len;
+    rdmString += Math.random().toString(36).substr(2)
+  );
+  return rdmString.substr(0, len);
+};
+
+export const capitalizeString = (str: string) =>
+  str.charAt(0).toUpperCase() + str.slice(1);
+
+export const validateEmail = (email: any) => {
+  return String(email)
+    .toLowerCase()
+    .match(
+      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+    );
+};
+
+export const isValidURL2 = (str: string) => {
+  var pattern = new RegExp(
+    '^(https?:\\/\\/)?' + // protocol
+      '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|' + // domain name
+      '((\\d{1,3}\\.){3}\\d{1,3}))' + // OR ip (v4) address
+      '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*' + // port and path
+      '(\\?[;&a-z\\d%_.~+=-]*)?' + // query string
+      '(\\#[-a-z\\d_]*)?$',
+    'i'
+  ); // fragment locator
+  return !!pattern.test(str);
+};
+
+export const isEmptyString = (str: any) => {
+  return (
+    str === undefined ||
+    str === 'undefined' ||
+    str === null ||
+    str === 'null' ||
+    str.trim() === ''
+  );
+};
+export const isDate = (checkDate: any) => {
+  const date = moment(checkDate);
+  return date.isValid() ? new Date(checkDate) : undefined;
+};
+export const dayDif = (
+  date1: { getTime: () => number },
+  date2: { getTime: () => number }
+) => Math.ceil(Math.abs(date1.getTime() - date2.getTime()) / 86400000);
+
+export const fixedJson = (jsonStr: string) => {
+  let fixedStr = jsonStr
+    // Replace ":" with "@colon@" if it's between double-quotes
+    .replace(/:\s*"([^"]*)"/g, function (match, p1) {
+      return ': "' + p1.replace(/:/g, '@colon@') + '"';
+    })
+
+    // Replace ":" with "@colon@" if it's between single-quotes
+    .replace(/:\s*'([^']*)'/g, function (match, p1) {
+      return ': "' + p1.replace(/:/g, '@colon@') + '"';
+    })
+
+    // Add double-quotes around any tokens before the remaining ":"
+    .replace(/(['"])?([a-z0-9A-Z_]+)(['"])?\s*:/g, '"$2": ')
+
+    // Turn "@colon@" back into ":"
+    .replace(/@colon@/g, ':');
+
+  let lastIndexIll = fixedStr.lastIndexOf('",') + 1;
+  let constlastIndexIll = lastIndexIll;
+  while (lastIndexIll < fixedStr.length) {
+    if (fixedStr.charAt(lastIndexIll) === '"') break;
+    if (fixedStr.charAt(lastIndexIll) === '}') {
+      fixedStr =
+        fixedStr.slice(0, constlastIndexIll) +
+        fixedStr.slice(constlastIndexIll + 1);
+      break;
+    }
+    lastIndexIll++;
+  }
+  return fixedStr;
 };
