@@ -289,7 +289,7 @@ const TextInput: React.ForwardRefRenderFunction<unknown, TextInputProps> = ({
 
       {rightIcon ? (
         <Touchable onPress={rightIconOnPress && rightIconOnPress}>
-          <View style={[{ marginEnd: 15, marginStart: 5 }]}>{leftIcon}</View>
+          <View style={[{ marginEnd: 15, marginStart: 5 }]}>{rightIcon}</View>
         </Touchable>
       ) : rightIconName ? (
         <Touchable onPress={rightIconOnPress && rightIconOnPress}>
