@@ -366,6 +366,10 @@ export const generateRandomKey = (len: number) => {
   return rdmString.substr(0, len);
 };
 
+export const numberWithCommas = (number: number) => {
+  return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+};
+
 export const capitalizeString = (str: string) =>
   str.charAt(0).toUpperCase() + str.slice(1);
 
@@ -376,11 +380,6 @@ export const validateEmail = (email: any) => {
       /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
     );
 };
-export const stringToAbb = (str: string) =>
-  str
-    .match(/(?<=(\s|^))[a-z]/gi)
-    .join('')
-    .toUpperCase();
 
 export const isValidURL2 = (str: string) => {
   var pattern = new RegExp(

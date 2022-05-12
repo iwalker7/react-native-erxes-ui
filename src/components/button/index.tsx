@@ -56,7 +56,7 @@ const Button: React.FC<ButtonProps> = ({
   borderColor,
   children,
   width,
-  height = 36,
+  height = 33,
   rightIcon,
   rightIconName,
   rightIconSize = defaultsize,
