@@ -376,6 +376,11 @@ export const validateEmail = (email: any) => {
       /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
     );
 };
+export const stringToAbb = (str: string) =>
+  str
+    .match(/(?<=(\s|^))[a-z]/gi)
+    .join('')
+    .toUpperCase();
 
 export const isValidURL2 = (str: string) => {
   var pattern = new RegExp(

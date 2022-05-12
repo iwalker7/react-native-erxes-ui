@@ -15,7 +15,6 @@ import {
   KeyboardAvoidingView,
 } from 'react-native';
 import color from 'color';
-
 import TextView from '../Typography';
 import Divider from '../Divider';
 import { black, grey100, grey500, white } from '../../styles/colors';
@@ -29,6 +28,7 @@ export type ModalProps = RNModalProps &
     onVisible: SetStateAction<any>;
     children?: React.ReactNode;
     style?: StyleProp<ViewStyle> | {};
+    containerStyle?: StyleProp<ViewStyle> | {};
     cancelable?: boolean;
     bottom?: boolean;
     withHeader?: boolean;
@@ -47,6 +47,7 @@ const Modal: React.FC<ModalProps> = ({
   onVisible,
   children,
   style,
+  containerStyle,
   cancelable = true,
   animationType,
   bottom = false,
@@ -75,7 +76,7 @@ const Modal: React.FC<ModalProps> = ({
       }}
     >
       {withoutTouch ? (
-        <View style={styles.dialogContainer}>
+        <View style={[styles.dialogContainer, containerStyle]}>
           <View
             style={[
               {
@@ -97,7 +98,7 @@ const Modal: React.FC<ModalProps> = ({
               justifyContent: 'flex-end',
               backgroundColor: colors.backdrop,
             },
-            style,
+            containerStyle,
           ]}
         >
           <TouchableOpacity
@@ -108,7 +109,7 @@ const Modal: React.FC<ModalProps> = ({
             }}
           >
             {bottom ? (
-              <View style={[{ flex: 1, justifyContent: 'flex-end' }]}>
+              <View style={[{ flex: 1, justifyContent: 'flex-end' }, style]}>
                 <TouchableWithoutFeedback>
                   <KeyboardAvoidingView
                     style={[
@@ -119,6 +120,7 @@ const Modal: React.FC<ModalProps> = ({
                           : 10,
                         backgroundColor: rest?.bgColor ? rest?.bgColor : white,
                       },
+                      style,
                     ]}
                     behavior={Platform.OS === 'ios' ? 'padding' : undefined}
                   >
@@ -127,7 +129,7 @@ const Modal: React.FC<ModalProps> = ({
                 </TouchableWithoutFeedback>
               </View>
             ) : (
-              <View style={styles.centeredView}>
+              <View style={[styles.centeredView, style]}>
                 <TouchableWithoutFeedback>
                   <View
                     style={[
