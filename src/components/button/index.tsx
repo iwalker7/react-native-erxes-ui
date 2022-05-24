@@ -72,8 +72,8 @@ const Button: React.FC<ButtonProps> = ({
   const { colors } = theme;
 
   const defaultStyle = {
-    minHeight: 36,
-    minWidth: 90,
+    minHeight: 20,
+    minWidth: 50,
     width: width ? width : block ? '100%' : undefined,
     height: height,
     borderWidth: 1,
