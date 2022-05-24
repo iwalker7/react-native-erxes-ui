@@ -43,8 +43,11 @@ const ModalScreen: React.FC<any> = () => {
         <Modal
           isVisible={visible}
           onVisible={onVisible}
-          withHeader
-          headerText="hi"
+          animationType="slide"
+          presentationStyle="formSheet"
+          onDismiss={() => console.log('on ddismiss')}
+          onRequestClose={() => console.log('on ddismiss')}
+          onHide={() => onVisible(false)}
         >
           <View>
             <Avatar source={images.avatar} uri={undefined} size={80} />
@@ -55,15 +58,13 @@ const ModalScreen: React.FC<any> = () => {
             </TextView>
           </View>
         </Modal>
-        <Modal bottom isVisible={bottomVisible} onVisible={onBottomVisible}>
-          <View>
-            <Avatar source={images.avatar} uri={undefined} size={80} />
-            <TextView center style={{ marginTop: 10 }}>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation
-            </TextView>
-          </View>
+        <Modal isVisible={bottomVisible} onVisible={onBottomVisible} bottom>
+          <Avatar source={images.avatar} uri={undefined} size={80} />
+          <TextView center style={{ marginTop: 10 }}>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+            ad minim veniam, quis nostrud exercitation
+          </TextView>
         </Modal>
       </View>
       <ScrollView

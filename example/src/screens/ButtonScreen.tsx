@@ -56,7 +56,6 @@ const ButtonScreen: React.FC<any> = () => {
               onPress={() => {}}
               onLongPress={() => {}}
               style={{ marginRight: 20 }}
-              width={200}
             >
               Default
             </Button>

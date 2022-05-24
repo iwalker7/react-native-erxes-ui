@@ -11,13 +11,11 @@ import {
   View,
   ViewProps as RNViewProps,
   ViewStyle,
-  Platform,
-  KeyboardAvoidingView,
+  SafeAreaView,
 } from 'react-native';
-import color from 'color';
 import TextView from '../Typography';
 import Divider from '../Divider';
-import { black, grey100, grey500, white } from '../../styles/colors';
+import { grey100, grey500 } from '../../styles/colors';
 import ScreenUtils from '../../utils/screenUtils';
 import { withTheme } from '../../core/theming';
 
@@ -28,15 +26,22 @@ export type ModalProps = RNModalProps &
     onVisible: SetStateAction<any>;
     children?: React.ReactNode;
     style?: StyleProp<ViewStyle> | {};
-    containerStyle?: StyleProp<ViewStyle> | {};
+    contentContainerStyle?: StyleProp<ViewStyle> | {};
     cancelable?: boolean;
     bottom?: boolean;
     withHeader?: boolean;
     headerText?: string;
     withoutTouch?: boolean;
-    animationType?: 'fade' | 'none' | 'slide' | undefined;
     bgColor?: string;
     modalHeader?: JSX.Element;
+    iconClose?: JSX.Element;
+    closeText?: string;
+    transparent?: boolean;
+    presentationStyle?:
+      | 'fullScreen'
+      | 'pageSheet'
+      | 'formSheet'
+      | 'overFullScreen';
     theme: ReactNativeErxes.Theme;
   };
 
@@ -47,14 +52,17 @@ const Modal: React.FC<ModalProps> = ({
   onVisible,
   children,
   style,
-  containerStyle,
+  contentContainerStyle,
   cancelable = true,
-  animationType,
   bottom = false,
   modalHeader,
   withHeader,
   headerText,
   withoutTouch,
+  iconClose,
+  closeText,
+  transparent = true,
+  presentationStyle = 'overFullScreen',
   ...rest
 }) => {
   const { colors } = theme;
@@ -69,124 +77,110 @@ const Modal: React.FC<ModalProps> = ({
   return (
     <RNModal
       visible={isVisible}
-      animationType={animationType || 'fade'}
-      transparent
+      transparent={
+        presentationStyle === 'pageSheet' || 'formSheet'
+          ? false
+          : transparent
+          ? transparent
+          : true
+      }
+      animationType={rest.animationType ? rest.animationType : 'fade'}
       onRequestClose={() => {
         onHideComplete();
       }}
+      presentationStyle={ScreenUtils.isIOS ? presentationStyle : undefined}
     >
       {withoutTouch ? (
-        <View style={[styles.dialogContainer, containerStyle]}>
-          <View
-            style={[
-              {
-                flex: 1,
-                width: '100%',
-              },
-              style,
-            ]}
-          >
-            {children}
-          </View>
-        </View>
-      ) : (
         <View
           style={[
             {
-              flex: 1,
-              width: '100%',
-              justifyContent: 'flex-end',
-              backgroundColor: colors.backdrop,
+              backgroundColor:
+                (presentationStyle === 'pageSheet' || 'formSheet') &&
+                ScreenUtils.isIOS
+                  ? 'transparent'
+                  : colors.backdrop,
             },
-            containerStyle,
+            style,
           ]}
         >
-          <TouchableOpacity
-            style={styles.dialogContainer}
-            activeOpacity={1}
-            onPressOut={() => {
-              onHideComplete();
-            }}
-          >
-            {bottom ? (
-              <View style={[{ flex: 1, justifyContent: 'flex-end' }, style]}>
-                <TouchableWithoutFeedback>
-                  <KeyboardAvoidingView
-                    style={[
-                      styles.modalView,
-                      {
-                        paddingBottom: ScreenUtils.isIphoneWithNotch()
-                          ? 30
-                          : 10,
-                        backgroundColor: rest?.bgColor ? rest?.bgColor : white,
-                      },
-                      style,
-                    ]}
-                    behavior={Platform.OS === 'ios' ? 'padding' : undefined}
-                  >
-                    {children}
-                  </KeyboardAvoidingView>
-                </TouchableWithoutFeedback>
-              </View>
-            ) : (
-              <View style={[styles.centeredView, style]}>
-                <TouchableWithoutFeedback>
-                  <View
-                    style={[
-                      styles.modalView,
-                      {
-                        width: '90%',
-                        minHeight: 50,
-                      },
-                      style,
-                    ]}
-                  >
-                    {withHeader && (
-                      <View
-                        style={{
-                          borderTopLeftRadius: 20,
-                          borderTopRightRadius: 20,
-                          backgroundColor: grey100,
-                        }}
-                      >
-                        <TextView style={styles.popoverHeader}>
-                          {headerText}
-                        </TextView>
-                        <Divider />
-                      </View>
-                    )}
-                    {cancelable && (
-                      <Pressable
-                        style={styles.xbutton}
-                        onPress={() => onVisible(false)}
-                      >
-                        <TextView small color={'#616161'}>
-                          Close
-                        </TextView>
-                      </Pressable>
-                    )}
-                    {modalHeader}
-                    {children}
-                  </View>
-                </TouchableWithoutFeedback>
-              </View>
-            )}
-          </TouchableOpacity>
+          <View style={contentContainerStyle}>{children}</View>
         </View>
+      ) : (presentationStyle === 'pageSheet' || 'formSheet') &&
+        ScreenUtils.isIOS ? (
+        <View style={contentContainerStyle}>{children}</View>
+      ) : (
+        <TouchableOpacity
+          style={[
+            {
+              width: '100%',
+              flex: 1,
+              backgroundColor:
+                (presentationStyle === 'pageSheet' || 'formSheet') &&
+                ScreenUtils.isIOS
+                  ? 'transparent'
+                  : colors.backdrop,
+              justifyContent: bottom ? 'flex-end' : 'center',
+            },
+          ]}
+          activeOpacity={1}
+          onPressOut={() => {
+            onHideComplete();
+          }}
+        >
+          {bottom ? (
+            <SafeAreaView style={[styles.modalView, style]}>
+              <TouchableWithoutFeedback>
+                <View style={contentContainerStyle}>{children}</View>
+              </TouchableWithoutFeedback>
+            </SafeAreaView>
+          ) : (
+            <SafeAreaView style={[styles.modalView, style]}>
+              <TouchableWithoutFeedback>
+                <View>
+                  {withHeader && (
+                    <View
+                      style={{
+                        borderTopLeftRadius: 20,
+                        borderTopRightRadius: 20,
+                        backgroundColor: grey100,
+                      }}
+                    >
+                      {cancelable && (
+                        <Pressable
+                          style={styles.xbutton}
+                          onPress={() => onVisible(false)}
+                        >
+                          {iconClose ? (
+                            iconClose
+                          ) : (
+                            <TextView small color={'#616161'}>
+                              {closeText ? closeText : 'Close'}
+                            </TextView>
+                          )}
+                        </Pressable>
+                      )}
+                      <TextView style={styles.popoverHeader}>
+                        {headerText}
+                      </TextView>
+                      <Divider />
+                    </View>
+                  )}
+                  {modalHeader}
+                  <View style={contentContainerStyle}>{children}</View>
+                </View>
+              </TouchableWithoutFeedback>
+            </SafeAreaView>
+          )}
+        </TouchableOpacity>
       )}
     </RNModal>
   );
 };
 
 const styles = StyleSheet.create({
-  centeredView: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
   modalView: {
-    backgroundColor: 'white',
     borderRadius: 20,
+    backgroundColor: '#fff',
   },
   xbutton: {
     position: 'absolute',
@@ -212,11 +206,6 @@ const styles = StyleSheet.create({
     fontWeight: '500',
     height: 50,
     backgroundColor: 'red',
-  },
-  dialogContainer: {
-    flex: 1,
-    width: '100%',
-    backgroundColor: color(black).alpha(0.5).rgb().string(),
   },
 });
 

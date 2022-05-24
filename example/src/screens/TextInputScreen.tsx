@@ -44,26 +44,27 @@ const TextInputScreen: React.FC<any> = () => {
                 onChangeText={(text: string) => setSearchText(text)}
               />
 
-              <TextInput
+              {/* <TextInput
                 placeholder="Default"
                 type="text"
                 leftIconName="eye"
                 onChangeText={(text: string) => setSearchText(text)}
                 value={searchText}
-              />
-              <TextInput
+              /> */}
+              {/* <TextInput
                 height={40}
                 label={'Lable'}
                 placeholder="Default"
                 onChangeText={(text: string) => setSearchText(text)}
                 value={searchText}
-              />
+              /> */}
               <TextInput
                 label={'Lable'}
                 type="outline"
                 placeholder="Outline"
                 onChangeText={(text: string) => setSearchText(text)}
                 value={searchText}
+                containerStyle={{ marginTop: 3 }}
               />
 
               <TextInput
@@ -86,7 +87,6 @@ const TextInputScreen: React.FC<any> = () => {
           </TextView>
           <TextInput
             leftIconName="eye"
-            rightIconName="eye"
             placeholder="Outline"
             onChangeText={(text: string) => setSearchText(text)}
             value={searchText}
