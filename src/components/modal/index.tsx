@@ -191,7 +191,6 @@ const styles = StyleSheet.create({
   modalView: {
     borderRadius: 20,
     backgroundColor: '#fff',
-    maxHeight: ScreenUtils.screenHeight * 0.5,
   },
   xbutton: {
     position: 'absolute',
