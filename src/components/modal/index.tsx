@@ -1,8 +1,6 @@
 /* eslint-disable react-native/no-inline-styles */
 import React, { SetStateAction } from 'react';
 import {
-  Pressable,
-  TouchableWithoutFeedback,
   Modal as RNModal,
   ModalProps as RNModalProps,
   StyleProp,
@@ -11,13 +9,12 @@ import {
   View,
   ViewProps as RNViewProps,
   ViewStyle,
-  SafeAreaView,
 } from 'react-native';
-import TextView from '../Typography';
-import Divider from '../Divider';
-import { grey100, grey500 } from '../../styles/colors';
+import { grey500 } from '../../styles/colors';
 import ScreenUtils from '../../utils/screenUtils';
 import { withTheme } from '../../core/theming';
+import { useState } from 'react';
+import { useEffect } from 'react';
 
 export type ModalProps = RNModalProps &
   RNViewProps & {
@@ -29,11 +26,9 @@ export type ModalProps = RNModalProps &
     contentContainerStyle?: StyleProp<ViewStyle> | {};
     cancelable?: boolean;
     bottom?: boolean;
-    withHeader?: boolean;
-    headerText?: string;
     withoutTouch?: boolean;
     bgColor?: string;
-    modalHeader?: JSX.Element;
+    headerComponent?: JSX.Element;
     iconClose?: JSX.Element;
     closeText?: string;
     transparent?: boolean;
@@ -52,20 +47,22 @@ const Modal: React.FC<ModalProps> = ({
   onVisible,
   children,
   style,
-  contentContainerStyle,
   cancelable = true,
   bottom = false,
-  modalHeader,
-  withHeader,
-  headerText,
+  headerComponent,
   withoutTouch,
-  iconClose,
-  closeText,
   transparent = true,
-  presentationStyle = 'overFullScreen',
+  presentationStyle,
   ...rest
 }) => {
   const { colors } = theme;
+
+  const [forceModalVisible, setForceModalVisible] = useState(false);
+  useEffect(() => {
+    if (forceModalVisible) {
+      setForceModalVisible(false);
+    }
+  }, [forceModalVisible]);
 
   const onHideComplete = () => {
     if (cancelable) {
@@ -74,17 +71,50 @@ const Modal: React.FC<ModalProps> = ({
     }
   };
 
+  //   const defaultHeader = () => {
+  //       return <View
+  //       style={{
+  //         borderTopLeftRadius: 20,
+  //         borderTopRightRadius: 20,
+  //         backgroundColor: grey100,
+  //       }}
+  //     >
+  //       {cancelable && (
+  //         <Pressable
+  //           style={styles.xbutton}
+  //           onPress={() => onVisible(false)}
+  //         >
+  //           {iconClose ? (
+  //             iconClose
+  //           ) : (
+  //             <TextView small color={'#616161'}>
+  //               {closeText ? closeText : 'Close'}
+  //             </TextView>
+  //           )}
+  //         </Pressable>
+  //       )}
+  //       <TextView style={styles.popoverHeader}>
+  //         {headerTitle}
+  //       </TextView>
+  //       <Divider />
+  //     </View>
+  //   }
+
   return (
     <RNModal
       visible={isVisible}
       transparent={
-        presentationStyle === 'pageSheet' || 'formSheet'
+        presentationStyle === 'pageSheet' || presentationStyle === 'formSheet'
           ? false
           : transparent
-          ? transparent
-          : true
       }
-      animationType={rest.animationType ? rest.animationType : 'fade'}
+      animationType={
+        presentationStyle
+          ? 'slide'
+          : rest.animationType
+          ? rest.animationType
+          : 'fade'
+      }
       onRequestClose={() => {
         onHideComplete();
       }}
@@ -95,83 +125,63 @@ const Modal: React.FC<ModalProps> = ({
           style={[
             {
               backgroundColor:
-                (presentationStyle === 'pageSheet' || 'formSheet') &&
+                (presentationStyle === 'pageSheet' ||
+                  presentationStyle === 'formSheet') &&
                 ScreenUtils.isIOS
                   ? 'transparent'
                   : colors.backdrop,
+              justifyContent: 'center',
+              alignItems: 'center',
             },
             style,
           ]}
         >
-          <View style={contentContainerStyle}>{children}</View>
+          {children}
         </View>
-      ) : (presentationStyle === 'pageSheet' || 'formSheet') &&
+      ) : (presentationStyle === 'pageSheet' ||
+          presentationStyle === 'formSheet') &&
         ScreenUtils.isIOS ? (
-        <View style={contentContainerStyle}>{children}</View>
-      ) : (
-        <TouchableOpacity
-          style={[
-            {
-              width: '100%',
-              flex: 1,
-              backgroundColor:
-                (presentationStyle === 'pageSheet' || 'formSheet') &&
-                ScreenUtils.isIOS
-                  ? 'transparent'
-                  : colors.backdrop,
-              justifyContent: bottom ? 'flex-end' : 'center',
-            },
-          ]}
-          activeOpacity={1}
-          onPressOut={() => {
-            onHideComplete();
+        <View
+          style={{
+            flexDirection: 'column',
+            justifyContent: bottom ? 'flex-end' : 'center',
           }}
         >
-          {bottom ? (
-            <SafeAreaView style={[styles.modalView, style]}>
-              <TouchableWithoutFeedback>
-                <View style={contentContainerStyle}>{children}</View>
-              </TouchableWithoutFeedback>
-            </SafeAreaView>
-          ) : (
-            <SafeAreaView style={[styles.modalView, style]}>
-              <TouchableWithoutFeedback>
-                <View>
-                  {withHeader && (
-                    <View
-                      style={{
-                        borderTopLeftRadius: 20,
-                        borderTopRightRadius: 20,
-                        backgroundColor: grey100,
-                      }}
-                    >
-                      {cancelable && (
-                        <Pressable
-                          style={styles.xbutton}
-                          onPress={() => onVisible(false)}
-                        >
-                          {iconClose ? (
-                            iconClose
-                          ) : (
-                            <TextView small color={'#616161'}>
-                              {closeText ? closeText : 'Close'}
-                            </TextView>
-                          )}
-                        </Pressable>
-                      )}
-                      <TextView style={styles.popoverHeader}>
-                        {headerText}
-                      </TextView>
-                      <Divider />
-                    </View>
-                  )}
-                  {modalHeader}
-                  <View style={contentContainerStyle}>{children}</View>
-                </View>
-              </TouchableWithoutFeedback>
-            </SafeAreaView>
-          )}
-        </TouchableOpacity>
+          {children}
+        </View>
+      ) : (
+        <View
+          style={{
+            flex: 1,
+            width: '100%',
+            justifyContent: bottom ? 'flex-end' : 'center',
+          }}
+        >
+          <TouchableOpacity
+            style={[
+              {
+                position: 'absolute',
+                left: 0,
+                top: 0,
+                right: 0,
+                bottom: 0,
+                backgroundColor:
+                  (presentationStyle === 'pageSheet' ||
+                    presentationStyle === 'formSheet') &&
+                  ScreenUtils.isIOS
+                    ? 'transparent'
+                    : colors.backdrop,
+              },
+            ]}
+            onPress={() => {
+              onHideComplete();
+            }}
+          />
+          <View style={[styles.modalView, style]}>
+            {headerComponent ? headerComponent : null}
+            {children}
+          </View>
+        </View>
       )}
     </RNModal>
   );
@@ -181,6 +191,7 @@ const styles = StyleSheet.create({
   modalView: {
     borderRadius: 20,
     backgroundColor: '#fff',
+    maxHeight: ScreenUtils.screenHeight * 0.5,
   },
   xbutton: {
     position: 'absolute',

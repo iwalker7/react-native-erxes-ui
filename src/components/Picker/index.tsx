@@ -8,95 +8,157 @@ import {
   ViewStyle,
 } from 'react-native';
 import { grey100 } from '../../styles/colors';
-import { Modal, Touchable, TextView } from '../../index';
+import { Modal, Touchable, TextView, Colors } from '../../index';
 import Divider from '../Divider';
 import type { SetStateAction } from 'react';
 import type { RefObject } from 'react';
+import { useState } from 'react';
 
 export type PickerProps = {
-  selectedIndex?: number;
-  data?: any[];
-  icon?: JSX.Element;
-  iconPosition?: 'left' | 'right';
-  onSelect: (i: number) => void;
+  data: any[];
+  value?: any[];
+  onChange: (item: any) => void;
+  isVisible: boolean;
+  onVisible: SetStateAction<any>;
+  mode?: 'SINGLE' | 'MULTI';
+  rightIcon?: JSX.Element;
   from?:
     | RefObject<View>
     | ((sourceRef: RefObject<View>, openPopover: () => void) => React.ReactNode)
     | React.ReactNode;
-  itemStyle: StyleProp<ViewStyle>;
-  style: StyleProp<ViewStyle>;
-  containerStyle?: StyleProp<ViewStyle>;
-  placeholderText?: string;
-  selectionLimit?: number;
-  isVisible: boolean;
-  onVisible: SetStateAction<any>;
+  selectionColor?: string;
+  placeholder?: string;
+  saveText?: string;
+  closeText?: string;
+  saveTextStyle?: StyleProp<ViewStyle>;
+  closeTextStyle?: StyleProp<ViewStyle>;
+  placeholderStyle?: StyleProp<ViewStyle>;
+  itemStyle?: StyleProp<ViewStyle>;
+  modalStyle?: StyleProp<ViewStyle>;
 };
 const Picker: React.FC<PickerProps> = ({
-  selectedIndex = 0,
+  selectionColor = Colors.grey200,
+  mode = 'SINGLE',
+  value = [],
   data = [],
-  onSelect,
-  icon,
-  iconPosition = 'right',
-  placeholderText,
+  onChange,
+  placeholder = 'Choose',
   isVisible,
   onVisible,
+  rightIcon,
+  saveText = 'Save',
+  closeText = 'Close',
+  saveTextStyle,
+  closeTextStyle,
+  placeholderStyle,
   itemStyle,
-  style,
-  containerStyle,
+  modalStyle,
 }) => {
+  const [selections, setSelections] = useState<any[]>(value);
+
+  const onSelect = (item: any) => {
+    console.log(item, selections);
+    if (mode === 'SINGLE') {
+      setSelections(selections.includes(item) ? [] : [item]);
+      return;
+    }
+    let temp = [...selections];
+    if (selections.length > 0 && selections.includes(item)) {
+      temp = selections.filter((el: number) => el !== item);
+      setSelections(temp);
+      return;
+    }
+    temp.push(item);
+    setSelections(temp);
+  };
+
+  const onHide = () => {
+    if (selections.length < 0) {
+      return;
+    } else {
+      onChange && onChange(selections);
+    }
+    onVisible(false);
+  };
+
   return (
     <>
-      <Modal bottom isVisible={isVisible} onVisible={onVisible}>
-        <ScrollView
-          style={[{ maxHeight: 200, width: '100%' }, style]}
-          showsVerticalScrollIndicator={false}
-        >
-          <View>
-            {data?.map((item, index) => {
-              return (
-                <Touchable
-                  key={index.toString()}
-                  onPress={() => {
-                    if (index !== selectedIndex) {
-                      onSelect(index);
-                    } else {
-                      onSelect(-1);
-                    }
-                    onVisible(false);
-                  }}
-                >
-                  <View style={[styles.itemText, itemStyle]}>
-                    <TextView small>{item}</TextView>
-                  </View>
-                  <Divider />
-                </Touchable>
-              );
-            })}
+      <Modal bottom isVisible={isVisible} onVisible={onVisible} onHide={onHide}>
+        <View style={modalStyle}>
+          <View
+            style={{
+              height: 45,
+              justifyContent: 'space-between',
+              flexDirection: 'row',
+              paddingHorizontal: 20,
+              paddingVertical: 15,
+            }}
+          >
+            <Touchable
+              style={{
+                flexDirection: 'row',
+              }}
+              onPress={onHide}
+            >
+              <TextView color={Colors.grey400} style={closeTextStyle}>
+                {closeText}
+              </TextView>
+            </Touchable>
+            <Touchable
+              style={{
+                flexDirection: 'row',
+              }}
+              onPress={onHide}
+            >
+              <TextView color={Colors.green400} style={saveTextStyle}>
+                {saveText}
+              </TextView>
+            </Touchable>
           </View>
-        </ScrollView>
+          <Divider />
+
+          <ScrollView
+            style={[{ maxHeight: 200, width: '100%' }, modalStyle]}
+            showsVerticalScrollIndicator={false}
+          >
+            <View>
+              {data?.map((item, index) => {
+                return (
+                  <Touchable
+                    key={index.toString()}
+                    onPress={() => onSelect(item)}
+                  >
+                    <View
+                      style={[
+                        styles.item,
+                        {
+                          backgroundColor: selections.includes(item)
+                            ? selectionColor
+                            : undefined,
+                        },
+                        itemStyle,
+                      ]}
+                    >
+                      <TextView small>{item}</TextView>
+                      <Divider />
+                    </View>
+                  </Touchable>
+                );
+              })}
+            </View>
+          </ScrollView>
+        </View>
       </Modal>
       <Touchable onPress={() => onVisible(!isVisible)}>
-        <View style={[styles.container, containerStyle]}>
-          <TextView style={{ fontSize: 13 }}>
-            {selectedIndex > -1
-              ? data[selectedIndex]
-              : placeholderText
-              ? placeholderText
-              : 'Choose'}
+        <View style={[styles.container, placeholderStyle]}>
+          <TextView>
+            {mode === 'MULTI' && selections?.length > 0
+              ? selections?.join(', ')
+              : mode === 'SINGLE' && selections?.length === 1 && selections[0]
+              ? selections[0]
+              : placeholder}
           </TextView>
-
-          {icon && (
-            <View
-              style={[
-                {
-                  marginLeft: iconPosition === 'right' ? 5 : 0,
-                  marginRight: iconPosition === 'right' ? 0 : 5,
-                },
-              ]}
-            >
-              {icon}
-            </View>
-          )}
+          {rightIcon && rightIcon}
         </View>
       </Touchable>
     </>
@@ -115,10 +177,12 @@ const styles = StyleSheet.create({
     backgroundColor: grey100,
   },
 
-  itemText: {
+  item: {
     padding: 15,
     paddingHorizontal: 10,
     width: '100%',
+    alignItems: 'center',
+    flexDirection: 'row',
   },
 });
 

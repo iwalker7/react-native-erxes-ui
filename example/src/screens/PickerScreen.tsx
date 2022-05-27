@@ -7,23 +7,28 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import styles from '../styles';
 
 const PickerScreen: React.FC<any> = () => {
-  const data = ['EXM', 'ERXES'];
-  const [indexBoard, setIndexBoard] = useState<number>(-1);
+  const data = ['EXM', 'ERXES', 'VALUE', 'VALUE 2'];
+  const [isVisible, onVisible] = useState(false);
+  const [value, setValue] = useState();
+
   return (
     <View style={styles.container}>
       <View style={{ width: '100%' }}>
-        {/* <Picker
-          selectedIndex={indexBoard}
+        <Picker
+          isVisible={isVisible}
+          onVisible={onVisible}
           data={data}
-          onSelect={(i: any) => setIndexBoard(i)}
-          icon={
+          mode="MULTI"
+          value={value}
+          onChange={setValue}
+          rightIcon={
             <MaterialCommunityIcons
               name={'chevron-down'}
               color="#757575"
               size={18}
             />
           }
-        /> */}
+        />
       </View>
 
       <View style={styles.segment}>

@@ -31,6 +31,7 @@ export type SearchbarProps = React.ComponentPropsWithRef<typeof TextInput> & {
   rightIconName?: IconSource;
   rightIconColor?: string;
   rightIconSize?: number;
+  rightIconOnPress?: () => void;
   inputStyle?: StyleProp<TextStyle>;
   style?: StyleProp<ViewStyle>;
   theme: ReactNativeErxes.Theme;
@@ -45,12 +46,13 @@ const Searchbar = React.forwardRef<TextInputHandles, SearchbarProps>(
   (
     {
       clearAccessibilityLabel = 'clear',
-      leftIconName = 'magnify',
+      leftIconName = 'search-1',
       leftIconColor = '#757575',
-      leftIconSize = 20,
+      leftIconSize = 18,
       leftIconOnPress,
-      rightIconName = 'close',
+      rightIconName = 'times',
       rightIconColor = '#757575',
+      rightIconOnPress,
       rightIconSize = 16,
       inputStyle,
       placeholder,
@@ -161,7 +163,7 @@ const Searchbar = React.forwardRef<TextInputHandles, SearchbarProps>(
           accessibilityLabel={clearAccessibilityLabel}
           color={value ? iconColor : 'rgba(255, 255, 255, 0)'}
           rippleColor={rippleColor}
-          onPress={handleClearPress}
+          onPress={rightIconOnPress ? rightIconOnPress : handleClearPress}
           icon={() => (
             <Icon
               source={rightIconName}

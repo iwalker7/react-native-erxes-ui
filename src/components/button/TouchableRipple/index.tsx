@@ -46,7 +46,7 @@ const TouchableRipple = ({
   const calculatedRippleColor =
     rippleColor ||
     color(colors.text)
-      .alpha(dark ? 0.32 : 0.2)
+      .alpha(dark ? 0.3 : 0.2)
       .rgb()
       .string();
 
