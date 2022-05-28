@@ -23,7 +23,7 @@ export type ModalProps = RNModalProps &
     onVisible: SetStateAction<any>;
     children?: React.ReactNode;
     style?: StyleProp<ViewStyle> | {};
-    contentContainerStyle?: StyleProp<ViewStyle> | {};
+    modalContainerStyle?: StyleProp<ViewStyle> | {};
     cancelable?: boolean;
     bottom?: boolean;
     withoutTouch?: boolean;
@@ -53,6 +53,7 @@ const Modal: React.FC<ModalProps> = ({
   withoutTouch,
   transparent = true,
   presentationStyle,
+  modalContainerStyle,
   ...rest
 }) => {
   const { colors } = theme;
@@ -151,11 +152,14 @@ const Modal: React.FC<ModalProps> = ({
         </View>
       ) : (
         <View
-          style={{
-            flex: 1,
-            width: '100%',
-            justifyContent: bottom ? 'flex-end' : 'center',
-          }}
+          style={[
+            {
+              flex: 1,
+              width: '100%',
+              justifyContent: bottom ? 'flex-end' : 'center',
+            },
+            modalContainerStyle,
+          ]}
         >
           <TouchableOpacity
             style={[
