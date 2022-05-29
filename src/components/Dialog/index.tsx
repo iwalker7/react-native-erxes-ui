@@ -89,6 +89,7 @@ const Dialog: React.FC<DialogProps> = ({
             {action !== 'simple' && (
               <View style={styles.buttonsContainer}>
                 <Button
+                  width={80}
                   color={grey300}
                   textStyle={{ color: grey800, fontSize: 13 }}
                   onPress={() => {
@@ -104,6 +105,7 @@ const Dialog: React.FC<DialogProps> = ({
                 </Button>
                 <Button
                   mode="verify"
+                  width={80}
                   style={{ marginStart: 10 }}
                   textStyle={{ fontSize: 13 }}
                   onPress={() => {

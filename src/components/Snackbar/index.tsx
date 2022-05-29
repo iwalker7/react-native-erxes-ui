@@ -219,8 +219,9 @@ const Snackbar: React.FC<SnackbarProps> = ({
             ))}
         </View>
         {action ? (
-          <View style={{ justifyContent: 'flex-end' }}>
+          <View style={{ flexDirection: 'row-reverse' }}>
             <Button
+              width={80}
               onPress={() => {
                 action.onPress && action.onPress();
                 onDismiss();

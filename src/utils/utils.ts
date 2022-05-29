@@ -5,6 +5,7 @@ import type {
 } from 'react-native';
 import { useSettings } from '../core/settings';
 import moment from 'moment';
+import { Colors } from 'react-native-erxes-ui';
 
 export function addEventListener<
   T extends {
@@ -80,6 +81,7 @@ export const androidCameraPermission = async (callback: () => void) => {
 };
 
 export const regexRemoveTags = /(<([^>]+)>)/gi;
+
 export const incomingBottom = { borderTopLeftRadius: 0, marginBottom: 10 };
 export const incomingMiddle = {
   borderBottomLeftRadius: 0,
@@ -91,40 +93,56 @@ export const incomingSolo = {
   borderTopLeftRadius: 20,
   marginBottom: 10,
 };
+
 export const getCustomerBorder = (
-  conversationMessages: string | any[] | undefined,
+  conversationMessages: any[],
   position: number
 ) => {
-  if (conversationMessages === undefined) {
-    return {};
-  }
+  if (conversationMessages === undefined) return {};
   if (position > 0) {
-    if (
-      conversationMessages[position]?.createdUser?._id ===
-      conversationMessages[position - 1]?.createdUser?._id
-    ) {
-      if (
-        conversationMessages[position]?.createdUser?._id ===
-        conversationMessages[position + 1]?.createdUser?._id
-      ) {
-        return incomingMiddle;
+    if (!conversationMessages[position - 1]?.customerId) {
+      if (position + 1 < conversationMessages.length) {
+        if (conversationMessages[position + 1]?.customerId) {
+          if (conversationMessages[position + 1]?.botData) {
+            return incomingSolo;
+          }
+          return incomingBottom;
+        } else {
+          return incomingSolo;
+        }
+      } else {
+        return incomingSolo;
+      }
+    } else if (position + 1 < conversationMessages.length) {
+      if (conversationMessages[position + 1]?.customerId) {
+        if (conversationMessages[position - 1]?.botData) {
+          if (conversationMessages[position + 1]?.botData) {
+            return incomingSolo;
+          }
+          return incomingBottom;
+        } else {
+          if (conversationMessages[position + 1]?.botData) {
+            return incomingTop;
+          }
+          return incomingMiddle;
+        }
+      } else if (conversationMessages[position - 1]?.botData) {
+        return incomingSolo;
       } else {
         return incomingTop;
       }
-    } else if (
-      conversationMessages[position]?.createdUser?._id ===
-      conversationMessages[position + 1]?.createdUser?._id
-    ) {
-      return incomingBottom;
     } else {
-      return incomingSolo;
+      if (conversationMessages[position - 1]?.botData) {
+        return incomingSolo;
+      }
+      return incomingBottom;
     }
   } else if (position + 1 < conversationMessages.length) {
-    if (
-      conversationMessages[position]?.createdUser?._id ===
-      conversationMessages[position + 1]?.createdUser?._id
-    ) {
-      return incomingBottom;
+    if (conversationMessages[position + 1]?.customerId) {
+      if (conversationMessages[position + 1]?.botData) {
+        return incomingSolo;
+      }
+      return incomingTop;
     } else {
       return incomingSolo;
     }
@@ -132,57 +150,96 @@ export const getCustomerBorder = (
     return incomingSolo;
   }
 };
-export const getUserBorder = (
-  conversationMessages: string | any[] | undefined,
-  position: number
-) => {
-  if (conversationMessages === undefined) {
-    return {};
-  }
-  if (position > 0) {
-    if (
-      conversationMessages[position]?.createdUser?._id ===
-      conversationMessages[position - 1]?.createdUser?._id
-    ) {
-      if (
-        conversationMessages[position]?.createdUser?._id ===
-        conversationMessages[position + 1]?.createdUser?._id
-      ) {
-        return outcomingMiddle;
-      } else {
-        return outcomingTop;
-      }
-    } else if (
-      conversationMessages[position]?.createdUser?._id ===
-      conversationMessages[position + 1]?.createdUser?._id
-    ) {
-      return outcomingBottom;
-    } else {
-      return outcomingSolo;
-    }
-  } else if (position + 1 < conversationMessages.length) {
-    if (
-      conversationMessages[position]?.createdUser?._id ===
-      conversationMessages[position + 1]?.createdUser?._id
-    ) {
-      return outcomingBottom;
-    } else {
-      return outcomingSolo;
-    }
-  } else {
-    return outcomingSolo;
-  }
-};
+
 export const outcomingBottom = { borderTopRightRadius: 0, marginBottom: 10 };
 export const outcomingMiddle = {
   borderBottomRightRadius: 0,
   borderTopRightRadius: 0,
 };
 export const outcomingTop = { borderBottomRightRadius: 0 };
-export const outcomingSolo = {
+const outcomingSolo = {
   borderBottomRightRadius: 20,
   borderTopRightRadius: 20,
   marginBottom: 10,
+};
+
+export const getUserBorder = (
+  conversationMessages: any[],
+  position: number
+) => {
+  if (conversationMessages === undefined) return outcomingSolo;
+  if (position > 0) {
+    if (!conversationMessages[position - 1]?.customerId) {
+      if (
+        conversationMessages[position]?.userId !==
+        conversationMessages[position - 1]?.userId
+      ) {
+        if (position + 1 < conversationMessages.length) {
+          if (!conversationMessages[position + 1]?.customerId) {
+            if (
+              conversationMessages[position]?.userId !==
+              conversationMessages[position + 1]?.userId
+            ) {
+              return outcomingSolo;
+            } else {
+              return outcomingBottom;
+            }
+          } else {
+            return outcomingSolo;
+          }
+        } else {
+          return outcomingSolo;
+        }
+      } else {
+        if (position + 1 < conversationMessages.length) {
+          if (!conversationMessages[position + 1]?.customerId) {
+            if (
+              conversationMessages[position]?.userId !==
+              conversationMessages[position + 1]?.userId
+            ) {
+              return outcomingTop;
+            } else {
+              return outcomingMiddle;
+            }
+          } else {
+            return outcomingTop;
+          }
+        } else {
+          return outcomingTop;
+        }
+      }
+    } else if (position + 1 < conversationMessages.length) {
+      if (!conversationMessages[position + 1]?.customerId) {
+        if (
+          conversationMessages[position]?.userId !==
+          conversationMessages[position + 1]?.userId
+        ) {
+          return outcomingSolo;
+        } else {
+          return outcomingBottom;
+        }
+      } else {
+        return outcomingSolo;
+      }
+    } else {
+      return outcomingSolo;
+    }
+  } else if (position + 1 < conversationMessages.length) {
+    if (!conversationMessages[position + 1]?.customerId) {
+      if (
+        conversationMessages[position]?.userId !==
+        conversationMessages[position + 1]?.userId
+      ) {
+        return outcomingSolo;
+      } else {
+        return outcomingBottom;
+      }
+    } else {
+      return outcomingSolo;
+    }
+  } else {
+    return outcomingSolo;
+  }
 };
 
 //user related
@@ -223,6 +280,27 @@ export function getIconName(key?: string) {
       return 'file-2';
   }
 }
+
+export const getAttachmentIconColor = (type: any) => {
+  switch (type) {
+    case 'doc':
+      return Colors.blue400;
+    case 'docx':
+      return Colors.blue400;
+    case 'ppt':
+      return Colors.orange800;
+    case 'pptx':
+      return Colors.orange800;
+    case 'xlsx':
+      return Colors.green500;
+    case 'xls':
+      return Colors.green500;
+    case 'pdf':
+      return Colors.red900;
+    default:
+      return '#673FBD';
+  }
+};
 export const renderFullName = (item: any) => {
   let fullName = '';
   if (item.firstName || item.lastName) {
