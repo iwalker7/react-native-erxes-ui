@@ -6,9 +6,6 @@ import { TextView, Colors, Picker, Button } from 'react-native-erxes-ui';
 import styles from '../styles';
 
 const SnackbarScreen: React.FC<any> = () => {
-  const data = ['success', 'warning', 'error', 'info'];
-  const [indexBoard, setIndexBoard] = React.useState<number>(-1);
-
   return (
     <>
       <View style={styles.container}>

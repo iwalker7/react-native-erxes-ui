@@ -37,36 +37,21 @@ const TextInputScreen: React.FC<any> = () => {
           </View>
           <View style={{ flexDirection: 'row' }}>
             <View style={style.search}>
-              <Searchbar
-                rightIconOnPress={() => console.log('sf')}
-                value={searchText}
-                placeholder="search"
-                onChangeText={(text: string) => setSearchText(text)}
-              />
-
-              {/* <TextInput
-                placeholder="Default"
-                type="text"
-                leftIconName="eye"
-                onChangeText={(text: string) => setSearchText(text)}
-                value={searchText}
-              /> */}
-              {/* <TextInput
-                height={40}
-                label={'Lable'}
-                placeholder="Default"
-                onChangeText={(text: string) => setSearchText(text)}
-                value={searchText}
-              /> */}
               <TextInput
-                label={'Lable'}
-                type="outline"
+                label={'Label'}
+                placeholder="Default"
+                onChangeText={(text: string) => setSearchText(text)}
+                value={searchText}
+                containerStyle={{ marginVertical: 3 }}
+              />
+              <TextInput
+                label={'Label'}
+                type="filled"
                 placeholder="Outline"
                 onChangeText={(text: string) => setSearchText(text)}
                 value={searchText}
-                containerStyle={{ marginTop: 3 }}
+                containerStyle={{ marginVertical: 3 }}
               />
-
               <TextInput
                 height={100}
                 label={'BIG LABEL'}

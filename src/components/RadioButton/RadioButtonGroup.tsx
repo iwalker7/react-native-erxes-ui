@@ -1,10 +1,11 @@
 import * as React from 'react';
-import { View } from 'react-native';
+import { StyleProp, View, ViewStyle } from 'react-native';
 
 export type RadioButtonGroupProps = {
   onValueChange: (value: string) => void;
   value: string;
   children: React.ReactNode;
+  style?: StyleProp<ViewStyle>;
 };
 
 export type RadioButtonContextType = {
@@ -20,9 +21,12 @@ const RadioButtonGroup: React.FC<RadioButtonGroupProps> = ({
   value,
   onValueChange,
   children,
+  style,
 }) => (
   <RadioButtonContext.Provider value={{ value, onValueChange }}>
-    <View accessibilityRole="radiogroup">{children}</View>
+    <View accessibilityRole="radiogroup" style={style}>
+      {children}
+    </View>
   </RadioButtonContext.Provider>
 );
 

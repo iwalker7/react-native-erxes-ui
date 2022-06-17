@@ -13,8 +13,6 @@ import {
 import { grey500 } from '../../styles/colors';
 import ScreenUtils from '../../utils/screenUtils';
 import { withTheme } from '../../core/theming';
-import { useState } from 'react';
-import { useEffect } from 'react';
 
 export type ModalProps = RNModalProps &
   RNViewProps & {
@@ -56,14 +54,7 @@ const Modal: React.FC<ModalProps> = ({
   modalContainerStyle,
   ...rest
 }) => {
-  const { colors } = theme;
-
-  const [forceModalVisible, setForceModalVisible] = useState(false);
-  useEffect(() => {
-    if (forceModalVisible) {
-      setForceModalVisible(false);
-    }
-  }, [forceModalVisible]);
+  const { themeColors } = theme;
 
   const onHideComplete = () => {
     if (cancelable) {
@@ -130,7 +121,7 @@ const Modal: React.FC<ModalProps> = ({
                   presentationStyle === 'formSheet') &&
                 ScreenUtils.isIOS
                   ? 'transparent'
-                  : colors.backdrop,
+                  : themeColors.backdrop,
               justifyContent: 'center',
               alignItems: 'center',
             },
@@ -174,7 +165,7 @@ const Modal: React.FC<ModalProps> = ({
                     presentationStyle === 'formSheet') &&
                   ScreenUtils.isIOS
                     ? 'transparent'
-                    : colors.backdrop,
+                    : themeColors.backdrop,
               },
             ]}
             onPress={() => {

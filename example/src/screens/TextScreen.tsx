@@ -32,7 +32,7 @@ const TextScreen: React.FC<any> = () => {
           justifyContent: 'space-between',
           alignContent: 'center',
           borderColor: 'transparent',
-          borderBottomColor: theme.colors.surface,
+          borderBottomColor: theme.themeColors.surface,
           borderWidth: 1,
         }}
       >

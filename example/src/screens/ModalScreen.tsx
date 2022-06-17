@@ -26,7 +26,9 @@ const ModalScreen: React.FC<any> = () => {
         }}
       >
         <TextView bold>Default modal</TextView>
-        <Button onPress={() => onVisible(true)}>Click here </Button>
+        <Button width={100} onPress={() => onVisible(true)}>
+          Click here
+        </Button>
       </View>
       <View
         style={{
@@ -37,13 +39,16 @@ const ModalScreen: React.FC<any> = () => {
         }}
       >
         <TextView bold>Bottom modal</TextView>
-        <Button onPress={() => onBottomVisible(true)}>Click here </Button>
+        <Button width={100} onPress={() => onBottomVisible(true)}>
+          Click here
+        </Button>
       </View>
       <View style={styles.segment}>
         <Modal
           isVisible={visible}
           onVisible={onVisible}
           onHide={() => onVisible(false)}
+          style={{ padding: 30 }}
         >
           <Avatar source={images.avatar} uri={undefined} size={80} />
           <TextView center style={{ marginTop: 10 }}>
@@ -52,10 +57,32 @@ const ModalScreen: React.FC<any> = () => {
             ad minim veniam, quis nostrud exercitation
           </TextView>
         </Modal>
-        <Modal bottom isVisible={bottomVisible} onVisible={onBottomVisible}>
+        <Modal
+          style={{ padding: 30 }}
+          bottom
+          isVisible={bottomVisible}
+          onVisible={onBottomVisible}
+        >
           <Avatar source={images.avatar} uri={undefined} size={80} />
         </Modal>
         <ScrollView showsVerticalScrollIndicator={false}>
+          <View style={styles.segment}>
+            <View style={styles.props}>
+              <TextView bold>presentationStyle</TextView>
+            </View>
+            <View
+              style={{
+                backgroundColor: Colors.grey200,
+                padding: 5,
+                borderRadius: 5,
+              }}
+            >
+              <TextView small>
+                formSheet | pageSheet | fullScreen | overFullScreen
+              </TextView>
+            </View>
+          </View>
+
           <View style={styles.segment}>
             <View style={styles.props}>
               <TextView bold>
@@ -79,7 +106,12 @@ const ModalScreen: React.FC<any> = () => {
               </TextView>
             </View>
           </View>
-
+          <View style={styles.segment}>
+            <TextView bold>
+              headerComponent
+              <TextView color={Colors.grey600}>{`: JSX.Elelment`}</TextView>
+            </TextView>
+          </View>
           <View style={styles.segment}>
             <TextView bold>
               isVisible
@@ -89,7 +121,6 @@ const ModalScreen: React.FC<any> = () => {
               <TextView small>Модал харагдаж байгаа эсэх</TextView>
             </View>
           </View>
-
           <View style={styles.segment}>
             <TextView bold>
               onVisible
@@ -101,7 +132,6 @@ const ModalScreen: React.FC<any> = () => {
               <TextView small>Модал удирдах функц</TextView>
             </View>
           </View>
-
           <View style={styles.segment}>
             <TextView bold>
               cancelable
@@ -115,7 +145,6 @@ const ModalScreen: React.FC<any> = () => {
               </TextView>
             </View>
           </View>
-
           <View style={styles.segment}>
             <TextView bold>
               onHide
@@ -125,7 +154,6 @@ const ModalScreen: React.FC<any> = () => {
               <TextView small>Модал хаагдсаны дараа дуудагдах функц</TextView>
             </View>
           </View>
-
           <View style={styles.segment}>
             <TextView bold>
               style
@@ -133,9 +161,6 @@ const ModalScreen: React.FC<any> = () => {
                 color={Colors.grey600}
               >{`: StyleProp<ViewStyle>`}</TextView>
             </TextView>
-            <View style={{ marginVertical: 10 }}>
-              <TextView small>Агуулагчийн style</TextView>
-            </View>
           </View>
         </ScrollView>
       </View>

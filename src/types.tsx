@@ -29,8 +29,9 @@ export type Theme = {
   dark: boolean;
   mode?: Mode;
   roundness: number;
-  colors: {
+  themeColors: {
     primary: string;
+    primaryDark: string;
     background: string;
     surface: string;
     accent: string;
@@ -38,6 +39,7 @@ export type Theme = {
     warn: string;
     success: string;
     text: string;
+    textSecondary: string;
     onSurface: string;
     disabled: string;
     placeholder: string;
@@ -83,6 +85,7 @@ declare global {
     }
     interface ThemeColors {
       primary: string;
+      primaryDark: string;
       background: string;
       surface: string;
       accent: string;
@@ -90,6 +93,7 @@ declare global {
       warn: string;
       success: string;
       text: string;
+      textSecondary: string;
       onSurface: string;
       disabled: string;
       placeholder: string;
@@ -105,7 +109,7 @@ declare global {
       dark: boolean;
       mode?: Mode;
       roundness: number;
-      colors: ThemeColors;
+      themeColors: ThemeColors;
       fonts: ThemeFonts;
       animation: ThemeAnimation;
     }

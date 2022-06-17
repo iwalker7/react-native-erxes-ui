@@ -9,7 +9,6 @@ import {
   ViewProps,
 } from 'react-native';
 import { withTheme } from '../../core/theming';
-import { white } from '../../styles/colors';
 
 export type LoaderProps = ViewProps & {
   backgroundColor?: string;
@@ -26,7 +25,7 @@ const Loader: React.FC<LoaderProps> = ({
   custom,
   theme,
 }) => {
-  const { colors } = theme;
+  const { themeColors } = theme;
 
   return (
     <View style={{ flex: 1 }}>
@@ -42,7 +41,10 @@ const Loader: React.FC<LoaderProps> = ({
         {custom ? (
           custom
         ) : (
-          <ActivityIndicator size="small" color={color || colors.primary} />
+          <ActivityIndicator
+            size="small"
+            color={color || themeColors.primary}
+          />
         )}
       </View>
     </View>

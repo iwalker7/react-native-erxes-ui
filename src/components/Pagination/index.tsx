@@ -4,8 +4,7 @@ import React from 'react';
 import { ScrollView, View } from 'react-native';
 import Touchable from '../Touchable';
 import TextView from '../Typography';
-import { black, grey300, white } from '../../styles/colors';
-import Icon from '../Icon';
+import { white } from '../../styles/colors';
 import { withTheme } from '../../core/theming';
 
 export const generatePages = (pageCount: number, currentPage: number) => {
@@ -75,9 +74,9 @@ const Page = (props: any) => {
     style,
     theme,
     textStyle,
-    hightlightColor = '#000',
+    hightlightColor = '#673FBD',
   } = props;
-  const { colors } = theme;
+  const { themeColors } = theme;
   const goto = (pg: number) => {
     onPage(pg);
   };
@@ -99,7 +98,7 @@ const Page = (props: any) => {
               page === currentPage
                 ? hightlightColor
                   ? hightlightColor
-                  : colors.primary
+                  : themeColors.primary
                 : white,
           },
           style,
@@ -142,6 +141,8 @@ const Pagination = (props: any) => {
     pages = [],
     containerStyle,
     theme,
+    leftIcon,
+    rightIcon,
   } = props;
 
   const goto = (page: number) => {
@@ -176,7 +177,7 @@ const Pagination = (props: any) => {
           {
             flexGrow: 1,
             justifyContent: 'center',
-            backgroundColor: black,
+            backgroundColor: white,
           },
           containerStyle,
         ]}
@@ -198,11 +199,7 @@ const Pagination = (props: any) => {
             style={{ padding: 5, marginEnd: 5 }}
             onPress={() => currentPage > 1 && onPrev()}
           >
-            <Icon
-              source="arrow-left-line"
-              size={20}
-              color={currentPage > 1 ? black : grey300}
-            />
+            {leftIcon}
           </Touchable>
 
           {pages.map((page: any, index: number) => (
@@ -219,11 +216,7 @@ const Pagination = (props: any) => {
             style={{ padding: 5, marginStart: 5 }}
             onPress={() => currentPage < totalPagesCount && onNext()}
           >
-            <Icon
-              source="arrow-right-line"
-              size={20}
-              color={currentPage < totalPagesCount ? black : grey300}
-            />
+            {rightIcon}
           </Touchable>
         </View>
       </ScrollView>

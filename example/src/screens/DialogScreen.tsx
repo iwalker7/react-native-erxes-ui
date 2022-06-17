@@ -35,7 +35,9 @@ const DialogScreen: React.FC<any> = () => {
           }}
         >
           <TextView bold>Alert dialog</TextView>
-          <Button onPress={() => onAlert(true)}>Click here </Button>
+          <Button width={80} onPress={() => onAlert(true)}>
+            Click here
+          </Button>
         </View>
 
         <View
@@ -46,7 +48,9 @@ const DialogScreen: React.FC<any> = () => {
           }}
         >
           <TextView bold>Confirm dialog</TextView>
-          <Button onPress={() => onConfirm(true)}>Click here </Button>
+          <Button width={80} onPress={() => onConfirm(true)}>
+            Click here
+          </Button>
         </View>
 
         <View
@@ -59,7 +63,9 @@ const DialogScreen: React.FC<any> = () => {
           <View style={{ flexWrap: 'wrap', flexDirection: 'column' }}>
             <TextView bold>Simple dialog </TextView>
           </View>
-          <Button onPress={() => onSimple(true)}>Click here </Button>
+          <Button width={80} onPress={() => onSimple(true)}>
+            Click here
+          </Button>
         </View>
       </View>
 
@@ -126,9 +132,6 @@ const DialogScreen: React.FC<any> = () => {
               Close
             </Button>
           </View>
-
-          <Divider style={{ marginVertical: 10 }} />
-          <TextView> ...</TextView>
         </Dialog>
       </View>
       <ScrollView

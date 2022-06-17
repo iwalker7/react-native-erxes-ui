@@ -30,15 +30,21 @@ const ButtonScreen: React.FC<any> = () => {
           <View style={{ flexDirection: 'row' }}>
             <TextView style={{ marginRight: 42 }}>Without icon</TextView>
             <Button
-              height={20}
               type="default"
               onPress={() => {}}
               onLongPress={() => {}}
-              style={{ marginRight: 20 }}
+              width={90}
+              containerStyle={{ marginRight: 20 }}
             >
               Default
             </Button>
-            <Button type="outline" onPress={() => {}} onLongPress={() => {}}>
+            <Button
+              width={90}
+              containerStyle={{ marginRight: 20 }}
+              type="outline"
+              onPress={() => {}}
+              onLongPress={() => {}}
+            >
               Outlined
             </Button>
           </View>
@@ -51,19 +57,21 @@ const ButtonScreen: React.FC<any> = () => {
             <TextView style={{ marginRight: 61 }}>With icon</TextView>
             <Button
               leftIconName="cloud-check"
-              leftIconSize={20}
+              leftIconSize={15}
               type="default"
               onPress={() => {}}
               onLongPress={() => {}}
-              style={{ marginRight: 20 }}
+              width={90}
+              containerStyle={{ marginRight: 20 }}
             >
               Default
             </Button>
             <Button
+              width={90}
               type="outline"
-              //   rightIconName="cloud-check"
-              //   rightIconColor="#472D9A"
-              //   rightIconSize={15}
+              rightIconName="cloud-check"
+              rightIconColor={Colors.amber900}
+              rightIconSize={15}
               onPress={() => {}}
               onLongPress={() => {}}
             >
@@ -101,7 +109,8 @@ const ButtonScreen: React.FC<any> = () => {
                 mode="active"
                 onPress={() => {}}
                 onLongPress={() => {}}
-                style={{ marginBottom: 10 }}
+                width={90}
+                containerStyle={{ margin: 5 }}
               >
                 Active
               </Button>
@@ -110,6 +119,8 @@ const ButtonScreen: React.FC<any> = () => {
                 mode="active"
                 onPress={() => {}}
                 onLongPress={() => {}}
+                width={90}
+                containerStyle={{ margin: 5 }}
               >
                 Active
               </Button>
@@ -121,7 +132,8 @@ const ButtonScreen: React.FC<any> = () => {
                 mode="disabled"
                 onPress={() => {}}
                 onLongPress={() => {}}
-                style={{ marginBottom: 10 }}
+                width={90}
+                containerStyle={{ margin: 5 }}
               >
                 Disabled
               </Button>
@@ -130,6 +142,8 @@ const ButtonScreen: React.FC<any> = () => {
                 mode="disabled"
                 onPress={() => {}}
                 onLongPress={() => {}}
+                width={90}
+                containerStyle={{ margin: 5 }}
               >
                 Disabled
               </Button>
@@ -141,6 +155,8 @@ const ButtonScreen: React.FC<any> = () => {
                 onPress={() => {}}
                 onLongPress={() => {}}
                 style={{ marginBottom: 10 }}
+                width={90}
+                containerStyle={{ margin: 5 }}
               >
                 Verify
               </Button>
@@ -149,6 +165,8 @@ const ButtonScreen: React.FC<any> = () => {
                 mode="verify"
                 onPress={() => {}}
                 onLongPress={() => {}}
+                width={90}
+                containerStyle={{ margin: 5 }}
               >
                 Verify
               </Button>
@@ -167,51 +185,21 @@ const ButtonScreen: React.FC<any> = () => {
 
         <View style={styles.segment}>
           <TextView bold>
-            onPress<TextView color={Colors.grey600}>{`:  () => void`}</TextView>
+            leftIconName
+            <TextView color={Colors.grey600}>: string</TextView>
           </TextView>
-          <View style={{ marginVertical: 10 }}>
-            <TextView small>Товчин дээр дарах үед дуудагдах функц</TextView>
-          </View>
         </View>
-
         <View style={styles.segment}>
           <TextView bold>
-            onLongPress
-            <TextView color={Colors.grey600}>{`:  () => void`}</TextView>
+            leftIconColor
+            <TextView color={Colors.grey600}>: string</TextView>
           </TextView>
-          <View style={{ marginVertical: 10 }}>
-            <TextView small>
-              Товчин дээр удаан дарах үед дуудагдах функц
-            </TextView>
-          </View>
         </View>
-
         <View style={styles.segment}>
           <TextView bold>
-            icon<TextView color={Colors.grey600}>: JSX.Element</TextView>
+            leftIconSize
+            <TextView color={Colors.grey600}>: number</TextView>
           </TextView>
-          <View style={{ marginVertical: 10 }}>
-            <TextView small color={Colors.grey600}>
-              {`Example: <Button icon={<Icon name="cloud-check" size={15} />}`}
-            </TextView>
-          </View>
-        </View>
-
-        <View style={styles.segment}>
-          <View style={styles.props}>
-            <TextView bold>
-              iconPosition<TextView color={Colors.grey600}>: string</TextView>
-            </TextView>
-            <View
-              style={{
-                backgroundColor: Colors.grey200,
-                padding: 5,
-                borderRadius: 5,
-              }}
-            >
-              <TextView small> left | right </TextView>
-            </View>
-          </View>
         </View>
       </ScrollView>
     </View>

@@ -1,7 +1,7 @@
 /* eslint-disable react-native/no-inline-styles */
 import React from 'react';
 import { View, ScrollView } from 'react-native';
-import { TextView, RadioButton, Colors, Divider } from 'react-native-erxes-ui';
+import { TextView, RadioButton, Colors } from 'react-native-erxes-ui';
 import styles from '../styles';
 
 const RadioButtonScreen: React.FC<any> = () => {

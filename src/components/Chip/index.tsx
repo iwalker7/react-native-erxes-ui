@@ -62,7 +62,7 @@ const Chip: React.FC<ChipProps> = ({
   isAvatar = false,
   isUser = false,
 }) => {
-  const { colors } = theme;
+  const { themeColors } = theme;
 
   const [select, setSelect] = useState(selected);
   const scale = 0.1;
@@ -100,12 +100,12 @@ const Chip: React.FC<ChipProps> = ({
         styles.chipContainer,
         mode === 'outline'
           ? {
-              borderColor: colors.primary,
+              borderColor: themeColors.primary,
               backgroundColor: select ? selectedColor : white,
             }
           : disabled
-          ? { backgroundColor: colors.disabled }
-          : { backgroundColor: primaryDark3(colors.primary) },
+          ? { backgroundColor: themeColors.disabled }
+          : { backgroundColor: primaryDark3(themeColors.primary) },
         containerStyle,
       ]}
     >
@@ -114,7 +114,10 @@ const Chip: React.FC<ChipProps> = ({
         small
         style={[
           styles.chipName,
-          { color: mode === 'outline' ? primaryDark1(colors.primary) : white },
+          {
+            color:
+              mode === 'outline' ? primaryDark1(themeColors.primary) : white,
+          },
           textStyle,
         ]}
       >
@@ -139,7 +142,7 @@ const Chip: React.FC<ChipProps> = ({
           <View
             style={[
               styles.chipRemove,
-              { backgroundColor: primaryLight1(colors.primary) },
+              { backgroundColor: primaryLight1(themeColors.primary) },
             ]}
           >
             {removeIcon}

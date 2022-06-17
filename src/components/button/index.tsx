@@ -69,7 +69,7 @@ const Button: React.FC<ButtonProps> = ({
   loaderPosition,
   theme,
 }) => {
-  const { colors } = theme;
+  const { themeColors } = theme;
 
   const defaultStyle = {
     minHeight: 20,
@@ -81,11 +81,11 @@ const Button: React.FC<ButtonProps> = ({
       ? borderColor
       : type === 'outline'
       ? mode === 'active'
-        ? colors.primary
+        ? themeColors.primary
         : mode === 'disabled'
-        ? colors.disabled
+        ? themeColors.disabled
         : mode === 'verify'
-        ? colors.success
+        ? themeColors.success
         : transparent
       : transparent,
 
@@ -96,11 +96,11 @@ const Button: React.FC<ButtonProps> = ({
       ? white
       : type === 'default'
       ? mode === 'disabled'
-        ? colors.disabled
+        ? themeColors.disabled
         : mode === 'verify'
-        ? colors.success
-        : colors.primary
-      : colors.primary,
+        ? themeColors.success
+        : themeColors.primary
+      : themeColors.primary,
     justifyContent: 'center',
     alignItems: 'center',
     alignContent: 'center',
@@ -141,10 +141,10 @@ const Button: React.FC<ButtonProps> = ({
                 type === 'default'
                   ? white
                   : mode === 'verify'
-                  ? colors.success
+                  ? themeColors.success
                   : color
                   ? color
-                  : colors.primary
+                  : themeColors.primary
               }
               style={{
                 marginHorizontal: 10,
@@ -160,11 +160,11 @@ const Button: React.FC<ButtonProps> = ({
                 ? textColor
                 : type === 'outline'
                 ? mode === 'active'
-                  ? colors.primary
+                  ? themeColors.primary
                   : mode === 'verify'
-                  ? colors.success
+                  ? themeColors.success
                   : mode === 'disabled'
-                  ? colors.disabled
+                  ? themeColors.disabled
                   : white
                 : white
             }

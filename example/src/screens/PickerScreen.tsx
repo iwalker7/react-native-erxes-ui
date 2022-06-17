@@ -32,12 +32,21 @@ const PickerScreen: React.FC<any> = () => {
       </View>
 
       <View style={styles.segment}>
-        <TextView bold>
-          selectedIndex
-          <TextView color={Colors.grey600}>{`: number`}</TextView>
-        </TextView>
-        <View style={{ marginVertical: 10 }}>
-          <TextView small>Сонгодсон элементийн индекс</TextView>
+        <View style={styles.props}>
+          <TextView bold>
+            mode
+            <TextView color={Colors.grey600}>: string</TextView>
+          </TextView>
+
+          <View
+            style={{
+              backgroundColor: Colors.grey200,
+              padding: 5,
+              borderRadius: 5,
+            }}
+          >
+            <TextView small> SINGLE | MULTI </TextView>
+          </View>
         </View>
       </View>
 
@@ -71,23 +80,6 @@ const PickerScreen: React.FC<any> = () => {
           <TextView small color={Colors.grey600}>
             {`Example: <Picker icon={<Icon name="cloud-check" size={15} />}`}
           </TextView>
-        </View>
-      </View>
-
-      <View style={styles.segment}>
-        <View style={styles.props}>
-          <TextView bold>
-            iconPosition<TextView color={Colors.grey600}>: string</TextView>
-          </TextView>
-          <View
-            style={{
-              backgroundColor: Colors.grey200,
-              padding: 5,
-              borderRadius: 5,
-            }}
-          >
-            <TextView small> left | right </TextView>
-          </View>
         </View>
       </View>
 

@@ -57,7 +57,6 @@ const Picker: React.FC<PickerProps> = ({
   const [selections, setSelections] = useState<any[]>(value);
 
   const onSelect = (item: any) => {
-    console.log(item, selections);
     if (mode === 'SINGLE') {
       setSelections(selections.includes(item) ? [] : [item]);
       return;

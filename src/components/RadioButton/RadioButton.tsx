@@ -19,7 +19,7 @@ export type RadioButtonProps = {
   theme: ReactNativeErxes.Theme;
 };
 
-const BORDER_WIDTH = 2;
+const BORDER_WIDTH = 6;
 
 const RadioButton: React.FC<RadioButtonProps> = ({
   disabled,
@@ -30,7 +30,7 @@ const RadioButton: React.FC<RadioButtonProps> = ({
   theme,
   ...rest
 }) => {
-  const { colors } = theme;
+  const { themeColors } = theme;
 
   const { current: borderAnim } = React.useRef<Animated.Value>(
     new Animated.Value(BORDER_WIDTH)
@@ -70,7 +70,7 @@ const RadioButton: React.FC<RadioButtonProps> = ({
     }
   }, [status, borderAnim, radioAnim, scale]);
 
-  const checkedColor = rest.color || colors.primary;
+  const checkedColor = rest.color || themeColors.primary;
   const uncheckedColor =
     rest.uncheckedColor || color(black).alpha(0.7).rgb().string();
 
@@ -126,15 +126,7 @@ const RadioButton: React.FC<RadioButtonProps> = ({
             >
               {checked ? (
                 <View style={[StyleSheet.absoluteFill, styles.radioContainer]}>
-                  <Animated.View
-                    style={[
-                      styles.dot,
-                      {
-                        backgroundColor: radioColor,
-                        transform: [{ scale: radioAnim }],
-                      },
-                    ]}
-                  />
+                  <Animated.View style={[styles.dot]} />
                 </View>
               ) : null}
             </Animated.View>
@@ -160,9 +152,10 @@ const styles = StyleSheet.create({
     margin: 8,
   },
   dot: {
-    height: 10,
-    width: 10,
-    borderRadius: 5,
+    height: 3,
+    width: 3,
+    borderRadius: 3,
+    backgroundColor: '#fff',
   },
 });
 

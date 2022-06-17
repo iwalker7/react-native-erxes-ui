@@ -49,7 +49,7 @@ export default function MainScreen({ navigation }: any) {
             backgroundColor: '#DED9E8',
           }}
         >
-          <TextView uppercase bold color={theme.colors.primary}>
+          <TextView uppercase bold color={theme.themeColors.primary}>
             {section.key}
           </TextView>
         </View>
@@ -89,7 +89,7 @@ export default function MainScreen({ navigation }: any) {
               paddingHorizontal: 30,
               paddingVertical: 15,
               backgroundColor: 'white',
-              color: theme.colors.primary,
+              color: theme.themeColors.primary,
             }}
           >
             {item.title}

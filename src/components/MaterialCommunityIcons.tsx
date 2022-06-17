@@ -40,7 +40,7 @@ try {
           (e as any).message
         )
       ) {
-        console.error(e);
+        // console.error(e);
       }
 
       console.warn(
