@@ -97,8 +97,8 @@ const Searchbar = React.forwardRef<TextInputHandles, SearchbarProps>(
       rest.onChangeText?.('');
     };
 
-    const { themeColors, roundness, dark, fonts } = theme;
-    const textColor = themeColors.text;
+    const { colors, roundness, dark, fonts } = theme;
+    const textColor = colors.text;
     const font = fonts.regular;
     const iconColor = dark
       ? textColor
@@ -145,8 +145,8 @@ const Searchbar = React.forwardRef<TextInputHandles, SearchbarProps>(
             inputStyle,
           ]}
           placeholder={placeholder || ''}
-          placeholderTextColor={themeColors.placeholder}
-          selectionColor={themeColors.primary}
+          placeholderTextColor={colors.placeholder}
+          selectionColor={colors.primary}
           underlineColorAndroid="transparent"
           returnKeyType="search"
           keyboardAppearance={dark ? 'dark' : 'light'}

@@ -54,7 +54,7 @@ const Modal: React.FC<ModalProps> = ({
   modalContainerStyle,
   ...rest
 }) => {
-  const { themeColors } = theme;
+  const { colors } = theme;
 
   const onHideComplete = () => {
     if (cancelable) {
@@ -121,7 +121,7 @@ const Modal: React.FC<ModalProps> = ({
                   presentationStyle === 'formSheet') &&
                 ScreenUtils.isIOS
                   ? 'transparent'
-                  : themeColors.backdrop,
+                  : colors.backdrop,
               justifyContent: 'center',
               alignItems: 'center',
             },
@@ -148,6 +148,7 @@ const Modal: React.FC<ModalProps> = ({
               flex: 1,
               width: '100%',
               justifyContent: bottom ? 'flex-end' : 'center',
+              alignItems: 'center',
             },
             modalContainerStyle,
           ]}
@@ -165,7 +166,7 @@ const Modal: React.FC<ModalProps> = ({
                     presentationStyle === 'formSheet') &&
                   ScreenUtils.isIOS
                     ? 'transparent'
-                    : themeColors.backdrop,
+                    : colors.backdrop,
               },
             ]}
             onPress={() => {

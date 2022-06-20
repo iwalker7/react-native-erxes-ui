@@ -30,7 +30,7 @@ const RadioButton: React.FC<RadioButtonProps> = ({
   theme,
   ...rest
 }) => {
-  const { themeColors } = theme;
+  const { colors } = theme;
 
   const { current: borderAnim } = React.useRef<Animated.Value>(
     new Animated.Value(BORDER_WIDTH)
@@ -70,7 +70,7 @@ const RadioButton: React.FC<RadioButtonProps> = ({
     }
   }, [status, borderAnim, radioAnim, scale]);
 
-  const checkedColor = rest.color || themeColors.primary;
+  const checkedColor = rest.color || colors.primary;
   const uncheckedColor =
     rest.uncheckedColor || color(black).alpha(0.7).rgb().string();
 

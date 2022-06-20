@@ -16,7 +16,7 @@ const AvatarScreen: React.FC<any> = () => {
           flexDirection: 'row',
           paddingVertical: 10,
           borderColor: 'transparent',
-          borderBottomColor: theme.themeColors.primary,
+          borderBottomColor: theme.colors.primary,
           borderWidth: 1,
           justifyContent: 'space-around',
         }}

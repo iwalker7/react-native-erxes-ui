@@ -13,7 +13,7 @@ export type TSurface = React.ComponentPropsWithRef<typeof View> & {
 
 const Surface = ({ style, theme, ...rest }: TSurface) => {
   const { elevation = 4 } = (StyleSheet.flatten(style) || {}) as ViewStyle;
-  const { dark: isDarkTheme, mode, themeColors } = theme;
+  const { dark: isDarkTheme, mode, colors } = theme;
   return (
     <Animated.View
       {...rest}
@@ -21,8 +21,8 @@ const Surface = ({ style, theme, ...rest }: TSurface) => {
         {
           backgroundColor:
             isDarkTheme && mode === 'adaptive'
-              ? overlay(elevation, themeColors.surface)
-              : themeColors.surface,
+              ? overlay(elevation, colors.surface)
+              : colors.surface,
         },
         elevation ? shadow(elevation) : null,
         style,

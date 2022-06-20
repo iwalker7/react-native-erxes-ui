@@ -73,7 +73,7 @@ const Snackbar: React.FC<SnackbarProps> = ({
   backgroungColor,
   ...rest
 }) => {
-  const { themeColors } = theme;
+  const { colors } = theme;
 
   const { current: opacity } = useRef(new Animated.Value(0.0));
   const [hidden, setHidden] = useState<boolean>(!visible);
@@ -81,12 +81,12 @@ const Snackbar: React.FC<SnackbarProps> = ({
   const mainColor = backgroungColor
     ? backgroungColor
     : type === 'error'
-    ? themeColors.error
+    ? colors.error
     : type === 'success'
-    ? themeColors.success
+    ? colors.success
     : type === 'warning'
-    ? themeColors.warn
-    : themeColors.accent;
+    ? colors.warn
+    : colors.accent;
 
   useEffect(() => {
     return () => {

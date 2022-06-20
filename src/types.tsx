@@ -29,7 +29,7 @@ export type Theme = {
   dark: boolean;
   mode?: Mode;
   roundness: number;
-  themeColors: {
+  colors: {
     primary: string;
     primaryDark: string;
     background: string;
@@ -109,7 +109,7 @@ declare global {
       dark: boolean;
       mode?: Mode;
       roundness: number;
-      themeColors: ThemeColors;
+      colors: ThemeColors;
       fonts: ThemeFonts;
       animation: ThemeAnimation;
     }

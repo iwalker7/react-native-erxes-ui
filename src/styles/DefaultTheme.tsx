@@ -6,7 +6,7 @@ import type { Theme } from '../types';
 const DefaultTheme: Theme = {
   dark: false,
   roundness: 5,
-  themeColors: {
+  colors: {
     background: '#fff',
     text: 'rgba(0, 0, 0, 0.8)',
     textSecondary: 'rgba(0, 0, 0, 0.6)',

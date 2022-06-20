@@ -76,7 +76,7 @@ const Page = (props: any) => {
     textStyle,
     hightlightColor = '#673FBD',
   } = props;
-  const { themeColors } = theme;
+  const { colors } = theme;
   const goto = (pg: number) => {
     onPage(pg);
   };
@@ -98,7 +98,7 @@ const Page = (props: any) => {
               page === currentPage
                 ? hightlightColor
                   ? hightlightColor
-                  : themeColors.primary
+                  : colors.primary
                 : white,
           },
           style,

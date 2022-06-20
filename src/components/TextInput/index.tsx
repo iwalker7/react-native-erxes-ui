@@ -100,11 +100,11 @@ const TextInput: React.ForwardRefRenderFunction<unknown, TextInputProps> = ({
   backgroundColor,
   ...rest
 }) => {
-  const { themeColors } = theme;
+  const { colors } = theme;
 
   const p = password ? '*****' : placeholder ? placeholder : '';
   //   const [ph, setPh] = React.useState(p);
-  const [mainColor, setMainColor] = React.useState(themeColors.primary);
+  const [mainColor, setMainColor] = React.useState(colors.primary);
   const [focused, setFocused] = React.useState<boolean>(false);
   const { current: labeled } = React.useRef<Animated.Value>(
     new Animated.Value(0)
@@ -229,7 +229,7 @@ const TextInput: React.ForwardRefRenderFunction<unknown, TextInputProps> = ({
           ) : null}
           <TextView
             small
-            color={labelColor || primaryDark3(themeColors.primary)}
+            color={labelColor || primaryDark3(colors.primary)}
             style={labelStyle}
           >
             {label}
@@ -260,7 +260,7 @@ const TextInput: React.ForwardRefRenderFunction<unknown, TextInputProps> = ({
         {isLoading ? (
           <ActivityIndicator
             size="small"
-            color={themeColors.primary}
+            color={colors.primary}
             style={{
               marginHorizontal: 10,
             }}

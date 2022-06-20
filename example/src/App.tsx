@@ -54,8 +54,8 @@ const PREFERENCES_KEY = 'APP_PREFERENCES';
 
 const CustomDarkTheme: ReactNativeErxes.Theme = {
   ...DarkTheme,
-  themeColors: {
-    ...DarkTheme.themeColors,
+  colors: {
+    ...DarkTheme.colors,
     customColor: '#BADA55',
   },
   fonts: {
@@ -71,8 +71,8 @@ const CustomDarkTheme: ReactNativeErxes.Theme = {
 
 const CustomDefaultTheme = {
   ...DefaultTheme,
-  themeColors: {
-    ...DefaultTheme.themeColors,
+  colors: {
+    ...DefaultTheme.colors,
     customColor: '#BADA55',
   },
   fonts: {

@@ -25,7 +25,7 @@ export default function ScreenWrapper({
   ...rest
 }: Props) {
   const {
-    themeColors: { background },
+    colors: { background },
   } = useTheme();
 
   const insets = useSafeAreaInsets();

@@ -9,8 +9,8 @@ const DarkTheme: Theme = {
   dark: true,
   mode: 'adaptive',
 
-  themeColors: {
-    ...DefaultTheme.themeColors,
+  colors: {
+    ...DefaultTheme.colors,
     background: '#252437',
     onSurface: '#FFFFFF',
     text: white,

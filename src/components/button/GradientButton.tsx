@@ -56,10 +56,10 @@ const GradientBtn: React.FC<GradientButtonProps> = ({
   children,
   ...rest
 }) => {
-  const { themeColors } = useTheme();
+  const { colors } = useTheme();
 
   const defaultsize = 20;
-  const defaultGradient = [themeColors.primary, themeColors.accent];
+  const defaultGradient = [colors.primary, colors.accent];
   return (
     <View
       pointerEvents="box-none"

@@ -25,7 +25,7 @@ const Loader: React.FC<LoaderProps> = ({
   custom,
   theme,
 }) => {
-  const { themeColors } = theme;
+  const { colors } = theme;
 
   return (
     <View style={{ flex: 1 }}>
@@ -41,10 +41,7 @@ const Loader: React.FC<LoaderProps> = ({
         {custom ? (
           custom
         ) : (
-          <ActivityIndicator
-            size="small"
-            color={color || themeColors.primary}
-          />
+          <ActivityIndicator size="small" color={color || colors.primary} />
         )}
       </View>
     </View>
