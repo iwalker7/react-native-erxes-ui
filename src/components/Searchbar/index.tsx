@@ -108,7 +108,11 @@ const Searchbar = React.forwardRef<TextInputHandles, SearchbarProps>(
     return (
       <Surface
         style={[
-          { borderRadius: roundness, elevation: 2 },
+          {
+            borderRadius: roundness,
+            elevation: 2,
+            backgroundColor: colors.surfaceHighlight,
+          },
           styles.container,
           style,
         ]}

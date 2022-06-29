@@ -185,6 +185,7 @@ const TextInput: React.ForwardRefRenderFunction<unknown, TextInputProps> = ({
               borderColor: 'transparent',
               borderBottomColor: theme.colors.borderPrimary,
               paddingHorizontal: 15,
+              backgroundColor: 'transparent',
             }
           : styles.container,
         {

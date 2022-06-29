@@ -24,9 +24,9 @@ const DefaultTheme: Theme = {
     onSurfaceLow: rgba(black, 0.3),
     onSurfaceLowest: rgba(black, 0.15),
 
-    backdrop: color(black).alpha(0.45).rgb().string(),
-    backdropHigh: color(black).alpha(0.7).rgb().string(),
-    backdropLow: color(black).alpha(0.3).rgb().string(),
+    backdrop: color(black).alpha(0.3).rgb().string(),
+    backdropHigh: color(black).alpha(0.6).rgb().string(),
+    backdropLow: color(black).alpha(0.15).rgb().string(),
 
     error: '#EA475D',
     warn: '#FFC82C',
