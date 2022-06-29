@@ -10,7 +10,7 @@ const TextScreen: React.FC<any> = () => {
   return (
     <View style={styles.container}>
       <View style={[styles.segment, { height: 70, marginBottom: 10 }]}>
-        <TextView bold color={Colors.grey600}>
+        <TextView color={Colors.grey600}>
           {`Props + React native-ын TextProps`}
         </TextView>
 

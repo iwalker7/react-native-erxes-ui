@@ -16,9 +16,8 @@ import TextView from '../Typography';
 import Icon from '../Icon';
 import type { ViewStyle } from 'react-native';
 import { withTheme } from '../../core/theming';
-import { primaryDark3 } from '../../utils/colorUtils';
 import Touchable from '../Touchable';
-import { red400 } from 'src/styles/colors';
+import { red400 } from '../../styles/colors';
 
 export type TextInputProps = RNProps & {
   type?: 'default' | 'outline' | 'filled' | 'text';
@@ -205,7 +204,7 @@ const TextInput: React.ForwardRefRenderFunction<unknown, TextInputProps> = ({
             type === 'filled'
               ? mainColor
               : type === 'outline'
-              ? mainColor
+              ? theme.colors.surfaceHighlight
               : required
               ? red400
               : 'transparent',

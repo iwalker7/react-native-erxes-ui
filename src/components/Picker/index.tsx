@@ -13,6 +13,7 @@ import Divider from '../Divider';
 import type { SetStateAction } from 'react';
 import type { RefObject } from 'react';
 import { useState } from 'react';
+import ScreenUtils from '../../utils/screenUtils';
 
 export type PickerProps = {
   data: any[];
@@ -38,7 +39,8 @@ export type PickerProps = {
   theme: ReactNativeErxes.Theme;
 };
 const Picker: React.FC<PickerProps> = ({
-  selectionColor = Colors.grey200,
+  theme,
+  selectionColor = theme.colors.onSurfaceMedium,
   mode = 'SINGLE',
   value = [],
   data = [],
@@ -54,7 +56,6 @@ const Picker: React.FC<PickerProps> = ({
   placeholderStyle,
   itemStyle,
   modalStyle,
-  theme,
 }) => {
   const [selections, setSelections] = useState<any[]>(value);
 
@@ -88,6 +89,7 @@ const Picker: React.FC<PickerProps> = ({
         <View
           style={[
             {
+              width: ScreenUtils.screenWidth,
               backgroundColor: theme.colors.surface,
             },
             modalStyle,
@@ -123,7 +125,7 @@ const Picker: React.FC<PickerProps> = ({
               }}
               onPress={onHide}
             >
-              <TextView bold color={Colors.green400} style={saveTextStyle}>
+              <TextView bold color={Colors.green500} style={saveTextStyle}>
                 {saveText}
               </TextView>
             </Touchable>
@@ -172,7 +174,13 @@ const Picker: React.FC<PickerProps> = ({
         </View>
       </Modal>
       <Touchable onPress={() => onVisible(!isVisible)}>
-        <View style={[styles.container, placeholderStyle]}>
+        <View
+          style={[
+            styles.container,
+            { backgroundColor: theme.colors.surfaceHighlight },
+            placeholderStyle,
+          ]}
+        >
           <TextView color={theme.colors.textPrimary}>
             {mode === 'MULTI' && selections?.length > 0
               ? selections?.join(', ')

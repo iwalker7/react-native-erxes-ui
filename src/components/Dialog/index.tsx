@@ -54,7 +54,10 @@ const Dialog: React.FC<DialogProps> = ({
       }}
     >
       <TouchableOpacity
-        style={[styles.dialogContainer, { shadowColor: theme.colors.backdrop }]}
+        style={[
+          styles.dialogContainer,
+          { backgroundColor: theme.colors.backdrop },
+        ]}
         activeOpacity={1}
         onPressOut={() => {
           onVisible(false);
@@ -182,7 +185,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   subText: {
-    color: '#373737',
     marginBottom: 5,
   },
 });

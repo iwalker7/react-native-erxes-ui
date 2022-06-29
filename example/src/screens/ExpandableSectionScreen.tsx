@@ -41,7 +41,7 @@ const ExpandableSectionScreen: React.FC<any> = () => {
           }}
         >
           <Avatar source={images.avatar} />
-          <TextView center style={{ marginTop: 10 }}>
+          <TextView secondary theme={theme} center style={{ marginTop: 10 }}>
             Lorem ipsum dolor sit amet, elit. laoreet risus, ats finibus turpis.
             Mauris ornare accumsan sempesdr. Morbi quis leo dolor. Nulla
             venenatis nulla quis nisi laoreet, vitae feugiat lectus ornare. Nunc

@@ -7,7 +7,7 @@ import {
   TextProps,
   TextStyle,
 } from 'react-native';
-import { withTheme } from 'src/core/theming';
+import { withTheme } from '../../core/theming';
 import { red400 } from '../../styles/colors';
 
 export type TextViewProps = TextProps & {
@@ -19,6 +19,7 @@ export type TextViewProps = TextProps & {
   xxlarge?: boolean;
   xxxlarge?: boolean;
   xxxxlarge?: boolean;
+  primary?: boolean;
   secondary?: boolean;
   bold?: boolean;
   boldless?: boolean;
@@ -47,6 +48,7 @@ const TextView: React.FC<TextViewProps> = ({
   xxxxlarge,
   bold,
   boldless,
+  primary = true,
   secondary = false,
   italic,
   style,
@@ -81,10 +83,11 @@ const TextView: React.FC<TextViewProps> = ({
         capitalize && { textTransform: 'capitalize' },
         uppercase && { textTransform: 'uppercase' },
         center && { textAlign: 'center' },
+        primary && { color: theme.colors.textPrimary },
+        secondary && { color: theme.colors.textSecondary },
         { color },
         { lineHeight },
         style,
-        secondary && { color: theme.colors.textSecondary },
       ]}
       maxFontSizeMultiplier={1}
       ellipsizeMode="tail"

@@ -3,7 +3,7 @@ import DefaultTheme from './DefaultTheme';
 import { redA400, white } from './colors';
 import type { Theme } from '../types';
 import configureFonts from './fonts';
-import { rgba } from 'src/utils/colorUtils';
+import { rgba } from '../../src/utils/colorUtils';
 
 const DarkTheme: Theme = {
   ...DefaultTheme,
@@ -20,7 +20,7 @@ const DarkTheme: Theme = {
     surfaceHighlight: '#566573',
     surfaceLight: '#566573',
 
-    textPrimary: '#fff',
+    textPrimary: '#ffff',
     textSecondary: '#F0F0F0',
 
     onSurfaceHigh: rgba(white, 0.8),

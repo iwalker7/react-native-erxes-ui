@@ -60,7 +60,7 @@ const ModalScreen: React.FC<any> = () => {
           style={{ padding: 30 }}
         >
           <Avatar source={images.avatar} uri={undefined} size={80} />
-          <TextView center style={{ marginTop: 10 }}>
+          <TextView style={{ marginTop: 10 }}>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
             eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
             ad minim veniam, quis nostrud exercitation

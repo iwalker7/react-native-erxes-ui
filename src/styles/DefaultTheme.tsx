@@ -2,7 +2,7 @@ import color from 'color';
 import { black, redA400 } from './colors';
 import configureFonts from './fonts';
 import type { Theme } from '../types';
-import { rgba } from 'src/utils/colorUtils';
+import { rgba } from '../../src/utils/colorUtils';
 
 const DefaultTheme: Theme = {
   dark: false,

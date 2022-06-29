@@ -37,8 +37,11 @@ const ExpandableSection: React.FC<ExpandableSectionType> = ({
   return (
     <View
       style={[
-        styles.container,
-        bordered && styles.border,
+        { width: '100%' },
+        bordered && [
+          styles.border,
+          { borderColor: theme.colors.borderPrimary },
+        ],
         {
           backgroundColor: theme.colors.surface,
         },
@@ -69,9 +72,6 @@ const ExpandableSection: React.FC<ExpandableSectionType> = ({
   );
 };
 const styles = StyleSheet.create({
-  container: {
-    width: '100%',
-  },
   border: {
     borderRadius: 10,
     borderWidth: 1,
