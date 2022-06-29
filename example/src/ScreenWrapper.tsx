@@ -25,7 +25,7 @@ export default function ScreenWrapper({
   ...rest
 }: Props) {
   const {
-    colors: { background },
+    colors: { surface },
   } = useTheme();
 
   const insets = useSafeAreaInsets();
@@ -33,7 +33,7 @@ export default function ScreenWrapper({
   const containerStyle = [
     styles.container,
     {
-      backgroundColor: background,
+      backgroundColor: surface,
       paddingBottom: insets.bottom,
       paddingLeft: insets.left,
       paddingRight: insets.left,

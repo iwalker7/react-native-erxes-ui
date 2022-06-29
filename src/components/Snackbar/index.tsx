@@ -86,7 +86,7 @@ const Snackbar: React.FC<SnackbarProps> = ({
     ? colors.success
     : type === 'warning'
     ? colors.warn
-    : colors.accent;
+    : colors.secondary;
 
   useEffect(() => {
     return () => {

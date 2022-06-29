@@ -1,13 +1,10 @@
 /* eslint-disable react-native/no-inline-styles */
 import React, { useState } from 'react';
 import { View, StyleSheet, LayoutAnimation } from 'react-native';
-
 import type { SetStateAction } from 'react';
 import type { TextStyle, ViewStyle, StyleProp, ViewProps } from 'react-native';
-
 import Touchable from '../Touchable';
 import TextView from '../Typography';
-import { white, grey300 } from '../../styles/colors';
 
 export type ExpandableSectionType = ViewProps & {
   expanded?: boolean;
@@ -20,6 +17,7 @@ export type ExpandableSectionType = ViewProps & {
   headerStyle?: StyleProp<ViewStyle>;
   headerTextStyle?: StyleProp<TextStyle>;
   containerStyle?: StyleProp<ViewStyle>;
+  theme: ReactNativeErxes.Theme;
 };
 
 const ExpandableSection: React.FC<ExpandableSectionType> = ({
@@ -33,10 +31,20 @@ const ExpandableSection: React.FC<ExpandableSectionType> = ({
   headerTextStyle,
   containerStyle,
   bordered = false,
+  theme,
 }) => {
   const [expand, setExpand] = useState(expanded);
   return (
-    <View style={[styles.container, bordered && styles.border, containerStyle]}>
+    <View
+      style={[
+        styles.container,
+        bordered && styles.border,
+        {
+          backgroundColor: theme.colors.surface,
+        },
+        containerStyle,
+      ]}
+    >
       <Touchable
         style={styles.header || headerStyle}
         onPress={() => {
@@ -50,7 +58,9 @@ const ExpandableSection: React.FC<ExpandableSectionType> = ({
         }}
       >
         {headerText && (
-          <TextView style={headerTextStyle}>{headerText}</TextView>
+          <TextView style={headerTextStyle} color={theme.colors.textPrimary}>
+            {headerText}
+          </TextView>
         )}
         {sectionHeader}
       </Touchable>
@@ -61,11 +71,9 @@ const ExpandableSection: React.FC<ExpandableSectionType> = ({
 const styles = StyleSheet.create({
   container: {
     width: '100%',
-    backgroundColor: white,
   },
   border: {
     borderRadius: 10,
-    borderColor: grey300,
     borderWidth: 1,
   },
   header: {

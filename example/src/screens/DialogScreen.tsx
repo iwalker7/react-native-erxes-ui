@@ -8,6 +8,7 @@ import {
   Dialog,
   Avatar,
   Divider,
+  useTheme,
 } from 'react-native-erxes-ui';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import styles from '../styles';
@@ -16,6 +17,7 @@ const DialogScreen: React.FC<any> = () => {
   const [alert, onAlert] = useState(false);
   const [confirm, onConfirm] = useState(false);
   const [simple, onSimple] = useState(false);
+  const theme = useTheme();
 
   return (
     <View style={styles.container}>
@@ -78,6 +80,7 @@ const DialogScreen: React.FC<any> = () => {
           closeText="No"
           isVisible={confirm}
           onVisible={onConfirm}
+          theme={theme}
         />
         <Dialog
           action="alert"
@@ -90,6 +93,7 @@ const DialogScreen: React.FC<any> = () => {
               size={30}
             />
           }
+          theme={theme}
         />
         <Dialog
           action="simple"
@@ -97,6 +101,7 @@ const DialogScreen: React.FC<any> = () => {
           supportingText="Supporting text"
           isVisible={simple}
           onVisible={onSimple}
+          theme={theme}
         >
           <TextView>
             Here you can display JSX components. Just do whatever you want. For

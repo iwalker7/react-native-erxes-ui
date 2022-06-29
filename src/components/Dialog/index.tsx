@@ -9,7 +9,6 @@ import {
   StyleProp,
   ViewStyle,
 } from 'react-native';
-import { grey800, grey300 } from '../../styles/colors';
 import Button from '../Button';
 import Divider from '../Divider';
 import TextView from '../Typography';
@@ -27,6 +26,7 @@ export type DialogProps = {
   onVisible: SetStateAction<any>;
   icon?: JSX.Element;
   children?: React.ReactNode;
+  theme: ReactNativeErxes.Theme;
 };
 
 const Dialog: React.FC<DialogProps> = ({
@@ -42,6 +42,7 @@ const Dialog: React.FC<DialogProps> = ({
   isVisible,
   onVisible,
   children,
+  theme,
 }) => {
   return (
     <Modal
@@ -53,21 +54,33 @@ const Dialog: React.FC<DialogProps> = ({
       }}
     >
       <TouchableOpacity
-        style={styles.dialogContainer}
+        style={[styles.dialogContainer, { shadowColor: theme.colors.backdrop }]}
         activeOpacity={1}
         onPressOut={() => {
           onVisible(false);
         }}
       >
         <TouchableWithoutFeedback>
-          <View style={[styles.container, containerStyle]}>
+          <View
+            style={[
+              styles.container,
+              {
+                backgroundColor: theme.colors.surface,
+              },
+              containerStyle,
+            ]}
+          >
             {(action === 'alert' || action === 'confirm') && (
               <View style={styles.body}>
                 {icon}
-                <TextView bold style={styles.subText}>
+                <TextView bold color={theme.colors.textPrimary}>
                   {title ? title : 'Are you sure?'}
                 </TextView>
-                <TextView small color={grey800} style={styles.subText}>
+                <TextView
+                  small
+                  color={theme.colors.textSecondary}
+                  style={styles.subText}
+                >
                   {supportingText ? supportingText : 'This cannot be undone.'}
                 </TextView>
               </View>
@@ -75,10 +88,14 @@ const Dialog: React.FC<DialogProps> = ({
             {children && action === 'simple' && (
               <>
                 <View style={styles.header}>
-                  <TextView bold color={grey800}>
+                  <TextView bold color={theme.colors.textPrimary}>
                     {title}
                   </TextView>
-                  <TextView small color={grey800} style={{ marginTop: 3 }}>
+                  <TextView
+                    small
+                    color={theme.colors.textSecondary}
+                    style={{ marginTop: 3 }}
+                  >
                     {supportingText ? supportingText : 'This cannot be undone.'}
                   </TextView>
                 </View>
@@ -90,8 +107,8 @@ const Dialog: React.FC<DialogProps> = ({
               <View style={styles.buttonsContainer}>
                 <Button
                   width={80}
-                  color={grey300}
-                  textStyle={{ color: grey800, fontSize: 13 }}
+                  color={theme.colors.onSurfaceMedium}
+                  textStyle={{ color: theme.colors.textPrimary, fontSize: 13 }}
                   onPress={() => {
                     onVisible(false);
                     onClose && onClose();
@@ -131,12 +148,10 @@ const Dialog: React.FC<DialogProps> = ({
 const styles = StyleSheet.create({
   dialogContainer: {
     flex: 1,
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
     justifyContent: 'center',
     alignItems: 'center',
   },
   container: {
-    backgroundColor: '#fff',
     borderRadius: 10,
     width: '80%',
     alignSelf: 'center',

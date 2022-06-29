@@ -41,7 +41,10 @@ const Loader: React.FC<LoaderProps> = ({
         {custom ? (
           custom
         ) : (
-          <ActivityIndicator size="small" color={color || colors.primary} />
+          <ActivityIndicator
+            size="small"
+            color={color || colors.surfaceHighlight}
+          />
         )}
       </View>
     </View>

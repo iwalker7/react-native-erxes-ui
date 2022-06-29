@@ -173,7 +173,15 @@ const Modal: React.FC<ModalProps> = ({
               onHideComplete();
             }}
           />
-          <View style={[styles.modalView, style]}>
+          <View
+            style={[
+              styles.modalView,
+              {
+                backgroundColor: theme.colors.surface,
+              },
+              style,
+            ]}
+          >
             {headerComponent ? headerComponent : null}
             {children}
           </View>
@@ -186,7 +194,6 @@ const Modal: React.FC<ModalProps> = ({
 const styles = StyleSheet.create({
   modalView: {
     borderRadius: 20,
-    backgroundColor: '#fff',
   },
   xbutton: {
     position: 'absolute',

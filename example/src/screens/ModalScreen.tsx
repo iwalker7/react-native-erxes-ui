@@ -1,13 +1,21 @@
 /* eslint-disable react-native/no-inline-styles */
 import React, { useState } from 'react';
 import { View, ScrollView } from 'react-native';
-import { TextView, Colors, Modal, Button, Avatar } from 'react-native-erxes-ui';
+import {
+  TextView,
+  Colors,
+  Modal,
+  Button,
+  Avatar,
+  useTheme,
+} from 'react-native-erxes-ui';
 import images from '../../assets/images';
 import styles from '../styles';
 
 const ModalScreen: React.FC<any> = () => {
   const [visible, onVisible] = useState(false);
   const [bottomVisible, onBottomVisible] = useState(false);
+  const theme = useTheme();
 
   return (
     <View style={styles.container}>
@@ -45,6 +53,7 @@ const ModalScreen: React.FC<any> = () => {
       </View>
       <View style={styles.segment}>
         <Modal
+          theme={theme}
           isVisible={visible}
           onVisible={onVisible}
           onHide={() => onVisible(false)}
@@ -58,6 +67,7 @@ const ModalScreen: React.FC<any> = () => {
           </TextView>
         </Modal>
         <Modal
+          theme={theme}
           style={{ padding: 30 }}
           bottom
           isVisible={bottomVisible}

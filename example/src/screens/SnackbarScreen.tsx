@@ -1,7 +1,7 @@
 /* eslint-disable react-native/no-inline-styles */
 import React from 'react';
 import { View, ScrollView } from 'react-native';
-import { TextView, Colors, Picker, Button } from 'react-native-erxes-ui';
+import { TextView, Colors, Button } from 'react-native-erxes-ui';
 
 import styles from '../styles';
 

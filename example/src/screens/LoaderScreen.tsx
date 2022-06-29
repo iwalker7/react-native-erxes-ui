@@ -28,7 +28,7 @@ const LoaderScreen: React.FC<any> = () => {
 
         <View style={{ height: 50, flexDirection: 'row' }}>
           <Loader />
-          <Loader color={theme.colors.accent} />
+          <Loader color={theme.colors.secondary} />
           <Loader color={Colors.grey600} />
         </View>
       </View>

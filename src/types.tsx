@@ -32,19 +32,43 @@ export type Theme = {
   colors: {
     primary: string;
     primaryDark: string;
-    background: string;
-    surface: string;
-    accent: string;
+    secondary: string;
+
     error: string;
     warn: string;
     success: string;
-    text: string;
+
+    surface: string;
+    surfaceHighlight: string;
+    surfaceLight: string;
+
+    textPrimary: string;
     textSecondary: string;
-    onSurface: string;
-    disabled: string;
-    placeholder: string;
+
+    borderPrimary: string;
+    borderSecondary: string;
+
     backdrop: string;
+    backdropLow: string;
+    backdropHigh: string;
+
+    onSurfaceHigh: string;
+    onSurfaceMedium: string;
+    onSurfaceLow: string;
+    onSurfaceLowest: string;
+
+    link: string;
     notification: string;
+    disabled: string;
+
+    coreBlue: string;
+    coreGreen: string;
+    coreRed: string;
+    coreTeal: string;
+    coreYellow: string;
+    coreGray: string;
+    coreLightGray: string;
+    coreDarkGray: string;
   };
   fonts: Fonts;
   animation: {
@@ -86,19 +110,43 @@ declare global {
     interface ThemeColors {
       primary: string;
       primaryDark: string;
-      background: string;
-      surface: string;
-      accent: string;
+      secondary: string;
+
       error: string;
       warn: string;
       success: string;
-      text: string;
+
+      surface: string;
+      surfaceHighlight: string;
+      surfaceLight: string;
+
+      textPrimary: string;
       textSecondary: string;
-      onSurface: string;
-      disabled: string;
-      placeholder: string;
+
+      borderPrimary: string;
+      borderSecondary: string;
+
       backdrop: string;
+      backdropLow: string;
+      backdropHigh: string;
+
+      onSurfaceHigh: string;
+      onSurfaceMedium: string;
+      onSurfaceLow: string;
+      onSurfaceLowest: string;
+
+      link: string;
       notification: string;
+      disabled: string;
+
+      coreBlue: string;
+      coreGreen: string;
+      coreRed: string;
+      coreTeal: string;
+      coreYellow: string;
+      coreGray: string;
+      coreLightGray: string;
+      coreDarkGray: string;
     }
 
     interface ThemeAnimation {

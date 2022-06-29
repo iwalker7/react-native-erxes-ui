@@ -63,7 +63,9 @@ const CheckboxItem: React.FC<CheckBoxItemProps> = ({
           style={[
             styles.label,
             {
-              color: disabled ? theme.colors.disabled : theme.colors.text,
+              color: disabled
+                ? theme.colors.disabled
+                : theme.colors.textPrimary,
               textAlign: isTrealing ? 'right' : 'left',
             },
             labelStyle,

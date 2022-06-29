@@ -7,7 +7,7 @@ import {
   View,
   ViewStyle,
 } from 'react-native';
-import { grey100 } from '../../styles/colors';
+import { withTheme } from '../../index';
 import { Modal, Touchable, TextView, Colors } from '../../index';
 import Divider from '../Divider';
 import type { SetStateAction } from 'react';
@@ -35,6 +35,7 @@ export type PickerProps = {
   placeholderStyle?: StyleProp<ViewStyle>;
   itemStyle?: StyleProp<ViewStyle>;
   modalStyle?: StyleProp<ViewStyle>;
+  theme: ReactNativeErxes.Theme;
 };
 const Picker: React.FC<PickerProps> = ({
   selectionColor = Colors.grey200,
@@ -53,6 +54,7 @@ const Picker: React.FC<PickerProps> = ({
   placeholderStyle,
   itemStyle,
   modalStyle,
+  theme,
 }) => {
   const [selections, setSelections] = useState<any[]>(value);
 
@@ -83,7 +85,14 @@ const Picker: React.FC<PickerProps> = ({
   return (
     <>
       <Modal bottom isVisible={isVisible} onVisible={onVisible} onHide={onHide}>
-        <View style={modalStyle}>
+        <View
+          style={[
+            {
+              backgroundColor: theme.colors.surface,
+            },
+            modalStyle,
+          ]}
+        >
           <View
             style={{
               height: 45,
@@ -91,6 +100,7 @@ const Picker: React.FC<PickerProps> = ({
               flexDirection: 'row',
               paddingHorizontal: 20,
               paddingVertical: 15,
+              backgroundColor: theme.colors.surfaceHighlight,
             }}
           >
             <Touchable
@@ -99,7 +109,11 @@ const Picker: React.FC<PickerProps> = ({
               }}
               onPress={onHide}
             >
-              <TextView color={Colors.grey400} style={closeTextStyle}>
+              <TextView
+                bold
+                color={theme.colors.textPrimary}
+                style={closeTextStyle}
+              >
                 {closeText}
               </TextView>
             </Touchable>
@@ -109,7 +123,7 @@ const Picker: React.FC<PickerProps> = ({
               }}
               onPress={onHide}
             >
-              <TextView color={Colors.green400} style={saveTextStyle}>
+              <TextView bold color={Colors.green400} style={saveTextStyle}>
                 {saveText}
               </TextView>
             </Touchable>
@@ -117,7 +131,14 @@ const Picker: React.FC<PickerProps> = ({
           <Divider />
 
           <ScrollView
-            style={[{ maxHeight: 200, width: '100%' }, modalStyle]}
+            style={[
+              {
+                maxHeight: 200,
+                width: '100%',
+                backgroundColor: theme.colors.surface,
+              },
+              modalStyle,
+            ]}
             showsVerticalScrollIndicator={false}
           >
             <View>
@@ -138,7 +159,9 @@ const Picker: React.FC<PickerProps> = ({
                         itemStyle,
                       ]}
                     >
-                      <TextView small>{item}</TextView>
+                      <TextView small color={theme.colors.textPrimary}>
+                        {item}
+                      </TextView>
                       <Divider />
                     </View>
                   </Touchable>
@@ -150,7 +173,7 @@ const Picker: React.FC<PickerProps> = ({
       </Modal>
       <Touchable onPress={() => onVisible(!isVisible)}>
         <View style={[styles.container, placeholderStyle]}>
-          <TextView>
+          <TextView color={theme.colors.textPrimary}>
             {mode === 'MULTI' && selections?.length > 0
               ? selections?.join(', ')
               : mode === 'SINGLE' && selections?.length === 1 && selections[0]
@@ -173,7 +196,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    backgroundColor: grey100,
   },
 
   item: {
@@ -185,4 +207,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Picker;
+export default withTheme(Picker);

@@ -177,7 +177,7 @@ const Pagination = (props: any) => {
           {
             flexGrow: 1,
             justifyContent: 'center',
-            backgroundColor: white,
+            backgroundColor: theme.colors.surface,
           },
           containerStyle,
         ]}

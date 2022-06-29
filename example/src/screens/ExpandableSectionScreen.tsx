@@ -6,6 +6,7 @@ import {
   ExpandableSection,
   Avatar,
   Colors,
+  useTheme,
 } from 'react-native-erxes-ui';
 import styles from '../styles';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -13,6 +14,7 @@ import images from '../../assets/images';
 
 const ExpandableSectionScreen: React.FC<any> = () => {
   const [visible, onVisible] = useState(false);
+  const theme = useTheme();
   const header = () => {
     return (
       <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
@@ -31,6 +33,7 @@ const ExpandableSectionScreen: React.FC<any> = () => {
         expanded={visible}
         setExpanded={onVisible}
         sectionHeader={header()}
+        theme={theme}
       >
         <View
           style={{

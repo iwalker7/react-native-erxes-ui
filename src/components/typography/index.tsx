@@ -60,6 +60,7 @@ const TextView: React.FC<TextViewProps> = ({
   return (
     <Text
       style={[
+        { fontSize: 14 },
         flex && { flex: 1 },
         xxsmall && { fontSize: 8 },
         xsmall && { fontSize: 10 },

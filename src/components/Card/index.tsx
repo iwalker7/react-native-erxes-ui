@@ -2,10 +2,9 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import type { StyleProp, ViewStyle } from 'react-native';
-
 import TextView from '../Typography';
 import Touchable from '../Touchable';
-import { Colors } from 'react-native-erxes-ui';
+import { withTheme } from '../../core/theming';
 
 export type CardProps = {
   title?: string;
@@ -18,7 +17,9 @@ export type CardProps = {
   overflowIcon?: JSX.Element;
   overflowAction?: () => void;
   mediaStyle?: StyleProp<ViewStyle>;
+  thumbnailStyle?: StyleProp<ViewStyle>;
   containerStyle?: StyleProp<ViewStyle>;
+  theme: ReactNativeErxes.Theme;
 };
 
 const Card: React.FC<CardProps> = ({
@@ -34,26 +35,43 @@ const Card: React.FC<CardProps> = ({
   children,
   containerStyle,
   mediaStyle,
+  thumbnailStyle,
+  theme,
 }) => {
   return (
     <View
       style={[
-        type === 'elevated' ? styles.elevated : styles.outlined,
+        type === 'elevated'
+          ? [styles.elevated, { shadowColor: theme.colors.backdrop }]
+          : [styles.outlined, { borderColor: theme.colors.borderPrimary }],
+        {
+          backgroundColor: theme.colors.surface,
+        },
         containerStyle,
       ]}
     >
       <View style={styles.header}>
-        {thumbnail && <View style={styles.thumbnail}>{thumbnail}</View>}
+        {thumbnail && (
+          <View style={[styles.thumbnail, thumbnailStyle]}>{thumbnail}</View>
+        )}
         {overflowAction && (
           <View style={styles.overflow}>
             <Touchable onPress={overflowAction}>{overflowIcon}</Touchable>
           </View>
         )}
         <View style={[styles.column, { width: thumbnail ? '80%' : '100%' }]}>
-          <TextView large bold style={styles.mb}>
+          <TextView
+            large
+            bold
+            color={theme.colors.textPrimary}
+            style={styles.mb}
+          >
             {title}
           </TextView>
-          <TextView style={{ flexWrap: 'wrap' }} color={Colors.grey600}>
+          <TextView
+            style={{ flexWrap: 'wrap' }}
+            color={theme.colors.textSecondary}
+          >
             {secondaryText}
           </TextView>
         </View>
@@ -61,7 +79,7 @@ const Card: React.FC<CardProps> = ({
       {media && <View style={[styles.med, mediaStyle]}>{media}</View>}
       {supportingText && (
         <TextView
-          color={Colors.grey600}
+          color={theme.colors.textPrimary}
           style={(styles.mb, styles.mt, styles.p)}
         >
           {supportingText}
@@ -94,8 +112,6 @@ const styles = StyleSheet.create({
     paddingBottom: 5,
     width: '100%',
     borderRadius: 5,
-    backgroundColor: '#fff',
-    shadowColor: '#000',
     shadowOffset: {
       width: 0,
       height: 2,
@@ -108,8 +124,6 @@ const styles = StyleSheet.create({
     width: '100%',
     paddingBottom: 5,
     borderRadius: 10,
-    backgroundColor: '#fff',
-    borderColor: 'rgba(0, 0, 0, 0.34)',
     borderWidth: 1,
   },
   mb: { marginBottom: 1 },
@@ -120,4 +134,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Card;
+export default withTheme(Card);
