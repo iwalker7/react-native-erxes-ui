@@ -14,11 +14,11 @@ import {
 } from 'react-native';
 import TextView from '../Typography';
 import Icon from '../Icon';
-import { grey100, red400, transparent, white } from '../../styles/colors';
 import type { ViewStyle } from 'react-native';
 import { withTheme } from '../../core/theming';
 import { primaryDark3 } from '../../utils/colorUtils';
 import Touchable from '../Touchable';
+import { red400 } from 'src/styles/colors';
 
 export type TextInputProps = RNProps & {
   type?: 'default' | 'outline' | 'filled' | 'text';
@@ -64,40 +64,40 @@ export type TextInputProps = RNProps & {
 const TextInput: React.ForwardRefRenderFunction<unknown, TextInputProps> = ({
   style,
   value,
+  theme,
   containerStyle,
   type = 'default',
   onChangeText,
   onSubmitEditing,
   placeholder,
-  placeholderTextColor,
+  placeholderTextColor = theme.colors.textSecondary,
   inputRef,
   required = false,
   password = false,
   disabled = false,
   maxLength = 30,
   label,
+  labelColor = theme.colors.textPrimary,
   labelIcon,
   labelIconName,
-  labelIconColor,
+  labelIconColor = theme.colors.textSecondary,
   labelIconSize = 10,
   labelContainerStyle,
   rightIcon,
   rightIconName,
   rightIconSize = 16,
-  rightIconColor,
+  rightIconColor = theme.colors.textPrimary,
   leftIcon,
   leftIconName,
   leftIconSize = 16,
-  leftIconColor,
+  leftIconColor = theme.colors.textPrimary,
   isLoading = false,
   loaderPosition,
-  labelColor,
   labelStyle,
-  theme,
   rightIconOnPress,
   leftIconOnPress,
   height = 52,
-  backgroundColor,
+  backgroundColor = theme.colors.surfaceHighlight,
   ...rest
 }) => {
   const { colors } = theme;
@@ -184,7 +184,7 @@ const TextInput: React.ForwardRefRenderFunction<unknown, TextInputProps> = ({
           ? {
               borderWidth: 1,
               borderColor: 'transparent',
-              borderBottomColor: grey100,
+              borderBottomColor: theme.colors.borderPrimary,
               paddingHorizontal: 15,
             }
           : styles.container,
@@ -197,10 +197,10 @@ const TextInput: React.ForwardRefRenderFunction<unknown, TextInputProps> = ({
             : type === 'filled'
             ? 'rgba(79, 51, 175, 0.12)'
             : type === 'outline'
-            ? white
+            ? theme.colors.surface
             : type === 'text'
             ? 'transparent'
-            : grey100,
+            : backgroundColor,
           borderColor:
             type === 'filled'
               ? mainColor
@@ -208,7 +208,7 @@ const TextInput: React.ForwardRefRenderFunction<unknown, TextInputProps> = ({
               ? mainColor
               : required
               ? red400
-              : transparent,
+              : 'transparent',
           borderWidth: 1,
         },
         containerStyle,
@@ -227,11 +227,7 @@ const TextInput: React.ForwardRefRenderFunction<unknown, TextInputProps> = ({
               />
             </View>
           ) : null}
-          <TextView
-            small
-            color={labelColor || primaryDark3(colors.primary)}
-            style={labelStyle}
-          >
+          <TextView small color={labelColor} style={labelStyle}>
             {label}
           </TextView>
         </View>
@@ -282,7 +278,7 @@ const TextInput: React.ForwardRefRenderFunction<unknown, TextInputProps> = ({
           onChangeText={handleChangeText}
           onSubmitEditing={handleSubmit}
           value={value && value}
-          underlineColorAndroid={transparent}
+          underlineColorAndroid={'transparent'}
           {...rest}
         />
       </View>

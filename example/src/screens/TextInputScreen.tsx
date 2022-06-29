@@ -1,10 +1,11 @@
 /* eslint-disable react-native/no-inline-styles */
 import React from 'react';
 import { View, ScrollView, StyleSheet } from 'react-native';
-import { TextView, Colors, TextInput, Searchbar } from 'react-native-erxes-ui';
+import { TextView, Colors, TextInput, useTheme } from 'react-native-erxes-ui';
 import styles from '../styles';
 
 const TextInputScreen: React.FC<any> = () => {
+  const theme = useTheme();
   const [searchText, setSearchText] = React.useState<string>('');
   return (
     <View style={styles.container}>
@@ -38,6 +39,7 @@ const TextInputScreen: React.FC<any> = () => {
           <View style={{ flexDirection: 'row' }}>
             <View style={style.search}>
               <TextInput
+                theme={theme}
                 label={'Label'}
                 placeholder="Default"
                 onChangeText={(text: string) => setSearchText(text)}
@@ -45,6 +47,7 @@ const TextInputScreen: React.FC<any> = () => {
                 containerStyle={{ marginVertical: 3 }}
               />
               <TextInput
+                theme={theme}
                 label={'Label'}
                 type="filled"
                 placeholder="Outline"
@@ -54,6 +57,7 @@ const TextInputScreen: React.FC<any> = () => {
               />
               <TextInput
                 height={100}
+                theme={theme}
                 label={'BIG LABEL'}
                 backgroundColor={'white'}
                 type="filled"
@@ -71,6 +75,7 @@ const TextInputScreen: React.FC<any> = () => {
             <TextView color={Colors.grey600}>{`: JSX.Element`}</TextView>
           </TextView>
           <TextInput
+            theme={theme}
             leftIconName="eye"
             placeholder="Outline"
             onChangeText={(text: string) => setSearchText(text)}
@@ -91,6 +96,7 @@ const TextInputScreen: React.FC<any> = () => {
             <TextView color={Colors.grey600}>{`: boolean`}</TextView>
           </TextView>
           <TextInput
+            theme={theme}
             required
             placeholder="Outline"
             onChangeText={(text: string) => setSearchText(text)}

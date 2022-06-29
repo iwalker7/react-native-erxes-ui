@@ -7,6 +7,7 @@ import {
   TextProps,
   TextStyle,
 } from 'react-native';
+import { withTheme } from 'src/core/theming';
 import { red400 } from '../../styles/colors';
 
 export type TextViewProps = TextProps & {
@@ -18,6 +19,7 @@ export type TextViewProps = TextProps & {
   xxlarge?: boolean;
   xxxlarge?: boolean;
   xxxxlarge?: boolean;
+  secondary?: boolean;
   bold?: boolean;
   boldless?: boolean;
   italic?: boolean;
@@ -31,6 +33,7 @@ export type TextViewProps = TextProps & {
   color?: string;
   onPress?: (event: GestureResponderEvent) => void;
   onLongPress?: (event: GestureResponderEvent) => void;
+  theme: ReactNativeErxes.Theme;
 };
 
 const TextView: React.FC<TextViewProps> = ({
@@ -44,6 +47,7 @@ const TextView: React.FC<TextViewProps> = ({
   xxxxlarge,
   bold,
   boldless,
+  secondary = false,
   italic,
   style,
   capitalize,
@@ -55,12 +59,13 @@ const TextView: React.FC<TextViewProps> = ({
   required,
   onPress,
   onLongPress,
+  theme,
   ...rest
 }) => {
   return (
     <Text
       style={[
-        { fontSize: 14 },
+        { fontSize: 14, color: theme.colors.textPrimary },
         flex && { flex: 1 },
         xxsmall && { fontSize: 8 },
         xsmall && { fontSize: 10 },
@@ -79,6 +84,7 @@ const TextView: React.FC<TextViewProps> = ({
         { color },
         { lineHeight },
         style,
+        secondary && { color: theme.colors.textSecondary },
       ]}
       maxFontSizeMultiplier={1}
       ellipsizeMode="tail"
@@ -94,4 +100,4 @@ const TextView: React.FC<TextViewProps> = ({
   );
 };
 
-export default TextView;
+export default withTheme(TextView);
