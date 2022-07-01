@@ -20,7 +20,7 @@ const DarkTheme: Theme = {
     surfaceHighlight: '#566573',
     surfaceLight: '#566573',
 
-    textPrimary: '#ffff',
+    textPrimary: '#ffffff',
     textSecondary: '#F0F0F0',
 
     onSurfaceHigh: rgba(white, 0.8),
