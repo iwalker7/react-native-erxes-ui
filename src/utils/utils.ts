@@ -3,7 +3,6 @@ import type {
   NativeEventSubscription,
   EmitterSubscription,
 } from 'react-native';
-import { useSettings } from '../core/settings';
 import moment from 'moment';
 import { Colors } from 'react-native-erxes-ui';
 
@@ -359,42 +358,6 @@ export const readFile = (apiUrl: any, value: any) => {
     return value;
   }
   return `${apiUrl}/read-file?key=${value}`;
-};
-
-export const DeleteHandler = (
-  fileName: any,
-  onStart: () => void,
-  onError: (value: string) => void,
-  onEnd: () => void
-) => {
-  const settings = useSettings();
-  const apiUrl = settings.apiUrl;
-
-  if (!fileName) {
-    return onError && onError('fileName is Required! Dev');
-  }
-  const url = apiUrl + '/delete-file';
-
-  onStart && onStart();
-
-  fetch(`${url}`, {
-    method: 'POST',
-    headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
-    },
-    body: `fileName=${fileName}`,
-    credentials: 'include',
-  })
-    .then((res: any) => {
-      if (res.status !== 200) {
-        return onError && onError(res.statusText);
-      }
-      onEnd && onEnd();
-    })
-    .catch((e: any) => {
-      onError && onError('uploadHandler: ' + e);
-    });
 };
 
 //integration
