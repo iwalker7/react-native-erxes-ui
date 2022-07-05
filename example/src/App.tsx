@@ -96,7 +96,7 @@ export default function App() {
   };
 
   return (
-    <ThemeProvider theme={CustomDarkTheme}>
+    <ThemeProvider theme={CustomDefaultTheme}>
       <NavigationContainer>
         <Stack.Navigator>
           <Stack.Screen

@@ -89,7 +89,7 @@ const Button: React.FC<ButtonProps> = ({
         : transparent
       : transparent,
 
-    borderRadius: 10,
+    borderRadius: theme.roundness,
     backgroundColor: color
       ? color
       : type === 'outline'
@@ -194,11 +194,6 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     alignItems: 'center',
     justifyContent: 'center',
-  },
-  linearGradient: {
-    paddingVertical: 12,
-    paddingHorizontal: 24,
-    borderRadius: 22,
   },
 });
 

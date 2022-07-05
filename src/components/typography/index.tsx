@@ -68,7 +68,7 @@ const TextView: React.FC<TextViewProps> = ({
     <Text
       style={[
         { fontSize: 14 },
-        { color: theming.colors.coreBlue },
+        { color: theming.colors.textPrimary },
         flex && { flex: 1 },
         xxsmall && { fontSize: 8 },
         xsmall && { fontSize: 10 },

@@ -69,6 +69,7 @@ const Dialog: React.FC<DialogProps> = ({
               styles.container,
               {
                 backgroundColor: theme.colors.surface,
+                borderRadius: theme.roundness / 2,
               },
               containerStyle,
             ]}
@@ -110,7 +111,7 @@ const Dialog: React.FC<DialogProps> = ({
               <View style={styles.buttonsContainer}>
                 <Button
                   width={80}
-                  color={theme.colors.onSurfaceMedium}
+                  color={theme.colors.onSurfaceLowest}
                   textStyle={{ color: theme.colors.textPrimary, fontSize: 13 }}
                   onPress={() => {
                     onVisible(false);
@@ -155,7 +156,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   container: {
-    borderRadius: 10,
     width: '80%',
     alignSelf: 'center',
   },

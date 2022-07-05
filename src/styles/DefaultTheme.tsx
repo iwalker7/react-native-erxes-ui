@@ -6,7 +6,7 @@ import { rgba } from '../../src/utils/colorUtils';
 
 const DefaultTheme: Theme = {
   dark: false,
-  roundness: 5,
+  roundness: 8,
   colors: {
     primary: '#5629B6',
     primaryDark: '#2F1F69',

@@ -79,7 +79,7 @@ const TextInput: React.ForwardRefRenderFunction<unknown, TextInputProps> = ({
   disabled = false,
   maxLength = 30,
   label,
-  labelColor = theme.colors.textPrimary,
+  labelColor = theme.colors.primaryDark,
   labelIcon,
   labelIconName,
   labelIconColor = theme.colors.textSecondary,
@@ -140,7 +140,7 @@ const TextInput: React.ForwardRefRenderFunction<unknown, TextInputProps> = ({
     <>
       <View
         style={[
-          { height, backgroundColor },
+          { height, backgroundColor, borderRadius: theme.roundness },
           type === 'text'
             ? {
                 borderWidth: 1,
@@ -270,7 +270,6 @@ const TextInput: React.ForwardRefRenderFunction<unknown, TextInputProps> = ({
 
 const styles = StyleSheet.create({
   container: {
-    borderRadius: 8,
     paddingHorizontal: 15,
   },
   input: {

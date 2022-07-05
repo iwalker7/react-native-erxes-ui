@@ -1,6 +1,6 @@
 /* eslint-disable react-native/no-inline-styles */
 import React, { useState } from 'react';
-import { View, StyleSheet, LayoutAnimation } from 'react-native';
+import { View, LayoutAnimation } from 'react-native';
 import type { SetStateAction } from 'react';
 import type { TextStyle, ViewStyle, StyleProp, ViewProps } from 'react-native';
 import Touchable from '../Touchable';
@@ -37,10 +37,12 @@ const ExpandableSection: React.FC<ExpandableSectionType> = ({
   return (
     <View
       style={[
-        { width: '100%' },
+        { width: '100%', borderRadius: theme.roundness },
         bordered && [
-          styles.border,
-          { borderColor: theme.colors.borderPrimary },
+          {
+            borderColor: theme.colors.borderPrimary,
+            borderWidth: 1,
+          },
         ],
         {
           backgroundColor: theme.colors.surface,
@@ -49,7 +51,7 @@ const ExpandableSection: React.FC<ExpandableSectionType> = ({
       ]}
     >
       <Touchable
-        style={styles.header || headerStyle}
+        style={[{ padding: 10 }, headerStyle]}
         onPress={() => {
           setExpand(!expand);
           LayoutAnimation.configureNext({
@@ -71,14 +73,5 @@ const ExpandableSection: React.FC<ExpandableSectionType> = ({
     </View>
   );
 };
-const styles = StyleSheet.create({
-  border: {
-    borderRadius: 10,
-    borderWidth: 1,
-  },
-  header: {
-    padding: 10,
-  },
-});
 
 export default ExpandableSection;

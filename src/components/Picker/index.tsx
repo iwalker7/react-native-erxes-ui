@@ -1,5 +1,7 @@
 /* eslint-disable react-native/no-inline-styles */
-import React from 'react';
+import React, { useState } from 'react';
+import type { SetStateAction } from 'react';
+import type { RefObject } from 'react';
 import {
   ScrollView,
   StyleProp,
@@ -7,12 +9,12 @@ import {
   View,
   ViewStyle,
 } from 'react-native';
-import { withTheme } from '../../index';
-import { Modal, Touchable, TextView, Colors } from '../../index';
+import { withTheme } from '../../core/theming';
+import Surface from '../Surface';
 import Divider from '../Divider';
-import type { SetStateAction } from 'react';
-import type { RefObject } from 'react';
-import { useState } from 'react';
+import Modal from '../Modal';
+import Touchable from '../Touchable';
+import TextView from '../Typography';
 import ScreenUtils from '../../utils/screenUtils';
 
 export type PickerProps = {
@@ -86,11 +88,11 @@ const Picker: React.FC<PickerProps> = ({
   return (
     <>
       <Modal bottom isVisible={isVisible} onVisible={onVisible} onHide={onHide}>
-        <View
+        <Surface
           style={[
             {
               width: ScreenUtils.screenWidth,
-              backgroundColor: theme.colors.surface,
+              paddingBottom: 25,
             },
             modalStyle,
           ]}
@@ -125,7 +127,7 @@ const Picker: React.FC<PickerProps> = ({
               }}
               onPress={onHide}
             >
-              <TextView bold color={Colors.green500} style={saveTextStyle}>
+              <TextView bold color={theme.colors.success} style={saveTextStyle}>
                 {saveText}
               </TextView>
             </Touchable>
@@ -138,7 +140,7 @@ const Picker: React.FC<PickerProps> = ({
                 maxHeight: 200,
                 width: '100%',
                 backgroundColor: theme.colors.surface,
-                padding: 20,
+                padding: 10,
               },
               modalStyle,
             ]}
@@ -167,26 +169,27 @@ const Picker: React.FC<PickerProps> = ({
                       itemStyle,
                     ]}
                   >
-                    <TextView small color={theme.colors.textPrimary}>
-                      {item}
-                    </TextView>
+                    <TextView color={theme.colors.textPrimary}>{item}</TextView>
                     <Divider />
                   </View>
                 </Touchable>
               );
             })}
           </ScrollView>
-        </View>
+        </Surface>
       </Modal>
       <Touchable onPress={() => onVisible(!isVisible)}>
         <View
           style={[
             styles.container,
-            { backgroundColor: theme.colors.surfaceHighlight },
+            {
+              backgroundColor: theme.colors.surfaceHighlight,
+              borderRadius: theme.roundness,
+            },
             placeholderStyle,
           ]}
         >
-          <TextView color={theme.colors.textSecondary}>
+          <TextView color={theme.colors.textPrimary}>
             {mode === 'MULTI' && selections?.length > 0
               ? selections?.join(', ')
               : mode === 'SINGLE' && selections?.length === 1 && selections[0]
@@ -203,14 +206,12 @@ const Picker: React.FC<PickerProps> = ({
 const styles = StyleSheet.create({
   container: {
     height: 50,
-    borderRadius: 8,
     marginVertical: 5,
     paddingHorizontal: 10,
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
   },
-
   item: {
     padding: 15,
     paddingHorizontal: 10,

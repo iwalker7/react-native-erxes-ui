@@ -9,7 +9,6 @@ import {
   Animated,
   Image,
 } from 'react-native';
-
 import {
   primaryDark1,
   primaryDark3,
@@ -18,7 +17,6 @@ import {
 import { withTheme } from '../../core/theming';
 import Touchable from '../Touchable';
 import TextView from '../Typography/index';
-
 import { white } from '../../styles/colors';
 import images from '../../assets/images';
 

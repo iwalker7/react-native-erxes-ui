@@ -4,15 +4,14 @@ import {
   Modal as RNModal,
   ModalProps as RNModalProps,
   StyleProp,
-  StyleSheet,
   TouchableOpacity,
   View,
   ViewProps as RNViewProps,
   ViewStyle,
 } from 'react-native';
-import { grey500 } from '../../styles/colors';
 import ScreenUtils from '../../utils/screenUtils';
 import { withTheme } from '../../core/theming';
+import Surface from '../Surface';
 
 export type ModalProps = RNModalProps &
   RNViewProps & {
@@ -133,14 +132,14 @@ const Modal: React.FC<ModalProps> = ({
       ) : (presentationStyle === 'pageSheet' ||
           presentationStyle === 'formSheet') &&
         ScreenUtils.isIOS ? (
-        <View
+        <Surface
           style={{
             flexDirection: 'column',
             justifyContent: bottom ? 'flex-end' : 'center',
           }}
         >
           {children}
-        </View>
+        </Surface>
       ) : (
         <View
           style={[
@@ -173,53 +172,22 @@ const Modal: React.FC<ModalProps> = ({
               onHideComplete();
             }}
           />
-          <View
+          <Surface
             style={[
-              styles.modalView,
               {
                 backgroundColor: theme.colors.surfaceHighlight,
+                borderRadius: theme.roundness,
               },
               style,
             ]}
           >
             {headerComponent ? headerComponent : null}
             {children}
-          </View>
+          </Surface>
         </View>
       )}
     </RNModal>
   );
 };
-
-const styles = StyleSheet.create({
-  modalView: {
-    borderRadius: 20,
-  },
-  xbutton: {
-    position: 'absolute',
-    top: 10,
-    right: 10,
-    width: 40,
-    height: 20,
-  },
-  popoverHeader: {
-    paddingHorizontal: 20,
-    paddingVertical: 10,
-    color: grey500,
-    textTransform: 'uppercase',
-    fontSize: 13,
-    fontWeight: '500',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  headerText: {
-    color: grey500,
-    textTransform: 'uppercase',
-    fontSize: 13,
-    fontWeight: '500',
-    height: 50,
-    backgroundColor: 'red',
-  },
-});
 
 export default withTheme(Modal);

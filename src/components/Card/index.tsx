@@ -5,6 +5,7 @@ import type { StyleProp, ViewStyle } from 'react-native';
 import TextView from '../Typography';
 import Touchable from '../Touchable';
 import { withTheme } from '../../core/theming';
+import Surface from '../Surface';
 
 export type CardProps = {
   title?: string;
@@ -39,11 +40,23 @@ const Card: React.FC<CardProps> = ({
   theme,
 }) => {
   return (
-    <View
+    <Surface
       style={[
         type === 'elevated'
-          ? [styles.elevated, { shadowColor: theme.colors.backdrop }]
-          : [styles.outlined, { borderColor: theme.colors.borderPrimary }],
+          ? [
+              styles.elevated,
+              {
+                shadowColor: theme.colors.backdrop,
+                borderRadius: theme.roundness,
+              },
+            ]
+          : [
+              styles.outlined,
+              {
+                borderColor: theme.colors.borderPrimary,
+                borderRadius: theme.roundness,
+              },
+            ],
         {
           backgroundColor: theme.colors.surface,
         },
@@ -87,7 +100,7 @@ const Card: React.FC<CardProps> = ({
       )}
       {children}
       {actions}
-    </View>
+    </Surface>
   );
 };
 
@@ -111,7 +124,6 @@ const styles = StyleSheet.create({
   elevated: {
     paddingBottom: 5,
     width: '100%',
-    borderRadius: 5,
     shadowOffset: {
       width: 0,
       height: 2,
@@ -123,7 +135,6 @@ const styles = StyleSheet.create({
   outlined: {
     width: '100%',
     paddingBottom: 5,
-    borderRadius: 10,
     borderWidth: 1,
   },
   mb: { marginBottom: 1 },

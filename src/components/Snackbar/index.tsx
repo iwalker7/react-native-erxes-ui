@@ -161,7 +161,7 @@ const Snackbar: React.FC<SnackbarProps> = ({
         accessibilityLiveRegion="polite"
         style={[
           styles.container,
-          { backgroundColor: mainColor },
+          { backgroundColor: mainColor, borderRadius: theme.roundness },
           {
             opacity: opacity,
             transform: [
@@ -229,7 +229,7 @@ const Snackbar: React.FC<SnackbarProps> = ({
               color={'rgba(255, 255, 255, 0.6)'}
               textColor={color(mainColor).darken(0.6).rgb().string()}
               style={{
-                borderRadius: 8,
+                borderRadius: theme.roundness,
               }}
             >
               {action.label}
@@ -249,7 +249,6 @@ const styles = StyleSheet.create({
     paddingLeft: 15,
     paddingRight: 5,
     paddingVertical: 8,
-    borderRadius: 5,
     width: Dimensions.get('screen').width - 15,
     shadowColor: black,
     shadowOffset: {
