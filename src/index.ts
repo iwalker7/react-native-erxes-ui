@@ -7,6 +7,7 @@ export { default as Chip, ChipProps } from './components/Chip';
 export { default as Checkbox } from './components/Checkbox';
 export { default as Dialog, DialogProps } from './components/Dialog';
 export { default as Divider, DividerProps } from './components/Divider';
+export { default as FAB } from './components/FAB';
 export { default as Picker, PickerProps } from './components/Picker';
 export { default as Empty, EmptyProps } from './components/Empty';
 export { default as Indicator, IndicatorProps } from './components/Indicator';
@@ -16,6 +17,7 @@ export { default as TextInput, TextInputProps } from './components/TextInput';
 export { default as Touchable, TouchableProps } from './components/Touchable';
 export { default as Modal, ModalProps } from './components/Modal';
 export { default as RadioButton } from './components/RadioButton';
+export { default as Surface } from './components/Surface';
 export { default as Searchbar, SearchbarProps } from './components/Searchbar';
 // export { default as TopTabBar, TopTabBarProps } from './components/TopTabBar';
 export {
@@ -33,7 +35,6 @@ export {
 } from './components/Button/TouchableRipple';
 export { default as Pagination, generatePages } from './components/Pagination';
 export { default as GradientButton } from './components/Button/GradientButton';
-
 export { default as ScreenUtils } from './utils/screenUtils';
 
 import * as Colors from './styles/colors';

@@ -16,6 +16,7 @@ import TouchableScreen from './TouchableScreen';
 import TextInputScreen from './TextInputScreen';
 import ThemeScreen from './ThemeScreen';
 import UplaoderScreen from './UploaderScreen';
+import FABScreen from './FABScreen';
 
 export {
   AvatarScreen,
@@ -36,4 +37,5 @@ export {
   TouchableScreen,
   UplaoderScreen,
   ThemeScreen,
+  FABScreen,
 };

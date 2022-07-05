@@ -51,9 +51,9 @@ export const screens = {
       },
 
       //   {
-      //     title: 'Swipeable List',
-      //     tags: 'Swipeable',
-      //     screen: 'SwipeableListScreen',
+      //     title: 'FLoating action button',
+      //     tags: 'FLoating action button',
+      //     screen: 'FABScreen',
       //   },
       { title: 'Text', tags: 'text', screen: 'TextScreen' },
       { title: 'Touchable', tags: 'touchable', screen: 'TouchableScreen' },

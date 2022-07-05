@@ -7,7 +7,7 @@ import {
   TextProps,
   TextStyle,
 } from 'react-native';
-import { withTheme } from '../../core/theming';
+import { useTheme } from '../../core/theming';
 import { red400 } from '../../styles/colors';
 
 export type TextViewProps = TextProps & {
@@ -32,12 +32,13 @@ export type TextViewProps = TextProps & {
   lineHeight?: number;
   center?: boolean;
   color?: string;
+  theme?: ReactNativeErxes.Theme;
   onPress?: (event: GestureResponderEvent) => void;
   onLongPress?: (event: GestureResponderEvent) => void;
-  theme: ReactNativeErxes.Theme;
 };
 
 const TextView: React.FC<TextViewProps> = ({
+  theme,
   xxsmall,
   xsmall,
   small,
@@ -48,7 +49,6 @@ const TextView: React.FC<TextViewProps> = ({
   xxxxlarge,
   bold,
   boldless,
-  primary = true,
   secondary = false,
   italic,
   style,
@@ -61,13 +61,14 @@ const TextView: React.FC<TextViewProps> = ({
   required,
   onPress,
   onLongPress,
-  theme,
   ...rest
 }) => {
+  const theming = useTheme(theme);
   return (
     <Text
       style={[
-        { fontSize: 14, color: theme.colors.textPrimary },
+        { fontSize: 14 },
+        { color: theming.colors.coreBlue },
         flex && { flex: 1 },
         xxsmall && { fontSize: 8 },
         xsmall && { fontSize: 10 },
@@ -83,8 +84,7 @@ const TextView: React.FC<TextViewProps> = ({
         capitalize && { textTransform: 'capitalize' },
         uppercase && { textTransform: 'uppercase' },
         center && { textAlign: 'center' },
-        primary && { color: theme.colors.textPrimary },
-        secondary && { color: theme.colors.textSecondary },
+        secondary && { color: theming.colors.textSecondary },
         { color },
         { lineHeight },
         style,
@@ -103,4 +103,4 @@ const TextView: React.FC<TextViewProps> = ({
   );
 };
 
-export default withTheme(TextView);
+export default TextView;

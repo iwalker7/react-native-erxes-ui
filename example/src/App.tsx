@@ -22,6 +22,7 @@ import {
   ChipScreen,
   SnackbarScreen,
   ExpandableSectionScreen,
+  FABScreen,
 } from './screens';
 
 import {
@@ -67,6 +68,7 @@ const CustomDarkTheme: ReactNativeErxes.Theme = {
     ...DarkTheme.animation,
     customProperty: 1,
   },
+  mode: 'exact',
 };
 
 const CustomDefaultTheme = {
@@ -89,12 +91,12 @@ const CustomDefaultTheme = {
 export default function App() {
   const option = {
     headerTitleStyle: {
-      //   color: '#472D9A',
+      color: '#472D9A',
     },
   };
 
   return (
-    <ThemeProvider theme={CustomDefaultTheme}>
+    <ThemeProvider theme={CustomDarkTheme}>
       <NavigationContainer>
         <Stack.Navigator>
           <Stack.Screen
@@ -169,6 +171,7 @@ export default function App() {
             component={ExpandableSectionScreen}
             options={option}
           />
+          <Stack.Screen name="FAB" component={FABScreen} options={option} />
         </Stack.Navigator>
       </NavigationContainer>
     </ThemeProvider>

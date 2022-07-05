@@ -17,14 +17,15 @@ import {
 } from '../../utils/colorUtils';
 import { withTheme } from '../../core/theming';
 import Touchable from '../Touchable';
-import TextView from '../Typography';
+import TextView from '../Typography/index';
+
 import { white } from '../../styles/colors';
 import images from '../../assets/images';
 
 export type ChipProps = {
   mode?: 'flat' | 'outline';
   index: number;
-  text: string;
+  label: string;
   selected?: boolean;
   icon?: JSX.Element;
   removeIcon?: JSX.Element;
@@ -34,7 +35,7 @@ export type ChipProps = {
   onRemove?: (index: number) => void;
   onPress?: () => void;
   onLongPress?: () => void;
-  textStyle?: StyleProp<TextStyle>;
+  labelStyle?: StyleProp<TextStyle>;
   containerStyle?: StyleProp<ViewStyle>;
   theme: ReactNativeErxes.Theme;
   item: any;
@@ -47,7 +48,7 @@ const Chip: React.FC<ChipProps> = ({
   mode,
   selected = false,
   index,
-  text,
+  label,
   icon,
   removeIcon,
   selectedColor,
@@ -56,7 +57,7 @@ const Chip: React.FC<ChipProps> = ({
   onRemove,
   onPress,
   onLongPress,
-  textStyle,
+  labelStyle,
   containerStyle,
   item,
   isAvatar = false,
@@ -117,7 +118,7 @@ const Chip: React.FC<ChipProps> = ({
           {
             color: mode === 'outline' ? primaryDark1(colors.primary) : white,
           },
-          textStyle,
+          labelStyle,
         ]}
       >
         {isAvatar && (
@@ -127,7 +128,7 @@ const Chip: React.FC<ChipProps> = ({
             style={styles.chipImage}
           />
         )}
-        {text}
+        {label}
       </TextView>
       {removable && (
         <Touchable

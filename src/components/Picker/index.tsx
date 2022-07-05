@@ -138,38 +138,43 @@ const Picker: React.FC<PickerProps> = ({
                 maxHeight: 200,
                 width: '100%',
                 backgroundColor: theme.colors.surface,
+                padding: 20,
               },
               modalStyle,
             ]}
             showsVerticalScrollIndicator={false}
           >
-            <View>
-              {data?.map((item, index) => {
-                return (
-                  <Touchable
-                    key={index.toString()}
-                    onPress={() => onSelect(item)}
+            {data?.map((item, index) => {
+              return (
+                <Touchable
+                  key={index.toString()}
+                  onPress={() => {
+                    if (mode === 'SINGLE') {
+                      onVisible(false);
+                      onHide();
+                    }
+                    onSelect(item);
+                  }}
+                >
+                  <View
+                    style={[
+                      styles.item,
+                      {
+                        backgroundColor: selections.includes(item)
+                          ? selectionColor
+                          : undefined,
+                      },
+                      itemStyle,
+                    ]}
                   >
-                    <View
-                      style={[
-                        styles.item,
-                        {
-                          backgroundColor: selections.includes(item)
-                            ? selectionColor
-                            : undefined,
-                        },
-                        itemStyle,
-                      ]}
-                    >
-                      <TextView small color={theme.colors.textPrimary}>
-                        {item}
-                      </TextView>
-                      <Divider />
-                    </View>
-                  </Touchable>
-                );
-              })}
-            </View>
+                    <TextView small color={theme.colors.textPrimary}>
+                      {item}
+                    </TextView>
+                    <Divider />
+                  </View>
+                </Touchable>
+              );
+            })}
           </ScrollView>
         </View>
       </Modal>
@@ -181,7 +186,7 @@ const Picker: React.FC<PickerProps> = ({
             placeholderStyle,
           ]}
         >
-          <TextView color={theme.colors.textPrimary}>
+          <TextView color={theme.colors.textSecondary}>
             {mode === 'MULTI' && selections?.length > 0
               ? selections?.join(', ')
               : mode === 'SINGLE' && selections?.length === 1 && selections[0]

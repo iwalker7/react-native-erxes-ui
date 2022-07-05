@@ -49,16 +49,19 @@ export type TextInputProps = RNProps & {
   rightIconSize?: number;
   rightIconColor?: ColorValue | string | undefined;
   rightIconOnPress?: () => void;
+  rightIconStyle?: StyleProp<ViewStyle>;
   leftIcon?: JSX.Element;
   leftIconName?: string;
   leftIconSize?: number;
   leftIconColor?: ColorValue | string | undefined;
   leftIconOnPress?: () => void;
+  leftIconStyle?: StyleProp<ViewStyle>;
   isLoading?: boolean;
   loaderPosition?: 'left' | 'right';
   theme: ReactNativeErxes.Theme;
   height?: number;
   backgroundColor?: string;
+  helperText?: string;
 };
 const TextInput: React.ForwardRefRenderFunction<unknown, TextInputProps> = ({
   style,
@@ -86,17 +89,20 @@ const TextInput: React.ForwardRefRenderFunction<unknown, TextInputProps> = ({
   rightIconName,
   rightIconSize = 16,
   rightIconColor = theme.colors.textPrimary,
+  rightIconStyle,
   leftIcon,
   leftIconName,
   leftIconSize = 16,
   leftIconColor = theme.colors.textPrimary,
+  leftIconStyle,
   isLoading = false,
   loaderPosition,
   labelStyle,
   rightIconOnPress,
   leftIconOnPress,
   height = 52,
-  backgroundColor = theme.colors.surfaceHighlight,
+  backgroundColor = 'transparent',
+  helperText,
   ...rest
 }) => {
   const { colors } = theme;
@@ -105,9 +111,6 @@ const TextInput: React.ForwardRefRenderFunction<unknown, TextInputProps> = ({
   //   const [ph, setPh] = React.useState(p);
   const [mainColor, setMainColor] = React.useState(colors.primary);
   const [focused, setFocused] = React.useState<boolean>(false);
-  const { current: labeled } = React.useRef<Animated.Value>(
-    new Animated.Value(0)
-  );
 
   const handleFocus = (args: any) => {
     if (disabled) {
@@ -117,53 +120,11 @@ const TextInput: React.ForwardRefRenderFunction<unknown, TextInputProps> = ({
     rest.onFocus?.(args);
   };
 
-  //   React.useEffect(() => {
-  //     if (focused || value !== '') {
-  //       //   if (floating) {
-  //       //     setPh(placeholder);
-  //       //   }
-  //       Animated.timing(labeled, {
-  //         toValue: 1,
-  //         duration: 200,
-  //         useNativeDriver: true,
-  //       }).start();
-  //     } else {
-  //       Animated.timing(labeled, {
-  //         toValue: 0,
-  //         duration: 200,
-  //         useNativeDriver: true,
-  //       }).start();
-  //     }
-  //   }, [labeled, focused, value]);
-
   const handleChangeText = (v: string) => {
     if (disabled) {
       return;
     }
     onChangeText && onChangeText(v);
-  };
-
-  const animStyle = {
-    transform: [
-      {
-        translateY: labeled.interpolate({
-          inputRange: [0, 1],
-          outputRange: [1, -12],
-        }),
-      },
-      {
-        translateX: labeled.interpolate({
-          inputRange: [0, 1],
-          outputRange: [1, -8],
-        }),
-      },
-      {
-        scale: labeled.interpolate({
-          inputRange: [0, 1],
-          outputRange: [1, 0.6],
-        }),
-      },
-    ],
   };
 
   const handleSubmit = (
@@ -176,135 +137,134 @@ const TextInput: React.ForwardRefRenderFunction<unknown, TextInputProps> = ({
     }
   };
   return (
-    <View
-      style={[
-        { height: height },
-        type === 'text'
-          ? {
-              borderWidth: 1,
-              borderColor: 'transparent',
-              borderBottomColor: theme.colors.borderPrimary,
-              paddingHorizontal: 15,
-              backgroundColor: 'transparent',
-            }
-          : styles.container,
-        {
-          flexDirection: 'row',
-          alignItems: label ? 'flex-end' : 'center',
-          paddingBottom: label ? 5 : 0,
-          backgroundColor: backgroundColor
-            ? backgroundColor
-            : type === 'filled'
-            ? 'rgba(79, 51, 175, 0.12)'
-            : type === 'outline'
-            ? theme.colors.surface
-            : type === 'text'
-            ? 'transparent'
-            : backgroundColor,
-          borderColor:
-            type === 'filled'
-              ? mainColor
-              : type === 'outline'
-              ? theme.colors.surfaceHighlight
-              : required
-              ? red400
-              : 'transparent',
-          borderWidth: 1,
-        },
-        containerStyle,
-      ]}
-    >
-      {label ? (
-        <View style={[styles.animatedStyle, labelContainerStyle]}>
-          {labelIcon ? (
-            labelIcon
-          ) : labelIconName ? (
-            <View style={{ marginHorizontal: 5 }}>
+    <>
+      <View
+        style={[
+          { height, backgroundColor },
+          type === 'text'
+            ? {
+                borderWidth: 1,
+                borderColor: 'transparent',
+                borderBottomColor: theme.colors.surfaceLight,
+                paddingHorizontal: 15,
+                backgroundColor: 'transparent',
+              }
+            : styles.container,
+          {
+            flexDirection: 'row',
+            alignItems: label ? 'flex-end' : 'center',
+            paddingBottom: label ? 5 : 0,
+            borderColor:
+              type === 'filled' || type === 'outline'
+                ? theme.colors.surfaceHighlight
+                : required
+                ? red400
+                : 'transparent',
+            borderWidth: 1,
+          },
+          containerStyle,
+        ]}
+      >
+        {label ? (
+          <View style={[styles.animatedStyle, labelContainerStyle]}>
+            {labelIcon ? (
+              labelIcon
+            ) : labelIconName ? (
+              <View style={{ marginHorizontal: 5 }}>
+                <Icon
+                  source={labelIconName}
+                  color={labelColor}
+                  size={labelIconSize}
+                />
+              </View>
+            ) : null}
+            <TextView small color={labelColor} style={labelStyle}>
+              {label}
+            </TextView>
+          </View>
+        ) : null}
+
+        <View
+          style={{
+            flex: 1,
+            flexDirection: loaderPosition === 'left' ? 'row' : 'row-reverse',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+          }}
+        >
+          {leftIcon ? (
+            leftIcon
+          ) : leftIconName ? (
+            <View style={[{ marginHorizontal: 5 }, leftIconStyle]}>
               <Icon
-                source={labelIconName}
-                color={labelColor}
-                size={labelIconSize}
+                source={leftIconName}
+                color={leftIconColor}
+                size={leftIconSize}
               />
             </View>
           ) : null}
-          <TextView small color={labelColor} style={labelStyle}>
-            {label}
-          </TextView>
-        </View>
-      ) : null}
 
-      <View
+          {isLoading ? (
+            <ActivityIndicator
+              size="small"
+              color={colors.primary}
+              style={{
+                marginHorizontal: 10,
+              }}
+            />
+          ) : null}
+
+          <RNTextInput
+            style={[{ flex: 1 }, style]}
+            ref={inputRef}
+            selectionColor={mainColor}
+            autoCapitalize="none"
+            autoCorrect={false}
+            secureTextEntry={password ? true : false}
+            placeholder={p}
+            placeholderTextColor={placeholderTextColor}
+            maxFontSizeMultiplier={1}
+            maxLength={maxLength}
+            onFocus={handleFocus}
+            onChangeText={handleChangeText}
+            onSubmitEditing={handleSubmit}
+            value={value && value}
+            underlineColorAndroid={'transparent'}
+            {...rest}
+          />
+        </View>
+
+        {rightIcon ? (
+          rightIcon
+        ) : rightIconName ? (
+          <Touchable onPress={rightIconOnPress && rightIconOnPress}>
+            <View style={[{ marginStart: 5 }, rightIconStyle]}>
+              <Icon
+                source={rightIconName}
+                color={rightIconColor}
+                size={rightIconSize}
+              />
+            </View>
+          </Touchable>
+        ) : null}
+        {required && (
+          <TextView
+            style={{ position: 'absolute', right: 10, top: 10 }}
+            required
+          />
+        )}
+      </View>
+      <TextView
+        small
         style={{
-          flex: 1,
-          flexDirection: loaderPosition === 'left' ? 'row' : 'row-reverse',
-          alignItems: 'center',
-          justifyContent: 'space-between',
+          position: 'relative',
+          top: 10,
+          color: theme.colors.textSecondary,
         }}
       >
-        {leftIcon ? (
-          leftIcon
-        ) : leftIconName ? (
-          <View style={{ marginHorizontal: 5 }}>
-            <Icon
-              source={leftIconName}
-              color={leftIconColor}
-              size={leftIconSize}
-            />
-          </View>
-        ) : null}
-
-        {isLoading ? (
-          <ActivityIndicator
-            size="small"
-            color={colors.primary}
-            style={{
-              marginHorizontal: 10,
-            }}
-          />
-        ) : null}
-
-        <RNTextInput
-          style={[{ flex: 1 }, style]}
-          ref={inputRef}
-          selectionColor={mainColor}
-          autoCapitalize="none"
-          autoCorrect={false}
-          secureTextEntry={password ? true : false}
-          placeholder={p}
-          placeholderTextColor={placeholderTextColor}
-          maxFontSizeMultiplier={1}
-          maxLength={maxLength}
-          onFocus={handleFocus}
-          onChangeText={handleChangeText}
-          onSubmitEditing={handleSubmit}
-          value={value && value}
-          underlineColorAndroid={'transparent'}
-          {...rest}
-        />
-      </View>
-
-      {rightIcon ? (
-        <Touchable onPress={rightIconOnPress && rightIconOnPress}>
-          <View style={[{ marginEnd: 15, marginStart: 5 }]}>{rightIcon}</View>
-        </Touchable>
-      ) : rightIconName ? (
-        <Touchable onPress={rightIconOnPress && rightIconOnPress}>
-          <View style={{ marginStart: 5 }}>
-            <Icon
-              source={rightIconName}
-              color={rightIconColor}
-              size={rightIconSize}
-            />
-          </View>
-        </Touchable>
-      ) : null}
-      {required && (
-        <TextView
-          style={{ position: 'absolute', right: 10, top: 10 }}
-          required
-        />
-      )}
-    </View>
+        {helperText}
+      </TextView>
+    </>
   );
 };
 

@@ -12,7 +12,7 @@ export type TSurface = React.ComponentPropsWithRef<typeof View> & {
 };
 
 const Surface = ({ style, theme, ...rest }: TSurface) => {
-  const { elevation = 4 } = (StyleSheet.flatten(style) || {}) as ViewStyle;
+  const { elevation = 0 } = (StyleSheet.flatten(style) || {}) as ViewStyle;
   const { dark: isDarkTheme, mode, colors } = theme;
   return (
     <Animated.View

@@ -177,7 +177,7 @@ const Modal: React.FC<ModalProps> = ({
             style={[
               styles.modalView,
               {
-                backgroundColor: theme.colors.surface,
+                backgroundColor: theme.colors.surfaceHighlight,
               },
               style,
             ]}

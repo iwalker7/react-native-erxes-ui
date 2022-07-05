@@ -26,11 +26,14 @@ type Props = $RemoveChildren<typeof TouchableRipple> & {
   size?: number;
   disabled?: boolean;
   animated?: boolean;
+  mode?: 'FILL' | 'TRANSPARENT';
   accessibilityLabel?: string;
   onPress?: (e: GestureResponderEvent) => void;
   style?: StyleProp<ViewStyle>;
   ref?: React.RefObject<TouchableWithoutFeedback>;
   theme: ReactNativeErxes.Theme;
+  depth?: number;
+  backgroundColor?: string;
 };
 
 const IconButton = ({
@@ -43,13 +46,16 @@ const IconButton = ({
   theme,
   style,
   icon,
+  depth = 1.5,
+  mode = 'TRANSPARENT',
+  backgroundColor,
   ...rest
 }: Props) => {
   const iconColor =
     typeof customColor !== 'undefined' ? customColor : theme.colors.textPrimary;
   const rippleColor = color(iconColor).alpha(0.2).rgb().string();
   const IconComponent = animated ? CrossFadeIcon : Icon;
-  const buttonSize = size * 1.5;
+  const buttonSize = size * depth;
   return (
     <TouchableRipple
       borderless
@@ -75,7 +81,7 @@ const IconButton = ({
       }
       {...rest}
     >
-      <View>
+      <View style={mode === 'FILL' && { flex: 1, backgroundColor }}>
         <IconComponent color={iconColor} source={icon || ''} size={size} />
       </View>
     </TouchableRipple>

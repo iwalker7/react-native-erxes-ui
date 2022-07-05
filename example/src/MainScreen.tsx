@@ -1,13 +1,13 @@
 /* eslint-disable react-native/no-inline-styles */
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useCallback, useState } from 'react';
-import { SectionList, StyleSheet, View } from 'react-native';
+import { SectionList } from 'react-native';
 import {
   TextView,
   Touchable,
-  TextInput,
-  Colors,
   useTheme,
+  Surface,
+  Searchbar,
 } from 'react-native-erxes-ui';
 
 import _ from 'lodash';
@@ -40,19 +40,16 @@ export default function MainScreen({ navigation }: any) {
       }
 
       return (
-        //   <ExpandableSection >
-
-        //   </ExpandableSection>
-        <View
+        <Surface
           style={{
             padding: 20,
-            backgroundColor: '#DED9E8',
+            backgroundColor: theme.colors.surfaceHighlight,
           }}
         >
-          <TextView uppercase bold color={theme.colors.primary}>
+          <TextView uppercase bold>
             {section.key}
           </TextView>
-        </View>
+        </Surface>
       );
     },
     [searchText]
@@ -64,10 +61,6 @@ export default function MainScreen({ navigation }: any) {
         return null;
       }
 
-      if (!item.title) {
-        return <View />;
-      }
-
       const screenId = _.flow(
         (str: string) => _.split(str, '.'),
         _.last,
@@ -75,44 +68,37 @@ export default function MainScreen({ navigation }: any) {
       )(item.screen);
 
       return (
-        <Touchable
-          activeOpacity={1}
-          key={item.title}
-          style={styles.sectionItem}
-          onPress={() => {
-            onItemPress({ screenId });
-          }}
-        >
-          <TextView
-            bold
-            style={{
-              paddingHorizontal: 30,
-              paddingVertical: 15,
-              backgroundColor: 'white',
-              color: theme.colors.primary,
+        <Surface>
+          <Touchable
+            activeOpacity={1}
+            key={item.title}
+            style={{ padding: 20 }}
+            onPress={() => {
+              onItemPress({ screenId });
             }}
           >
-            {item.title}
-          </TextView>
-        </Touchable>
+            <TextView bold>{item.title}</TextView>
+          </Touchable>
+        </Surface>
       );
     },
     [searchText]
   );
 
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: '#fff' }}>
+    <SafeAreaView style={{ flex: 1, backgroundColor: theme.colors.surface }}>
+      <Searchbar
+        leftIconName={'magnifent'}
+        placeholder="Search component name"
+        onChangeText={(text: string) => setSearchText(text)}
+        value={searchText}
+        style={{ margin: 10 }}
+      />
+      <TextView center large style={{ margin: 20 }}>
+        React native erxes ui
+      </TextView>
       <SectionList
         keyExtractor={(data, index) => data.tags + index}
-        ListHeaderComponent={
-          <View style={styles.search}>
-            <TextInput
-              placeholder="Search component name"
-              onChangeText={(text: string) => setSearchText(text)}
-              value={searchText}
-            />
-          </View>
-        }
         sections={sections}
         renderSectionHeader={renderSectionHeader}
         renderItem={renderItem}
@@ -120,11 +106,3 @@ export default function MainScreen({ navigation }: any) {
     </SafeAreaView>
   );
 }
-
-const styles = StyleSheet.create({
-  search: { backgroundColor: '#fff', width: '100%' },
-  sectionItem: {
-    borderBottomWidth: 1,
-    borderColor: Colors.grey300,
-  },
-});
