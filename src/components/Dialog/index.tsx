@@ -21,7 +21,7 @@ export type DialogProps = {
   supportingText?: string;
   cancelText?: string;
   confirmText?: string;
-  action: 'confirm' | 'single' | 'custom';
+  action?: 'confirm' | 'single' | 'custom';
   containerStyle?: StyleProp<ViewStyle>;
   isVisible: boolean;
   onVisible: SetStateAction<any>;

@@ -57,11 +57,7 @@ const CardScreen: React.FC<any> = () => {
             >
               Hide thumbnail
             </Button>
-            <Button
-              type="default"
-              onPress={() => setThVisible(true)}
-              onLongPress={() => {}}
-            >
+            <Button onPress={() => setThVisible(true)} onLongPress={() => {}}>
               Show thumbnail
             </Button>
           </View>

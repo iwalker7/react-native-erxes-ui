@@ -70,7 +70,6 @@ const ButtonScreen: React.FC<any> = () => {
               onLongPress={() => {}}
               width={90}
               style={{ margin: 3 }}
-              containerStyle={{ marginRight: 20 }}
             >
               Default
             </Button>
@@ -131,7 +130,7 @@ const ButtonScreen: React.FC<any> = () => {
                 onPress={() => {}}
                 onLongPress={() => {}}
                 width={90}
-                containerStyle={{ margin: 5 }}
+                style={{ margin: 5 }}
               >
                 Active
               </Button>
@@ -141,7 +140,7 @@ const ButtonScreen: React.FC<any> = () => {
                 onPress={() => {}}
                 onLongPress={() => {}}
                 width={90}
-                containerStyle={{ margin: 5 }}
+                style={{ margin: 5 }}
               >
                 Active
               </Button>
@@ -154,7 +153,7 @@ const ButtonScreen: React.FC<any> = () => {
                 onPress={() => {}}
                 onLongPress={() => {}}
                 width={90}
-                containerStyle={{ margin: 5 }}
+                style={{ margin: 5 }}
               >
                 Disabled
               </Button>
@@ -164,7 +163,7 @@ const ButtonScreen: React.FC<any> = () => {
                 onPress={() => {}}
                 onLongPress={() => {}}
                 width={90}
-                containerStyle={{ margin: 5 }}
+                style={{ margin: 5 }}
               >
                 Disabled
               </Button>
@@ -175,9 +174,8 @@ const ButtonScreen: React.FC<any> = () => {
                 mode="verify"
                 onPress={() => {}}
                 onLongPress={() => {}}
-                style={{ marginBottom: 10 }}
                 width={90}
-                containerStyle={{ margin: 5 }}
+                style={{ margin: 5 }}
               >
                 Verify
               </Button>
@@ -187,7 +185,7 @@ const ButtonScreen: React.FC<any> = () => {
                 onPress={() => {}}
                 onLongPress={() => {}}
                 width={90}
-                containerStyle={{ margin: 5 }}
+                style={{ margin: 5 }}
               >
                 Verify
               </Button>

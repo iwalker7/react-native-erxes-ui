@@ -1,6 +1,6 @@
 /* eslint-disable react-native/no-inline-styles */
 import React from 'react';
-import { View, StyleSheet, ActivityIndicator } from 'react-native';
+import { View, ActivityIndicator } from 'react-native';
 import type {
   ColorValue,
   TextStyle,
@@ -8,7 +8,6 @@ import type {
   ViewProps,
   ViewStyle,
 } from 'react-native';
-import Touchable from '../Touchable';
 import TextView from '../Typography';
 import Icon from '../Icon';
 import { withTheme } from '../../core/theming';
@@ -101,6 +100,7 @@ const Button: React.FC<ButtonProps> = ({
     alignItems: 'center',
     alignContent: 'center',
     alignSelf: 'center',
+    flexDirection: 'row',
   };
 
   const tcolor = textColor
@@ -124,9 +124,8 @@ const Button: React.FC<ButtonProps> = ({
       rippleColor={rippleColor}
       onPress={onPress}
       onLongPress={onLongPress}
-      style={[defaultStyle as ViewStyle, style]}
     >
-      <View style={[styles.inView]}>
+      <View style={[defaultStyle as ViewStyle, style]}>
         {leftIcon ? (
           leftIcon
         ) : leftIconName ? (
@@ -187,14 +186,5 @@ const Button: React.FC<ButtonProps> = ({
     </TouchableRipple>
   );
 };
-
-const styles = StyleSheet.create({
-  inView: {
-    flexDirection: 'row',
-    alignSelf: 'center',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
 
 export default withTheme(Button);
