@@ -16,7 +16,7 @@ import Touchable from '../Touchable';
 import { black } from '../../styles/colors';
 
 export type RBItemProps = {
-  value: string;
+  value: any;
   label: string;
   disabled?: boolean;
   onPress?: () => void;

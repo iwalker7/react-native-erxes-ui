@@ -1,12 +1,13 @@
 /* eslint-disable react-native/no-inline-styles */
 import React from 'react';
 import { View, ScrollView } from 'react-native';
-import { TextView, Colors, Button } from 'react-native-erxes-ui';
+import { TextView, Colors, Button, useTheme } from 'react-native-erxes-ui';
 import styles from '../styles';
 
 const ButtonScreen: React.FC<any> = () => {
+  const { colors } = useTheme();
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, { backgroundColor: colors.surface }]}>
       <ScrollView
         showsVerticalScrollIndicator={false}
         style={{ width: '100%' }}
@@ -24,58 +25,78 @@ const ButtonScreen: React.FC<any> = () => {
                 borderRadius: 5,
               }}
             >
-              <TextView small>default | outline</TextView>
+              <TextView small>contained | outlined</TextView>
             </View>
           </View>
+
+          <TextView>Without icon</TextView>
           <View style={{ flexDirection: 'row' }}>
-            <TextView style={{ marginRight: 42 }}>Without icon</TextView>
             <Button
-              type="default"
+              type="contained"
               onPress={() => {}}
               onLongPress={() => {}}
               width={90}
-              containerStyle={{ marginRight: 20 }}
+              style={{ margin: 3 }}
             >
               Default
             </Button>
             <Button
               width={90}
-              containerStyle={{ marginRight: 20 }}
-              type="outline"
+              style={{ margin: 3 }}
+              type="outlined"
               onPress={() => {}}
               onLongPress={() => {}}
             >
               Outlined
             </Button>
+            <Button
+              width={90}
+              style={{ margin: 3 }}
+              type="text"
+              onPress={() => {}}
+              onLongPress={() => {}}
+            >
+              Text
+            </Button>
           </View>
-          <View
-            style={{
-              flexDirection: 'row',
-              marginTop: 10,
-            }}
-          >
-            <TextView style={{ marginRight: 61 }}>With icon</TextView>
+
+          <TextView>With icon</TextView>
+          <View style={{ flexDirection: 'row' }}>
             <Button
               leftIconName="cloud-check"
               leftIconSize={15}
-              type="default"
+              type="contained"
               onPress={() => {}}
               onLongPress={() => {}}
               width={90}
+              style={{ margin: 3 }}
               containerStyle={{ marginRight: 20 }}
             >
               Default
             </Button>
             <Button
               width={90}
-              type="outline"
+              type="text"
               rightIconName="cloud-check"
               rightIconColor={Colors.amber900}
               rightIconSize={15}
               onPress={() => {}}
               onLongPress={() => {}}
+              style={{ margin: 3 }}
             >
               Outlined
+            </Button>
+            <Button
+              width={90}
+              type="text"
+              rightIconName="cloud-check"
+              rightIconColor={Colors.amber900}
+              rightIconSize={15}
+              onPress={() => {}}
+              onLongPress={() => {}}
+              style={{ margin: 3 }}
+            >
+              Text
             </Button>
           </View>
         </View>
@@ -105,7 +126,7 @@ const ButtonScreen: React.FC<any> = () => {
           >
             <View>
               <Button
-                type="default"
+                type="contained"
                 mode="active"
                 onPress={() => {}}
                 onLongPress={() => {}}
@@ -115,7 +136,7 @@ const ButtonScreen: React.FC<any> = () => {
                 Active
               </Button>
               <Button
-                type="outline"
+                type="outlined"
                 mode="active"
                 onPress={() => {}}
                 onLongPress={() => {}}
@@ -128,7 +149,7 @@ const ButtonScreen: React.FC<any> = () => {
 
             <View>
               <Button
-                type="default"
+                type="contained"
                 mode="disabled"
                 onPress={() => {}}
                 onLongPress={() => {}}
@@ -138,7 +159,7 @@ const ButtonScreen: React.FC<any> = () => {
                 Disabled
               </Button>
               <Button
-                type="outline"
+                type="outlined"
                 mode="disabled"
                 onPress={() => {}}
                 onLongPress={() => {}}
@@ -150,7 +171,7 @@ const ButtonScreen: React.FC<any> = () => {
             </View>
             <View>
               <Button
-                type="default"
+                type="contained"
                 mode="verify"
                 onPress={() => {}}
                 onLongPress={() => {}}
@@ -161,7 +182,7 @@ const ButtonScreen: React.FC<any> = () => {
                 Verify
               </Button>
               <Button
-                type="outline"
+                type="outlined"
                 mode="verify"
                 onPress={() => {}}
                 onLongPress={() => {}}

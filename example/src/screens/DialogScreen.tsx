@@ -36,19 +36,6 @@ const DialogScreen: React.FC<any> = () => {
             justifyContent: 'space-between',
           }}
         >
-          <TextView bold>Alert dialog</TextView>
-          <Button width={80} onPress={() => onAlert(true)}>
-            Click here
-          </Button>
-        </View>
-
-        <View
-          style={{
-            flexDirection: 'column',
-            height: 70,
-            justifyContent: 'space-between',
-          }}
-        >
           <TextView bold>Confirm dialog</TextView>
           <Button width={80} onPress={() => onConfirm(true)}>
             Click here
@@ -62,8 +49,21 @@ const DialogScreen: React.FC<any> = () => {
             justifyContent: 'space-between',
           }}
         >
+          <TextView bold>Single dialog</TextView>
+          <Button width={80} onPress={() => onAlert(true)}>
+            Click here
+          </Button>
+        </View>
+
+        <View
+          style={{
+            flexDirection: 'column',
+            height: 70,
+            justifyContent: 'space-between',
+          }}
+        >
           <View style={{ flexWrap: 'wrap', flexDirection: 'column' }}>
-            <TextView bold>Simple dialog </TextView>
+            <TextView bold>Custom dialog </TextView>
           </View>
           <Button width={80} onPress={() => onSimple(true)}>
             Click here
@@ -73,17 +73,9 @@ const DialogScreen: React.FC<any> = () => {
 
       <View style={styles.segment}>
         <Dialog
-          action="confirm"
-          title="Change field?"
-          supportingText="Do you want to save your edits?"
-          saveText="Yes"
-          closeText="No"
-          isVisible={confirm}
-          onVisible={onConfirm}
-          theme={theme}
-        />
-        <Dialog
-          action="alert"
+          action="single"
+          title="Not in stock"
+          supportingText="Item is no longer available"
           isVisible={alert}
           onVisible={onAlert}
           icon={
@@ -95,8 +87,18 @@ const DialogScreen: React.FC<any> = () => {
           }
           theme={theme}
         />
+
         <Dialog
-          action="simple"
+          title="Change field?"
+          supportingText="Do you want to save your edits?"
+          confirmText="Yes"
+          cancelText="No"
+          isVisible={confirm}
+          onVisible={onConfirm}
+          theme={theme}
+        />
+        <Dialog
+          action="single"
           title="Title"
           supportingText="Supporting text"
           isVisible={simple}
@@ -185,7 +187,7 @@ const DialogScreen: React.FC<any> = () => {
 
         <View style={styles.segment}>
           <TextView bold>
-            saveText
+            confirmText
             <TextView color={Colors.grey600}>{`: string`}</TextView>
           </TextView>
           <View style={{ marginVertical: 10 }}>
@@ -200,7 +202,7 @@ const DialogScreen: React.FC<any> = () => {
 
         <View style={styles.segment}>
           <TextView bold>
-            closeText
+            cancelText
             <TextView color={Colors.grey600}>{`: boolean`}</TextView>
           </TextView>
           <View style={{ marginVertical: 10 }}>

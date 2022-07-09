@@ -5,7 +5,7 @@ import { TextView, RadioButton, Colors } from 'react-native-erxes-ui';
 import styles from '../styles';
 
 const RadioButtonScreen: React.FC<any> = () => {
-  const [value, setValue] = React.useState('leading');
+  const [value, setValue] = React.useState(false);
 
   return (
     <View style={styles.container}>
@@ -15,6 +15,7 @@ const RadioButtonScreen: React.FC<any> = () => {
       >
         <TextView large bold style={{ marginTop: 20 }}>
           RadioButton.Group
+          <TextView>{value}</TextView>
         </TextView>
 
         <View style={styles.segment}>
@@ -64,11 +65,11 @@ const RadioButtonScreen: React.FC<any> = () => {
             onValueChange={(val: any) => setValue(val)}
             value={value}
           >
-            <RadioButton.Item label="Leading position" value="leading" />
+            <RadioButton.Item label="Leading position" value={false} />
             <RadioButton.Item
               position="trailing"
               label="Trailing position"
-              value="trailing"
+              value={true}
               style={{ width: 150 }}
             />
           </RadioButton.Group>

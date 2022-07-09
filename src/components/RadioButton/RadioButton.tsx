@@ -1,12 +1,10 @@
 /* eslint-disable no-undef */
 import * as React from 'react';
 import { Animated, View, StyleSheet } from 'react-native';
-import color from 'color';
 import { RadioButtonContext, RadioButtonContextType } from './RadioButtonGroup';
 import { handlePress, isChecked } from './utils';
 import Touchable from '../Touchable';
 import { withTheme } from '../../core/theming';
-import { black } from '../../styles/colors';
 
 export type RadioButtonProps = {
   value: string;
@@ -71,8 +69,7 @@ const RadioButton: React.FC<RadioButtonProps> = ({
   }, [status, borderAnim, radioAnim, scale]);
 
   const checkedColor = rest.color || colors.primary;
-  const uncheckedColor =
-    rest.uncheckedColor || color(black).alpha(0.7).rgb().string();
+  const uncheckedColor = rest.uncheckedColor || theme.colors.onSurfaceMedium;
 
   let radioColor: string;
 
@@ -87,7 +84,7 @@ const RadioButton: React.FC<RadioButtonProps> = ({
           }) === 'checked';
 
         if (disabled) {
-          radioColor = color(black).alpha(0.16).rgb().string();
+          radioColor = theme.colors.onSurfaceLow;
         } else {
           radioColor = checked ? checkedColor : uncheckedColor;
         }

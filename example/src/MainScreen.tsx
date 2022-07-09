@@ -88,7 +88,8 @@ export default function MainScreen({ navigation }: any) {
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: theme.colors.surface }}>
       <Searchbar
-        leftIconName={'magnifent'}
+        leftIconName={'magnify'}
+        rightIconName={"close"}
         placeholder="Search component name"
         onChangeText={(text: string) => setSearchText(text)}
         value={searchText}

@@ -9,18 +9,19 @@ import {
   StyleProp,
   ViewStyle,
 } from 'react-native';
+import ScreenUtils from '../../utils/screenUtils';
 import Button from '../Button';
 import Divider from '../Divider';
 import TextView from '../Typography';
 
 export type DialogProps = {
   onClose?: () => void;
-  onSave?: () => void;
+  callBack?: () => void;
   title?: string;
   supportingText?: string;
-  closeText?: string;
-  saveText?: string;
-  action: 'alert' | 'simple' | 'confirm';
+  cancelText?: string;
+  confirmText?: string;
+  action: 'confirm' | 'single' | 'custom';
   containerStyle?: StyleProp<ViewStyle>;
   isVisible: boolean;
   onVisible: SetStateAction<any>;
@@ -31,13 +32,13 @@ export type DialogProps = {
 
 const Dialog: React.FC<DialogProps> = ({
   onClose,
-  onSave,
+  callBack,
   title,
   icon,
   supportingText,
-  closeText,
-  saveText,
-  action,
+  cancelText,
+  confirmText,
+  action = 'confirm',
   containerStyle,
   isVisible,
   onVisible,
@@ -74,7 +75,7 @@ const Dialog: React.FC<DialogProps> = ({
               containerStyle,
             ]}
           >
-            {(action === 'alert' || action === 'confirm') && (
+            {(action === 'confirm' || action === 'single') && (
               <View style={styles.body}>
                 {icon}
                 <TextView bold color={theme.colors.textPrimary}>
@@ -89,7 +90,7 @@ const Dialog: React.FC<DialogProps> = ({
                 </TextView>
               </View>
             )}
-            {children && action === 'simple' && (
+            {children && action === 'custom' && (
               <>
                 <View style={styles.header}>
                   <TextView bold color={theme.colors.textPrimary}>
@@ -107,7 +108,7 @@ const Dialog: React.FC<DialogProps> = ({
                 <View style={{ padding: 10 }}>{children}</View>
               </>
             )}
-            {action !== 'simple' && (
+            {action === 'confirm' && (
               <View style={styles.buttonsContainer}>
                 <Button
                   width={80}
@@ -118,11 +119,7 @@ const Dialog: React.FC<DialogProps> = ({
                     onClose && onClose();
                   }}
                 >
-                  {action === 'alert'
-                    ? 'No, Cancel'
-                    : action === 'confirm'
-                    ? 'Cancel'
-                    : closeText && closeText}
+                  {cancelText ? cancelText : 'Cancel'}
                 </Button>
                 <Button
                   mode="verify"
@@ -131,14 +128,33 @@ const Dialog: React.FC<DialogProps> = ({
                   textStyle={{ fontSize: 13 }}
                   onPress={() => {
                     onVisible(false);
-                    onSave && onSave();
+                    callBack && callBack();
                   }}
                 >
-                  {action === 'alert'
-                    ? 'Yes, I am'
-                    : action === 'confirm'
-                    ? 'Save'
-                    : saveText && saveText}
+                  {confirmText ? confirmText : 'Save'}
+                </Button>
+              </View>
+            )}
+
+            {action === 'single' && (
+              <View
+                style={{
+                  flexDirection: 'row',
+                  justifyContent: 'flex-end',
+                  padding: 10,
+                }}
+              >
+                <Button
+                  width={'50%'}
+                  type={'text'}
+                  color={theme.colors.primary}
+                  textStyle={{ color: theme.colors.textPrimary, fontSize: 13 }}
+                  onPress={() => {
+                    onVisible(false);
+                    callBack && callBack();
+                  }}
+                >
+                  {cancelText ? cancelText : 'Cancel'}
                 </Button>
               </View>
             )}

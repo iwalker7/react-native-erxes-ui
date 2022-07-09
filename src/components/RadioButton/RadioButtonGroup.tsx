@@ -3,13 +3,13 @@ import { StyleProp, View, ViewStyle } from 'react-native';
 
 export type RadioButtonGroupProps = {
   onValueChange: (value: string) => void;
-  value: string;
+  value: any;
   children: React.ReactNode;
   style?: StyleProp<ViewStyle>;
 };
 
 export type RadioButtonContextType = {
-  value: string;
+  value: any;
   onValueChange: (item: string) => void;
 };
 
