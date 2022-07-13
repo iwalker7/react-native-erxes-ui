@@ -51,6 +51,17 @@ const DarkTheme: Theme = {
     link: '#42a5f5',
     notification: redA400,
     disabled: color(white).alpha(0.38).rgb().string(),
+    elevation: {
+      level0: 'transparent',
+      // Note: Color values with transparency cause RN to transfer shadows to children nodes
+      // instead of View component in Surface. Providing solid background fixes the issue.
+      // Opaque color values generated with `palette.primary80` used as background
+      level1: 'rgb(37, 35, 42)', // palette.primary80, alpha 0.05
+      level2: 'rgb(44, 40, 49)', // palette.primary80, alpha 0.08
+      level3: 'rgb(49, 44, 56)', // palette.primary80, alpha 0.11
+      level4: 'rgb(51, 46, 58)', // palette.primary80, alpha 0.12
+      level5: 'rgb(52, 49, 63)', // palette.primary80, alpha 0.14
+    },
   },
 
   fonts: configureFonts(),

@@ -1,6 +1,6 @@
 /* eslint-disable react-native/no-inline-styles */
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
+import { Animated, Image, ImageProps, StyleSheet, View } from 'react-native';
 import type { StyleProp, ViewStyle } from 'react-native';
 import TextView from '../Typography';
 import Touchable from '../Touchable';
@@ -19,8 +19,12 @@ export type CardProps = {
   overflowAction?: () => void;
   mediaStyle?: StyleProp<ViewStyle>;
   thumbnailStyle?: StyleProp<ViewStyle>;
-  containerStyle?: StyleProp<ViewStyle>;
+  style?: StyleProp<ViewStyle>;
   theme: ReactNativeErxes.Theme;
+  elevation?: 0 | 1 | 2 | 3 | 4 | 5 | Animated.Value | any;
+  onPress?: () => void;
+  onLongPress?: () => void;
+  imgSrc?: ImageProps | Readonly<ImageProps> | any;
 };
 
 const Card: React.FC<CardProps> = ({
@@ -34,10 +38,14 @@ const Card: React.FC<CardProps> = ({
   overflowIcon,
   overflowAction,
   children,
-  containerStyle,
+  style,
   mediaStyle,
   thumbnailStyle,
   theme,
+  elevation = 3,
+  onPress,
+  onLongPress,
+  imgSrc,
 }) => {
   return (
     <Surface
@@ -46,60 +54,94 @@ const Card: React.FC<CardProps> = ({
           ? [
               styles.elevated,
               {
+                elevation,
                 shadowColor: theme.colors.backdrop,
-                borderRadius: theme.roundness,
               },
             ]
           : [
               styles.outlined,
               {
                 borderColor: theme.colors.borderPrimary,
-                borderRadius: theme.roundness,
               },
             ],
         {
+          borderRadius: theme.roundness,
           backgroundColor: theme.colors.surface,
         },
-        containerStyle,
+        style,
       ]}
     >
-      <View style={styles.header}>
-        {thumbnail && (
-          <View style={[styles.thumbnail, thumbnailStyle]}>{thumbnail}</View>
-        )}
-        {overflowAction && (
-          <View style={styles.overflow}>
-            <Touchable onPress={overflowAction}>{overflowIcon}</Touchable>
+      <Touchable
+        disabled={!(onPress || onLongPress)}
+        onLongPress={onLongPress}
+        onPress={onPress}
+      >
+        {(title || secondaryText) && (
+          <View style={styles.header}>
+            {thumbnail && (
+              <View style={[styles.thumbnail, thumbnailStyle]}>
+                {thumbnail}
+              </View>
+            )}
+            {overflowAction && (
+              <View style={styles.overflow}>
+                <Touchable onPress={overflowAction}>{overflowIcon}</Touchable>
+              </View>
+            )}
+
+            <View style={[styles.column]}>
+              <TextView
+                large
+                bold
+                color={theme.colors.textPrimary}
+                style={styles.mb}
+              >
+                {title}
+              </TextView>
+              <TextView
+                style={{ flexWrap: 'wrap' }}
+                color={theme.colors.textSecondary}
+              >
+                {secondaryText}
+              </TextView>
+            </View>
           </View>
         )}
-        <View style={[styles.column, { width: thumbnail ? '80%' : '100%' }]}>
-          <TextView
-            large
-            bold
-            color={theme.colors.textPrimary}
-            style={styles.mb}
+        {(media || imgSrc) && (
+          <View
+            style={[
+              {
+                margin: 0,
+                maxHeight: 150,
+                borderTopStartRadius:
+                  !title || !supportingText ? theme.roundness : 0,
+                borderTopEndRadius:
+                  !title || !supportingText ? theme.roundness : 0,
+              },
+              mediaStyle,
+            ]}
           >
-            {title}
-          </TextView>
+            {media ? (
+              media
+            ) : imgSrc ? (
+              <Image
+                source={imgSrc}
+                style={{ resizeMode: 'cover', height: 100, width: '100%' }}
+              />
+            ) : null}
+          </View>
+        )}
+        {supportingText && (
           <TextView
-            style={{ flexWrap: 'wrap' }}
             color={theme.colors.textSecondary}
+            style={(styles.mb, styles.mt, styles.p)}
           >
-            {secondaryText}
+            {supportingText}
           </TextView>
-        </View>
-      </View>
-      {media && <View style={[styles.med, mediaStyle]}>{media}</View>}
-      {supportingText && (
-        <TextView
-          color={theme.colors.textPrimary}
-          style={(styles.mb, styles.mt, styles.p)}
-        >
-          {supportingText}
-        </TextView>
-      )}
-      {children}
-      {actions}
+        )}
+        {children}
+        {actions}
+      </Touchable>
     </Surface>
   );
 };
@@ -123,23 +165,19 @@ const styles = StyleSheet.create({
   },
   elevated: {
     paddingBottom: 5,
-    width: '100%',
     shadowOffset: {
       width: 0,
       height: 2,
     },
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
-    elevation: 5,
   },
   outlined: {
-    width: '100%',
     paddingBottom: 5,
     borderWidth: 1,
   },
   mb: { marginBottom: 1 },
   mt: { marginTop: 10 },
-  med: { margin: 0, maxHeight: 150 },
   p: {
     padding: 10,
   },

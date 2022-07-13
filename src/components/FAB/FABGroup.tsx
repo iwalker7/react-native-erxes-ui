@@ -10,26 +10,14 @@ import {
   ViewStyle,
 } from 'react-native';
 import FAB from './FAB';
-import TextView from '../Typography';
+import Card from '../Card/index';
 import { withTheme } from '../../core/theming';
 import type { IconSource } from '../Icon';
 import { getFABGroupColors } from './utils';
-import Touchable from '../Touchable';
+import TextView from '../Typography/index';
+import { rgba } from '../../utils/colorUtils';
 
-type FABGroupProps = {
-  /**
-   * Action items to display in the form of a speed dial.
-   * An action item should contain the following properties:
-   * - `icon`: icon to display (required)
-   * - `label`: optional label text
-   * - `accessibilityLabel`: accessibility label for the action, uses label by default if specified
-   * - `color`: custom icon color of the action item
-   * - `labelTextColor`: custom label text color of the action item
-   * - `style`: pass additional styles for the fab item, for example, `backgroundColor`
-   * - `labelStyle`: pass additional styles for the fab item label, for example, `backgroundColor`
-   * - `size`: size of action item. Defaults to `small`. @supported Available in v5.x
-   * - `onPress`: callback that is called when `FAB` is pressed (required)
-   */
+type Props = {
   actions: Array<{
     icon: IconSource;
     label?: string;
@@ -42,120 +30,28 @@ type FABGroupProps = {
     size?: 'small' | 'medium';
     testID?: string;
   }>;
-  /**
-   * Icon to display for the `FAB`.
-   * You can toggle it based on whether the speed dial is open to display a different icon.
-   */
+
   icon: IconSource;
-  /**
-   * Accessibility label for the FAB. This is read by the screen reader when the user taps the FAB.
-   */
+
   accessibilityLabel?: string;
-  /**
-   * Custom color for the `FAB`.
-   */
+
   color?: string;
-  /**
-   * Function to execute on pressing the `FAB`.
-   */
+
   onPress?: () => void;
-  /**
-   * Whether the speed dial is open.
-   */
+
   open: boolean;
-  /**
-   * Callback which is called on opening and closing the speed dial.
-   * The open state needs to be updated when it's called, otherwise the change is dropped.
-   */
+
   onStateChange: (state: { open: boolean }) => void;
-  /**
-   * Whether `FAB` is currently visible.
-   */
+
   visible: boolean;
-  /**
-   * Style for the group. You can use it to pass additional styles if you need.
-   * For example, you can set an additional padding if you have a tab bar at the bottom.
-   */
+
   style?: StyleProp<ViewStyle>;
-  /**
-   * Style for the FAB. It allows to pass the FAB button styles, such as backgroundColor.
-   */
+
   fabStyle?: StyleProp<ViewStyle>;
-  /**
-   * @supported Available in v5.x with theme version 3
-   *
-   * Color mappings variant for combinations of container and icon colors.
-   */
-  variant?: 'primary' | 'secondary' | 'tertiary' | 'surface';
-  /**
-   * @optional
-   */
+
   theme: ReactNativeErxes.Theme;
-  /**
-   * Pass down testID from Group props to FAB.
-   */
-  testID?: string;
 };
 
-/**
- * A component to display a stack of FABs with related actions in a speed dial.
- * To render the group above other components, you'll need to wrap it with the [`Portal`](portal.html) component.
- *
- * <div class="screenshots">
- *   <img class="small" src="screenshots/fab-group.gif" />
- * </div>
- *
- * ## Usage
- * ```js
- * import * as React from 'react';
- * import { FAB, Portal, Provider } from 'react-native-paper';
- *
- * const MyComponent = () => {
- *   const [state, setState] = React.useState({ open: false });
- *
- *   const onStateChange = ({ open }) => setState({ open });
- *
- *   const { open } = state;
- *
- *   return (
- *     <Provider>
- *       <Portal>
- *         <FAB.Group
- *           open={open}
- *           icon={open ? 'calendar-today' : 'plus'}
- *           actions={[
- *             { icon: 'plus', onPress: () => console.log('Pressed add') },
- *             {
- *               icon: 'star',
- *               label: 'Star',
- *               onPress: () => console.log('Pressed star'),
- *             },
- *             {
- *               icon: 'email',
- *               label: 'Email',
- *               onPress: () => console.log('Pressed email'),
- *             },
- *             {
- *               icon: 'bell',
- *               label: 'Remind',
- *               onPress: () => console.log('Pressed notifications'),
- *             },
- *           ]}
- *           onStateChange={onStateChange}
- *           onPress={() => {
- *             if (open) {
- *               // do something if the speed dial is open
- *             }
- *           }}
- *         />
- *       </Portal>
- *     </Provider>
- *   );
- * };
- *
- * export default MyComponent;
- * ```
- */
 const FABGroup = ({
   actions,
   icon,
@@ -166,11 +62,9 @@ const FABGroup = ({
   style,
   fabStyle,
   visible,
-  testID,
   onStateChange,
   color: colorProp,
-  variant = 'primary',
-}: FABGroupProps) => {
+}: Props) => {
   const { current: backdrop } = React.useRef<Animated.Value>(
     new Animated.Value(0)
   );
@@ -202,7 +96,7 @@ const FABGroup = ({
           useNativeDriver: true,
         }),
         Animated.stagger(
-          50 * scale,
+          15 * scale,
           animations.current
             .map((animation) =>
               Animated.timing(animation, {
@@ -311,19 +205,8 @@ const FABGroup = ({
               pointerEvents={open ? 'box-none' : 'none'}
             >
               {it.label && (
-                <Touchable
-                  onPress={() => {
-                    it.onPress();
-                    close();
-                  }}
-                  accessibilityLabel={
-                    it.accessibilityLabel !== 'undefined'
-                      ? it.accessibilityLabel
-                      : it.label
-                  }
-                  accessibilityRole="button"
-                >
-                  <View
+                <View>
+                  <Card
                     style={
                       [
                         styles.label,
@@ -331,28 +214,34 @@ const FABGroup = ({
                           transform: [{ translateY: labelTranslations[i] }],
                           opacity: opacities[i],
                         },
+                        styles.v3LabelStyle,
                         it.labelStyle,
                       ] as StyleProp<ViewStyle>
                     }
+                    onPress={() => {
+                      it.onPress();
+                      close();
+                    }}
                   >
                     <TextView
                       style={{ color: it.labelTextColor ?? labelColor }}
                     >
                       {it.label}
                     </TextView>
-                  </View>
-                </Touchable>
+                  </Card>
+                </View>
               )}
               <FAB
                 size={typeof it.size !== 'undefined' ? it.size : 'small'}
                 icon={it.icon}
-                color={it.color}
+                color={it.color || rgba(theme.colors.primary, 0.7)}
                 style={
                   [
                     {
                       transform: [{ scale: scales[i] }],
                       opacity: opacities[i],
                       backgroundColor: stackedFABBackgroundColor,
+                      elevation: 2,
                     },
                     { transform: [{ translateY: translations[i] }] },
                     it.style,
@@ -386,8 +275,6 @@ const FABGroup = ({
           accessibilityState={{ expanded: open }}
           style={[styles.fab, fabStyle]}
           visible={visible}
-          testID={testID}
-          variant={variant}
         />
       </SafeAreaView>
     </View>

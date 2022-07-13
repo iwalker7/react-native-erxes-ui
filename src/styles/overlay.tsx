@@ -2,7 +2,7 @@ import color from 'color';
 import { Animated } from 'react-native';
 import DarkTheme from './DarkTheme';
 
-const isAnimatedValue = (
+export const isAnimatedValue = (
   it: number | Animated.AnimatedInterpolation
 ): it is Animated.Value => it instanceof Animated.Value;
 

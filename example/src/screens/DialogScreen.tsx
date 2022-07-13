@@ -98,7 +98,7 @@ const DialogScreen: React.FC<any> = () => {
           theme={theme}
         />
         <Dialog
-          action="single"
+          action="custom"
           title="Title"
           supportingText="Supporting text"
           isVisible={simple}
@@ -145,6 +145,9 @@ const DialogScreen: React.FC<any> = () => {
         showsVerticalScrollIndicator={false}
         style={{ width: '100%' }}
       >
+        <Button style={{ marginTop: 10 }} onPress={() => {}}>
+          Close
+        </Button>
         <View style={styles.segment}>
           <View style={styles.props}>
             <TextView bold>

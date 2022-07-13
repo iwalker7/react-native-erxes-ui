@@ -45,7 +45,7 @@ const IconButton = ({
   animated = false,
   theme,
   style,
-  icon,
+  icon = '',
   depth = 1.5,
   mode = 'TRANSPARENT',
   backgroundColor,
@@ -82,7 +82,7 @@ const IconButton = ({
       {...rest}
     >
       <View style={mode === 'FILL' && { flex: 1, backgroundColor }}>
-        <IconComponent color={iconColor} source={icon || ''} size={size} />
+        <IconComponent color={iconColor} source={icon} size={size} />
       </View>
     </TouchableRipple>
   );

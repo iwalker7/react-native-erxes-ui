@@ -23,7 +23,22 @@ export type Fonts = {
   thin: Font;
 };
 
-type Mode = 'adaptive' | 'exact';
+export type Mode = 'adaptive' | 'exact';
+
+export type Elevations = 0 | 1 | 2 | 3 | 4 | 5;
+
+export enum ElevationLevels {
+  'level0',
+  'level1',
+  'level2',
+  'level3',
+  'level4',
+  'level5',
+}
+
+export type ElevationColors = {
+  [key in keyof typeof ElevationLevels]: string;
+};
 
 export type Theme = {
   dark: boolean;
@@ -69,6 +84,7 @@ export type Theme = {
     coreGray: string;
     coreLightGray: string;
     coreDarkGray: string;
+    elevation: ElevationColors;
   };
   fonts: Fonts;
   animation: {
@@ -147,6 +163,7 @@ declare global {
       coreGray: string;
       coreLightGray: string;
       coreDarkGray: string;
+      elevation: ElevationColors;
     }
 
     interface ThemeAnimation {

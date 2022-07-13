@@ -7,26 +7,27 @@ import {
   StyleProp,
   AccessibilityState,
   ActivityIndicator,
+  TextStyle,
 } from 'react-native';
 import Surface from '../Surface';
 import Icon, { IconSource } from '../Icon';
+import TouchableRipple from '../Button/TouchableRipple';
 import { withTheme } from '../../core/theming';
 import { getExtendedFabStyle, getFABColors, getFabStyle } from './utils';
 import type { $RemoveChildren, Theme } from '../../types';
-import CrossFadedIcon from '../Button/CrossFadedIcon';
-import TouchableRipple from '../Button/TouchableRipple';
-import TextView from '../Typography/index';
+import TextView from '../Typography';
 
 type FABSize = 'small' | 'medium' | 'large';
+
 type FABMode = 'flat' | 'elevated';
 
-export type FABProps = $RemoveChildren<typeof Surface> & {
+type Props = $RemoveChildren<typeof Surface> & {
   icon: IconSource;
   label?: string;
+  labelStyle?: StyleProp<TextStyle>;
   uppercase?: boolean;
   accessibilityLabel?: string;
   accessibilityState?: AccessibilityState;
-  animated?: boolean;
   small?: boolean;
   color?: string;
   disabled?: boolean;
@@ -43,18 +44,18 @@ export type FABProps = $RemoveChildren<typeof Surface> & {
   testID?: string;
 };
 
-const FAB: React.FC<FABProps> = ({
+const FAB = ({
   icon,
   label,
   accessibilityLabel = label,
   accessibilityState,
-  animated = true,
   color: customColor,
   disabled,
   onPress,
   onLongPress,
   theme,
   style,
+  labelStyle,
   visible = true,
   uppercase = false,
   loading,
@@ -64,7 +65,7 @@ const FAB: React.FC<FABProps> = ({
   mode = 'elevated',
   variant = 'primary',
   ...rest
-}) => {
+}: Props) => {
   const { current: visibility } = React.useRef<Animated.Value>(
     new Animated.Value(visible ? 1 : 0)
   );
@@ -87,7 +88,7 @@ const FAB: React.FC<FABProps> = ({
     }
   }, [visible, scale, visibility]);
 
-  const IconComponent = animated ? CrossFadedIcon : Icon;
+  const IconComponent = Icon;
 
   const { backgroundColor, foregroundColor, rippleColor } = getFABColors({
     theme,
@@ -115,7 +116,6 @@ const FAB: React.FC<FABProps> = ({
     disabled && styles.disabled,
     shapeStyle,
   ];
-
   const md3Elevation = isFlatMode || disabled ? 0 : 3;
 
   return (
@@ -155,13 +155,11 @@ const FAB: React.FC<FABProps> = ({
           style={[styles.content, label ? extendedStyle : fabStyle]}
           pointerEvents="none"
         >
-          {icon && loading !== true ? (
-            <IconComponent
-              source={icon}
-              size={customSize ? customSize / 2 : iconSize}
-              color={foregroundColor}
-            />
-          ) : null}
+          <IconComponent
+            source={icon}
+            size={customSize ? customSize / 2 : iconSize}
+            color={foregroundColor}
+          />
           {loading ? (
             <ActivityIndicator
               size={customSize ? customSize / 2 : loadingIndicatorSize}
@@ -176,6 +174,7 @@ const FAB: React.FC<FABProps> = ({
                 styles.label,
                 uppercase && styles.uppercaseLabel,
                 textStyle,
+                labelStyle,
               ]}
             >
               {label}

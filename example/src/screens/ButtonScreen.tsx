@@ -60,6 +60,17 @@ const ButtonScreen: React.FC<any> = () => {
             </Button>
           </View>
 
+          <Button
+            width={90}
+            style={{ margin: 3, height: 100, width: 300 }}
+            type="outlined"
+            textStyle={{ textTransform: 'uppercase' }}
+            onPress={() => {}}
+            onLongPress={() => {}}
+          >
+            Text
+          </Button>
+
           <TextView>With icon</TextView>
           <View style={{ flexDirection: 'row' }}>
             <Button
@@ -71,11 +82,10 @@ const ButtonScreen: React.FC<any> = () => {
               width={90}
               style={{ margin: 3 }}
             >
-              Default
+              Contained
             </Button>
             <Button
               width={90}
-              type="text"
               rightIconName="cloud-check"
               rightIconColor={Colors.amber900}
               rightIconSize={15}

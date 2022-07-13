@@ -12,7 +12,7 @@ const CardScreen: React.FC<any> = () => {
     return (
       <Image
         source={images.cover}
-        style={{ resizeMode: 'cover', height: 120, width: '100%' }}
+        style={{ resizeMode: 'cover', height: 100, width: '100%' }}
       />
     );
   };
@@ -50,11 +50,7 @@ const CardScreen: React.FC<any> = () => {
               marginBottom: 3,
             }}
           >
-            <Button
-              mode="disabled"
-              onPress={() => setThVisible(false)}
-              onLongPress={() => {}}
-            >
+            <Button onPress={() => setThVisible(false)} onLongPress={() => {}}>
               Hide thumbnail
             </Button>
             <Button onPress={() => setThVisible(true)} onLongPress={() => {}}>

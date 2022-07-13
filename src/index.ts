@@ -7,7 +7,7 @@ export { default as Chip, ChipProps } from './components/Chip';
 export { default as Checkbox } from './components/Checkbox';
 export { default as Dialog, DialogProps } from './components/Dialog';
 export { default as Divider, DividerProps } from './components/Divider';
-// export { default as FAB } from './components/FAB';
+export { default as FAB } from './components/FAB';
 export { default as Picker, PickerProps } from './components/Picker';
 export { default as Empty, EmptyProps } from './components/Empty';
 export { default as Indicator, IndicatorProps } from './components/Indicator';

@@ -9,7 +9,6 @@ import {
   StyleProp,
   ViewStyle,
 } from 'react-native';
-import ScreenUtils from '../../utils/screenUtils';
 import Button from '../Button';
 import Divider from '../Divider';
 import TextView from '../Typography';
@@ -17,6 +16,11 @@ import TextView from '../Typography';
 export type DialogProps = {
   onClose?: () => void;
   callBack?: () => void;
+  buttonType?: 'contained' | 'outlined' | 'text';
+  cancelButtonStyle?: StyleProp<ViewStyle>;
+  confirmButtonStyle?: StyleProp<ViewStyle>;
+  cancelButtonTextStyle?: StyleProp<ViewStyle>;
+  confirmButtonTextStyle?: StyleProp<ViewStyle>;
   title?: string;
   supportingText?: string;
   cancelText?: string;
@@ -44,6 +48,9 @@ const Dialog: React.FC<DialogProps> = ({
   onVisible,
   children,
   theme,
+  cancelButtonStyle,
+  confirmButtonStyle,
+  buttonType = 'text',
 }) => {
   return (
     <Modal
@@ -111,25 +118,26 @@ const Dialog: React.FC<DialogProps> = ({
             {action === 'confirm' && (
               <View style={styles.buttonsContainer}>
                 <Button
+                  type={buttonType}
                   width={80}
-                  color={theme.colors.onSurfaceLowest}
-                  textStyle={{ color: theme.colors.textPrimary, fontSize: 13 }}
+                  textStyle={{ color: theme.colors.coreGray, fontSize: 13 }}
                   onPress={() => {
                     onVisible(false);
                     onClose && onClose();
                   }}
+                  style={cancelButtonStyle}
                 >
                   {cancelText ? cancelText : 'Cancel'}
                 </Button>
                 <Button
-                  mode="verify"
+                  type={buttonType}
                   width={80}
-                  style={{ marginStart: 10 }}
                   textStyle={{ fontSize: 13 }}
                   onPress={() => {
                     onVisible(false);
                     callBack && callBack();
                   }}
+                  style={confirmButtonStyle}
                 >
                   {confirmText ? confirmText : 'Save'}
                 </Button>
@@ -146,13 +154,13 @@ const Dialog: React.FC<DialogProps> = ({
               >
                 <Button
                   width={'50%'}
-                  type={'text'}
-                  color={theme.colors.primary}
-                  textStyle={{ color: theme.colors.textPrimary, fontSize: 13 }}
+                  type={buttonType ? buttonType : 'text'}
+                  textStyle={{ fontSize: 13 }}
                   onPress={() => {
                     onVisible(false);
                     callBack && callBack();
                   }}
+                  style={confirmButtonStyle}
                 >
                   {cancelText ? cancelText : 'Cancel'}
                 </Button>

@@ -145,7 +145,7 @@ const TextInput: React.ForwardRefRenderFunction<unknown, TextInputProps> = ({
           {
             height,
             backgroundColor: backgroundColor ? backgroundColor : 'transparent',
-            borderRadius: theme.roundness,
+            borderRadius: type === 'text' ? 0 : theme.roundness,
             borderColor: required
               ? red400
               : type === 'text'
@@ -153,9 +153,13 @@ const TextInput: React.ForwardRefRenderFunction<unknown, TextInputProps> = ({
               : focused
               ? rgba(colors.primary, 0.7)
               : colors.onSurfaceLow,
-            borderWidth: 1,
             borderBottomColor:
-              type === 'text' ? colors.surfaceLight : 'transparent',
+              type === 'text'
+                ? colors.surfaceLight
+                : required
+                ? red400
+                : colors.onSurfaceLow,
+            borderWidth: 1,
             flexDirection: 'row',
             alignItems: label ? 'flex-end' : 'center',
             paddingBottom: label ? 5 : 0,

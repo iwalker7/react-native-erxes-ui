@@ -7,7 +7,7 @@ import {
   StyleSheet,
 } from 'react-native';
 import type { Theme } from '../../types';
-import { white } from '../../styles/colors';
+import { white, black } from '../../styles/colors';
 import { getContrastingColor } from '../../utils/colorUtils';
 
 type GetCombinedStylesProps = {
@@ -172,10 +172,6 @@ const getBackgroundColor = ({
     return backgroundColor;
   }
 
-  if (disabled) {
-    return theme.colors.disabled;
-  }
-
   if (isVariant('primary')) {
     return theme.colors.primary;
   }
@@ -189,18 +185,23 @@ const getBackgroundColor = ({
   }
 
   if (isVariant('surface')) {
-    return theme.colors.backdrop;
+    return theme.colors.elevation.level3;
+  }
+
+  if (disabled) {
+    if (theme.dark) {
+      return color(white).alpha(0.12).rgb().string();
+    }
+    return color(black).alpha(0.12).rgb().string();
   }
 
   //@ts-ignore
-  return theme.colors?.accent;
+  return theme.colors.accent;
 };
 
 const getForegroundColor = ({
   theme,
-  isVariant,
   disabled,
-  backgroundColor,
   customColor,
 }: BaseProps & { backgroundColor: string; customColor?: string }) => {
   if (typeof customColor !== 'undefined' && !disabled) {
@@ -211,31 +212,14 @@ const getForegroundColor = ({
     return theme.colors.disabled;
   }
 
-  if (isVariant('primary')) {
-    return theme.colors.primary;
+  if (disabled) {
+    if (theme.dark) {
+      return color(white).alpha(0.32).rgb().string();
+    }
+    return color(black).alpha(0.32).rgb().string();
   }
 
-  if (isVariant('secondary')) {
-    return theme.colors.secondary;
-  }
-
-  if (isVariant('tertiary')) {
-    return theme.colors.coreTeal;
-  }
-
-  if (isVariant('surface')) {
-    return theme.colors.surface;
-  }
-
-  if (backgroundColor) {
-    return getContrastingColor(
-      backgroundColor || white,
-      white,
-      'rgba(0, 0, 0, .54)'
-    );
-  }
-
-  return getContrastingColor(white, white, 'rgba(0, 0, 0, .54)');
+  return customColor ? customColor : color(white).alpha(0.9).rgb().string();
 };
 
 export const getFABColors = ({
@@ -269,18 +253,14 @@ export const getFABColors = ({
   });
 
   return {
-    backgroundColor,
+    backgroundColor: backgroundColor,
     foregroundColor,
-    rippleColor: color(foregroundColor).alpha(0.12).rgb().string(),
+    rippleColor: color(backgroundColor).alpha(0.5).rgb().string(),
   };
 };
 
 const getLabelColor = ({ theme }: { theme: Theme }) => {
-  if (theme.dark) {
-    return theme.colors.textPrimary;
-  }
-
-  return color(theme.colors.textPrimary).fade(0.54).rgb().string();
+  return theme.colors.textPrimary;
 };
 
 const getBackdropColor = ({ theme }: { theme: Theme }) => {
@@ -288,7 +268,7 @@ const getBackdropColor = ({ theme }: { theme: Theme }) => {
 };
 
 const getStackedFABBackgroundColor = ({ theme }: { theme: Theme }) => {
-  return theme.colors.surface;
+  return theme.colors.surfaceHighlight;
 };
 
 export const getFABGroupColors = ({ theme }: { theme: Theme }) => {
@@ -304,10 +284,17 @@ const standardSize = {
   width: 56,
   borderRadius: 28,
 };
-const smallSize = {
+const v3SmallSize = {
   height: 40,
   width: 40,
-  borderRadius: 28,
+};
+const v3MediumSize = {
+  height: 56,
+  width: 56,
+};
+const v3LargeSize = {
+  height: 96,
+  width: 96,
 };
 
 const getCustomFabSize = (customSize: number, roundness: number) => ({
@@ -329,14 +316,22 @@ export const getFabStyle = ({
 
   if (customSize) return getCustomFabSize(customSize, roundness);
 
-  if (size === 'small') {
-    return smallSize;
+  switch (size) {
+    case 'small':
+      return { ...v3SmallSize, borderRadius: 3 * roundness };
+    case 'medium':
+      return { ...v3MediumSize, borderRadius: 4 * roundness };
+    case 'large':
+      return { ...v3LargeSize, borderRadius: 7 * roundness };
+    default:
+      standardSize;
   }
   return standardSize;
 };
 
 const extended = {
-  height: 48,
+  height: 56,
+  borderRadius: 16,
   paddingHorizontal: 16,
 };
 

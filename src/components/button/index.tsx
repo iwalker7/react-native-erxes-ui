@@ -13,6 +13,7 @@ import Icon from '../Icon';
 import { withTheme } from '../../core/theming';
 import { transparent, white } from '../../styles/colors';
 import TouchableRipple from './TouchableRipple';
+import { Colors } from 'react-native-erxes-ui';
 
 const defaultsize = 16;
 
@@ -22,8 +23,8 @@ export type ButtonProps = ViewProps & {
   block?: boolean;
   children?: string;
   color?: string;
+  uppercase?: boolean;
   textColor?: string;
-  borderColor?: string;
   style?: StyleProp<ViewStyle>;
   textStyle?: StyleProp<TextStyle>;
   onPress: () => void;
@@ -41,6 +42,7 @@ export type ButtonProps = ViewProps & {
   width?: any;
   height?: number;
   theme: ReactNativeErxes.Theme;
+  rippleColor?: 'string';
 };
 
 const Button: React.FC<ButtonProps> = ({
@@ -52,8 +54,8 @@ const Button: React.FC<ButtonProps> = ({
   style,
   textStyle,
   color,
+  uppercase = false,
   textColor,
-  borderColor,
   children,
   width,
   height = 33,
@@ -68,8 +70,17 @@ const Button: React.FC<ButtonProps> = ({
   isLoading,
   loaderPosition,
   theme,
+  rippleColor,
 }) => {
   const { colors, roundness } = theme;
+
+  const mainColor = color
+    ? color
+    : mode === 'active'
+    ? colors.primary
+    : mode === 'verify'
+    ? colors.success
+    : transparent;
 
   const defaultStyle = {
     minHeight: 20,
@@ -77,25 +88,15 @@ const Button: React.FC<ButtonProps> = ({
     width: width ? width : block ? '100%' : undefined,
     height: height,
     borderWidth: 1,
-    borderColor: borderColor
-      ? borderColor
-      : type === 'outlined' && mode === 'active'
-      ? colors.primary
-      : mode === 'disabled'
-      ? colors.disabled
-      : mode === 'verify'
-      ? colors.success
-      : transparent,
+    borderColor: type === 'text' ? transparent : mainColor,
     borderRadius: roundness,
     backgroundColor: color
       ? color
-      : type === 'contained' && mode === 'active'
-      ? colors.primary
       : mode === 'disabled'
       ? colors.disabled
-      : mode === 'verify'
-      ? colors.success
-      : transparent,
+      : type === 'outlined' || type === 'text'
+      ? transparent
+      : mainColor,
     justifyContent: 'center',
     alignItems: 'center',
     alignContent: 'center',
@@ -103,29 +104,29 @@ const Button: React.FC<ButtonProps> = ({
     flexDirection: 'row',
   };
 
-  const tcolor = textColor
-    ? textColor
-    : (type === 'outlined' || type === 'text') && mode === 'active'
-    ? colors.primary
-    : mode === 'verify' && type === 'text'
-    ? colors.success
-    : type === 'contained' && mode === 'active'
-    ? white
-    : mode === 'disabled'
-    ? colors.coreGray
-    : colors.textSecondary;
-
-  const rippleColor = mode === 'verify' ? colors.success : colors.primary;
+  const tStyle = {
+    color: textColor
+      ? textColor
+      : (type === 'outlined' || type === 'text') && mode === 'active'
+      ? colors.primary
+      : type === 'contained' && mode === 'active'
+      ? white
+      : mode === 'disabled'
+      ? Colors.grey400
+      : colors.textSecondary,
+    fontSize: leftIcon || rightIcon ? 12 : 13,
+  };
 
   return (
     <TouchableRipple
       disabled={mode === 'disabled'}
       borderless={type === 'outlined'}
-      rippleColor={rippleColor}
+      rippleColor={rippleColor ? rippleColor : mainColor}
       onPress={onPress}
       onLongPress={onLongPress}
+      style={[defaultStyle as ViewStyle, style]}
     >
-      <View style={[defaultStyle as ViewStyle, style]}>
+      <View style={{ flexDirection: 'row', alignItems: 'center' }}>
         {leftIcon ? (
           leftIcon
         ) : leftIconName ? (
@@ -165,8 +166,8 @@ const Button: React.FC<ButtonProps> = ({
           <TextView
             bold
             small
-            style={[{ fontSize: leftIcon || rightIcon ? 12 : 13 }, textStyle]}
-            color={tcolor}
+            style={[tStyle, textStyle]}
+            uppercase={uppercase}
           >
             {children}
           </TextView>
