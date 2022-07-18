@@ -13,13 +13,13 @@ import Icon from '../Icon';
 import { withTheme } from '../../core/theming';
 import { transparent, white } from '../../styles/colors';
 import TouchableRipple from './TouchableRipple';
-import { Colors } from 'react-native-erxes-ui';
+import { rgba } from '../../utils/colorUtils';
 
 const defaultsize = 16;
 
 export type ButtonProps = ViewProps & {
   type?: 'contained' | 'outlined' | 'text';
-  mode?: 'active' | 'disabled' | 'verify';
+  mode?: 'active' | 'disabled';
   block?: boolean;
   children?: string;
   color?: string;
@@ -78,8 +78,6 @@ const Button: React.FC<ButtonProps> = ({
     ? color
     : mode === 'active'
     ? colors.primary
-    : mode === 'verify'
-    ? colors.success
     : transparent;
 
   const defaultStyle = {
@@ -109,19 +107,16 @@ const Button: React.FC<ButtonProps> = ({
       ? textColor
       : (type === 'outlined' || type === 'text') && mode === 'active'
       ? colors.primary
-      : type === 'contained' && mode === 'active'
-      ? white
       : mode === 'disabled'
-      ? Colors.grey400
-      : colors.textSecondary,
+      ? '#f0f0f0'
+      : white,
     fontSize: leftIcon || rightIcon ? 12 : 13,
   };
 
   return (
     <TouchableRipple
       disabled={mode === 'disabled'}
-      borderless={type === 'outlined'}
-      rippleColor={rippleColor ? rippleColor : mainColor}
+      rippleColor={rippleColor ? rippleColor : rgba(mainColor, 0.4)}
       onPress={onPress}
       onLongPress={onLongPress}
       style={[defaultStyle as ViewStyle, style]}
@@ -150,13 +145,7 @@ const Button: React.FC<ButtonProps> = ({
             <ActivityIndicator
               size="small"
               color={
-                type === 'contained'
-                  ? white
-                  : mode === 'verify'
-                  ? colors.success
-                  : color
-                  ? color
-                  : colors.primary
+                color ? color : type === 'contained' ? white : colors.primary
               }
               style={{
                 marginHorizontal: 10,

@@ -46,7 +46,7 @@ export default function MainScreen({ navigation }: any) {
             backgroundColor: theme.colors.surfaceHighlight,
           }}
         >
-          <TextView uppercase bold>
+          <TextView uppercase bold color={theme.colors.textPrimary}>
             {section.key}
           </TextView>
         </Surface>
@@ -77,7 +77,9 @@ export default function MainScreen({ navigation }: any) {
               onItemPress({ screenId });
             }}
           >
-            <TextView bold>{item.title}</TextView>
+            <TextView bold color={theme.colors.textPrimary}>
+              {item.title}
+            </TextView>
           </Touchable>
         </Surface>
       );
@@ -89,13 +91,13 @@ export default function MainScreen({ navigation }: any) {
     <SafeAreaView style={{ flex: 1, backgroundColor: theme.colors.surface }}>
       <Searchbar
         leftIconName={'magnify'}
-        rightIconName={"close"}
+        rightIconName={'close'}
         placeholder="Search component name"
         onChangeText={(text: string) => setSearchText(text)}
         value={searchText}
         style={{ margin: 10 }}
       />
-      <TextView center large style={{ margin: 20 }}>
+      <TextView center large style={{ margin: 20, color: '#000' }}>
         React native erxes ui
       </TextView>
       <SectionList

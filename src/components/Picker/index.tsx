@@ -3,15 +3,15 @@ import React, { useState } from 'react';
 import type { SetStateAction } from 'react';
 import type { RefObject } from 'react';
 import {
+  SafeAreaView,
   ScrollView,
   StyleProp,
   StyleSheet,
   View,
   ViewStyle,
 } from 'react-native';
-import { withTheme } from '../../core/theming';
+import { useTheme, withTheme } from '../../core/theming';
 import Surface from '../Surface';
-import Divider from '../Divider';
 import Modal from '../Modal';
 import Touchable from '../Touchable';
 import TextView from '../Typography';
@@ -42,7 +42,7 @@ export type PickerProps = {
 };
 const Picker: React.FC<PickerProps> = ({
   theme,
-  selectionColor = theme.colors.onSurfaceMedium,
+  selectionColor = theme.colors.surfaceHighlight,
   mode = 'SINGLE',
   value = [],
   data = [],
@@ -59,6 +59,7 @@ const Picker: React.FC<PickerProps> = ({
   itemStyle,
   modalStyle,
 }) => {
+  const { colors } = useTheme(theme);
   const [selections, setSelections] = useState<any[]>(value);
 
   const onSelect = (item: any) => {
@@ -99,12 +100,13 @@ const Picker: React.FC<PickerProps> = ({
         >
           <View
             style={{
-              height: 45,
+              height: 50,
               justifyContent: 'space-between',
               flexDirection: 'row',
               paddingHorizontal: 20,
               paddingVertical: 15,
-              backgroundColor: theme.colors.surfaceHighlight,
+              marginBottom: 5,
+              backgroundColor: colors.surfaceHighlight,
             }}
           >
             <Touchable
@@ -132,50 +134,48 @@ const Picker: React.FC<PickerProps> = ({
               </TextView>
             </Touchable>
           </View>
-          <Divider />
-
-          <ScrollView
-            style={[
-              {
-                maxHeight: 200,
-                width: '100%',
-                backgroundColor: theme.colors.surface,
-                padding: 10,
-              },
-              modalStyle,
-            ]}
-            showsVerticalScrollIndicator={false}
-          >
-            {data?.map((item, index) => {
-              return (
-                <Touchable
-                  key={index.toString()}
-                  onPress={() => {
-                    if (mode === 'SINGLE') {
-                      onVisible(false);
-                      onHide();
-                    }
-                    onSelect(item);
-                  }}
-                >
-                  <View
-                    style={[
-                      styles.item,
-                      {
-                        backgroundColor: selections.includes(item)
-                          ? selectionColor
-                          : undefined,
-                      },
-                      itemStyle,
-                    ]}
+          <SafeAreaView>
+            <ScrollView
+              style={[
+                {
+                  width: '100%',
+                },
+                modalStyle,
+              ]}
+              showsVerticalScrollIndicator={false}
+            >
+              {data?.map((item, index) => {
+                return (
+                  <Touchable
+                    key={index.toString()}
+                    onPress={() => {
+                      if (mode === 'SINGLE') {
+                        onVisible(false);
+                        onHide();
+                      }
+                      onSelect(item);
+                    }}
                   >
-                    <TextView color={theme.colors.textPrimary}>{item}</TextView>
-                    <Divider />
-                  </View>
-                </Touchable>
-              );
-            })}
-          </ScrollView>
+                    <View
+                      style={[
+                        styles.item,
+                        {
+                          backgroundColor: selections.includes(item)
+                            ? selectionColor
+                            : undefined,
+                        },
+                        itemStyle,
+                      ]}
+                    >
+                      <TextView color={theme.colors.textPrimary}>
+                        {item}
+                      </TextView>
+                    </View>
+                  </Touchable>
+                );
+              })}
+            </ScrollView>
+          </SafeAreaView>
         </Surface>
       </Modal>
       <Touchable onPress={() => onVisible(!isVisible)}>
@@ -185,6 +185,8 @@ const Picker: React.FC<PickerProps> = ({
             {
               backgroundColor: theme.colors.surfaceHighlight,
               borderRadius: theme.roundness,
+              borderColor: '#C5C6CC',
+              borderWidth: 1,
             },
             placeholderStyle,
           ]}
@@ -213,9 +215,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   item: {
-    padding: 15,
-    paddingHorizontal: 10,
+    padding: 16,
     width: '100%',
+    marginBottom: 1,
     alignItems: 'center',
     flexDirection: 'row',
   },

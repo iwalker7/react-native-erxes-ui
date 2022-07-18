@@ -1,21 +1,18 @@
 import React from 'react';
-import { View } from 'react-native';
 import { TextView, FAB } from 'react-native-erxes-ui';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 const FABScreen = () => {
-  const [state, setState] = React.useState({ open: false });
+  const [state, setState] = React.useState(false);
 
-  const onStateChange = ({ open }) => setState({ open });
-
-  const { open } = state;
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <TextView>Lorem</TextView>
 
       <FAB.Group
-        open={open}
-        icon={open ? 'eye' : 'eye'}
+        visible={true}
+        open={state}
+        icon={state ? 'eye' : 'eye'}
         actions={[
           {
             icon: 'star',
@@ -33,9 +30,9 @@ const FABScreen = () => {
             onPress: () => console.log('Pressed notifications'),
           },
         ]}
-        onStateChange={onStateChange}
+        onStateChange={() => setState(!state)}
         onPress={() => {
-          if (open) {
+          if (state) {
             // do something if the speed dial is open
           }
         }}

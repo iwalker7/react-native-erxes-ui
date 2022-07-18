@@ -49,7 +49,6 @@ const TextView: React.FC<TextViewProps> = ({
   xxxxlarge,
   bold,
   boldless,
-  secondary = false,
   italic,
   style,
   capitalize,
@@ -68,7 +67,7 @@ const TextView: React.FC<TextViewProps> = ({
     <Text
       style={[
         { fontSize: 14 },
-        { color: theming.colors.textPrimary },
+        { color: color ? color : theming.colors.textPrimary },
         flex && { flex: 1 },
         xxsmall && { fontSize: 8 },
         xsmall && { fontSize: 10 },
@@ -84,8 +83,6 @@ const TextView: React.FC<TextViewProps> = ({
         capitalize && { textTransform: 'capitalize' },
         uppercase && { textTransform: 'uppercase' },
         center && { textAlign: 'center' },
-        secondary && { color: theming.colors.textSecondary },
-        { color },
         { lineHeight },
         style,
       ]}

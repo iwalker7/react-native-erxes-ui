@@ -35,7 +35,7 @@ const Surface = ({
       });
     }
 
-    return colors.elevation?.[`level${elevation}`];
+    return colors.surface;
   })();
 
   const sharedStyle = [{ backgroundColor }, style];

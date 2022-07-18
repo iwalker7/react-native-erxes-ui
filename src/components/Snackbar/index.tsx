@@ -13,10 +13,8 @@ import Button from '../Button';
 import Surface from '../Surface';
 import TextView from '../Typography';
 import Touchable from '../Touchable';
-// import Icon from '../Icon';
 import { white, black } from '../../styles/colors';
 import { withTheme } from '../../core/theming';
-import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
 export enum DURATION {
   DURATION_SHORT = 1500,
@@ -54,8 +52,6 @@ export type SnackbarProps = {
   theme: ReactNativeErxes.Theme;
 };
 
-const defaultsize = 20;
-
 const Snackbar: React.FC<SnackbarProps> = ({
   visible,
   action,
@@ -64,9 +60,6 @@ const Snackbar: React.FC<SnackbarProps> = ({
   duration = DURATION.DURATION_MEDIUM,
   onDismiss,
   type = 'info',
-  leftIconName,
-  leftIconColor = white,
-  leftIconSize = defaultsize,
   leftIcon,
   closeIcon,
   theme,
@@ -75,7 +68,9 @@ const Snackbar: React.FC<SnackbarProps> = ({
 }) => {
   const { colors } = theme;
 
-  const { current: opacity } = useRef(new Animated.Value(0.0));
+  const { current: opacity } = React.useRef<Animated.Value>(
+    new Animated.Value(0.0)
+  );
   const [hidden, setHidden] = useState<boolean>(!visible);
   const hideTimeout = useRef<NodeJS.Timeout>();
   const mainColor = backgroungColor
@@ -138,107 +133,98 @@ const Snackbar: React.FC<SnackbarProps> = ({
   }
 
   return (
-    // <Touchable
-    //   onPress={() => {
-    //     if (!action) {
-    //       setHidden(true);
-    //     }
-    //   }}
-    // >
-    <SafeAreaView
-      style={[
-        {
-          position: 'absolute',
-          top: placement === 'top' ? 0 : undefined,
-          bottom: placement === 'bottom' ? 10 : undefined,
-          left: 3,
-          width: '100%',
-          zIndex: 5000,
-        },
-      ]}
+    <Touchable
+      onPress={() => {
+        if (!action) {
+          setHidden(true);
+        }
+      }}
     >
-      <Surface
-        accessibilityLiveRegion="polite"
+      <SafeAreaView
         style={[
-          styles.container,
-          { backgroundColor: mainColor, borderRadius: theme.roundness },
           {
-            opacity: opacity,
-            transform: [
-              {
-                scale: visible
-                  ? opacity.interpolate({
-                      inputRange: [0, 1],
-                      outputRange: [0.9, 1],
-                    })
-                  : 1,
-              },
-            ],
+            position: 'absolute',
+            top: placement === 'top' ? 0 : undefined,
+            bottom: placement === 'bottom' ? 10 : undefined,
+            left: 3,
+            width: '100%',
+            zIndex: 5000,
           },
-          rest?.wrapperStyle,
         ]}
       >
-        <View
-          style={{
-            width: action ? '72%' : '100%',
-            alignItems: 'center',
-            flexDirection: 'row',
-          }}
+        <Surface
+          accessibilityLiveRegion="polite"
+          style={
+            [
+              styles.container,
+              { backgroundColor: mainColor, borderRadius: theme.roundness },
+              {
+                opacity: opacity,
+                transform: [
+                  {
+                    scale: visible
+                      ? opacity.interpolate({
+                          inputRange: [0, 1],
+                          outputRange: [0.9, 1],
+                        })
+                      : 1,
+                  },
+                ],
+              },
+              rest?.wrapperStyle,
+            ] as StyleProp<ViewStyle>
+          }
         >
-          {leftIconName || leftIcon ? (
-            <View style={{ marginHorizontal: 5 }}>
-              {leftIcon ? (
-                leftIcon
-              ) : (
-                <FontAwesome
-                  name={leftIconName || ''}
-                  color={leftIconColor || white}
-                  size={leftIconSize || defaultsize}
-                />
-              )}
-            </View>
-          ) : null}
-
-          <TextView
-            bold
-            style={[
-              styles.content,
-              { marginRight: action ? 0 : 16, color: white },
-              rest?.textStyle,
-            ]}
+          <View
+            style={{
+              width: action ? '72%' : '100%',
+              alignItems: 'center',
+              flexDirection: 'row',
+            }}
           >
-            {message}
-          </TextView>
-          {closeIcon ||
-            (closeIcon && (
+            {leftIcon && (
+              <View style={{ marginHorizontal: 5 }}>{leftIcon}</View>
+            )}
+
+            <TextView
+              bold
+              style={[
+                styles.content,
+                { marginRight: action ? 0 : 16, color: white },
+                rest?.textStyle,
+              ]}
+            >
+              {message}
+            </TextView>
+            {closeIcon && (
               <View style={styles.overflow}>
                 <Touchable onPress={() => setHidden(true)}>
                   {closeIcon}
                 </Touchable>
               </View>
-            ))}
-        </View>
-        {action ? (
-          <View style={{ flexDirection: 'row-reverse' }}>
-            <Button
-              width={80}
-              onPress={() => {
-                action.onPress && action.onPress();
-                onDismiss();
-              }}
-              color={'rgba(255, 255, 255, 0.6)'}
-              textColor={color(mainColor).darken(0.6).rgb().string()}
-              style={{
-                borderRadius: theme.roundness,
-              }}
-            >
-              {action.label}
-            </Button>
+            )}
           </View>
-        ) : null}
-      </Surface>
-    </SafeAreaView>
-    // </Touchable>
+          {action ? (
+            <View style={{ flexDirection: 'row-reverse' }}>
+              <Button
+                width={80}
+                onPress={() => {
+                  action.onPress && action.onPress();
+                  onDismiss();
+                }}
+                color={'rgba(255, 255, 255, 0.6)'}
+                textColor={color(mainColor).darken(0.6).rgb().string()}
+                style={{
+                  borderRadius: theme.roundness,
+                }}
+              >
+                {action.label}
+              </Button>
+            </View>
+          ) : null}
+        </Surface>
+      </SafeAreaView>
+    </Touchable>
   );
 };
 

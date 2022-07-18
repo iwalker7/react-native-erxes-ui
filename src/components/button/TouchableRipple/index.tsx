@@ -33,7 +33,7 @@ export type TouchableRippleProps = React.ComponentProps<
 const TouchableRipple = ({
   style,
   background,
-  borderless = false,
+  borderless = true,
   disabled: disabledProp,
   rippleColor,
   underlayColor,

@@ -123,13 +123,13 @@ const ButtonScreen: React.FC<any> = () => {
                 borderRadius: 5,
               }}
             >
-              <TextView small>active | disabled | verify</TextView>
+              <TextView small>active | disabled </TextView>
             </View>
           </View>
           <View
             style={{
               flexDirection: 'row',
-              justifyContent: 'space-around',
+              justifyContent: 'space-between',
               flexWrap: 'wrap',
             }}
           >
@@ -176,28 +176,6 @@ const ButtonScreen: React.FC<any> = () => {
                 style={{ margin: 5 }}
               >
                 Disabled
-              </Button>
-            </View>
-            <View>
-              <Button
-                type="contained"
-                mode="verify"
-                onPress={() => {}}
-                onLongPress={() => {}}
-                width={90}
-                style={{ margin: 5 }}
-              >
-                Verify
-              </Button>
-              <Button
-                type="outlined"
-                mode="verify"
-                onPress={() => {}}
-                onLongPress={() => {}}
-                width={90}
-                style={{ margin: 5 }}
-              >
-                Verify
               </Button>
             </View>
           </View>

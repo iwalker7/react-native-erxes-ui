@@ -149,13 +149,13 @@ const Dialog: React.FC<DialogProps> = ({
                 style={{
                   flexDirection: 'row',
                   justifyContent: 'flex-end',
-                  padding: 10,
+                  paddingHorizontal: 20,
+                  paddingVertical: 10,
                 }}
               >
                 <Button
-                  width={'50%'}
+                  width={80}
                   type={buttonType ? buttonType : 'text'}
-                  textStyle={{ fontSize: 13 }}
                   onPress={() => {
                     onVisible(false);
                     callBack && callBack();

@@ -1,6 +1,6 @@
 /* eslint-disable react-native/no-inline-styles */
 import React from 'react';
-import { ScrollView, StyleSheet } from 'react-native';
+import { ScrollView, View } from 'react-native';
 import {
   TextView,
   Colors,
@@ -14,7 +14,7 @@ const TextInputScreen: React.FC<any> = () => {
   const theme = useTheme();
   const [searchText, setSearchText] = React.useState<string>('');
   return (
-    <Surface style={styles.container}>
+    <View style={[styles.container, { backgroundColor: theme.colors.surface }]}>
       <Surface style={styles.segment}>
         <TextView bold>{`Props + React native-ын TextInputProps`}</TextView>
       </Surface>
@@ -184,12 +184,8 @@ const TextInputScreen: React.FC<any> = () => {
           </Surface>
         </Surface>
       </ScrollView>
-    </Surface>
+    </View>
   );
 };
-const style = StyleSheet.create({
-  sectionItem: {
-    borderBottomWidth: 1,
-  },
-});
+
 export default TextInputScreen;

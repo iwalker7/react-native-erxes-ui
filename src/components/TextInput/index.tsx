@@ -15,7 +15,7 @@ import Icon from '../Icon';
 import type { ViewStyle } from 'react-native';
 import { withTheme } from '../../core/theming';
 import Touchable from '../Touchable';
-import { red400 } from '../../styles/colors';
+import { grey100, red400 } from '../../styles/colors';
 import { rgba } from '../../utils/colorUtils';
 
 export type TextInputProps = RNProps & {
@@ -31,6 +31,7 @@ export type TextInputProps = RNProps & {
     value: NativeSyntheticEvent<TextInputSubmitEditingEventData>
   ) => void;
   inputRef?: LegacyRef<RNTextInput>;
+  nextRef?: LegacyRef<RNTextInput>;
   containerStyle?: StyleProp<ViewStyle>;
   labelStyle?: StyleProp<TextStyle>;
   labelContainerStyle?: StyleProp<ViewStyle>;
@@ -75,12 +76,13 @@ const TextInput: React.ForwardRefRenderFunction<unknown, TextInputProps> = ({
   placeholder,
   placeholderTextColor = theme.colors.textSecondary,
   inputRef,
+  nextRef,
   required = false,
   password = false,
   disabled = false,
   maxLength = 30,
   label,
-  labelColor = theme.colors.primaryDark,
+  labelColor = theme.colors.textPrimary,
   labelIcon,
   labelIconName,
   labelIconColor = theme.colors.textSecondary,
@@ -135,6 +137,7 @@ const TextInput: React.ForwardRefRenderFunction<unknown, TextInputProps> = ({
     if (required && (value === '' || !value)) {
       setMainColor('red');
     } else {
+      nextRef && nextRef.current.focus();
       onSubmitEditing && onSubmitEditing(e);
     }
   };
@@ -152,13 +155,15 @@ const TextInput: React.ForwardRefRenderFunction<unknown, TextInputProps> = ({
               ? 'transparent'
               : focused
               ? rgba(colors.primary, 0.7)
-              : colors.onSurfaceLow,
+              : grey100,
             borderBottomColor:
               type === 'text'
                 ? colors.surfaceLight
                 : required
                 ? red400
-                : colors.onSurfaceLow,
+                : focused
+                ? rgba(colors.primary, 0.7)
+                : grey100,
             borderWidth: 1,
             flexDirection: 'row',
             alignItems: label ? 'flex-end' : 'center',
@@ -173,7 +178,7 @@ const TextInput: React.ForwardRefRenderFunction<unknown, TextInputProps> = ({
             {labelIcon ? (
               labelIcon
             ) : labelIconName ? (
-              <View style={{ marginHorizontal: 5 }}>
+              <View style={{ marginStart: 5 }}>
                 <Icon
                   source={labelIconName}
                   color={labelIconColor}
@@ -224,7 +229,7 @@ const TextInput: React.ForwardRefRenderFunction<unknown, TextInputProps> = ({
           ) : null}
 
           <RNTextInput
-            style={[{ flex: 1 }, style]}
+            style={[{ flex: 1, color: theme.colors.textPrimary }, style]}
             ref={inputRef}
             selectionColor={mainColor}
             autoCapitalize="none"
@@ -239,6 +244,8 @@ const TextInput: React.ForwardRefRenderFunction<unknown, TextInputProps> = ({
             onSubmitEditing={handleSubmit}
             value={value && value}
             underlineColorAndroid={'transparent'}
+            blurOnSubmit={nextRef ? false : true}
+            returnKeyType={nextRef ? 'next' : undefined}
             {...rest}
           />
         </View>
