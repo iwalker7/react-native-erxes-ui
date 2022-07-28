@@ -1,7 +1,7 @@
 /* eslint-disable react-native/no-inline-styles */
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useCallback, useState } from 'react';
-import { SectionList } from 'react-native';
+import { SectionList, View } from 'react-native';
 import {
   TextView,
   Touchable,
@@ -13,6 +13,7 @@ import {
 import _ from 'lodash';
 import { screens } from './MenuStructure';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { useAlert } from './App';
 
 const sections = _.map(screens, (section, key) => {
   return {
@@ -24,6 +25,7 @@ const sections = _.map(screens, (section, key) => {
 export default function MainScreen({ navigation }: any) {
   const [searchText, setSearchText] = useState('');
   const theme = useTheme();
+  const alert = useAlert();
 
   const includedInSearch = (text = '') => {
     return text.toLowerCase().includes(searchText.toLowerCase());
@@ -40,7 +42,7 @@ export default function MainScreen({ navigation }: any) {
       }
 
       return (
-        <Surface
+        <View
           style={{
             padding: 20,
             backgroundColor: theme.colors.surfaceHighlight,
@@ -49,7 +51,7 @@ export default function MainScreen({ navigation }: any) {
           <TextView uppercase bold color={theme.colors.textPrimary}>
             {section.key}
           </TextView>
-        </Surface>
+        </View>
       );
     },
     [searchText]
@@ -88,7 +90,7 @@ export default function MainScreen({ navigation }: any) {
   );
 
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: theme.colors.surface }}>
+    <SafeAreaView style={{ backgroundColor: theme.colors.surface }}>
       <Searchbar
         leftIconName={'magnify'}
         rightIconName={'close'}
@@ -97,9 +99,11 @@ export default function MainScreen({ navigation }: any) {
         value={searchText}
         style={{ margin: 10 }}
       />
+
       <TextView center large style={{ margin: 20, color: '#000' }}>
         React native erxes ui
       </TextView>
+
       <SectionList
         keyExtractor={(data, index) => data.tags + index}
         sections={sections}

@@ -16,6 +16,7 @@ import Modal from '../Modal';
 import Touchable from '../Touchable';
 import TextView from '../Typography';
 import ScreenUtils from '../../utils/screenUtils';
+import { useEffect } from 'react';
 
 export type PickerProps = {
   data: any[];
@@ -60,16 +61,22 @@ const Picker: React.FC<PickerProps> = ({
   modalStyle,
 }) => {
   const { colors } = useTheme(theme);
-  const [selections, setSelections] = useState<any[]>(value);
+  const [selections, setSelections] = useState<any[]>([]);
+
+  useEffect(() => {
+    if (value) {
+      setSelections([value]);
+    }
+  }, []);
 
   const onSelect = (item: any) => {
     if (mode === 'SINGLE') {
-      setSelections(selections.includes(item) ? [] : [item]);
+      setSelections(selections?.includes(item) ? [] : [item]);
       return;
     }
     let temp = [...selections];
-    if (selections.length > 0 && selections.includes(item)) {
-      temp = selections.filter((el: number) => el !== item);
+    if (selections?.length > 0 && selections.includes(item)) {
+      temp = selections?.filter((el: number) => el !== item);
       setSelections(temp);
       return;
     }
@@ -160,7 +167,7 @@ const Picker: React.FC<PickerProps> = ({
                       style={[
                         styles.item,
                         {
-                          backgroundColor: selections.includes(item)
+                          backgroundColor: selections?.includes(item)
                             ? selectionColor
                             : undefined,
                         },

@@ -1,15 +1,13 @@
 import React from 'react';
-import { TextView, FAB } from 'react-native-erxes-ui';
+import { TextView } from 'react-native-erxes-ui';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 const FABScreen = () => {
-  const [state, setState] = React.useState(false);
-
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <TextView>Lorem</TextView>
 
-      <FAB.Group
+      {/* <FAB.Group
         visible={true}
         open={state}
         icon={state ? 'eye' : 'eye'}
@@ -36,7 +34,7 @@ const FABScreen = () => {
             // do something if the speed dial is open
           }
         }}
-      />
+      /> */}
     </SafeAreaView>
   );
 };

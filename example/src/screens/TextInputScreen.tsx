@@ -1,13 +1,7 @@
 /* eslint-disable react-native/no-inline-styles */
 import React from 'react';
 import { ScrollView, View } from 'react-native';
-import {
-  TextView,
-  Colors,
-  TextInput,
-  useTheme,
-  Surface,
-} from 'react-native-erxes-ui';
+import { TextView, Colors, TextInput, useTheme } from 'react-native-erxes-ui';
 import styles from '../styles';
 
 const TextInputScreen: React.FC<any> = () => {
@@ -15,21 +9,21 @@ const TextInputScreen: React.FC<any> = () => {
   const [searchText, setSearchText] = React.useState<string>('');
   return (
     <View style={[styles.container, { backgroundColor: theme.colors.surface }]}>
-      <Surface style={styles.segment}>
+      <View style={styles.segment}>
         <TextView bold>{`Props + React native-ын TextInputProps`}</TextView>
-      </Surface>
+      </View>
 
       <ScrollView
         showsVerticalScrollIndicator={false}
         style={{ width: '100%' }}
       >
-        <Surface style={styles.segment}>
-          <Surface style={styles.props}>
+        <View style={styles.segment}>
+          <View style={styles.props}>
             <TextView bold>
               type<TextView color={Colors.grey600}>: string</TextView>
             </TextView>
 
-            <Surface
+            <View
               style={{
                 backgroundColor: Colors.grey200,
                 padding: 5,
@@ -37,8 +31,8 @@ const TextInputScreen: React.FC<any> = () => {
               }}
             >
               <TextView small> default | outline | filled </TextView>
-            </Surface>
-          </Surface>
+            </View>
+          </View>
 
           <TextInput
             theme={theme}
@@ -51,8 +45,25 @@ const TextInputScreen: React.FC<any> = () => {
           <TextInput
             theme={theme}
             label={'Label'}
-            type="filled"
             placeholder="Outline"
+            onChangeText={(text: string) => setSearchText(text)}
+            value={searchText}
+            containerStyle={{ marginVertical: 3 }}
+          />
+          <TextInput
+            theme={theme}
+            label={'Label'}
+            placeholder="prefix"
+            prefix={'$'}
+            onChangeText={(text: string) => setSearchText(text)}
+            value={searchText}
+            containerStyle={{ marginVertical: 3 }}
+          />
+          <TextInput
+            theme={theme}
+            label={'Label'}
+            placeholder="Suffix"
+            suffix={'$'}
             onChangeText={(text: string) => setSearchText(text)}
             value={searchText}
             containerStyle={{ marginVertical: 3 }}
@@ -67,9 +78,9 @@ const TextInputScreen: React.FC<any> = () => {
             onChangeText={(text: string) => setSearchText(text)}
             value={searchText}
           />
-        </Surface>
+        </View>
 
-        <Surface style={styles.segment}>
+        <View style={styles.segment}>
           <TextView bold>
             icon
             <TextView color={Colors.grey600}>{`: JSX.Element`}</TextView>
@@ -88,9 +99,9 @@ const TextInputScreen: React.FC<any> = () => {
           >
             {`Example: <Button icon={<Icon name="cloud-check" size={15} />}`}
           </TextView>
-        </Surface>
+        </View>
 
-        <Surface style={styles.segment}>
+        <View style={styles.segment}>
           <TextView bold>
             required
             <TextView color={Colors.grey600}>{`: boolean`}</TextView>
@@ -102,87 +113,87 @@ const TextInputScreen: React.FC<any> = () => {
             onChangeText={(text: string) => setSearchText(text)}
             value={searchText}
           />
-        </Surface>
+        </View>
 
-        <Surface style={styles.segment}>
+        <View style={styles.segment}>
           <TextView bold>
             value
             <TextView color={Colors.grey600}>{`: string`}</TextView>
           </TextView>
-          <Surface style={{ marginVertical: 10 }}>
+          <View style={{ marginVertical: 10 }}>
             <TextView small>Бичиж байхад харуулах утга</TextView>
-          </Surface>
-        </Surface>
+          </View>
+        </View>
 
-        <Surface style={styles.segment}>
+        <View style={styles.segment}>
           <TextView bold>
             onChangeText
             <TextView
               color={Colors.grey600}
             >{`: (value: string) => void`}</TextView>
           </TextView>
-          <Surface style={{ marginVertical: 10 }}>
+          <View style={{ marginVertical: 10 }}>
             <TextView small>Бичиж байхад өөрчлөлтийг хадгалах функц</TextView>
-          </Surface>
-        </Surface>
+          </View>
+        </View>
 
-        <Surface style={styles.segment}>
+        <View style={styles.segment}>
           <TextView bold>
             onSubmitEditing
             <TextView
               color={Colors.grey600}
             >{`: (value: string) => void`}</TextView>
           </TextView>
-          <Surface style={{ marginVertical: 10 }}>
+          <View style={{ marginVertical: 10 }}>
             <TextView small>
               Бичиж дууссаны дараа өөрчлөлтийг хадгалах функц
             </TextView>
-          </Surface>
-        </Surface>
+          </View>
+        </View>
 
-        <Surface style={styles.segment}>
+        <View style={styles.segment}>
           <TextView bold>
             ref
             <TextView
               color={Colors.grey600}
             >{`: LegacyRef<TouchableOpacity | any>`}</TextView>
           </TextView>
-          <Surface style={{ marginVertical: 10 }}>
+          <View style={{ marginVertical: 10 }}>
             <TextView small>Reference</TextView>
-          </Surface>
-        </Surface>
+          </View>
+        </View>
 
-        <Surface style={styles.segment}>
+        <View style={styles.segment}>
           <TextView bold>
             onFocus
             <TextView
               color={Colors.grey600}
             >{`: (value: string) => void`}</TextView>
           </TextView>
-          <Surface style={{ marginVertical: 10 }}>
+          <View style={{ marginVertical: 10 }}>
             <TextView small>Фокуслах үед дуудагдах функц</TextView>
-          </Surface>
-        </Surface>
+          </View>
+        </View>
 
-        <Surface style={styles.segment}>
+        <View style={styles.segment}>
           <TextView bold>
             placeholder
             <TextView color={Colors.grey600}>{`: string`}</TextView>
           </TextView>
-          <Surface style={{ marginVertical: 10 }}>
+          <View style={{ marginVertical: 10 }}>
             <TextView small>Бичих утгын тайлбар</TextView>
-          </Surface>
-        </Surface>
+          </View>
+        </View>
 
-        <Surface style={styles.segment}>
+        <View style={styles.segment}>
           <TextView bold>
             placeholderTextColor
             <TextView color={Colors.grey600}>{`: string`}</TextView>
           </TextView>
-          <Surface style={{ marginVertical: 10 }}>
+          <View style={{ marginVertical: 10 }}>
             <TextView small>placeholder-ын өнгө</TextView>
-          </Surface>
-        </Surface>
+          </View>
+        </View>
       </ScrollView>
     </View>
   );

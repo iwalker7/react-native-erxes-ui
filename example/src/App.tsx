@@ -39,9 +39,6 @@ const Stack = createStackNavigator();
 
 declare global {
   namespace ReactNativeErxes {
-    interface ThemeFonts {
-      superLight: ThemeFonts;
-    }
     interface ThemeColors {
       customColor: string;
     }
@@ -65,7 +62,6 @@ const CustomDarkTheme: ReactNativeErxes.Theme = {
   },
   fonts: {
     ...DarkTheme.fonts,
-    superLight: { ...DarkTheme.fonts.light },
   },
   userDefinedThemeProperty: '',
   animation: {
@@ -83,7 +79,6 @@ const CustomDefaultTheme = {
   },
   fonts: {
     ...DefaultTheme.fonts,
-    superLight: { ...DefaultTheme.fonts['light'] },
   },
   userDefinedThemeProperty: '',
   animation: {
@@ -195,37 +190,8 @@ export default function App() {
   };
 
   return (
-    <ThemeProvider theme={CustomDarkTheme}>
+    <ThemeProvider theme={CustomDefaultTheme}>
       <Provider value={mContext}>
-        <Snackbar
-          visible={alertState.isOpen}
-          onDismiss={onDismissSnackBar}
-          type={alertState.type}
-          duration={
-            alertState.type === 'error'
-              ? DURATION.DURATION_MEDIUM
-              : alertState.type === 'infinity'
-              ? DURATION.DURATION_INFINITY
-              : DURATION.DURATION_SHORT
-          }
-          message={alertState.message}
-          action={alertState.action}
-          leftIcon={
-            <MaterialCommunityIcons
-              name={
-                alertState.type === 'error'
-                  ? 'exclamation-triangle'
-                  : alertState.type === 'success'
-                  ? 'checked'
-                  : 'info-circle'
-              }
-              style={{ color: Colors.white }}
-              size={18}
-              color="#fff"
-            />
-          }
-          wrapperStyle={{ backgroundColor: alertState.backgroundColor }}
-        />
         <NavigationContainer>
           <Stack.Navigator>
             <Stack.Screen
@@ -316,6 +282,22 @@ export default function App() {
           </Stack.Navigator>
         </NavigationContainer>
       </Provider>
+      <Snackbar
+        visible={alertState.isOpen}
+        onDismiss={onDismissSnackBar}
+        type={alertState.type}
+        duration={
+          alertState.type === 'error'
+            ? 3000
+            : alertState.type === 'infinity'
+            ? 5000
+            : 1500
+        }
+        action={alertState.action}
+        backgroungColor={alertState.backgroundColor}
+      >
+        {alertState.message}
+      </Snackbar>
     </ThemeProvider>
   );
 }

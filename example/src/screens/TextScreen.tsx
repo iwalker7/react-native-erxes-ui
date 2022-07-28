@@ -1,21 +1,15 @@
 /* eslint-disable react-native/no-inline-styles */
 import React from 'react';
-import { Linking } from 'react-native';
-import {
-  TextView,
-  Surface,
-  Colors,
-  Touchable,
-  useTheme,
-} from 'react-native-erxes-ui';
+import { Linking, View } from 'react-native';
+import { TextView, Colors, Touchable, useTheme } from 'react-native-erxes-ui';
 import styles from '../styles';
 
 const TextScreen: React.FC<any> = () => {
   const theme = useTheme();
 
   return (
-    <Surface style={styles.container}>
-      <Surface style={[styles.segment, { height: 70, marginBottom: 10 }]}>
+    <View style={styles.container}>
+      <View style={[styles.segment, { height: 70, marginBottom: 10 }]}>
         <TextView color={Colors.grey600}>
           {`Props + React native-ын TextProps`}
         </TextView>
@@ -28,9 +22,9 @@ const TextScreen: React.FC<any> = () => {
             {`See React Native TextProps \u2192`}
           </TextView>
         </Touchable>
-      </Surface>
+      </View>
 
-      <Surface
+      <View
         style={{
           width: '100%',
           flexDirection: 'row',
@@ -42,13 +36,13 @@ const TextScreen: React.FC<any> = () => {
           borderWidth: 1,
         }}
       >
-        <Surface style={{ width: '25%', alignContent: 'flex-start' }}>
+        <View style={{ width: '25%', alignContent: 'flex-start' }}>
           <TextView bold large>
             Size
           </TextView>
-        </Surface>
-        <Surface style={{ flexDirection: 'column' }}>
-          <Surface
+        </View>
+        <View style={{ flexDirection: 'column' }}>
+          <View
             style={{
               width: '70%',
               flexDirection: 'row',
@@ -60,8 +54,8 @@ const TextScreen: React.FC<any> = () => {
             <TextView xsmall>xsmall</TextView>
             <TextView small>small</TextView>
             <TextView large>large</TextView>
-          </Surface>
-          <Surface
+          </View>
+          <View
             style={{
               width: '75%',
               flexDirection: 'row',
@@ -72,10 +66,10 @@ const TextScreen: React.FC<any> = () => {
             <TextView xlarge>xlarge</TextView>
             <TextView xxlarge>xxlarge</TextView>
             <TextView xxxlarge>xxxlarge</TextView>
-          </Surface>
-        </Surface>
-      </Surface>
-      <Surface
+          </View>
+        </View>
+      </View>
+      <View
         style={{
           width: '100%',
           flexDirection: 'row',
@@ -86,20 +80,20 @@ const TextScreen: React.FC<any> = () => {
           borderWidth: 1,
         }}
       >
-        <Surface>
+        <View>
           <TextView bold large>
             Style
           </TextView>
-        </Surface>
-        <Surface
+        </View>
+        <View
           style={{
             width: '75%',
             flexDirection: 'row',
             justifyContent: 'space-between',
           }}
         >
-          <Surface style={{ flexDirection: 'column' }}>
-            <Surface
+          <View style={{ flexDirection: 'column' }}>
+            <View
               style={{
                 flexWrap: 'wrap',
               }}
@@ -107,17 +101,17 @@ const TextScreen: React.FC<any> = () => {
               <TextView bold>bold</TextView>
               <TextView boldless>boldless</TextView>
               <TextView italic>italic</TextView>
-            </Surface>
-          </Surface>
-          <Surface style={{ flexDirection: 'column', width: '50%' }}>
-            <Surface>
+            </View>
+          </View>
+          <View style={{ flexDirection: 'column', width: '50%' }}>
+            <View>
               <TextView uppercase>uppercase</TextView>
               <TextView required>Required</TextView>
-            </Surface>
-          </Surface>
-        </Surface>
-      </Surface>
-    </Surface>
+            </View>
+          </View>
+        </View>
+      </View>
+    </View>
   );
 };
 

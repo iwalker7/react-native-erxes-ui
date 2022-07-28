@@ -9,6 +9,7 @@ import {
   Avatar,
   Divider,
   useTheme,
+  Pagination,
 } from 'react-native-erxes-ui';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import styles from '../styles';
@@ -145,9 +146,6 @@ const DialogScreen: React.FC<any> = () => {
         showsVerticalScrollIndicator={false}
         style={{ width: '100%' }}
       >
-        <Button style={{ marginTop: 10 }} onPress={() => {}}>
-          Close
-        </Button>
         <View style={styles.segment}>
           <View style={styles.props}>
             <TextView bold>

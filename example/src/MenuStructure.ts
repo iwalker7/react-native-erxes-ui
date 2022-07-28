@@ -50,11 +50,11 @@ export const screens = {
         screen: 'SnackbarScreen',
       },
 
-      {
-        title: 'FLoating action button',
-        tags: 'FLoating action button',
-        screen: 'FABScreen',
-      },
+      //   {
+      //     title: 'FLoating action button',
+      //     tags: 'FLoating action button',
+      //     screen: 'FABScreen',
+      //   },
       { title: 'Text', tags: 'text', screen: 'TextScreen' },
       { title: 'Touchable', tags: 'touchable', screen: 'TouchableScreen' },
     ],

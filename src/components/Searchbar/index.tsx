@@ -165,7 +165,6 @@ const Searchbar = React.forwardRef<TextInputHandles, SearchbarProps>(
           {...rest}
         />
         <IconButton
-          borderless
           disabled={!value}
           accessibilityLabel={clearAccessibilityLabel}
           color={value ? iconColor : 'rgba(255, 255, 255, 0)'}

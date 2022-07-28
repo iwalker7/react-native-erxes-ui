@@ -57,7 +57,7 @@ const TextView: React.FC<TextViewProps> = ({
   lineHeight,
   center,
   color,
-  required,
+  children,
   onPress,
   onLongPress,
   ...rest
@@ -92,10 +92,7 @@ const TextView: React.FC<TextViewProps> = ({
       onLongPress={onLongPress}
       {...rest}
     >
-      {rest.children}
-      {required && (
-        <Text style={{ color: red400, fontWeight: 'bold' }}> *</Text>
-      )}
+      {children}
     </Text>
   );
 };

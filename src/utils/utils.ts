@@ -251,6 +251,7 @@ export function getIconName(key?: string) {
     case 'xlsx':
       return 'xls';
     case 'mp4':
+      return 'play-1';
     case 'zip':
       return 'zip';
     case 'csv':

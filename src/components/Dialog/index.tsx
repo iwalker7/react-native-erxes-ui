@@ -85,11 +85,15 @@ const Dialog: React.FC<DialogProps> = ({
             {(action === 'confirm' || action === 'single') && (
               <View style={styles.body}>
                 {icon}
-                <TextView bold color={theme.colors.textPrimary}>
+                <TextView
+                  bold
+                  large
+                  color={theme.colors.textPrimary}
+                  style={{ marginVertical: 3 }}
+                >
                   {title ? title : 'Are you sure?'}
                 </TextView>
                 <TextView
-                  small
                   color={theme.colors.textSecondary}
                   style={styles.subText}
                 >
@@ -100,11 +104,15 @@ const Dialog: React.FC<DialogProps> = ({
             {children && action === 'custom' && (
               <>
                 <View style={styles.header}>
-                  <TextView bold color={theme.colors.textPrimary}>
+                  <TextView
+                    bold
+                    large
+                    color={theme.colors.textPrimary}
+                    style={{ marginVertical: 3 }}
+                  >
                     {title}
                   </TextView>
                   <TextView
-                    small
                     color={theme.colors.textSecondary}
                     style={{ marginTop: 3 }}
                   >
@@ -120,7 +128,7 @@ const Dialog: React.FC<DialogProps> = ({
                 <Button
                   type={buttonType}
                   width={80}
-                  textStyle={{ color: theme.colors.coreGray, fontSize: 13 }}
+                  textStyle={{ color: theme.colors.coreGray, fontSize: 15 }}
                   onPress={() => {
                     onVisible(false);
                     onClose && onClose();
@@ -132,7 +140,7 @@ const Dialog: React.FC<DialogProps> = ({
                 <Button
                   type={buttonType}
                   width={80}
-                  textStyle={{ fontSize: 13 }}
+                  textStyle={{ fontSize: 15 }}
                   onPress={() => {
                     onVisible(false);
                     callBack && callBack();
@@ -160,6 +168,7 @@ const Dialog: React.FC<DialogProps> = ({
                     onVisible(false);
                     callBack && callBack();
                   }}
+                  textStyle={{ fontSize: 15 }}
                   style={confirmButtonStyle}
                 >
                   {cancelText ? cancelText : 'Cancel'}

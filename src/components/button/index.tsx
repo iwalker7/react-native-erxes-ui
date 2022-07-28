@@ -42,7 +42,7 @@ export type ButtonProps = ViewProps & {
   width?: any;
   height?: number;
   theme: ReactNativeErxes.Theme;
-  rippleColor?: 'string';
+  rippleColor?: string;
 };
 
 const Button: React.FC<ButtonProps> = ({

@@ -15,7 +15,7 @@ import Icon from '../Icon';
 import type { ViewStyle } from 'react-native';
 import { withTheme } from '../../core/theming';
 import Touchable from '../Touchable';
-import { grey100, red400 } from '../../styles/colors';
+import { grey100, red300 } from '../../styles/colors';
 import { rgba } from '../../utils/colorUtils';
 
 export type TextInputProps = RNProps & {
@@ -31,7 +31,6 @@ export type TextInputProps = RNProps & {
     value: NativeSyntheticEvent<TextInputSubmitEditingEventData>
   ) => void;
   inputRef?: LegacyRef<RNTextInput>;
-  nextRef?: LegacyRef<RNTextInput>;
   containerStyle?: StyleProp<ViewStyle>;
   labelStyle?: StyleProp<TextStyle>;
   labelContainerStyle?: StyleProp<ViewStyle>;
@@ -57,7 +56,6 @@ export type TextInputProps = RNProps & {
   leftIconOnPress?: () => void;
   leftIconStyle?: StyleProp<ViewStyle>;
   isLoading?: boolean;
-  loaderPosition?: 'left' | 'right';
   theme: ReactNativeErxes.Theme;
   height?: number;
   backgroundColor?: string;
@@ -76,7 +74,6 @@ const TextInput: React.ForwardRefRenderFunction<unknown, TextInputProps> = ({
   placeholder,
   placeholderTextColor = theme.colors.textSecondary,
   inputRef,
-  nextRef,
   required = false,
   password = false,
   disabled = false,
@@ -99,7 +96,6 @@ const TextInput: React.ForwardRefRenderFunction<unknown, TextInputProps> = ({
   leftIconColor = theme.colors.textPrimary,
   leftIconStyle,
   isLoading = false,
-  loaderPosition,
   labelStyle,
   rightIconOnPress,
   leftIconOnPress,
@@ -134,12 +130,7 @@ const TextInput: React.ForwardRefRenderFunction<unknown, TextInputProps> = ({
   const handleSubmit = (
     e: NativeSyntheticEvent<TextInputSubmitEditingEventData>
   ) => {
-    if (required && (value === '' || !value)) {
-      setMainColor('red');
-    } else {
-      nextRef && nextRef.current.focus();
-      onSubmitEditing && onSubmitEditing(e);
-    }
+    onSubmitEditing && onSubmitEditing(e);
   };
   return (
     <>
@@ -150,7 +141,7 @@ const TextInput: React.ForwardRefRenderFunction<unknown, TextInputProps> = ({
             backgroundColor: backgroundColor ? backgroundColor : 'transparent',
             borderRadius: type === 'text' ? 0 : theme.roundness,
             borderColor: required
-              ? red400
+              ? red300
               : type === 'text'
               ? 'transparent'
               : focused
@@ -160,15 +151,16 @@ const TextInput: React.ForwardRefRenderFunction<unknown, TextInputProps> = ({
               type === 'text'
                 ? colors.surfaceLight
                 : required
-                ? red400
+                ? red300
                 : focused
                 ? rgba(colors.primary, 0.7)
                 : grey100,
             borderWidth: 1,
             flexDirection: 'row',
             alignItems: label ? 'flex-end' : 'center',
+            padding: 0,
             paddingBottom: label ? 5 : 0,
-            paddingHorizontal: 15,
+            paddingHorizontal: 10,
           },
           containerStyle,
         ]}
@@ -195,7 +187,7 @@ const TextInput: React.ForwardRefRenderFunction<unknown, TextInputProps> = ({
         <View
           style={{
             flex: 1,
-            flexDirection: loaderPosition === 'left' ? 'row' : 'row-reverse',
+            flexDirection: 'row',
             alignItems: 'center',
             justifyContent: 'space-between',
           }}
@@ -214,7 +206,11 @@ const TextInput: React.ForwardRefRenderFunction<unknown, TextInputProps> = ({
             </Touchable>
           ) : null}
           {prefix && (
-            <TextView small color={rgba(colors.textPrimary, 0.5)}>
+            <TextView
+              small
+              color={rgba(colors.textPrimary, 0.5)}
+              style={{ marginEnd: 5 }}
+            >
               {prefix}
             </TextView>
           )}
@@ -244,13 +240,15 @@ const TextInput: React.ForwardRefRenderFunction<unknown, TextInputProps> = ({
             onSubmitEditing={handleSubmit}
             value={value && value}
             underlineColorAndroid={'transparent'}
-            blurOnSubmit={nextRef ? false : true}
-            returnKeyType={nextRef ? 'next' : undefined}
             {...rest}
           />
         </View>
         {suffix && (
-          <TextView small color={rgba(colors.textPrimary, 0.5)}>
+          <TextView
+            small
+            color={rgba(colors.textPrimary, 0.5)}
+            style={{ marginStart: 5 }}
+          >
             {suffix}
           </TextView>
         )}
@@ -296,7 +294,7 @@ const styles = StyleSheet.create({
   },
   animatedStyle: {
     top: 3,
-    left: 15,
+    left: 10,
     position: 'absolute',
     zIndex: 1000,
     marginVertical: 3,

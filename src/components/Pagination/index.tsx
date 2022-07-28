@@ -143,6 +143,7 @@ const Pagination = (props: any) => {
     theme,
     leftIcon,
     rightIcon,
+    style,
   } = props;
 
   const goto = (page: number) => {
@@ -209,6 +210,7 @@ const Pagination = (props: any) => {
               page={page}
               onPage={onPage}
               theme={theme}
+              style={style}
             />
           ))}
           <Touchable
@@ -227,7 +229,7 @@ const Pagination = (props: any) => {
 };
 
 const PaginationContainer = (props: any) => {
-  const { count = 100, page = 1, onPage, containerStyle } = props;
+  const { count = 100, page = 1, onPage, containerStyle, style } = props;
 
   let totalPagesCount = parseInt((count / 20).toString(), 10) + 1;
   let currentPage = page;
@@ -245,6 +247,7 @@ const PaginationContainer = (props: any) => {
     pages,
     onPage,
     containerStyle,
+    style,
   };
 
   return <Pagination {...childProps} />;

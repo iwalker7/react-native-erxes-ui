@@ -1,19 +1,19 @@
 /* eslint-disable react-native/no-inline-styles */
-import color from 'color';
+
 import React, { useRef, useState, useEffect, useLayoutEffect } from 'react';
 import {
   Animated,
   SafeAreaView,
   StyleSheet,
   View,
-  Dimensions,
+  PixelRatio,
 } from 'react-native';
 import type { ColorValue, ViewStyle, TextProps, StyleProp } from 'react-native';
 import Button from '../Button';
 import Surface from '../Surface';
 import TextView from '../Typography';
 import Touchable from '../Touchable';
-import { white, black } from '../../styles/colors';
+import { darken } from '../../utils/colorUtils';
 import { withTheme } from '../../core/theming';
 
 export enum DURATION {
@@ -37,18 +37,12 @@ export type SnackbarProps = {
   message?: string;
   onDismiss: () => void;
   leftIcon?: JSX.Element;
-  leftIconName?: string;
-  leftIconSize?: number;
-  leftIconColor?: ColorValue | string | undefined;
   closeIcon?: JSX.Element;
-  closeIconName?: string;
-  closeIconSize?: number;
-  closeIconColor?: ColorValue | string | undefined;
   backgroungColor?: ColorValue | string | undefined;
-  textStyle?: StyleProp<TextProps>;
   wrapperStyle?: StyleProp<ViewStyle>;
   style?: StyleProp<ViewStyle>;
-  ref?: React.RefObject<View>;
+  textStyle?: StyleProp<TextProps>;
+  buttonStyle?: StyleProp<TextProps>;
   theme: ReactNativeErxes.Theme;
 };
 
@@ -56,14 +50,13 @@ const Snackbar: React.FC<SnackbarProps> = ({
   visible,
   action,
   message,
-  placement = 'top',
   duration = DURATION.DURATION_MEDIUM,
   onDismiss,
   type = 'info',
   leftIcon,
-  closeIcon,
   theme,
   backgroungColor,
+
   ...rest
 }) => {
   const { colors } = theme;
@@ -133,116 +126,99 @@ const Snackbar: React.FC<SnackbarProps> = ({
   }
 
   return (
-    <Touchable
-      onPress={() => {
-        if (!action) {
-          setHidden(true);
-        }
-      }}
+    <SafeAreaView
+      pointerEvents="box-none"
+      style={[
+        {
+          position: 'absolute',
+          top: 30,
+          zIndex: 5000,
+          marginHorizontal: 20,
+        },
+        rest?.wrapperStyle,
+      ]}
     >
-      <SafeAreaView
+      <Surface
+        pointerEvents="box-none"
+        accessibilityLiveRegion="polite"
         style={[
+          styles.container,
+          { backgroundColor: mainColor },
           {
-            position: 'absolute',
-            top: placement === 'top' ? 0 : undefined,
-            bottom: placement === 'bottom' ? 10 : undefined,
-            left: 3,
-            width: '100%',
-            zIndex: 5000,
+            opacity: opacity,
+            transform: [
+              {
+                scale: visible
+                  ? opacity.interpolate({
+                      inputRange: [0, 1],
+                      outputRange: [0.9, 1],
+                    })
+                  : 1,
+              },
+            ],
           },
+          rest?.style,
         ]}
       >
-        <Surface
-          accessibilityLiveRegion="polite"
-          style={
-            [
-              styles.container,
-              { backgroundColor: mainColor, borderRadius: theme.roundness },
-              {
-                opacity: opacity,
-                transform: [
-                  {
-                    scale: visible
-                      ? opacity.interpolate({
-                          inputRange: [0, 1],
-                          outputRange: [0.9, 1],
-                        })
-                      : 1,
-                  },
-                ],
-              },
-              rest?.wrapperStyle,
-            ] as StyleProp<ViewStyle>
-          }
+        <Touchable
+          onPress={() => onDismiss()}
+          style={{
+            width: action ? '72%' : '100%',
+            alignItems: 'center',
+            flexDirection: 'row',
+            paddingVertical: 16 / PixelRatio.get(),
+          }}
         >
-          <View
-            style={{
-              width: action ? '72%' : '100%',
-              alignItems: 'center',
-              flexDirection: 'row',
-            }}
-          >
-            {leftIcon && (
-              <View style={{ marginHorizontal: 5 }}>{leftIcon}</View>
-            )}
+          {leftIcon && <View style={{ marginHorizontal: 5 }}>{leftIcon}</View>}
 
-            <TextView
-              bold
+          <TextView
+            boldless
+            style={[
+              styles.content,
+              { marginRight: action ? 0 : 16, color: '#fff' },
+              rest?.textStyle,
+            ]}
+          >
+            {message}
+          </TextView>
+        </Touchable>
+        {action && (
+          <View style={{ justifyContent: 'flex-end' }}>
+            <Button
+              onPress={() => {
+                action.onPress && action.onPress();
+                onDismiss();
+              }}
+              color={'rgba(255, 255, 255, 0.6)'}
+              textColor={darken(mainColor, 0.6)}
               style={[
-                styles.content,
-                { marginRight: action ? 0 : 16, color: white },
-                rest?.textStyle,
+                {
+                  borderRadius: theme.roundness,
+                },
+                rest?.buttonStyle,
               ]}
             >
-              {message}
-            </TextView>
-            {closeIcon && (
-              <View style={styles.overflow}>
-                <Touchable onPress={() => setHidden(true)}>
-                  {closeIcon}
-                </Touchable>
-              </View>
-            )}
+              {action.label}
+            </Button>
           </View>
-          {action ? (
-            <View style={{ flexDirection: 'row-reverse' }}>
-              <Button
-                width={80}
-                onPress={() => {
-                  action.onPress && action.onPress();
-                  onDismiss();
-                }}
-                color={'rgba(255, 255, 255, 0.6)'}
-                textColor={color(mainColor).darken(0.6).rgb().string()}
-                style={{
-                  borderRadius: theme.roundness,
-                }}
-              >
-                {action.label}
-              </Button>
-            </View>
-          ) : null}
-        </Surface>
-      </SafeAreaView>
-    </Touchable>
+        )}
+      </Surface>
+    </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
+  wrapper: {
+    position: 'absolute',
+    top: 0,
+    width: '100%',
+  },
   container: {
-    margin: 5,
+    elevation: 4,
     flexDirection: 'row',
-    paddingLeft: 15,
-    paddingRight: 5,
-    paddingVertical: 8,
-    width: Dimensions.get('screen').width - 15,
-    shadowColor: black,
-    shadowOffset: {
-      width: 0,
-      height: 0,
-    },
-    shadowOpacity: 0.1,
-    shadowRadius: 7,
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    borderRadius: 6,
   },
   content: {
     marginLeft: 10,
@@ -250,11 +226,9 @@ const styles = StyleSheet.create({
     flexWrap: 'wrap',
     flex: 1,
   },
-
-  overflow: {
-    position: 'absolute',
-    top: 0,
-    right: 0,
+  button: {
+    marginHorizontal: 10,
+    marginVertical: 5,
   },
 });
 export default withTheme(Snackbar);
